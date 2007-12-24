@@ -1,0 +1,296 @@
+<!--
+ !
+ ! Licensed to the Apache Software Foundation (ASF) under one or more
+ ! contributor license agreements.  See the NOTICE file distributed with
+ ! this work for additional information regarding copyright ownership.
+ ! The ASF licenses this file to You under the Apache License, Version 2.0
+ ! (the "License"); you may not use this file except in compliance with
+ ! the License.  You may obtain a copy of the License at
+ !
+ !      http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<html>
+<head></head>
+<body>
+<h1>Woden Incubating 1.0M7 Release Notes</h1>
+
+February 2007. This is the Milestone 7 (M7) release of <a href="http://incubator.apache.org/woden">Apache Woden</a>.<br />
+The Milestone plan is at <a href="http://incubator.apache.org/woden/dev/1.0/milestoneplan.html">http://incubator.apache.org/woden/dev/1.0/milestoneplan.html</a>.
+
+<h2>Incubation Disclaimer</h2>
+<p>
+  	The Woden project is an effort undergoing <a href="http://incubator.apache.org">incubation at the Apache 
+  	Software Foundation (ASF)</a>, sponsored by the Apache Web Services PMC. Incubation is 
+  	required of all newly accepted projects until a further review indicates 
+  	that the infrastructure, communications, and decision making process have 
+  	stabilized in a manner consistent with other successful ASF projects. While 
+  	incubation status is not necessarily a reflection of the completeness or 
+  	stability of the code, it does indicate that the project has yet to be fully 
+  	endorsed by the ASF.
+</p>
+
+<h2>Key points</h2>
+<p>
+    <b>Milestone releases </b>
+    will deliver Woden functionality gradually, leading up to a 1.0 release.
+    The objective of a 1.0 release will be to deliver a WSDL processor that fully implements the
+	W3C WSDL 2.0 specification, with functionality to parse WSDL 2.0 documents into the WSDL 2.0 
+	component model and validate their syntax and semantics.
+</p>
+<p>
+    <b>The W3C WSDL 2.0 specification </b>
+    is still at W3C Candidate Recommendation (CR) but is close to being ready to move to 
+    Proposed Recommendation (PR). There are a few CR issues to be resolved and some outstanding editorial
+    actions for the spec authors, but these should be completed during February 2007. The move from PR to 
+    a full W3C Recommendation (equivalent to a formal spec) is now likely around mid 2007.
+</p>
+<p>
+	<b>The M7 release</b> fully supports the parsing of valid WSDL 2.0 documents 
+    into the WSDL 2.0 Component model, as defined by the WSDL 2.0 spec and embodied in its
+    Test Suite as at the <b>10th February 2007</b>. Within the WSDL 2.0 Test Suite at that date,
+    there were 80 testcases in the Component Model Tests (the 'good' document testcases)
+    whose WSDL documents collectively covered all of the WSDL 2.0 elements and attributes 
+    defined by the spec and those defined for the SOAP and HTTP binding extensions. 
+    Woden passed all of these 80 testcases. This 100% compliance level has been the main 
+    development objective for the M7 release. 
+    Any further change to the WSDL 2.0 spec and test suite will be implemented in Woden
+    after the M7 release to maintain this level of compliance.
+    The latest 'Component Model Tests Results' can be seen on the 
+	<a href="http://dev.w3.org/cvsweb/~checkout~/2002/ws/desc/test-suite/Dashboard.html">
+	WSDL 2.0 Interop Dashboard</a>.
+</p>
+<p>
+    <b>A second Interop event</b> was held by the WSDL 2.0 Working Group in November 2006. This 
+    event consolidated the 'good' WSDL testcases, improved the Dashboard reporting mechanism and 
+    helped define Woden's release criteria for M7 (i.e. passing all 'good' testcases).
+    It also initiated a period of more substantial message exchange testing between the Axis2/Woden 
+    implementation and the Canon implementation, using both SOAP and HTTP bindings. As at the release 
+    of M7, this message exchange testing is progressing well with more varied and complex scenarios 
+    being successfully tested. See the 'Message Exchange Test Results' on the Dashboard for the
+    latest progress.
+</p>
+<p>
+    The main focus of the next release will be to complete Woden's WSDL 2.0 compliance by fully supporting
+    the assertions defined in the WSDL 2.0 spec. That is, completing Woden's validation logic to capture 
+    violations of these assertions in the 'bad' WSDL documents in the W3C WSDL 2.0 test suite.
+</p>
+	Other significant functionality that remains to be delivered is:
+	<ul>
+	<li>Completing the API to fully support the programmatic creation and editing of WSDL 2.0 documents.</li>
+	<li>Modifying the extensions API to improve its usability</li>
+	<li>Serializing Woden's WSDL object model to WSDL 2.0 XML documents (i.e. a WSDLWriter).</li>
+	<li>Parsing WSDL 1.1 documents into Woden's WSDL 2.0 object model.</li>
+	</ul>
+<p>
+	The Woden parser framework and its programming model originated from WSDL4J, a WSDL 1.1 processor.
+	Differences in WSDL 2.0 mean that the Woden WSDL object model is quite different to WSDL4J's,
+	however other WSDL4J features have been reused or adapted, such as its extension architecture.
+</p>
+
+<h2>What's new in this release?</h2>
+
+<p>This release includes the following new features:</p>
+<ul>
+    <li>
+        Many JIRAs have been resolved during M7 development that dealt with failures against the W3C WSDL 2.0 test suite.
+    </li>
+    <li>
+        The readWSDL methods on WSDLReader now return a Description component instead of DescriptionElement.
+        This is because the WSDL information in the WSDL 2.0 Component model is more useful and easier to 
+        consume than in the WSDL 2.0 infoset (e.g. flattening document composition, default values). 
+        Note that Description.toElement() can still be used if a DescriptionElement is required.
+    </li>
+    <li>
+        XMLElement has been introduced to the Woden API to provide a common representation for 'element' objects 
+        such as DOM Element and AXIOM OMElement. This eliminates Woden API dependencies on particular XML parsers 
+        or object models. As XMLElement wraps most of the behaviour in the underlying DOM Element or OMElement, 
+        it has also allowed us to refactor much of the DOMWSDLReader and OMWSDLReader implementations into a common 
+        code base.
+    </li>  
+    <li>
+        The underlying &lt;xs:schema&gt; and &lt;xs:import&gt; elements defined directly within &lt;wsdl:types&gt;
+        are now accessible via the Woden Schema API as XMLElements. This allows applications to use additional schema 
+        processing techniques other than WS-Commons XmlSchema if they so choose (note, XmlSchema is still used in 
+        the Woden API to represent schemas).
+    </li>
+    <li>
+        Convenience methods getAllInterfaceFaults and getAllInterfaceOperations have been added to the Interface
+        component API to provide access to faults and operations derived via interface inheritance.
+    </li>
+    <li>
+        A URL Resolver mechanism has been introduced to resolve URLs via an optional user-defined catalog. 
+        This mechanism can greatly improve performance by redirecting remote requests to locally stored
+        documents. It is used internally by Woden for common XML schemas and DTDs and a default user catalog
+        is provided with entries for the W3C WSDL 2.0 testcases, which can be downloaded and stored locally
+        by an ANT script. This mechanism resolves URLs to URLs. Further development is underway to introduce
+        an 'Entity Resolver', which will resolve a URL to the actual XML content (i.e. an XML catalog). 
+    </li>
+    <li>
+        The Feature and Property components have been removed from the WSDL 2.0 spec and so from Woden. 
+    </li> 
+    <li>
+        The outstanding unit tests for the Element and Component APIs have been completed.
+    </li>
+    <li>
+        The API Javadoc is more complete.
+    </li>
+</ul>
+
+<h2>Current Release Structure</h2>
+
+<p>
+    The M7 release is available in 3 types of archives; zip, tar.gz and tar.bz2.
+    For each archive type there is a binary and a source distribution archive, each with 
+    its own MD5 and sha1 checksums.
+    The source distribution contains the entire Woden Subversion source code tree.
+</p>
+	The binary distribution contains the Woden API Javadoc and the three Woden jar files described below:<br />
+	<ul>
+		<li>
+			woden-api-1.0-incubating-M7.jar - Contains only the public Woden API (not yet final). 
+			This jar is suitable for those that wish to create their own implementation of 
+			the API.
+		</li>
+		<li>
+			woden-1.0-incubating-M7.jar - Contains the public Woden API (not yet final) and current DOM 
+			and AXIOM implementations.
+		</li>
+		<li>
+			woden-ant-1.0-incubating-M7.jar - Contains the Ant task ValidateWSDL20 used to produce
+			Woden results for the W3C WSDL 2.0 test suite.
+		</li>
+	</ul>
+	Woden depends on the following libraries and these are also included in the binary distribution:
+	<ul>
+	    <li>
+            Apache WS Commons XmlSchema 1.3.1 (for representing schemas in the Woden API)
+	    </li>
+	    <li>
+            Apache Xerces 2.8.1 (used by XmlSchema and by the DOM implementation of Woden)
+	    </li>
+	    <li>
+            Apache WS Commons AXIOM 1.2.3
+	    </li>
+	    <li>
+            Apache Commons Logging API 1.1 (used by the AXIOM implementation of Woden)
+	    </li>
+	    <li>
+	        StAX 1.0.1 API and the Woodstox 3.2.0 implementation  (used by the AXIOM implementation of Woden)
+	    </li>
+	    <li>
+	        WSDL4J 1.6.2 (used by the standalone WSDL 1.1 conversion program)
+	    </li>
+	</ul>
+<p>
+The next release of Woden will produce separate distributions for the DOM and AXIOM
+implementations, each with only their own dependent libraries.
+</p>
+
+<h2>What's still to do?</h2>
+
+<p>Please see this list of what we think needs doing - and please consider helping out if 
+you're interested & able! A more complete and up-to-date list of ToDos is the Woden JIRA issues at
+<a href="http://issues.apache.org/jira/browse/Woden">http://issues.apache.org/jira/browse/Woden</a>.
+</p>
+<ul>
+	<li>
+	    Various API changes (see JIRA)
+	</li>
+	<li>
+	    Modularizing the build to separate the DOM and AXIOM distributions
+	</li>
+	<li>
+	    The User Guide on the Woden website requires ongoing improvement.
+	</li>
+	<li>
+		Technical design documentation for developers needs to be created. 
+	</li>
+	<li>
+		Integrating the stand-alone WSDL 1.1 to 2.0 converter tool into Woden to produce
+		a Woden WSDL 2.0 object model from a parsed WSDL 1.1. document. 
+	</li>
+  	<li>
+  		Validation of MEPs and extension elements (such as those for SOAP and HTTP bindings) 
+  		has not yet been implemented.
+  	</li>
+  	<li>
+  		Serialization (e.g. WSDLWriter) has not been implemented.
+  	</li>
+  	<li>
+		Support for non-XML Schema type systems has not yet been implemented (e.g. RelaxNG, DTDs).
+	</li>
+	<li>
+	    Entity resolver and an XML catalog mechanism
+	</li>
+</ul>
+
+<h2>Example Usage</h2>
+
+<pre>
+   WSDLFactory factory = WSDLFactory.newInstance();
+   WSDLReader reader = factory.newWSDLReader();
+   reader.setFeature(ReaderFeatures.VALIDATION_FEATURE_ID, true); &lt;-- enable WSDL 2.0 validation (optional) 
+   Description descComp = reader.readWSDL(wsdlLoc);               &lt;-- the Description component, always returned
+   DescriptionElement descElem = descComp.toElement();            &lt;-- the &lt;description&gt; element, if required
+</pre>
+   A custom error handler can also be specified as follows:<br />
+<pre>
+   Description descComp = reader.readWSDL(wsdlLoc, myErrorHandler);
+</pre>
+   WSDL can be parsed from some underlying object or byte stream content (rather than a URL) using a WSDLSource object:<br />
+<pre>
+   WSDLFactory factory = WSDLFactory.newInstance();
+   WSDLReader reader = factory.newWSDLReader();
+   reader.setFeature(WSDLReader.FEATURE_VALIDATION, true);
+   WSDLSource wsdlSource = reader.createWSDLSource();  //the WSDLSource impl is specific to the WSDLReader impl
+   wsdlSource.setBaseURI(wsdlURI);
+   wsdlSource.setSource(wsdlSrc);                      //where wsdlSrc might be a DOM Document or Element object
+   Description descComp = reader.readWSDL(wsdlSource);
+</pre>
+
+<h2>Known Problems/Issues</h2>
+
+<ol>
+   	<li>
+   	    The StAX/AXIOM implementation is less complete than the Xerces/DOM implementation and
+   	    some functionality is not yet implemented (e.g. parsing of extenions).
+   	</li>
+	<li>
+		Currently, the only type system supported is W3C XML Schema and this is exposed at 
+   		certain points of the API (through the use of the XmlSchema interface). Later on we
+   		will consider more general, extendable support for other type systems.
+   	</li>
+	<li>
+	    Validation does not yet cover all WSDL 2.0 assertions and in fact, the W3C WSDL 2.0 
+	    Assertion Test Suite Coverage report shows that 'bad' WSDL testcases for some of these 
+	    assertions do not not yet exist (i.e. this test suite is incomplete).
+	    So, there will currently be some Woden failures on the WSDL 2.0 Validation Tests 
+	    report on the Dashboard.
+	</li>
+	<li>
+	    The current extension mechanism mandates statically typed interfaces for each type of
+	    extension. This requires the client application to know each required extension and
+	    its API. Some investigation has been done on a more flexible, dynamic extension 
+	    mechanism and any changes that arise from this will be delivered in M8 (this was deferred
+	    on the M7 plan due to lack of time and resources).
+	</li>
+	<li>
+	    To improve performance, a better mechanism is required for caching retrieved documents to
+	    reduce network requests. This will be addressed along side work on the XML Entity Resolver
+	    described above.  
+	</li>
+</ol>
+
+</body>
+</html>
+
+
+
+
+ 

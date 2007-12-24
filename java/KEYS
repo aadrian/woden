@@ -1,0 +1,157 @@
+This file contains the PGP keys of various developers.
+
+Users: pgp < KEYS
+       gpg --import KEYS
+Developers: 
+        pgp -kxa <your name> and append it to this file.
+        (pgpk -ll <your name> && pgpk -xa <your name>) >> this file.
+        (gpg --list-sigs <your name>
+             && gpg --armor --export <your name>) >> this file.
+
+pub   1024D/0B3CC3E4 2007-02-19
+uid                  John Kaputin (SIGNING KEY) <jkaputin@apache.org>
+sig 3        0B3CC3E4 2007-02-19  John Kaputin (SIGNING KEY) <jkaputin@apache.org>
+sig          0768A18D 2007-04-16  Lawrence Mandel <lmandel@ca.ibm.com>
+sig          FED9CF25 2007-07-10  Graham C Turrell <gturrell@apache.org>
+sub   2048g/2CA75198 2007-02-19
+sig          0B3CC3E4 2007-02-19  John Kaputin (SIGNING KEY) <jkaputin@apache.org>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.6 (MingW32)
+
+mQGiBEXZpZARBAD5RN4WEcBAQIoICWjXQ15EK59hb88LufG5e3I8hZuXbta35PyB
+V3XFcZQzvWu4Fu3ZuUp1H+dzU5qcGniW3botm3EpFbWvyIF7OSG2dRRZum50p0tC
+QZWKeB0y4xlnGLm6y0kvF9V2Rer2d4U6lw0S8Ajva0exsxQhsQLNsRk2YwCg0AJK
+9AU3uR/Xmcw3pn/iCK8W62MEAPINVcnRIP2/TgrfQR3bNpwThSe1RhGuwbsBE35h
+WAtNw4w/tiOhmmWJeazT+CTa08++g4eh87Bk4+jZa48id17Jm9Rm1dviPxCEIvmf
+WEAWnaPQXSeP8ki7IsvpBMelG2ZA/B7SAnmGrZ9BIKOakmcPTDn02waSJgPZUXWC
+FdL9A/9g6F5YnQ6CT/TT303OxeHyuNFfgZc7CttxoXgkKDrz5Ns6kCEszgkBXHKv
+yJxX4OlIpQ6c9qIKx+kfyTZ06GLtfBd+53+0YvpSC7kE+cXi3/b93sDEl+D2YYgi
+aExzdqFkJ8xkP6N1Fx7DJREj9fer7dMe81K5ANZKZCf/37WB0LQwSm9obiBLYXB1
+dGluIChTSUdOSU5HIEtFWSkgPGprYXB1dGluQGFwYWNoZS5vcmc+iGAEExECACAF
+AkXZpZACGwMGCwkIBwMCBBUCCAMEFgIDAQIeAQIXgAAKCRApvgUFCzzD5HjUAJ4s
+3YGah9ghZlqAYFum0W7mFI/RlQCdGFvttE0AO4b1a9/QH5yYYzz97cGIRgQQEQIA
+BgUCRiOwNAAKCRDhTU7rB2ihjQLgAKCWWgAD26QSBlVF16qclmNWibAo1gCgrfOg
+AApisSdcP1/CCpkfJb0XM+WIRgQQEQIABgUCRpOWngAKCRCEgpm3/tnPJY+zAJ9b
+5G9QLqB+Yhh0mV2lxNn1Z0ICQACgh/WkIrJHEwAI7Faj4uVRrKvvwSy5Ag0ERdml
+sBAIAPxCddT9Uopwlkk0/3uHrXCW0X627kd0hSyuFAt+Bx3vTwlshIl8tUNAhMyG
+HuLJhz7Eby9bMnVU/g6jgGMP+Cr208+Tgwx/NmmodvdLIhZPfImSD+RFl1ZXM+np
+LjMLcCAz0YbN4iiUBPgdu28eMAT5SOApkxIbDviBHWHyHuMUgK5CQdXaqYnECMY4
+ImaetkkYgYgSY1lSlbAXDlGBrh2KoPwbLnPPdTblbG32a+Nh5rq9YM3qc/bxLY+n
+fB7NVpSbCAfFfXh2gRnaItUyo0HDct5YK/U8HNv5q183BGcieHAXbd5FCPpGJ5AG
+/yki54o8cmaq/DlRq//KsRZZ5gMAAwUH/R/x6+GpGZCVKHXH9MK3IoN+isSJDuZz
+jVclrPIisMLMMP6Ks9Xf9a3MUpMAfFcvRbXUxinefpKKGCpNkufWmGV2pp6Dv/xZ
+Fjh9XphCDpi8Fjl6xjS1vxzH2lGTQqQxo/7l5fWELPQaft2Qh7aOkmH4UqEnlPp1
+dlPLdzv3X7RsD8u6NfML8U5byfq6U4D2h+/PONVcD/RHQ9UtPcM2EJkTFG1sLpFa
+4RIF4XBhct9zoD3Qj1qGbxp/OvPlCsYc+FJEexz1T9NZ4TU3U6cpAcxLCfYxdH56
+7fOniiqmnKheNsGefuEJErwQiebNkgRkB9FsoBR1bpzlh2yHKD1amEuISQQYEQIA
+CQUCRdmlsAIbDAAKCRApvgUFCzzD5GYvAJ9k4leftX823DKuJ4qO+XWSHO3SiACc
+DPaxa482f5aNB/qaWgFUjahEBnI=
+=uORq
+-----END PGP PUBLIC KEY BLOCK-----
+
+pub   1024D/FED9CF25 2007-03-06
+uid                  Graham C Turrell <gturrell@apache.org>
+sig 3        FED9CF25 2007-03-06  Graham C Turrell <gturrell@apache.org>
+sig          0768A18D 2007-03-28  Lawrence Mandel <lmandel@ca.ibm.com>
+sig       X  CA57AD7C 2007-04-12  PGP Global Directory Verification Key
+sig          5793498F 2007-04-12  Tim Ellison <tim@ellison.name>
+sig          0B3CC3E4 2007-06-15  John Kaputin (SIGNING KEY) <jkaputin@apache.org>
+sub   1024g/CDD9E1EC 2007-03-06
+sig          FED9CF25 2007-03-06  Graham C Turrell <gturrell@apache.org>
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.6 (MingW32)
+
+mQGiBEXtjyoRBACAWL2SK3IslDOtx64DQrZR3NH4X2a561tRlpZVp59E15c7BzLn
+D4T3zbIR0H3etXidREUJ5UeMz+2Kox+0EG/bWQHcb2dnOxahuiCa9UTKfA0zmgag
+cI8yT+KZm57LCFg9fbhLwcCiXyYsdbMLWsc87Mik0gMXgumR+UXcjEZtcwCgypeb
+QEUxpV1lWyLmq6XBKbTaheUD/A1GsLJ9hiaSFw94GgVIVPP46dsF9YU0coWVetXu
+uu1sI0IsQ4vnzVY+/T9zTmkZ91pWEgiJlG7F89NK5cdgcAIg7+NDt8PQrrsInZ/U
+IZVCEz+bzwBWsHC9hBAsl0U24+Pru1BFADw7DakbJ3h9d1Msk389HiS3UPGXQG+n
+VtA5A/9soE7eUtKRBdi4bOtYRH9Qedtp7xDxWsHhI9XNvtDnYfsrO83/NWxZpomS
+D9FC+vG3VI4c4SPAmmIFbJyTdGnbI+QE/bcRu5FsWe6JTdm1zeiZLdMQQw+XQu9y
+DuQoiYUUmRZtksV1tVr41YlzYTHtiyr7QoNNPkiCmblSRlm0G7QmR3JhaGFtIEMg
+VHVycmVsbCA8Z3R1cnJlbGxAYXBhY2hlLm9yZz6IYAQTEQIAIAUCRe2PKgIbIwYL
+CQgHAwIEFQIIAwQWAgMBAh4BAheAAAoJEISCmbf+2c8l2HcAnRzz1fpzcprGC2xf
+EbeYVAqydNQDAKCnbbx2InTRq0a/XH/EbJjdPg3Q1ohGBBARAgAGBQJGCqDeAAoJ
+EOFNTusHaKGNgQoAn1TIpaAFWDXcRQRhU9Tf6apPcUD6AJ9STnNYc2YMyPGA3GM+
+66sWEYPUYIkBIgQQAQIADAUCRh5ovwUDABJ1AAAKCRCXELibyletfJf7B/9tmF42
+hHpGw0jJP2sskcC5tNnU3Qou4JJDPsueWPq9nfRSM6Eb0RgCjGq8bEQcwt19GpPa
+/sIRGwABJZ/tBSelN9q+vZrWjwF9uzeA/W2m25NugzRYATAZIcU/DRfvHD/Aqhwx
+4YpWShUZeGgJTfbIsKQuptraCbfjKV72dVZQQIVNSi07oUyRvu/cXxM5LLmZGuRR
+/EpMjd04IhBI29Sggj84K4BriBHLDyCPoA78NlX+tYX8xf4Ndw1D7wgyZVXmBeBR
+ExFcXqd6xNhxHcDo3ux/6DbHkAxGFj5sg4xVvKSN76myBJQ3KtAap+o8fhnNef+Y
+C1kQpRcmnrw13m0KiEYEEBECAAYFAkYeSAAACgkQQeoJoFeTSY/4BACeJtlRdcNV
+4fmmHaC66c1PoomkLPEAn17wXDFs2g9xVX4F2Z8xq3xN50lTiEYEEBECAAYFAkZy
+qLYACgkQKb4FBQs8w+S48gCglo3btkYs0IcyqTQvxdB/WPAT3S0AoLYCIbVBml6n
+bk2EelZdQoBn8sgAuQENBEXtjywQBACMY2rON4HY2a9g4dvQ+xIuK9bPdB+XIrZr
+g4xfKQsaD9W5bFVRJoZGkUve//M9AnLmrPLrfHPzpoVNiaZIqWv9AJ9jLgGllWLG
+4bNq8aNe14X42kbA625QjlFNZzyIa1h3iMCNW0kUI707s1CDtfyVFBzX6EcDeWsk
+F8JZnH+euwADBgP/WJVyDgnacKwcjO3tedpXa8lJl2y/O+jYfUQjXYSoy66Y+7on
+5FJRSQfmS2oTMkqqietRXMYVlq8gy497OoP1GiFrFfBzYxLo7S7GQNtUpmithTR8
+fO8q9RXZihYmbgcBzE/jfS4eKgRoffoZrA6NnrryhJwUX2OCHSPgJ0akTheISQQY
+EQIACQUCRe2PLAIbDAAKCRCEgpm3/tnPJS63AJ4hz+ewybhq8+Rtig61pMuBdG5T
+zgCgoi4APmXorHNyqQZBGbcBX/rj/4w=
+=wLSs
+-----END PGP PUBLIC KEY BLOCK-----
+
+pub   1024D/0768A18D 2007-03-19
+uid                  Lawrence Mandel <lmandel@ca.ibm.com>
+sig 3        0768A18D 2007-04-13  Lawrence Mandel <lmandel@ca.ibm.com>
+sig 3        16A8D3AB 2007-04-19  Julie MacNaught <jmacna@apache.org>
+sig          30A21D55 2007-05-16  Shane Curcuru <asf@shanecurcuru.org>
+sig          0B3CC3E4 2007-06-15  John Kaputin (SIGNING KEY) <jkaputin@apache.org>
+uid                  Lawrence Mandel (CODE SIGNING KEY) <lmandel@apache.org>
+sig 3        0768A18D 2007-03-19  Lawrence Mandel <lmandel@ca.ibm.com>
+sig          FED9CF25 2007-03-28  Graham C Turrell <gturrell@apache.org>
+sig          95597B05 2007-04-10  Neil Graham (this key is primarily for signing Xerces-J releases) <neilg@ca.ibm.com>
+sig 3        16A8D3AB 2007-04-19  Julie MacNaught <jmacna@apache.org>
+sig          30A21D55 2007-05-16  Shane Curcuru <asf@shanecurcuru.org>
+sig          0B3CC3E4 2007-06-15  John Kaputin (SIGNING KEY) <jkaputin@apache.org>
+sub   2048g/D3927EC6 2007-03-19
+sig          0768A18D 2007-03-19  Lawrence Mandel <lmandel@ca.ibm.com>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.7 (MingW32)
+
+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
+pGVhIYRUdIULpXWoqvae8MG1
+=O66F
+-----END PGP PUBLIC KEY BLOCK-----
