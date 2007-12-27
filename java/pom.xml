@@ -37,7 +37,7 @@
     W3C WSDL 2.0 specification. The implementation will be a high performance implementation
     directly usable in other Apache projects such as Axis2.
   </description>
-  <url>http://incubator.apache.org/woden/</url>
+  <url>http://ws.apache.org/woden/</url>
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/trunk/java/</connection>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/trunk/java/</developerConnection>
