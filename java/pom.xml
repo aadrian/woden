@@ -23,25 +23,25 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.woden</groupId>
   <artifactId>woden</artifactId>
-  <version>1.0-incubating-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2005</inceptionYear>
   <name>Woden</name>
-  <description>The Woden project is an incubation subproject of the Apache Web Services Project to
+  <description>The Woden project is a subproject of the Apache Web Services Project to
     develop a Java class library for reading, manipulating, creating and writing WSDL documents,
     initially to support WSDL 2.0 but with the longer term aim of supporting past, present and
     future versions of WSDL.
 
-    There are two main deliverables: an API and an implementation. The Woden API will consist of
-    a set of Java interfaces. The WSDL 2.0-specific portion of the Woden API will conform to the
+    There are two main deliverables: an API and an implementation. The Woden API consists of
+    a set of Java interfaces. The WSDL 2.0-specific portion of the Woden API conforms to the
     W3C WSDL 2.0 specification. The implementation will be a high performance implementation
     directly usable in other Apache projects such as Axis2.
   </description>
   <url>http://incubator.apache.org/woden/</url>
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/woden/trunk/java/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/woden/trunk/java/</developerConnection>
-    <url>http://svn.apache.org/viewvc/incubator/woden/trunk/java/</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/trunk/java/</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/trunk/java/</developerConnection>
+    <url>http://svn.apache.org/viewvc/webservices/woden/trunk/java/</url>
   </scm>
   <reporting>
     <plugins>
