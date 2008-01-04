@@ -16,12 +16,14 @@
  */
 package org.apache.woden.internal.resolver;
 
-import java.io.File;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.apache.woden.XMLElement;
+import org.apache.woden.internal.util.StringUtils;
 import org.xml.sax.InputSource;
 
 /**
@@ -91,6 +93,7 @@ public abstract class SchemaResolverAdapter implements org.apache.ws.commons.sch
 			/* IOException
 			 * WSDLException
 			 * URISyntaxException
+			 * MalformedURLException
 			 */
 			throw new RuntimeException(e);
 		}
@@ -134,16 +137,14 @@ public abstract class SchemaResolverAdapter implements org.apache.ws.commons.sch
 	 */
 	private URI buildUri(String targetNamespace,
                String schemaLocation,
-               String baseUri) throws URISyntaxException {
+               String baseUri) throws URISyntaxException, MalformedURLException {
 		
        if (baseUri != null) 
         {
-
-    	   File baseFile = new File(baseUri);
-           if (baseFile.exists()) baseUri = baseFile.toURI().toString();
-                
-           return new URI(baseUri).resolve(new URI(schemaLocation));
-
+           URL ctxUrl = new URL(baseUri);
+           URL schemaUrl = StringUtils.getURL(ctxUrl,schemaLocation);
+           URI uri = new URI(schemaUrl.toString());
+           return uri;
         }
         return new URI(schemaLocation);
 		

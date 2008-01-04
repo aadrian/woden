@@ -78,6 +78,7 @@ import org.apache.woden.xml.TokenAttrTest;
 import org.apache.woden.xpointer.XPointerTest;
 
 import testcase.extensions.foo.FooBindingExtensionsTest;
+import testcase.resolver.schemaloc.SchemaLocationTest;
 
 public class AllWodenTestsDOM extends TestSuite
 {
@@ -161,6 +162,7 @@ public class AllWodenTestsDOM extends TestSuite
     addTest(ExtensionRegistryTest.suite());
     addTest(FooBindingExtensionsTest.suite());
     addTest(XPointerTest.suite());
+    addTest(SchemaLocationTest.suite());
     //TODO in-progress 30May06 tests for BindingOpExt and BindingMsgRefExt
   }
 
