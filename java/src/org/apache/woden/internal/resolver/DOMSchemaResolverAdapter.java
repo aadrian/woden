@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.woden.XMLElement;
+import org.apache.woden.internal.schema.SchemaConstants;
+import org.apache.woden.internal.wsdl20.Constants;
 import org.apache.woden.resolver.URIResolver;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
@@ -57,7 +59,7 @@ public class DOMSchemaResolverAdapter extends SchemaResolverAdapter {
         }
         
         String localName = schemaEl.getLocalName();
-        if(!localName.equals("schema")) {
+        if(!localName.equals(SchemaConstants.ELEM_SCHEMA)) {
             //the fragid does not point to a schema element
             //TODO suitable error message
             return null;

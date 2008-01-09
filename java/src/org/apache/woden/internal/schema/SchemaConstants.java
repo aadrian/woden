@@ -16,6 +16,7 @@
  */
 package org.apache.woden.internal.schema;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import javax.xml.namespace.QName;
@@ -29,112 +30,74 @@ public class SchemaConstants {
 
     //Schema attribute names
     public static final String ATTR_ID = "id";
+    public static final String ATTR_TARGET_NAMESPACE = "targetNamespace";
+    public static final String ATTR_NAMESPACE = "namespace";
     public static final String ATTR_SCHEMA_LOCATION = "schemaLocation";
     
     //Schema element names
     public static final String ELEM_SCHEMA = "schema";
-    public static final String ELEM_SCHEMA_IMPORT = "import";
-    public static final String ELEM_SCHEMA_INCLUDE = "include";
-    public static final String ELEM_SCHEMA_REDEFINE = "redefine";
+    public static final String ELEM_IMPORT = "import";
 
-    //Schema uri
-    public static final String NS_URI_XSD_1999 =
-        "http://www.w3.org/1999/XMLSchema";
-    public static final String NS_URI_XSD_2000 =
-        "http://www.w3.org/2000/10/XMLSchema";
-    public static final String NS_URI_XSD_2001 =
+    //Schema namespace string
+    public static final String NS_STRING_SCHEMA =
         "http://www.w3.org/2001/XMLSchema";
+    
+    //Schema namespace uri
+    public static final URI NS_URI_SCHEMA = URI.create(NS_STRING_SCHEMA);
     
     //Schema attribute qnames
     public static final QName Q_ATTR_ID = new QName(ATTR_ID);
     
-    //<xs:schema> qnames
-    public static final QName Q_ELEM_XSD_1999 =
-        new QName(NS_URI_XSD_1999, ELEM_SCHEMA);
-    public static final QName Q_ELEM_XSD_2000 =
-        new QName(NS_URI_XSD_2000, ELEM_SCHEMA);
-    public static final QName Q_ELEM_XSD_2001 =
-        new QName(NS_URI_XSD_2001, ELEM_SCHEMA);
-    public static final List XSD_SCHEMA_QNAME_LIST = Arrays.asList(new QName[]
-        {Q_ELEM_XSD_1999, Q_ELEM_XSD_2000, Q_ELEM_XSD_2001});
-    
-    //<xs:import> qnames
-    public static final QName Q_ELEM_IMPORT_XSD_1999 = new QName(
-        NS_URI_XSD_1999, ELEM_SCHEMA_IMPORT);
-    public static final QName Q_ELEM_IMPORT_XSD_2000 = new QName(
-        NS_URI_XSD_2000, ELEM_SCHEMA_IMPORT);
-    public static final QName Q_ELEM_IMPORT_XSD_2001 = new QName(
-        NS_URI_XSD_2001, ELEM_SCHEMA_IMPORT);
-    public static final List XSD_IMPORT_QNAME_LIST = Arrays.asList(new QName[] 
-        { Q_ELEM_IMPORT_XSD_1999, Q_ELEM_IMPORT_XSD_2000, Q_ELEM_IMPORT_XSD_2001 });
-
-    //TODO remove <include> if not used in Woden
-    //<xs:include> qnames
-    public static final QName Q_ELEM_INCLUDE_XSD_1999 = new QName(
-        NS_URI_XSD_1999, ELEM_SCHEMA_INCLUDE);
-    public static final QName Q_ELEM_INCLUDE_XSD_2000 = new QName(
-        NS_URI_XSD_2000, ELEM_SCHEMA_INCLUDE);
-    public static final QName Q_ELEM_INCLUDE_XSD_2001 = new QName(
-        NS_URI_XSD_2001, ELEM_SCHEMA_INCLUDE);
-    public static final List XSD_INCLUDE_QNAME_LIST = Arrays.asList(new QName[]
-        { Q_ELEM_INCLUDE_XSD_1999, Q_ELEM_INCLUDE_XSD_2000, Q_ELEM_INCLUDE_XSD_2001 });
-
-    //TODO remove <redefine> if not used in Woden
-    //<xs:redefine> qnames
-    public static final QName Q_ELEM_REDEFINE_XSD_1999 = new QName(
-        NS_URI_XSD_1999, ELEM_SCHEMA_REDEFINE);
-    public static final QName Q_ELEM_REDEFINE_XSD_2000 = new QName(
-        NS_URI_XSD_2000, ELEM_SCHEMA_REDEFINE);
-    public static final QName Q_ELEM_REDEFINE_XSD_2001 = new QName(
-	    NS_URI_XSD_2001, ELEM_SCHEMA_REDEFINE);
-    public static final List XSD_REDEFINE_QNAME_LIST = Arrays.asList(new QName[]
-	    { Q_ELEM_REDEFINE_XSD_1999, Q_ELEM_REDEFINE_XSD_2000, Q_ELEM_REDEFINE_XSD_2001 });
-
+    //Schema element qnames
+    public static final QName Q_ELEM_SCHEMA =
+        new QName(NS_STRING_SCHEMA, ELEM_SCHEMA);
+    public static final QName Q_ELEM_SCHEMA_IMPORT = 
+        new QName(NS_STRING_SCHEMA, ELEM_IMPORT);
 
     //Built-in XML Schema types. 19 primitive and 25 derived.
     public static final List LIST_Q_BUILT_IN_TYPES = Arrays.asList(new QName[]
-        { new QName(NS_URI_XSD_2001, "string"),
-          new QName(NS_URI_XSD_2001, "boolean"),
-          new QName(NS_URI_XSD_2001, "decimal"),
-          new QName(NS_URI_XSD_2001, "float"),
-          new QName(NS_URI_XSD_2001, "double"),
-          new QName(NS_URI_XSD_2001, "duration"),
-          new QName(NS_URI_XSD_2001, "dateTime"),
-          new QName(NS_URI_XSD_2001, "time"),
-          new QName(NS_URI_XSD_2001, "date"),
-          new QName(NS_URI_XSD_2001, "gYearMonth"),
-          new QName(NS_URI_XSD_2001, "gYear"),
-          new QName(NS_URI_XSD_2001, "gMonthDay"),
-          new QName(NS_URI_XSD_2001, "gDay"),
-          new QName(NS_URI_XSD_2001, "gMonth"),
-          new QName(NS_URI_XSD_2001, "hexBinary"),
-          new QName(NS_URI_XSD_2001, "base64Binary"),
-          new QName(NS_URI_XSD_2001, "anyURI"),
-          new QName(NS_URI_XSD_2001, "QName"),
-          new QName(NS_URI_XSD_2001, "NOTATION"),
-          new QName(NS_URI_XSD_2001, "normalizedString"),
-          new QName(NS_URI_XSD_2001, "token"),
-          new QName(NS_URI_XSD_2001, "language"),
-          new QName(NS_URI_XSD_2001, "NMTOKEN"),
-          new QName(NS_URI_XSD_2001, "NMTOKENS"),
-          new QName(NS_URI_XSD_2001, "Name"),
-          new QName(NS_URI_XSD_2001, "NCName"),
-          new QName(NS_URI_XSD_2001, "ID"),
-          new QName(NS_URI_XSD_2001, "IDREF"),
-          new QName(NS_URI_XSD_2001, "IDREFS"),
-          new QName(NS_URI_XSD_2001, "ENTITY"),
-          new QName(NS_URI_XSD_2001, "ENTITIES"),
-          new QName(NS_URI_XSD_2001, "integer"),
-          new QName(NS_URI_XSD_2001, "nonPositiveInteger"),
-          new QName(NS_URI_XSD_2001, "negativeInteger"),
-          new QName(NS_URI_XSD_2001, "long"),
-          new QName(NS_URI_XSD_2001, "int"),
-          new QName(NS_URI_XSD_2001, "short"),
-          new QName(NS_URI_XSD_2001, "byte"),
-          new QName(NS_URI_XSD_2001, "nonNegativeInteger"),
-          new QName(NS_URI_XSD_2001, "unsignedLong"),
-          new QName(NS_URI_XSD_2001, "unsignedInt"),
-          new QName(NS_URI_XSD_2001, "unsignedShort"),
-          new QName(NS_URI_XSD_2001, "unsignedByte"),
-          new QName(NS_URI_XSD_2001, "positiveInteger") });
+        { new QName(NS_STRING_SCHEMA, "string"),
+          new QName(NS_STRING_SCHEMA, "boolean"),
+          new QName(NS_STRING_SCHEMA, "decimal"),
+          new QName(NS_STRING_SCHEMA, "float"),
+          new QName(NS_STRING_SCHEMA, "double"),
+          new QName(NS_STRING_SCHEMA, "duration"),
+          new QName(NS_STRING_SCHEMA, "dateTime"),
+          new QName(NS_STRING_SCHEMA, "time"),
+          new QName(NS_STRING_SCHEMA, "date"),
+          new QName(NS_STRING_SCHEMA, "gYearMonth"),
+          new QName(NS_STRING_SCHEMA, "gYear"),
+          new QName(NS_STRING_SCHEMA, "gMonthDay"),
+          new QName(NS_STRING_SCHEMA, "gDay"),
+          new QName(NS_STRING_SCHEMA, "gMonth"),
+          new QName(NS_STRING_SCHEMA, "hexBinary"),
+          new QName(NS_STRING_SCHEMA, "base64Binary"),
+          new QName(NS_STRING_SCHEMA, "anyURI"),
+          new QName(NS_STRING_SCHEMA, "QName"),
+          new QName(NS_STRING_SCHEMA, "NOTATION"),
+          new QName(NS_STRING_SCHEMA, "normalizedString"),
+          new QName(NS_STRING_SCHEMA, "token"),
+          new QName(NS_STRING_SCHEMA, "language"),
+          new QName(NS_STRING_SCHEMA, "NMTOKEN"),
+          new QName(NS_STRING_SCHEMA, "NMTOKENS"),
+          new QName(NS_STRING_SCHEMA, "Name"),
+          new QName(NS_STRING_SCHEMA, "NCName"),
+          new QName(NS_STRING_SCHEMA, "ID"),
+          new QName(NS_STRING_SCHEMA, "IDREF"),
+          new QName(NS_STRING_SCHEMA, "IDREFS"),
+          new QName(NS_STRING_SCHEMA, "ENTITY"),
+          new QName(NS_STRING_SCHEMA, "ENTITIES"),
+          new QName(NS_STRING_SCHEMA, "integer"),
+          new QName(NS_STRING_SCHEMA, "nonPositiveInteger"),
+          new QName(NS_STRING_SCHEMA, "negativeInteger"),
+          new QName(NS_STRING_SCHEMA, "long"),
+          new QName(NS_STRING_SCHEMA, "int"),
+          new QName(NS_STRING_SCHEMA, "short"),
+          new QName(NS_STRING_SCHEMA, "byte"),
+          new QName(NS_STRING_SCHEMA, "nonNegativeInteger"),
+          new QName(NS_STRING_SCHEMA, "unsignedLong"),
+          new QName(NS_STRING_SCHEMA, "unsignedInt"),
+          new QName(NS_STRING_SCHEMA, "unsignedShort"),
+          new QName(NS_STRING_SCHEMA, "unsignedByte"),
+          new QName(NS_STRING_SCHEMA, "positiveInteger") });
 }

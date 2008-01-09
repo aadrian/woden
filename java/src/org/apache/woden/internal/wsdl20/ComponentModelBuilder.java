@@ -210,7 +210,7 @@ public class ComponentModelBuilder {
         
         //process elements and types declared directly in this schema
         
-        if(!SchemaConstants.NS_URI_XSD_2001.equals(schemaDef.getTargetNamespace())) {
+        if(!SchemaConstants.NS_STRING_SCHEMA.equals(schemaDef.getTargetNamespace())) {
             //XML Schema namespace is implicitly imported to get built-in types...we don't want the elements.
             //TODO detect if the XML Schema NS has been explicitly imported (if so, we do want the elements) 
             buildElementDeclarations(schemaDef, schemaTns, typeSystemURI);
@@ -295,7 +295,7 @@ public class ComponentModelBuilder {
 	    while (qnames.hasNext()) {
 	        QName xstQN = (QName) qnames.next();
             
-            if(SchemaConstants.NS_URI_XSD_2001.equals(schemaTns) && 
+            if(SchemaConstants.NS_STRING_SCHEMA.equals(schemaTns) && 
                !SchemaConstants.LIST_Q_BUILT_IN_TYPES.contains(xstQN)) {
                 //XML Schema namespace is implicitly imported to get built-in types...we don't want non-built-in types.
                 //TODO detect if the XML Schema NS has been explicitly imported (if so, we want ALL type defs) 

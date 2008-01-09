@@ -151,7 +151,7 @@ public class Constants
 
   // Qualified attribute names.
   public static final QName Q_ATTR_REQUIRED =
-    new QName(NS_STRING_WSDL20, ATTR_REQUIRED);
+    new QName(NS_STRING_WSDL20, ATTR_REQUIRED);   //<wsdl:required>
 
   // XML Declaration string.
   public static final String XML_DECL_DEFAULT = "UTF-8";

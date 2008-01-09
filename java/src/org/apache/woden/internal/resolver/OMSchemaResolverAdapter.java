@@ -50,7 +50,7 @@ public class OMSchemaResolverAdapter extends SchemaResolverAdapter {
         OMElement contextEl = (OMElement)fContextElement.getSource();
         OMElement typesEl = (OMElement)contextEl.getParent();
         Iterator inlineSchemas = typesEl.
-            getChildrenWithName(SchemaConstants.Q_ELEM_XSD_2001);
+            getChildrenWithName(SchemaConstants.Q_ELEM_SCHEMA);
         OMElement identifiedSchema = null;
         String schemaId;
         while(inlineSchemas.hasNext()) {

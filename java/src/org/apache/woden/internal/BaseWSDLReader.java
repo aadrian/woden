@@ -564,11 +564,11 @@ public abstract class BaseWSDLReader implements WSDLReader {
             {
                 parseDocumentation(tempEl, desc, types);
             }
-            else if (SchemaConstants.XSD_IMPORT_QNAME_LIST.contains(tempElQN))
+            else if (SchemaConstants.Q_ELEM_SCHEMA_IMPORT.equals(tempElQN))
             {
                 types.addSchema(parseSchemaImport(tempEl, desc));
             }
-            else if (SchemaConstants.XSD_SCHEMA_QNAME_LIST.contains(tempElQN))
+            else if (SchemaConstants.Q_ELEM_SCHEMA.equals(tempElQN))
             {
                 types.addSchema(parseSchemaInline(tempEl, desc));
             }

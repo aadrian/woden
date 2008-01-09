@@ -27,10 +27,8 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.woden.ErrorHandler;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
-import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
 import org.apache.woden.WSDLSource;
 import org.apache.woden.XMLElement;
@@ -282,9 +280,9 @@ public class DOMWSDLReader extends BaseWSDLReader {
         InlinedSchemaImpl schema = new InlinedSchemaImpl();
         schema.setXMLElement(schemaEl);
         
-        schema.setId(schemaEl.getAttributeValue(Constants.ATTR_ID));
+        schema.setId(schemaEl.getAttributeValue(SchemaConstants.ATTR_ID));
         
-        String tns = schemaEl.getAttributeValue(Constants.ATTR_TARGET_NAMESPACE);
+        String tns = schemaEl.getAttributeValue(SchemaConstants.ATTR_TARGET_NAMESPACE);
         if(tns != null) {
             schema.setNamespace(getURI(tns));
         }
@@ -352,7 +350,7 @@ public class DOMWSDLReader extends BaseWSDLReader {
         ImportedSchemaImpl schema = new ImportedSchemaImpl();
         schema.setXMLElement(importEl);
         
-        String importNS = importEl.getAttributeValue(Constants.ATTR_NAMESPACE);
+        String importNS = importEl.getAttributeValue(SchemaConstants.ATTR_NAMESPACE);
         if(importNS != null) {
             schema.setNamespace(getURI(importNS));
         }
@@ -554,9 +552,10 @@ public class DOMWSDLReader extends BaseWSDLReader {
         try
         {
           Document schemaDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-          Element schemaElem = schemaDoc.createElementNS("http://www.w3.org/2001/XMLSchema", "import");
-          schemaElem.setAttribute("namespace", "http://www.w3.org/2001/XMLSchema");
-          schemaElem.setAttribute("schemaLocation", resolveURI("http://www.w3.org/2001/XMLSchema.xsd"));
+          Element schemaElem = schemaDoc.
+              createElementNS(SchemaConstants.NS_STRING_SCHEMA, SchemaConstants.ELEM_IMPORT);
+          schemaElem.setAttribute(SchemaConstants.ATTR_NAMESPACE, SchemaConstants.NS_STRING_SCHEMA);
+          schemaElem.setAttribute(SchemaConstants.ATTR_SCHEMA_LOCATION, resolveURI("http://www.w3.org/2001/XMLSchema.xsd"));
           
           XMLElement xmlEl = createXMLElement(schemaElem);
           desc.getTypesElement().addSchema(parseSchemaImport(xmlEl, desc));
