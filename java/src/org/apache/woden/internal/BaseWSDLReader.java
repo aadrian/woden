@@ -80,6 +80,7 @@ import org.apache.woden.wsdl20.xml.WSDLElement;
  */
 public abstract class BaseWSDLReader implements WSDLReader {
 	
+    private static final String emptyString = "".intern();
 	private final String DEFAULT_RESOLVER_PROPERTY="org.apache.woden.resolver.default";
     
     private String fFactoryImplName = null; //TODO deprecate/remove?
@@ -1529,11 +1530,12 @@ public abstract class BaseWSDLReader implements WSDLReader {
             throws WSDLException {
 
         QName elementType = el.getQName();
-        String namespaceURI = (el.getNamespaceURI()).toString();
+        URI namespaceURI = el.getNamespaceURI();
 
         try
         {
-            if (namespaceURI == null || namespaceURI.equals(Constants.NS_STRING_WSDL20))
+            //check that ext element is not in the WSDL 2.0 namespace.
+            if (Constants.NS_URI_WSDL20.equals(namespaceURI))
             {
                 getErrorReporter().reportError(
                         new ErrorLocatorImpl(),  //TODO line&col nos.

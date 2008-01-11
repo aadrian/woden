@@ -36,6 +36,8 @@ import org.w3c.dom.Node;
 
 public class DOMXMLElement extends BaseXMLElement{
 
+    private static final String emptyString = "".intern();
+    
     public DOMXMLElement(ErrorReporter errorReporter) {
         super(errorReporter);
     }
@@ -97,16 +99,15 @@ public class DOMXMLElement extends BaseXMLElement{
     	String nsStr =  el.getNamespaceURI();
     	URI uri = null;
     	
-    	try {
-    		uri = new URI(nsStr);
-    	} catch (URISyntaxException e) {
-    		String msg = fErrorReporter.getFormattedMessage(
-    				                        "WSDL506", 
-    				                        new Object[] {nsStr});
-    		throw new WSDLException(WSDLException.INVALID_WSDL, msg, e);
-    	}
-    	
-    	return uri;
+    	if (nsStr != null) {
+            try {
+                uri = new URI(nsStr);
+            } catch (URISyntaxException e) {
+                String msg = fErrorReporter.getFormattedMessage("WSDL506", new Object[] { nsStr });
+                throw new WSDLException(WSDLException.INVALID_WSDL, msg, e);
+            }
+        }
+        return uri;
     }
 
     protected String doGetLocalName() {
@@ -143,7 +144,7 @@ public class DOMXMLElement extends BaseXMLElement{
             throw wsdlExc;
         }
         
-        return new QName(namespaceURI, localPart, (prefix != null ? prefix : ""));
+        return new QName(namespaceURI, localPart, (prefix != null ? prefix : emptyString));
     }
 
     protected XMLElement doGetFirstChildElement() {

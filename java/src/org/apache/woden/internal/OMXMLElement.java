@@ -33,6 +33,8 @@ import org.apache.woden.XMLElement;
 
 public class OMXMLElement extends BaseXMLElement{
 
+    private static final String emptyString = "".intern();
+    
     public OMXMLElement(ErrorReporter errorReporter) {
         super(errorReporter);
     }
@@ -88,13 +90,13 @@ public class OMXMLElement extends BaseXMLElement{
         OMElement elem = (OMElement)fSource;
         String nsStr =  elem.getNamespace().getNamespaceURI();
         URI uri = null;
-        try {
-            uri = new URI(nsStr);
-        } catch (URISyntaxException e) {
-            String msg = fErrorReporter.getFormattedMessage(
-                                            "WSDL506", 
-                                            new Object[] {nsStr});
-            throw new WSDLException(WSDLException.INVALID_WSDL, msg, e);
+        if (nsStr != null) {
+            try {
+                uri = new URI(nsStr);
+            } catch (URISyntaxException e) {
+                String msg = fErrorReporter.getFormattedMessage("WSDL506", new Object[] { nsStr });
+                throw new WSDLException(WSDLException.INVALID_WSDL, msg, e);
+            }
         }
         return uri;
     }
@@ -131,7 +133,7 @@ public class OMXMLElement extends BaseXMLElement{
             throw wsdlExc;
         }
         
-        return new QName(namespaceURI, localPart, (prefix != null ? prefix : ""));
+        return new QName(namespaceURI, localPart, (prefix != null ? prefix : emptyString));
     }
 
     protected XMLElement doGetFirstChildElement() {
