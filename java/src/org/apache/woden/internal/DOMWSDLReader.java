@@ -74,6 +74,8 @@ import org.xml.sax.SAXParseException;
  */
 public class DOMWSDLReader extends BaseWSDLReader {
     
+    private static final String emptyString = "".intern();
+    
     //a map of imported schema definitions keyed by schema location URI
     private Map fImportedSchemas = new Hashtable();
     
@@ -453,7 +455,7 @@ public class DOMWSDLReader extends BaseWSDLReader {
             String localName = domAttr.getLocalName();
             String namespaceURI = domAttr.getNamespaceURI();
             String prefix = domAttr.getPrefix();
-            QName attrType = new QName(namespaceURI, localName, (prefix != null ? prefix : ""));
+            QName attrType = new QName(namespaceURI, localName, (prefix != null ? prefix : emptyString));
             String attrValue = domAttr.getValue();
                     
             if (namespaceURI != null && !namespaceURI.equals(Constants.NS_STRING_WSDL20))

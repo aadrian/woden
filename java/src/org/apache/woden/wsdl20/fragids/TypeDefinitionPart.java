@@ -30,6 +30,7 @@ import java.net.URI;
  *
  */
 public class TypeDefinitionPart implements ComponentPart{
+    private static final String emptyString = "".intern();
     private QName type;   //Name of the Type Definition component.
     private final URI system;   //Namespace absolute IRI of the extension type system used for the Type Definition component.
 
@@ -80,7 +81,7 @@ public class TypeDefinitionPart implements ComponentPart{
      * @return a String the serialised Type Definition Pointer Part.
      */
     public String toString() {
-        String typeString = (type.getPrefix() != null && !type.getPrefix().equals("") ? type.getPrefix() + ":" + type.getLocalPart() : type.getLocalPart());
+        String typeString = (type.getPrefix() != null && !type.getPrefix().equals(emptyString) ? type.getPrefix() + ":" + type.getLocalPart() : type.getLocalPart());
         if (system == null) {
             return "wsdl.typeDefinition(" + typeString + ")";
         } else {

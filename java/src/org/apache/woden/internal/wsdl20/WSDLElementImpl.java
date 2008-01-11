@@ -43,6 +43,7 @@ import org.apache.woden.xml.XMLAttr;
  */
 public class WSDLElementImpl implements WSDLElement 
 {
+    private static final String emptyString = "".intern();
     private AttributeExtensibleImpl fAttrExt = new AttributeExtensibleImpl();
     private ElementExtensibleImpl fElemExt = new ElementExtensibleImpl();
     private Map namespaceToPrefixMap = new HashMap();
@@ -145,7 +146,7 @@ public class WSDLElementImpl implements WSDLElement
     }
     
     public void addNamespace(String prefix, URI namespace) {
-        prefix = (prefix != null) ? prefix : "";
+        prefix = (prefix != null) ? prefix : emptyString;
         if (namespace == null) {
             removeNamespace(prefix);
         } else {
@@ -155,7 +156,7 @@ public class WSDLElementImpl implements WSDLElement
     }
     
     public URI removeNamespace(String prefix) {
-        prefix = (prefix != null) ? prefix : "";
+        prefix = (prefix != null) ? prefix : emptyString;
         URI namespaceURI = (URI)prefixToNamespaceMap.remove(prefix);
         namespaceToPrefixMap.remove(namespaceURI);
         return namespaceURI;
@@ -173,6 +174,7 @@ public class WSDLElementImpl implements WSDLElement
     
     public URI getNamespaceURI(String prefix) {
         //See if the prefix is local.
+        prefix = (prefix != null) ? prefix : emptyString;
         URI namespace = (URI)prefixToNamespaceMap.get(prefix);
         if (namespace == null && this instanceof NestedElement) { //If not call parents to find prefix if I'm nested.
             return ((NestedElement)this).getParentElement().getNamespaceURI(prefix);

@@ -35,12 +35,13 @@ import org.apache.woden.types.NCName;
  * 
  */
 public class XPointer {
+    private static final String emptyString = "".intern();
     private final Map prefixBindingContex;
     private final Map namespaceBindingContex;
     private NCName shorthandPointer;
     private final List pointerParts;
     
-    private static final NCName emptyNCName = new NCName("");
+    private static final NCName emptyNCName = new NCName(emptyString);
     
     private static final String NS_URI_XML = "http://www.w3.org/XML/1998/namespace";
     private static final String NS_URI_XMLNS = "http://www.w3.org/2000/xmlns/";
@@ -67,8 +68,8 @@ public class XPointer {
      */
     public XPointer(String xpointerString) throws InvalidXPointerException {
         this(); //Construct a new XPointer.
-        if (xpointerString == null || xpointerString.equals(""))
-            throw new InvalidXPointerException("The XPointer string is either null or empty", "");
+        if (xpointerString == null || xpointerString.equals(emptyString))
+            throw new InvalidXPointerException("The XPointer string is either null or empty", emptyString);
         XPointerParser.parseXPointer(xpointerString, this); //Parse the string and add the Pointers to the new XPointer.
     }
     

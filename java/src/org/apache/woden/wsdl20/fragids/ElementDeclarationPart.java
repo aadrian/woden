@@ -31,6 +31,7 @@ import java.net.URI;
  *
  */
 public class ElementDeclarationPart implements ComponentPart {
+    private static final String emptyString = "".intern();
     private QName element;    //Name of the Element Declaration component.
     private final URI system;       //Namespace absolute IRI of the extension type system used for the Element Declaration component.
 
@@ -85,7 +86,7 @@ public class ElementDeclarationPart implements ComponentPart {
      * @return a String the serialised Element Declaration Pointer Part.
      */
     public String toString() {
-        String elementString = (element.getPrefix() != null && !element.getPrefix().equals("") ? element.getPrefix() + ":" + element.getLocalPart() : element.getLocalPart());
+        String elementString = (element.getPrefix() != null && !element.getPrefix().equals(emptyString) ? element.getPrefix() + ":" + element.getLocalPart() : element.getLocalPart());
         if (system == null) {
             return "wsdl.elementDeclaration(" + elementString + ")";
         } else {

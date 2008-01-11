@@ -72,13 +72,13 @@ public class HTTPLocation {
     private List fValidatedList = null; //used for validating the HTTP location string
     private List fConsolidatedList = null; //used for substitution and formatting
     
-    private final String emptyString = "".intern();
-    private final String questionMark = "?".intern();
-    private final String leftBrace = "{".intern();
-    private final String rightBrace = "}".intern();
-    private final String doubleLeftBraces = "{{".intern();
-    private final String doubleRightBraces = "}}".intern();
-    private final String exclamatedLeftBrace = "{!".intern();
+    private static final String emptyString = "".intern();
+    private static final String questionMark = "?".intern();
+    private static final String leftBrace = "{".intern();
+    private static final String rightBrace = "}".intern();
+    private static final String doubleLeftBraces = "{{".intern();
+    private static final String doubleRightBraces = "}}".intern();
+    private static final String exclamatedLeftBrace = "{!".intern();
     
     /**
      * Creates an HTTPLocation object to represent the specified HTTP Location String value.

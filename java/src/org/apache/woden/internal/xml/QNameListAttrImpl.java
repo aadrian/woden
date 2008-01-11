@@ -37,6 +37,7 @@ import org.apache.woden.xml.QNameListAttr;
  */
 public class QNameListAttrImpl extends XMLAttrImpl implements QNameListAttr 
 {
+    private static final String emptyString = "".intern();
     public QNameListAttrImpl(XMLElement ownerEl, QName attrType, 
             String attrValue, ErrorReporter errRpt) throws WSDLException
     {
@@ -65,7 +66,7 @@ public class QNameListAttrImpl extends XMLAttrImpl implements QNameListAttr
      */
     protected Object convert(XMLElement ownerEl, String attrValue) throws WSDLException
     {
-        if(attrValue == null || "".equals(attrValue))
+        if(attrValue == null || emptyString.equals(attrValue))
         {
             setValid(false);
             getErrorReporter().reportError(

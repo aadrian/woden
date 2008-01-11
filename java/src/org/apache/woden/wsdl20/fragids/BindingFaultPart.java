@@ -27,6 +27,7 @@ import org.apache.woden.types.NCName;
  *
  */
 public class BindingFaultPart implements ComponentPart {
+    private static final String emptyString = "".intern();
     private final NCName binding; //Local name of the parent Binding component.
     private QName fault;    //Name of the Interface Fault referred to by this Binding Fault component.
 
@@ -55,7 +56,7 @@ public class BindingFaultPart implements ComponentPart {
      * @return a String the serialised Binding Fault Pointer Part.
      */
     public String toString() {
-        String faultString = (fault.getPrefix() != null && !fault.getPrefix().equals("") ? fault.getPrefix() + ":" + fault.getLocalPart() : fault.getLocalPart());
+        String faultString = (fault.getPrefix() != null && !fault.getPrefix().equals(emptyString) ? fault.getPrefix() + ":" + fault.getLocalPart() : fault.getLocalPart());
         return "wsdl.bindingFault(" + binding + "/" + faultString + ")";
     }
 }

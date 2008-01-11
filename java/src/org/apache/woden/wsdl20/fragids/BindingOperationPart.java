@@ -28,6 +28,7 @@ import org.apache.woden.types.NCName;
  *
  */
 public class BindingOperationPart implements ComponentPart {
+    private static final String emptyString = "".intern();
     private final NCName binding;     //Local name of the parent Binding component.
     private QName operation;    //Name of the Interface Operation component referred to by this Binding Operation component.
     
@@ -56,7 +57,7 @@ public class BindingOperationPart implements ComponentPart {
      * @return a String the serialised Binding Operation Pointer Part.
      */
     public String toString() {
-        String operationString = (operation.getPrefix() != null && !operation.getPrefix().equals("") ? operation.getPrefix() + ":" + operation.getLocalPart() : operation.getLocalPart());
+        String operationString = (operation.getPrefix() != null && !operation.getPrefix().equals(emptyString) ? operation.getPrefix() + ":" + operation.getLocalPart() : operation.getLocalPart());
         return "wsdl.bindingOperation(" + binding + "/" + operationString + ")";
     }
 }

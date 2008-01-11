@@ -39,6 +39,7 @@ import org.apache.woden.xml.QNameListOrTokenAttr;
 public class QNameListOrTokenAnyAttrImpl extends XMLAttrImpl 
                                          implements QNameListOrTokenAttr 
 {
+    private static final String emptyString = "".intern();
     public QNameListOrTokenAnyAttrImpl(XMLElement ownerEl, QName attrType, 
             String attrValue, ErrorReporter errRpt) throws WSDLException
     {
@@ -107,7 +108,7 @@ public class QNameListOrTokenAnyAttrImpl extends XMLAttrImpl
         if("#any".equals(attrValue)) return attrValue;
         
         //Second, assume the attribute contains a list of xs:QName.
-        if(attrValue == null || "".equals(attrValue))
+        if(attrValue == null || emptyString.equals(attrValue))
         {
             setValid(false);
             getErrorReporter().reportError(

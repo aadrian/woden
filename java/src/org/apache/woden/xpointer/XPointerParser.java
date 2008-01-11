@@ -36,6 +36,7 @@ import org.apache.woden.types.NCName;
  */
 final class XPointerParser {
 
+    private static final String emptyString = "".intern();
     /**
      * Parses a String XPointer and stores the results into the given XPointer object.
      * 
@@ -419,7 +420,7 @@ final class XPointerParser {
                         }
 
                         name = data.substring(nameOffset, currentOffset).intern();
-                        prefix = "".intern();
+                        prefix = emptyString;
 
                         // The name is a QName => a SchemeName
                         if (ch == ':') {

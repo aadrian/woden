@@ -73,6 +73,8 @@ import org.apache.ws.commons.schema.utils.NamespacePrefixList;
  *         Interface Operation extensions, - added Endpoint extensions
  */
 public class ComponentModelBuilder {
+    
+    private static final String emptyString = "".intern();
 
 	// TODO support for other (non-Schema) type systems
 
@@ -314,7 +316,7 @@ public class ComponentModelBuilder {
                 //so replace it with the including schema's tns.
                 tdQN = new QName(schemaTns, xstQN.getLocalPart(), xstQN.getPrefix());
             }
-            if(tdQN.getPrefix() == "" || tdQN.getPrefix() == null) {
+            if(tdQN.getPrefix() == emptyString || tdQN.getPrefix() == null) {
                 //if a prefix has been declared for this NS uri, include it in the qname
                 String pfx = prefixes.getPrefix(tdQN.getNamespaceURI());
                 if(pfx != null) {

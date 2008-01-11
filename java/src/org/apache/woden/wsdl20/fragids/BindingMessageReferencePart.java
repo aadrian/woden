@@ -28,6 +28,7 @@ import org.apache.woden.types.NCName;
  *
  */
 public class BindingMessageReferencePart implements ComponentPart {
+    private static final String emptyString = "".intern();
     private final NCName binding;     //Local name of the parent Binding component.
     private QName operation;    //Name of the Interface Operation referred to the parent Binding Operation component.
     private final NCName message;     //Message Label of the Interface Message Reference component referred to by this Binding Message Reference component.
@@ -59,7 +60,7 @@ public class BindingMessageReferencePart implements ComponentPart {
      * @return a String the serialised Binding Message Reference Pointer Part.
      */
     public String toString() {
-        String operationString = (operation.getPrefix() != null && !operation.getPrefix().equals("") ? operation.getPrefix() + ":" + operation.getLocalPart() : operation.getLocalPart());
+        String operationString = (operation.getPrefix() != null && !operation.getPrefix().equals(emptyString) ? operation.getPrefix() + ":" + operation.getLocalPart() : operation.getLocalPart());
         return "wsdl.bindingMessageReference(" + binding + "/" + operationString + "/" + message + ")";
     }
 }

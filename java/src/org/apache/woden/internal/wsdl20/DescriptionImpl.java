@@ -67,6 +67,8 @@ import org.apache.woden.wsdl20.xml.WSDLElement;
 public class DescriptionImpl extends WSDLComponentImpl
                              implements Description, DescriptionElement 
 {
+    private static final String emptyString = "".intern();
+    
     /*
      * WSDL Component model data (flattened properties of Description Component)
      * TODO cache top-level components here with a flush-on-update mechanism
@@ -627,7 +629,7 @@ public class DescriptionImpl extends WSDLComponentImpl
         DescriptionElement desc = ((DescriptionElement) wElem);
         
         //Find its target name and prefix.
-        String[] namespace = new String[] {"", ""};
+        String[] namespace = new String[] {emptyString, emptyString};
         URI tns = desc.getTargetNamespace();
         if (tns != null) {
             namespace[0] = tns.toString();
