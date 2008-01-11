@@ -63,10 +63,12 @@ public interface WSDLElement extends AttributeExtensible, ElementExtensible
     
     
     /**
-     * Return the namespace URI associated with the specified prefix.
-     * The scope of the search correponds to the scope of namespace declarations 
+     * Return the namespace URI associated with the specified prefix, or null if there is no
+     * such namespace declaration.
+     * The scope of the search corresponds to the scope of namespace declarations 
      * in XML. That is, from the current element upwards to the root element
      * (to the wsdl:description).
+     * To request the default namespace, specify null or the empty string "" for the prefix.
      *  
      * @param prefix the prefix whose associated namespace URI is required
      * @return the associated namespace URI
