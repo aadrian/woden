@@ -80,7 +80,7 @@ public interface XMLElement {
 
     /**
      *
-     * @return the namespace URI of the element
+     * @return the namespace URI of the element or null if it has no namespace
      */
     public URI getNamespaceURI() throws WSDLException;
 
