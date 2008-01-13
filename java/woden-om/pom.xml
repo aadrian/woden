@@ -90,6 +90,7 @@
                        <exclude>**/AllWodenTests.java</exclude>
                        <exclude>**/AllWodenTestsDOM.java</exclude>
                        <exclude>**/SchemaTest.java</exclude>
+                       <exclude>**/SchemaLocationTest.java</exclude>
                        <exclude>**/WSDLDocumentValidatorTest.java</exclude>
                    </testExcludes>
                </configuration>
