@@ -68,6 +68,10 @@
 		<gzip zipfile="${dist.tar.gz}" src="${dist.tar}"/>
 
 		<delete file="${dist.tar}" failonerror="false"/>
+
+		<copy todir="${basedir}" >
+			<fileset file="${dist.image.viewer}"/>
+		</copy>
 	</target>
 
 	<target name="test" depends="createPackage">

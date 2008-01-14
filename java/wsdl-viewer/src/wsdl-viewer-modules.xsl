@@ -136,6 +136,9 @@
 * 	2007-08-01 - 3.0.08 - Fix: xsl:template name="render-type"
 * 						  Fix: typo - "Impotred WSDL" should be "Impotred WSDL"
 * 	2007-08-16 - 3.0.09 - Fix: xsl:template name="render-type" - anti recursion
+* 	2007-12-05 - 3.1.00 - Modularized
+* 	2007-12-23 - 3.1.01 - Terminating message by WS without interface or service definition was removed
+* 						  (seems to be a correct state)
 * ====================================================================
 -->
 
@@ -269,7 +272,7 @@
 	</xsl:if>
 	<xsl:if test="$ENABLE-ABOUT-PARAGRAPH">
 		<xsl:call-template name="about.render">
-			<xsl:with-param name="version">3.1.00</xsl:with-param>
+			<xsl:with-param name="version" select="$wsdl-viewer.version" />
 		</xsl:call-template>
 	</xsl:if>
 </div>
@@ -360,7 +363,7 @@
 	</div>
 
 	<xsl:apply-templates select="/*/*[local-name() = 'import'][@location]/@location" mode="src.import"/>
-	<xsl:apply-templates select="$global.types//xsd:import[@schemaLocation]/@schemaLocation | $global.types//xsd:include[@schemaLocation]/@schemaLocation" mode="src.import"/>
+	<xsl:apply-templates select="$consolidated-wsdl/*[local-name() = 'types']//xsd:import[@schemaLocation]/@schemaLocation | $consolidated-wsdl/*[local-name() = 'types']//xsd:include[@schemaLocation]/@schemaLocation" mode="src.import"/>
 </div>
 </xsl:template>
 

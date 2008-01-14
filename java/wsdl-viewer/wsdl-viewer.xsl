@@ -141,6 +141,9 @@
 * 	2007-08-01 - 3.0.08 - Fix: xsl:template name="render-type"
 * 						  Fix: typo - "Impotred WSDL" should be "Impotred WSDL"
 * 	2007-08-16 - 3.0.09 - Fix: xsl:template name="render-type" - anti recursion
+* 	2007-12-05 - 3.1.00 - Modularized
+* 	2007-12-23 - 3.1.01 - Terminating message by WS without interface or service definition was removed
+* 						  (seems to be a correct state)
 * ====================================================================
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:ws="http://schemas.xmlsoap.org/wsdl/" xmlns:ws2="http://www.w3.org/ns/wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:local="http://tomi.vanek.sk/xml/wsdl-viewer" version="1.0" exclude-result-prefixes="ws ws2 xsd soap local">
@@ -180,13 +183,10 @@
 <xsl:variable name="OPERATIONS-PREFIX">op.</xsl:variable>
 <xsl:variable name="PORT-PREFIX">port.</xsl:variable>
 <xsl:variable name="IFACE-PREFIX">iface.</xsl:variable>
-<xsl:variable name="global.wsdl-name" select="concat(/*/*[local-name() = 'import' and @location][1]/@location, /*/*[local-name() = 'include' and @location][1]/@location)"/>
-<xsl:variable name="consolidated-wsdl" select="/*|document($global.wsdl-name)/*"/>
-<xsl:variable name="global.types" select="$consolidated-wsdl/*[local-name() = 'types']"/>
-<xsl:variable name="global.xsd" select="$global.types//xsd:import[@schemaLocation][1] | $global.types//xsd:include[@schemaLocation][1]"/>
-<xsl:variable name="global.xsd-name" select="$global.xsd[1]/@schemaLocation"/>
-<xsl:variable name="consolidated-xsd.data" select="document($global.xsd-name)/xsd:schema/xsd:*|/*/*[local-name() = 'types']/xsd:schema/xsd:*"/>
-<xsl:variable name="consolidated-xsd" select="$consolidated-xsd.data[local-name() = 'complexType' or local-name() = 'element' or local-name() = 'simpleType']"/>
+<xsl:variable name="global.wsdl-name" select="/*/*[(local-name() = 'import' or local-name() = 'include') and @location][1]/@location"/>
+<xsl:variable name="consolidated-wsdl" select="/* | document($global.wsdl-name)/*"/>
+<xsl:variable name="global.xsd-name" select="($consolidated-wsdl/*[local-name() = 'types']//xsd:import[@schemaLocation] | $consolidated-wsdl/*[local-name() = 'types']//xsd:include[@schemaLocation])[1]/@schemaLocation"/>
+<xsl:variable name="consolidated-xsd" select="(document($global.xsd-name)/xsd:schema/xsd:*|/*/*[local-name() = 'types']/xsd:schema/xsd:*)[local-name() = 'complexType' or local-name() = 'element' or local-name() = 'simpleType']"/>
 <xsl:variable name="global.service-name" select="concat($consolidated-wsdl/ws:service/@name, $consolidated-wsdl/ws2:service/@name)"/>
 <xsl:variable name="global.binding-name" select="concat($consolidated-wsdl/ws:binding/@name, $consolidated-wsdl/ws2:binding/@name)"/>
 <xsl:variable name="html-title">
@@ -755,13 +755,13 @@ h3 {
 		<xsl:when test="$global.binding-name">
 <xsl:value-of select="concat('WS Binding: ', $global.binding-name)"/>
 </xsl:when>
-		<xsl:when test="$consolidated-wsdl/ws2:interface/@name">
-<xsl:value-of select="concat('WS Interface: ', $consolidated-wsdl/ws2:interface/@name)"/>
+		<xsl:when test="ws2:interface/@name">
+<xsl:value-of select="concat('WS Interface: ', ws2:interface/@name)"/>
 </xsl:when>
-		<xsl:otherwise>
-<xsl:message terminate="yes">Syntax error in element <xsl:call-template name="src.syntax-error.path"/>
-</xsl:message>
+		<xsl:otherwise>Web Service Fragment</xsl:otherwise>
+<!--		<xsl:otherwise><xsl:message terminate="yes">Syntax error in element <xsl:call-template name="src.syntax-error.path"/></xsl:message>
 		</xsl:otherwise>
+-->
 	</xsl:choose>
 </xsl:template>
 <xsl:template name="src.syntax-error">
@@ -900,12 +900,25 @@ h3 {
 </xsl:if>
 </h3>
 
+	<xsl:variable name="base-iface-name">
+		<xsl:apply-templates select="@extends" mode="qname.normalized"/>
+	</xsl:variable>
+
+	<xsl:if test="$base-iface-name">
+		<div class="label">Extends: </div>
+		<div class="value">
+<xsl:value-of select="$base-iface-name"/>
+</div>
+	</xsl:if>
+
+	<xsl:variable name="base-iface" select="$consolidated-wsdl/ws2:interface[@name = $base-iface-name]"/>
+
 	<div class="label">Operations:</div>
 	<div class="value">
 <xsl:text>
 </xsl:text>
 		<ol style="line-height: 180%;">
-			<xsl:apply-templates select="ws2:operation" mode="service">
+			<xsl:apply-templates select="$base-iface/ws2:operation | ws2:operation" mode="service">
 				<xsl:sort select="@name"/>
 			</xsl:apply-templates>
 		</ol>
@@ -1810,28 +1823,46 @@ h3 {
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 -->
 <xsl:template match="@*" mode="src.import">
-	<h2>
-<a name="{concat($SRC-FILE-PREFIX, generate-id(..))}">
-	<xsl:choose>
-		<xsl:when test="parent::xsd:include">Included </xsl:when>
-		<xsl:otherwise>Imported </xsl:otherwise>
-	</xsl:choose>
+	<xsl:param name="src.import.stack"/>
+	<xsl:variable name="recursion.label" select="concat('[', string(.), ']')"/>
+	<xsl:variable name="recursion.check" select="concat($src.import.stack, $recursion.label)"/>
 
 	<xsl:choose>
-		<xsl:when test="name() = 'location'">WSDL </xsl:when>
-		<xsl:otherwise>Schema </xsl:otherwise>
-	</xsl:choose>
-	<i>
+		<xsl:when test="contains($src.import.stack, $recursion.label)">
+			<h2 style="red">
+<xsl:value-of select="concat('Cyclic include / import: ', $recursion.check)"/>
+</h2>
+		</xsl:when>
+		<xsl:otherwise>
+			<h2>
+<a name="{concat($SRC-FILE-PREFIX, generate-id(..))}">
+			<xsl:choose>
+				<xsl:when test="parent::xsd:include">Included </xsl:when>
+				<xsl:otherwise>Imported </xsl:otherwise>
+			</xsl:choose>
+
+			<xsl:choose>
+				<xsl:when test="name() = 'location'">WSDL </xsl:when>
+				<xsl:otherwise>Schema </xsl:otherwise>
+			</xsl:choose>
+			<i>
 <xsl:value-of select="."/>
 </i>
 </a>
 </h2>
 
-	<div class="box">
-		<xsl:apply-templates select="document(.)" mode="src"/>
-	</div>
-	<xsl:apply-templates select="/*/*[local-name() = 'import'][@location]/@location" mode="src.import"/>
-	<xsl:apply-templates select="document(.)//xsd:import[@schemaLocation]/@schemaLocation" mode="src.import"/>
+			<div class="box">
+				<xsl:apply-templates select="document(string(.))" mode="src"/>
+			</div>
+
+			<xsl:apply-templates select="document(string(.))/*/*[local-name() = 'import'][@location]/@location" mode="src.import">
+				<xsl:with-param name="src.import.stack" select="$recursion.check"/>
+			</xsl:apply-templates>
+			<xsl:apply-templates select="document(string(.))//xsd:import[@schemaLocation]/@schemaLocation" mode="src.import">
+				<xsl:with-param name="src.import.stack" select="$recursion.check"/>
+			</xsl:apply-templates>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 <xsl:template match="*" mode="src">
 	<div class="xml-element">
@@ -2256,7 +2287,7 @@ h3 {
 	</xsl:if>
 	<xsl:if test="$ENABLE-ABOUT-PARAGRAPH">
 		<xsl:call-template name="about.render">
-			<xsl:with-param name="version">3.1.00</xsl:with-param>
+			<xsl:with-param name="version" select="$wsdl-viewer.version"/>
 		</xsl:call-template>
 	</xsl:if>
 </div>
@@ -2370,7 +2401,7 @@ h3 {
 	</div>
 
 	<xsl:apply-templates select="/*/*[local-name() = 'import'][@location]/@location" mode="src.import"/>
-	<xsl:apply-templates select="$global.types//xsd:import[@schemaLocation]/@schemaLocation | $global.types//xsd:include[@schemaLocation]/@schemaLocation" mode="src.import"/>
+	<xsl:apply-templates select="$consolidated-wsdl/*[local-name() = 'types']//xsd:import[@schemaLocation]/@schemaLocation | $consolidated-wsdl/*[local-name() = 'types']//xsd:include[@schemaLocation]/@schemaLocation" mode="src.import"/>
 </div>
 </xsl:template>
 

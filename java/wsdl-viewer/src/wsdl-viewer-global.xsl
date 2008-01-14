@@ -81,14 +81,11 @@
 ==================================================================
 -->
 
-<xsl:variable name="global.wsdl-name" select="concat(/*/*[local-name() = 'import' and @location][1]/@location, /*/*[local-name() = 'include' and @location][1]/@location)"/>
-<xsl:variable name="consolidated-wsdl" select="/*|document($global.wsdl-name)/*"/>
+<xsl:variable name="global.wsdl-name" select="/*/*[(local-name() = 'import' or local-name() = 'include') and @location][1]/@location"/>
+<xsl:variable name="consolidated-wsdl" select="/* | document($global.wsdl-name)/*"/>
 
-<xsl:variable name="global.types" select="$consolidated-wsdl/*[local-name() = 'types']"/>
-<xsl:variable name="global.xsd" select="$global.types//xsd:import[@schemaLocation][1] | $global.types//xsd:include[@schemaLocation][1]"/>
-<xsl:variable name="global.xsd-name" select="$global.xsd[1]/@schemaLocation"/>
-<xsl:variable name="consolidated-xsd.data" select="document($global.xsd-name)/xsd:schema/xsd:*|/*/*[local-name() = 'types']/xsd:schema/xsd:*"/>
-<xsl:variable name="consolidated-xsd" select="$consolidated-xsd.data[local-name() = 'complexType' or local-name() = 'element' or local-name() = 'simpleType']"/>
+<xsl:variable name="global.xsd-name" select="($consolidated-wsdl/*[local-name() = 'types']//xsd:import[@schemaLocation] | $consolidated-wsdl/*[local-name() = 'types']//xsd:include[@schemaLocation])[1]/@schemaLocation"/>
+<xsl:variable name="consolidated-xsd" select="(document($global.xsd-name)/xsd:schema/xsd:*|/*/*[local-name() = 'types']/xsd:schema/xsd:*)[local-name() = 'complexType' or local-name() = 'element' or local-name() = 'simpleType']"/>
 <xsl:variable name="global.service-name" select="concat($consolidated-wsdl/ws:service/@name, $consolidated-wsdl/ws2:service/@name)" />
 <xsl:variable name="global.binding-name" select="concat($consolidated-wsdl/ws:binding/@name, $consolidated-wsdl/ws2:binding/@name)" />
 

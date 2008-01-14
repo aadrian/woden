@@ -98,16 +98,28 @@
 </xsl:if>
 </h3>
 
+	<xsl:variable name="base-iface-name">
+		<xsl:apply-templates select="@extends" mode="qname.normalized"/>
+	</xsl:variable>
+
+	<xsl:if test="$base-iface-name">
+		<div class="label">Extends: </div>
+		<div class="value"><xsl:value-of select="$base-iface-name"/></div>
+	</xsl:if>
+
+	<xsl:variable name="base-iface" select="$consolidated-wsdl/ws2:interface[@name = $base-iface-name]"/>
+
 	<div class="label">Operations:</div>
 	<div class="value"><xsl:text>
 </xsl:text>
 		<ol style="line-height: 180%;">
-			<xsl:apply-templates select="ws2:operation" mode="service">
+			<xsl:apply-templates select="$base-iface/ws2:operation | ws2:operation" mode="service">
 				<xsl:sort select="@name"/>
 			</xsl:apply-templates>
 		</ol>
 	</div>
 </xsl:template>
+
 
 <!--
 ==================================================================

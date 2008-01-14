@@ -57,9 +57,11 @@
 	<xsl:choose>
 		<xsl:when test="$global.service-name"><xsl:value-of select="concat('Web Service: ', $global.service-name)"/></xsl:when>
 		<xsl:when test="$global.binding-name"><xsl:value-of select="concat('WS Binding: ', $global.binding-name)"/></xsl:when>
-		<xsl:when test="$consolidated-wsdl/ws2:interface/@name"><xsl:value-of select="concat('WS Interface: ', $consolidated-wsdl/ws2:interface/@name)"/></xsl:when>
-		<xsl:otherwise><xsl:message terminate="yes">Syntax error in element <xsl:call-template name="src.syntax-error.path"/></xsl:message>
+		<xsl:when test="ws2:interface/@name"><xsl:value-of select="concat('WS Interface: ', ws2:interface/@name)"/></xsl:when>
+		<xsl:otherwise>Web Service Fragment</xsl:otherwise>
+<!--		<xsl:otherwise><xsl:message terminate="yes">Syntax error in element <xsl:call-template name="src.syntax-error.path"/></xsl:message>
 		</xsl:otherwise>
+-->
 	</xsl:choose>
 </xsl:template>
 

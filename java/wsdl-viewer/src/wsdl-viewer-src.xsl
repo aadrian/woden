@@ -44,23 +44,39 @@
 ==================================================================
 -->
 <xsl:template match="@*" mode="src.import">
-	<h2><a name="{concat($SRC-FILE-PREFIX, generate-id(..))}">
-	<xsl:choose>
-		<xsl:when test="parent::xsd:include">Included </xsl:when>
-		<xsl:otherwise>Imported </xsl:otherwise>
-	</xsl:choose>
+	<xsl:param name="src.import.stack"/>
+	<xsl:variable name="recursion.label" select="concat('[', string(.), ']')"/>
+	<xsl:variable name="recursion.check" select="concat($src.import.stack, $recursion.label)"/>
 
 	<xsl:choose>
-		<xsl:when test="name() = 'location'">WSDL </xsl:when>
-		<xsl:otherwise>Schema </xsl:otherwise>
-	</xsl:choose>
-	<i><xsl:value-of select="."/></i></a></h2>
+		<xsl:when test="contains($src.import.stack, $recursion.label)">
+			<h2 style="red"><xsl:value-of select="concat('Cyclic include / import: ', $recursion.check)"/></h2>
+		</xsl:when>
+		<xsl:otherwise>
+			<h2><a name="{concat($SRC-FILE-PREFIX, generate-id(..))}">
+			<xsl:choose>
+				<xsl:when test="parent::xsd:include">Included </xsl:when>
+				<xsl:otherwise>Imported </xsl:otherwise>
+			</xsl:choose>
 
-	<div class="box">
-		<xsl:apply-templates select="document(.)" mode="src"/>
-	</div>
-	<xsl:apply-templates select="/*/*[local-name() = 'import'][@location]/@location" mode="src.import"/>
-	<xsl:apply-templates select="document(.)//xsd:import[@schemaLocation]/@schemaLocation" mode="src.import"/>
+			<xsl:choose>
+				<xsl:when test="name() = 'location'">WSDL </xsl:when>
+				<xsl:otherwise>Schema </xsl:otherwise>
+			</xsl:choose>
+			<i><xsl:value-of select="."/></i></a></h2>
+
+			<div class="box">
+				<xsl:apply-templates select="document(string(.))" mode="src"/>
+			</div>
+
+			<xsl:apply-templates select="document(string(.))/*/*[local-name() = 'import'][@location]/@location" mode="src.import">
+				<xsl:with-param name="src.import.stack" select="$recursion.check"/>
+			</xsl:apply-templates>
+			<xsl:apply-templates select="document(string(.))//xsd:import[@schemaLocation]/@schemaLocation" mode="src.import">
+				<xsl:with-param name="src.import.stack" select="$recursion.check"/>
+			</xsl:apply-templates>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 <!--
