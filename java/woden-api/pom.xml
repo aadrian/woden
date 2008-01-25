@@ -23,7 +23,7 @@
    <parent>
        <groupId>org.apache.woden</groupId>
        <artifactId>woden</artifactId>
-       <version>1.0-incubating-SNAPSHOT</version>
+       <version>1.0-SNAPSHOT</version>
    </parent>
 
    <artifactId>woden-api</artifactId>
