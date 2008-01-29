@@ -31,6 +31,8 @@ import java.util.ResourceBundle;
  * @author jkaputin@apache.org
  */
 public class MessageFormatter {
+    
+    private static final Object [] emptyMsgArray = new Object[] {};
 
     /**
      * The specified key is used to retrieve an unformatted message from a  
@@ -61,7 +63,7 @@ public class MessageFormatter {
                     bundle = ResourceBundle.getBundle(bundleName, locale);
                 }
                 String unformattedMsg = bundle.getString(key);
-                String formattedMsg = MessageFormat.format(unformattedMsg, args);
+                String formattedMsg = MessageFormat.format(unformattedMsg, args != null ? args : emptyMsgArray);
                 return formattedMsg;
             } catch (MissingResourceException e) {
                 if(i == (bundleNames.length -1)) {

@@ -177,6 +177,8 @@ public interface ErrorReporter {
      * parsing errors (via the reportError method). Typically these types of messages 
      * will be for configuration or runtime errors that will be thrown as exceptions
      * by the caller.
+     * If there are no message arguments, a null value may be specified for the 
+     * <code>arguments</code> parameter instead of an empty array. 
      * 
      * @param errorId a String representing the message key
      * @param arguments an Object array of message parameters

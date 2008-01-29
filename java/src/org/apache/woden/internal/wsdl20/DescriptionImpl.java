@@ -434,7 +434,7 @@ public class DescriptionImpl extends WSDLComponentImpl
         } else {
             String msg = fWsdlContext.errorReporter.getFormattedMessage( 
                     "WSDL523",
-                    new Object[] {});
+                    null);
             throw new WSDLException(WSDLException.OTHER_ERROR, msg);
         }
     }

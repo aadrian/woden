@@ -190,7 +190,7 @@ public abstract class BaseWSDLReader implements WSDLReader {
     {
         if(extReg == null) {
             String msg = fWsdlContext.errorReporter.getFormattedMessage(
-                    "WSDL014", new Object[] {});
+                    "WSDL014", null);
             throw new NullPointerException(msg);
         }
         
@@ -233,9 +233,8 @@ public abstract class BaseWSDLReader implements WSDLReader {
         catch(IllegalArgumentException e)
         {
         	// Feature name is not recognized, so throw an exception.
-            Object[] args = new Object[] {name};
             throw new IllegalArgumentException(
-                    fWsdlContext.errorReporter.getFormattedMessage("WSDL006", args));
+                    fWsdlContext.errorReporter.getFormattedMessage("WSDL006", new Object[] {name}));
         }
     }
 
@@ -262,9 +261,8 @@ public abstract class BaseWSDLReader implements WSDLReader {
         catch(IllegalArgumentException e)
         {
         	// Feature name is not recognized, so throw an exception.
-            Object[] args = new Object[] {name};
             throw new IllegalArgumentException(
-                    fWsdlContext.errorReporter.getFormattedMessage("WSDL006", args));
+                    fWsdlContext.errorReporter.getFormattedMessage("WSDL006", new Object[] {name}));
         }
     }
     
@@ -332,9 +330,8 @@ public abstract class BaseWSDLReader implements WSDLReader {
         else
         {
             //property name is not recognized, so throw an exception
-            Object[] args = new Object[] {name};
             throw new IllegalArgumentException(
-                    fWsdlContext.errorReporter.getFormattedMessage("WSDL008", args));
+                    fWsdlContext.errorReporter.getFormattedMessage("WSDL008", new Object[] {name}));
         }
     }
 
