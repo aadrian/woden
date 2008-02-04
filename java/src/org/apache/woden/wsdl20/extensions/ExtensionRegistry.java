@@ -17,7 +17,6 @@
 package org.apache.woden.wsdl20.extensions;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -30,7 +29,6 @@ import javax.xml.namespace.QName;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
 import org.apache.woden.XMLElement;
-import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.UnknownAttr;
 import org.apache.woden.xml.XMLAttr;
