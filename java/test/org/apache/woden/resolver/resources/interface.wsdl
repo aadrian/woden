@@ -19,11 +19,7 @@
 <!-- this document is imported by main wsdl document -->
 
 <description targetNamespace="http://example.com/bank"              
-             xmlns="http://www.w3.org/ns/wsdl" 
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	     xsi:schemaLocation=
-	         "http://www.w3.org/ns/wsdl http://www.w3.org/ns/wsdl/wsdl20.xsd 
-	          http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+             xmlns="http://www.w3.org/ns/wsdl">
   
   <!-- any old interface -->
   <interface name="Bank">
