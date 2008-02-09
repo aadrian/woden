@@ -32,7 +32,6 @@ import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingFault;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of SoapBindingFaultExtensions.
@@ -92,7 +91,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[0];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPFaultCode soapFaultCode = soapBindFaultExts.getSoapFaultCode();
         
         assertNotNull("The SOAPBindingFaultExtensions did not return a SOAPFaultCode.", soapFaultCode);
@@ -110,7 +109,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[1];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPFaultCode soapFaultCode = soapBindFaultExts.getSoapFaultCode();
         
         assertNotNull("The SOAPBindingFaultExtensions did not return a SOAPFaultCode.", soapFaultCode);
@@ -128,7 +127,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[2];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPFaultCode soapFaultCode = soapBindFaultExts.getSoapFaultCode();
         
         assertNotNull("The SOAPBindingFaultExtensions did not return a SOAPFaultCode.", soapFaultCode);
@@ -145,7 +144,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[0];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPFaultSubcodes soapFaultSubcodes = soapBindFaultExts.getSoapFaultSubcodes();
         
         assertNotNull("The SOAPBindingFaultExtensions did not return a SOAPFaultSubcodes.", soapFaultSubcodes);
@@ -166,7 +165,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[1];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPFaultSubcodes soapFaultSubcodes = soapBindFaultExts.getSoapFaultSubcodes();
         
         assertNotNull("The SOAPBindingFaultExtensions did not return a SOAPFaultSubcodes.", soapFaultSubcodes);
@@ -184,7 +183,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[2];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPFaultSubcodes soapFaultSubcodes = soapBindFaultExts.getSoapFaultSubcodes();
         
         assertNotNull("The SOAPBindingFaultExtensions did not return a SOAPFaultSubcodes.", soapFaultSubcodes);
@@ -201,7 +200,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[1];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPModule[] actual = soapBindFaultExts.getSoapModules();
         assertEquals("Unexpected number of SOAPModule objects.", 3, actual.length);
     }
@@ -214,7 +213,7 @@ public class SOAPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBinding.getBindingFaults()[2];
         SOAPBindingFaultExtensions soapBindFaultExts = 
-            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultExtensions) bindFault.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPHeaderBlock[] actual = soapBindFaultExts.getSoapHeaders();
         assertEquals("Unexpected number of SOAPHeaderBlock objects.", 2, actual.length);
     }

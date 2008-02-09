@@ -18,10 +18,14 @@ package org.apache.woden.internal.wsdl20.extensions.soap;
 
 import java.net.URI;
 
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
-import org.apache.woden.internal.wsdl20.extensions.http.HTTPConstants;
+import org.apache.woden.ErrorReporter;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
 import org.apache.woden.wsdl20.extensions.ExtensionElement;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
+import org.apache.woden.wsdl20.extensions.http.HTTPConstants;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingExtensions;
+import org.apache.woden.wsdl20.extensions.soap.SOAPConstants;
 import org.apache.woden.wsdl20.extensions.soap.SOAPModule;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.BooleanAttr;
@@ -35,17 +39,72 @@ import org.apache.woden.xml.URIAttr;
  * 
  * @author jkaputin@apache.org
  */
-public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
+public class SOAPBindingExtensionsImpl extends BaseComponentExtensionContext
                                        implements SOAPBindingExtensions 
 {
+
+    public SOAPBindingExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        
+        return new ExtensionProperty[] {
+                getProperty(SOAPConstants.PROP_SOAP_VERSION),
+                getProperty(SOAPConstants.PROP_SOAP_UNDERLYING_PROTOCOL),
+                getProperty(SOAPConstants.PROP_SOAP_MEP_DEFAULT),
+                getProperty(SOAPConstants.PROP_SOAP_MODULES)};
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        if(SOAPConstants.PROP_SOAP_VERSION.equals(propertyName)) {
+            return newExtensionProperty(SOAPConstants.PROP_SOAP_VERSION, getSoapVersion());
+            
+        } else if(SOAPConstants.PROP_SOAP_UNDERLYING_PROTOCOL.equals(propertyName)) {
+            return newExtensionProperty(SOAPConstants.PROP_SOAP_UNDERLYING_PROTOCOL, 
+                    getSoapUnderlyingProtocol());
+            
+        } else if(SOAPConstants.PROP_SOAP_MEP_DEFAULT.equals(propertyName)) {
+            return newExtensionProperty(SOAPConstants.PROP_SOAP_MEP_DEFAULT, getSoapMepDefault());
+            
+        } else if(SOAPConstants.PROP_SOAP_MODULES.equals(propertyName)) {
+            return newExtensionProperty(SOAPConstants.PROP_SOAP_MODULES, getSoapModules());
+            
+        } else {
+            return null; //the specified property name does not exist
+        }
+        
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by SOAPBindingExtensions
+     * ************************************************************/
 
     /* (non-Javadoc)
      * @see org.apache.woden.wsdl20.extensions.soap.SOAPBindingExtensions#getSoapVersion()
      */
     public String getSoapVersion() 
     {
-        StringAttr version = 
-            (StringAttr)fParentElement.getExtensionAttribute(SOAPConstants.Q_ATTR_SOAP_VERSION);
+        StringAttr version = (StringAttr) ((WSDLElement)getParent())
+            .getExtensionAttribute(SOAPConstants.Q_ATTR_SOAP_VERSION);
         return version != null ? version.getString() : "1.2";
     }
 
@@ -54,8 +113,8 @@ public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
      */
     public URI getSoapUnderlyingProtocol() 
     {
-        URIAttr protocol = 
-            (URIAttr)fParentElement.getExtensionAttribute(SOAPConstants.Q_ATTR_SOAP_PROTOCOL);
+        URIAttr protocol = (URIAttr) ((WSDLElement)getParent())
+            .getExtensionAttribute(SOAPConstants.Q_ATTR_SOAP_PROTOCOL);
         return protocol != null ? protocol.getURI() : null;
     }
 
@@ -64,8 +123,8 @@ public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
      */
     public URI getSoapMepDefault() 
     {
-        URIAttr mepDefault = 
-            (URIAttr)fParentElement.getExtensionAttribute(SOAPConstants.Q_ATTR_SOAP_MEPDEFAULT);
+        URIAttr mepDefault = (URIAttr) ((WSDLElement)getParent())
+            .getExtensionAttribute(SOAPConstants.Q_ATTR_SOAP_MEPDEFAULT);
         return mepDefault != null ? mepDefault.getURI() : null;
     }
 
@@ -74,7 +133,8 @@ public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
      */
     public SOAPModule[] getSoapModules() 
     {
-        ExtensionElement[] extEls = fParentElement.getExtensionElementsOfType(SOAPConstants.Q_ELEM_SOAP_MODULE);
+        ExtensionElement[] extEls = ((WSDLElement)getParent())
+            .getExtensionElementsOfType(SOAPConstants.Q_ELEM_SOAP_MODULE);
         int len = extEls.length;
         SOAPModule[] soapMods = new SOAPModule[len];
         System.arraycopy(extEls, 0, soapMods, 0, len);
@@ -94,7 +154,7 @@ public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
         if( ("1.2".equals(getSoapVersion()) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP12_HTTP)) ||
             ("1.1".equals(getSoapVersion()) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP11_HTTP)) )
         {
-            StringAttr qpsDef = (StringAttr) ((WSDLElement)fParent)
+            StringAttr qpsDef = (StringAttr) ((WSDLElement)getParent())
                 .getExtensionAttribute(HTTPConstants.Q_ATTR_QUERY_PARAMETER_SEPARATOR_DEFAULT);
             return qpsDef != null ? qpsDef.getString() : HTTPConstants.QUERY_SEP_AMPERSAND;
         } 
@@ -117,7 +177,7 @@ public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
         if( ("1.2".equals(getSoapVersion()) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP12_HTTP)) ||
             ("1.1".equals(getSoapVersion()) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP11_HTTP)) )
         {
-            BooleanAttr cookiesUsed = (BooleanAttr) ((WSDLElement)fParent)
+            BooleanAttr cookiesUsed = (BooleanAttr) ((WSDLElement)getParent())
                 .getExtensionAttribute(HTTPConstants.Q_ATTR_COOKIES);
             return cookiesUsed != null ? cookiesUsed.getBoolean() : new Boolean(false); //defaults to false if omitted
         } 
@@ -140,7 +200,7 @@ public class SOAPBindingExtensionsImpl extends ComponentExtensionsImpl
         if( ("1.2".equals(getSoapVersion()) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP12_HTTP)) ||
             ("1.1".equals(getSoapVersion()) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP11_HTTP)) )
         {
-            StringAttr ceDef = (StringAttr) ((WSDLElement)fParent)
+            StringAttr ceDef = (StringAttr) ((WSDLElement)getParent())
                 .getExtensionAttribute(HTTPConstants.Q_ATTR_CONTENT_ENCODING_DEFAULT);
             return ceDef != null ? ceDef.getString() : null;
         } 

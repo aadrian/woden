@@ -30,7 +30,6 @@ import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingMessageReference;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of HTTPBindingMessageReferenceExtensions.
@@ -92,8 +91,8 @@ public class HTTPBindingMessageReferenceExtensionsTest extends TestCase {
         BindingMessageReference inputMsg = bindMsgRefs[0];
         HTTPBindingMessageReferenceExtensions httpBindMsgRefExts = 
             (HTTPBindingMessageReferenceExtensions) inputMsg
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindMsgRefExts.getHttpContentEncoding();
         assertEquals("Unexpected value for http content encoding.",
@@ -104,8 +103,8 @@ public class HTTPBindingMessageReferenceExtensionsTest extends TestCase {
         BindingMessageReference outputMsg = bindMsgRefs[1];
         HTTPBindingMessageReferenceExtensions httpBindMsgRefExts2 = 
             (HTTPBindingMessageReferenceExtensions) outputMsg
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                    HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindMsgRefExts2.getHttpContentEncoding();
         assertNull("Null was expected for http content encoding.",
@@ -131,8 +130,8 @@ public class HTTPBindingMessageReferenceExtensionsTest extends TestCase {
         BindingMessageReference inputMsg = bindMsgRefs[0];
         HTTPBindingMessageReferenceExtensions httpBindMsgRefExts = 
             (HTTPBindingMessageReferenceExtensions) inputMsg
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         HTTPHeader[] actual = httpBindMsgRefExts.getHttpHeaders();
         assertEquals("Unexpected size of {http headers}.",
@@ -143,8 +142,8 @@ public class HTTPBindingMessageReferenceExtensionsTest extends TestCase {
         BindingMessageReference outputMsg = bindMsgRefs[1];
         HTTPBindingMessageReferenceExtensions httpBindMsgRefExts2 = 
             (HTTPBindingMessageReferenceExtensions) outputMsg
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         HTTPHeader[] actual2 = httpBindMsgRefExts2.getHttpHeaders();
         assertEquals("Unexpected size of {http headers}.",

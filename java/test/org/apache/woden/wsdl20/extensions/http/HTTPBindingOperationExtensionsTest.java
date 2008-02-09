@@ -29,7 +29,6 @@ import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of HTTPBindingOperationExtensions.
@@ -88,8 +87,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String expected = "http://ws.apache.woden/location";
         HTTPLocation httpLoc = httpBindOperExts.getHttpLocation();
@@ -102,8 +101,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         HTTPLocation actual2 = httpBindOperExts2.getHttpLocation();
         assertNull("Http location did not default to null", actual2);
@@ -125,8 +124,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         Boolean actual = httpBindOperExts.isHttpLocationIgnoreUncited();
         assertTrue("Http location ignore uncited was not True", 
@@ -136,8 +135,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         Boolean actual2 = httpBindOperExts2.isHttpLocationIgnoreUncited();
         assertFalse("Http location ignore uncited did not default to False", 
@@ -164,8 +163,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindOperExts.getHttpMethod();
         assertEquals("Unexpected value for http method.",
@@ -176,8 +175,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindOperExts2.getHttpMethod();
         assertNull("Http method was not null by default.",
@@ -219,8 +218,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindOperExts.getHttpInputSerialization();
         assertEquals("Unexpected value for http input serialization.",
@@ -232,8 +231,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindOperExts2.getHttpInputSerialization();
         assertEquals("Unexpected default value for http input serialization.",
@@ -245,8 +244,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper3 = fBindOpers[2];
         HTTPBindingOperationExtensions httpBindOperExts3 = 
             (HTTPBindingOperationExtensions) oper3
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual3 = httpBindOperExts3.getHttpInputSerialization();
         assertEquals("Unexpected default value for http input serialization.",
@@ -258,8 +257,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper4 = fBindOpers[3];
         HTTPBindingOperationExtensions httpBindOperExts4 = 
             (HTTPBindingOperationExtensions) oper4
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual4 = httpBindOperExts4.getHttpInputSerialization();
         assertEquals("Unexpected default value for http input serialization.",
@@ -271,8 +270,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper5 = fBindOpers[4];
         HTTPBindingOperationExtensions httpBindOperExts5 = 
             (HTTPBindingOperationExtensions) oper5
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual5 = httpBindOperExts5.getHttpInputSerialization();
         assertEquals("Unexpected default value for http input serialization.",
@@ -284,8 +283,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper6 = fBindOpers[5];
         HTTPBindingOperationExtensions httpBindOperExts6 = 
             (HTTPBindingOperationExtensions) oper6
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual6 = httpBindOperExts6.getHttpInputSerialization();
         assertEquals("Unexpected default value for http input serialization.",
@@ -297,8 +296,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper7 = fBindOpers[6];
         HTTPBindingOperationExtensions httpBindOperExts7 = 
             (HTTPBindingOperationExtensions) oper7
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual7 = httpBindOperExts7.getHttpInputSerialization();
         assertEquals("Unexpected default value for http input serialization.",
@@ -323,8 +322,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindOperExts.getHttpOutputSerialization();
         assertEquals("Unexpected value for http output serialization.",
@@ -335,8 +334,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindOperExts2.getHttpOutputSerialization();
         assertEquals("Unexpected default value for http output serialization.",
@@ -360,8 +359,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindOperExts.getHttpFaultSerialization();
         assertEquals("Unexpected value for http fault serialization.",
@@ -372,8 +371,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindOperExts2.getHttpFaultSerialization();
         assertEquals("Unexpected default value for http fault serialization.",
@@ -397,8 +396,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindOperExts.getHttpQueryParameterSeparator();
         assertEquals("Unexpected value for http query parameter separator.",
@@ -409,8 +408,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindOperExts2.getHttpQueryParameterSeparator();
         assertNull("Expected a null value for http query parameter separator.",
@@ -433,8 +432,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper = fBindOpers[0];
         HTTPBindingOperationExtensions httpBindOperExts = 
             (HTTPBindingOperationExtensions) oper
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindOperExts.getHttpContentEncodingDefault();
         assertEquals("Unexpected value for http content encoding default.",
@@ -445,8 +444,8 @@ public class HTTPBindingOperationExtensionsTest extends TestCase {
         BindingOperation oper2 = fBindOpers[1];
         HTTPBindingOperationExtensions httpBindOperExts2 = 
             (HTTPBindingOperationExtensions) oper2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual2 = httpBindOperExts2.getHttpContentEncodingDefault();
         assertNull("Http content encoding default did not default to null.",

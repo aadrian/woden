@@ -26,18 +26,15 @@ import org.apache.woden.internal.wsdl20.extensions.http.HTTPBindingExtensionsImp
 import org.apache.woden.internal.wsdl20.extensions.http.HTTPBindingFaultExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.http.HTTPBindingMessageReferenceExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.http.HTTPBindingOperationExtensionsImpl;
-import org.apache.woden.internal.wsdl20.extensions.http.HTTPConstants;
 import org.apache.woden.internal.wsdl20.extensions.http.HTTPEndpointExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.http.HTTPHeaderDeserializer;
 import org.apache.woden.internal.wsdl20.extensions.http.HTTPHeaderImpl;
-import org.apache.woden.internal.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.internal.wsdl20.extensions.rpc.RPCInterfaceOperationExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPBindingExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPBindingFaultExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPBindingFaultReferenceExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPBindingMessageReferenceExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPBindingOperationExtensionsImpl;
-import org.apache.woden.internal.wsdl20.extensions.soap.SOAPConstants;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPEndpointExtensionsImpl;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPHeaderBlockDeserializer;
 import org.apache.woden.internal.wsdl20.extensions.soap.SOAPHeaderBlockImpl;
@@ -58,9 +55,12 @@ import org.apache.woden.wsdl20.BindingMessageReference;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Endpoint;
 import org.apache.woden.wsdl20.InterfaceOperation;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistrar;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
+import org.apache.woden.wsdl20.extensions.http.HTTPConstants;
+import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
+import org.apache.woden.wsdl20.extensions.soap.SOAPConstants;
 import org.apache.woden.wsdl20.xml.BindingElement;
 import org.apache.woden.wsdl20.xml.BindingFaultElement;
 import org.apache.woden.wsdl20.xml.BindingFaultReferenceElement;
@@ -102,12 +102,12 @@ public class PopulatedExtensionRegistry extends ExtensionRegistry {
 
 		// ------------ WSDL extension attributes ------------
 		registerExtAttributeType(InterfaceOperationElement.class,
-				ExtensionConstants.Q_ATTR_SAFE, BooleanAttrImpl.class);
+				WSDLExtensionConstants.Q_ATTR_SAFE, BooleanAttrImpl.class);
 
 		// ------------ WSDL Component Extensions ------------
 
 		registerComponentExtension(InterfaceOperation.class,
-				ComponentExtensions.NS_URI_WSDL_EXTENSIONS,
+				WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS,
 				InterfaceOperationExtensionsImpl.class);
 
 		// ------------ RPC extension attributes ------------
@@ -117,7 +117,7 @@ public class PopulatedExtensionRegistry extends ExtensionRegistry {
 
 		// ------------ RPC Component Extensions ------------
 		registerComponentExtension(InterfaceOperation.class,
-				ComponentExtensions.NS_URI_RPC,
+		        RPCConstants.NS_URI_RPC,
 				RPCInterfaceOperationExtensionsImpl.class);
 
 		// ------------ SOAP extension attributes ------------
@@ -199,27 +199,27 @@ public class PopulatedExtensionRegistry extends ExtensionRegistry {
 		// ------------ SOAP Component Extensions ------------
 
 		registerComponentExtension(Binding.class,
-				ComponentExtensions.NS_URI_SOAP,
+				SOAPConstants.NS_URI_SOAP,
 				SOAPBindingExtensionsImpl.class);
 
 		registerComponentExtension(BindingFault.class,
-				ComponentExtensions.NS_URI_SOAP,
+		        SOAPConstants.NS_URI_SOAP,
 				SOAPBindingFaultExtensionsImpl.class);
 
 		registerComponentExtension(BindingOperation.class,
-				ComponentExtensions.NS_URI_SOAP,
+		        SOAPConstants.NS_URI_SOAP,
 				SOAPBindingOperationExtensionsImpl.class);
 
 		registerComponentExtension(BindingMessageReference.class,
-				ComponentExtensions.NS_URI_SOAP,
+		        SOAPConstants.NS_URI_SOAP,
 				SOAPBindingMessageReferenceExtensionsImpl.class);
 
 		registerComponentExtension(BindingFaultReference.class,
-				ComponentExtensions.NS_URI_SOAP,
+		        SOAPConstants.NS_URI_SOAP,
 				SOAPBindingFaultReferenceExtensionsImpl.class);
 
         registerComponentExtension(Endpoint.class,
-                ComponentExtensions.NS_URI_SOAP,
+                SOAPConstants.NS_URI_SOAP,
                 SOAPEndpointExtensionsImpl.class);
 
 		// ------------ HTTP extension attributes ------------
@@ -303,23 +303,23 @@ public class PopulatedExtensionRegistry extends ExtensionRegistry {
 		// ------------ HTTP Component Extensions ------------
 
 		registerComponentExtension(Binding.class,
-				ComponentExtensions.NS_URI_HTTP,
+				HTTPConstants.NS_URI_HTTP,
 				HTTPBindingExtensionsImpl.class);
 
 		registerComponentExtension(BindingFault.class,
-				ComponentExtensions.NS_URI_HTTP,
+				HTTPConstants.NS_URI_HTTP,
 				HTTPBindingFaultExtensionsImpl.class);
 
 		registerComponentExtension(BindingOperation.class,
-				ComponentExtensions.NS_URI_HTTP,
+				HTTPConstants.NS_URI_HTTP,
 				HTTPBindingOperationExtensionsImpl.class);
 
 		registerComponentExtension(BindingMessageReference.class,
-				ComponentExtensions.NS_URI_HTTP,
+				HTTPConstants.NS_URI_HTTP,
 				HTTPBindingMessageReferenceExtensionsImpl.class);
 
 		registerComponentExtension(Endpoint.class,
-				ComponentExtensions.NS_URI_HTTP,
+				HTTPConstants.NS_URI_HTTP,
 				HTTPEndpointExtensionsImpl.class);
         
         //Register other, user-defined WSDL extensions.

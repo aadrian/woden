@@ -29,6 +29,7 @@ import javax.xml.namespace.QName;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
 import org.apache.woden.XMLElement;
+import org.apache.woden.wsdl20.WSDLComponent;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.UnknownAttr;
 import org.apache.woden.xml.XMLAttr;
@@ -627,19 +628,20 @@ public class ExtensionRegistry
   /**
    * Register the Java class which will represent extensions from a specified 
    * namespace that will extend the specified WSDL component class.
+   * The Java class must implement <code>ComponentExtensionContext</code>.
    * 
    * @param parentClass the WSDL component class
    * @param extNamespace the extension namespace
-   * @param compExtClass the Java class representing these extensions
+   * @param compExtCtxClass the Java class representing these extensions
    */
   public void registerComponentExtension(Class parentClass,
                                          URI extNamespace,
-                                         Class compExtClass)
+                                         Class compExtCtxClass)
   {
-      if(!(ComponentExtensions.class.isAssignableFrom(compExtClass)))
+      if(!(ComponentExtensionContext.class.isAssignableFrom(compExtCtxClass)))
       {
           String msg = getErrorReporter().getFormattedMessage("WSDL016", 
-                  new Object[] {compExtClass.getName()});    
+                  new Object[] {compExtCtxClass.getName()});    
           throw new IllegalArgumentException(msg);
       }
       
@@ -653,12 +655,13 @@ public class ExtensionRegistry
           compExtReg.put(parentClass, innerCompExtReg);
       }
       
-      innerCompExtReg.put(extNamespace, compExtClass);
+      innerCompExtReg.put(extNamespace, compExtCtxClass);
   }
   
   /**
    * Return the Java class that represents the extensions from the specified
    * namespace that extend the specified WSDL component class.
+   * This class will be an implementation of <code>ComponentExtensionContext</code>.
    * 
    * @param parentClass the WSDL component
    * @param extNamespace the extension namespace
@@ -704,45 +707,67 @@ public class ExtensionRegistry
   }
   
   /**
-   * Return a ComponentExtensions object from the Java class registered for 
+   * Return a ComponentExtensionContext object from the Java class registered for 
    * the specified extension namespace against the specified WSDL component class.
    * 
    * @param parentClass the WSDL component class.
    * @param extNamespace the extension namespace.
-   * @return a <code>ComponentExtensions</code> object
+   * @return a <code>ComponentExtensionContext</code> object
    * @throws WSDLException if no Java class is registered for this namespace and WSDL component.
    */
-  public ComponentExtensions createComponentExtension(Class parentClass, 
+  public ComponentExtensionContext createComponentExtension(Class parentClass,
+                                                      WSDLComponent parentComp,
                                                       URI extNamespace)
                                                       throws WSDLException
   {
-      Class compExtClass = queryComponentExtension(parentClass, extNamespace);
+      Class compExtCtxClass = queryComponentExtension(parentClass, extNamespace);
       
-      if(compExtClass == null)
+      if(compExtCtxClass == null)
       {
           String msg = getErrorReporter().getFormattedMessage("WSDL015",
                   new Object[] {extNamespace.toString(), parentClass.getName()});
           throw new WSDLException(WSDLException.CONFIGURATION_ERROR, "WSDL015: " + msg);
       }
           
-      ComponentExtensions compExt = null;
+      ComponentExtensionContext compExtCtx = null;
       
+      /* TODO remove with woden-47
       try {
-          compExt = (ComponentExtensions)compExtClass.newInstance();
+          compExtCtx = (ComponentExtensionContext)compExtCtxClass.newInstance();
       } 
       catch (InstantiationException e) 
       {
           String msg = getErrorReporter().getFormattedMessage("WSDL009",
-                  new Object[] {compExtClass.getName()});
+                  new Object[] {compExtCtxClass.getName()});
           throw new WSDLException(WSDLException.CONFIGURATION_ERROR, "WSDL009: " + msg, e);
       } 
       catch (IllegalAccessException e) {
           String msg = getErrorReporter().getFormattedMessage("WSDL009",
-                  new Object[] {compExtClass.getName()});
+                  new Object[] {compExtCtxClass.getName()});
           throw new WSDLException(WSDLException.CONFIGURATION_ERROR, "WSDL009: " + msg, e);
       }
+      */
       
-      return compExt;
+      
+      try {
+          Class[] ctorParms = new Class[] {WSDLComponent.class, URI.class, ErrorReporter.class};
+          Constructor ctor = compExtCtxClass.getConstructor(ctorParms);
+          Object[] ctorParmValues = new Object[] {parentComp, extNamespace, getErrorReporter()};
+          compExtCtx = (ComponentExtensionContext)ctor.newInstance(ctorParmValues);
+      } 
+      catch (Exception e) {
+          //SecurityException
+          //NoSuchMethodException
+          //InvocationTargetException
+          //InstantiationException
+          //IllegalAccessException
+          String msg = getErrorReporter().getFormattedMessage("WSDL009", 
+                           new Object[] {compExtCtxClass.getName()});
+          throw new WSDLException(WSDLException.CONFIGURATION_ERROR, "WSDL009: " + msg, e);
+      } 
+      
+      
+      return compExtCtx;
   }
   
     public void registerResourceBundle(String resourceBundleName) {

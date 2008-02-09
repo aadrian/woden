@@ -16,21 +16,32 @@
  */
 package org.apache.woden.wsdl20.extensions.soap;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 
 /**
- * This interface represents the properties from the SOAP namespace
- * added to the WSDL 2.0 <code>BindingFaultReference</code> component as part 
- * of the SOAP binding extension.
+ * Provides access to the extension properties of the Binding Fault Reference component 
+ * that are in the <code>http://www.w3.org/ns/wsdl/soap</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
  * <p>
- * These include:
- * <ul>
- * <li>{soap modules}</li>
- * </ul> 
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>soap modules</td>
+ * <td>org.apache.woden.wsdl20.extensions.soap.SOAPModule[]</td>
+ * </tr>
+ * </table>
+ * <p>
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each SOAP extension property. 
  * 
- * @author jkaputin@apache.org
+ * @author John Kaputin (jkaputin@apache.org)
  */
-public interface SOAPBindingFaultReferenceExtensions extends ComponentExtensions 
+public interface SOAPBindingFaultReferenceExtensions extends ComponentExtensionContext 
 {
     public SOAPModule[] getSoapModules();
 }

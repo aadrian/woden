@@ -18,34 +18,55 @@ package org.apache.woden.wsdl20.extensions.soap;
 
 import java.net.URI;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 
 /**
- * This interface represents the properties from the SOAP namespace
- * added to the WSDL 2.0 <code>Binding</code> component as part 
- * of the SOAP binding extension. 
+ * Provides access to the extension properties of the Binding component 
+ * that are in the <code>http://www.w3.org/ns/wsdl/soap</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
  * <p>
- * These include:
- * <ul>
- * <li>{soap version}</li>
- * <li>{soap underlying protocol}</li>
- * <li>{soap mep default}</li>
- * <li>{soap modules}</li>
- * </ul> 
- * It also defines the properties from the HTTP extensions that
- * are present in the SOAP Binding extensions when the underlying
- * protocol is HTTP.
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>soap version</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>soap underlying protocol</td>
+ * <td>java.net.URI</td>
+ * </tr>
+ * <tr>
+ * <td>soap mep default</td>
+ * <td>java.net.URI</td>
+ * </tr>
+ * <tr>
+ * <td>soap modules</td>
+ * <td>org.apache.woden.wsdl20.extensions.soap.SOAPModule[]</td>
+ * </tr>
+ * </table>
  * <p>
- * These include:
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each SOAP extension property. 
+ * It also provides accessor methods for some additional HTTP extension properties 
+ * that are present in a SOAP binding when the underlying protocol is HTTP.
+ * <p>
+ * These are:
  * <ul>
  * <li>{http query parameter separator default}</li>
  * <li>{http cookies}</li>
  * <li>{http content encoding default}</li>
  * </ul>
+ * <p> 
+ * TODO Re HTTP methods, consider WODEN-158 which proposes keeping extension interfaces namespace-specific, not binding-type-specific
  * 
  * @author John Kaputin (jkaputin@apache.org)
  */
-public interface SOAPBindingExtensions extends ComponentExtensions 
+public interface SOAPBindingExtensions extends ComponentExtensionContext 
 {
     public String getSoapVersion();
     

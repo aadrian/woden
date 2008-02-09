@@ -17,10 +17,19 @@
 
 package org.apache.woden.internal.wsdl20.extensions.rpc;
 
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
+import java.net.URI;
+
+import org.apache.woden.ErrorReporter;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.rpc.Argument;
+import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.wsdl20.extensions.rpc.RPCInterfaceOperationExtensions;
+import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.ArgumentArrayAttr;
+import org.apache.woden.xml.BooleanAttr;
 
 /**
  * This class defines the properties from the WSDL RPC extensions namespace
@@ -30,9 +39,48 @@ import org.apache.woden.xml.ArgumentArrayAttr;
  * @author Arthur Ryman (ryman@ca.ibm.com)
  */
 
-public class RPCInterfaceOperationExtensionsImpl extends
-		ComponentExtensionsImpl implements RPCInterfaceOperationExtensions {
+public class RPCInterfaceOperationExtensionsImpl extends BaseComponentExtensionContext
+        implements RPCInterfaceOperationExtensions {
 
+    public RPCInterfaceOperationExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        return new ExtensionProperty[] {getProperty(RPCConstants.PROP_RPC_SIGNATURE)};
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        if(RPCConstants.PROP_RPC_SIGNATURE.equals(propertyName) ) {
+            return newExtensionProperty(RPCConstants.PROP_RPC_SIGNATURE,
+                    getRPCSignature());
+        } else {
+            return null; //the specified property name does not exist
+        }
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by RPCInterfaceOperationExtensions
+     * ************************************************************/
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -40,7 +88,7 @@ public class RPCInterfaceOperationExtensionsImpl extends
 	 */
 	public Argument[] getRPCSignature() {
 
-		ArgumentArrayAttr args = (ArgumentArrayAttr) fParentElement
+		ArgumentArrayAttr args = (ArgumentArrayAttr) ((WSDLElement)getParent())
 				.getExtensionAttribute(RPCConstants.Q_ATTR_RPC_SIGNATURE);
 
 		if (args == null)

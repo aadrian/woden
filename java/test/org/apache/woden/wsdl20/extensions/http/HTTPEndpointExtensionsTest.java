@@ -29,7 +29,6 @@ import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Description;
 import org.apache.woden.wsdl20.Endpoint;
 import org.apache.woden.wsdl20.Service;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of HTTPEndpointExtensions.
@@ -93,8 +92,8 @@ public class HTTPEndpointExtensionsTest extends TestCase {
         Endpoint endpoint = fEndpoints[0];
         HTTPEndpointExtensions httpEndpointExts = 
             (HTTPEndpointExtensions) endpoint
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         HTTPAuthenticationScheme actual = httpEndpointExts.getHttpAuthenticationScheme();
         assertEquals("Unexpected value for http authentication scheme.", 
@@ -105,8 +104,8 @@ public class HTTPEndpointExtensionsTest extends TestCase {
         Endpoint endpoint2 = fEndpoints[1];
         HTTPEndpointExtensions httpEndpointExts2 = 
             (HTTPEndpointExtensions) endpoint2
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         HTTPAuthenticationScheme actual2 = httpEndpointExts2.getHttpAuthenticationScheme();
         assertEquals("Unexpected value for http authentication scheme.", 
@@ -117,8 +116,8 @@ public class HTTPEndpointExtensionsTest extends TestCase {
         Endpoint endpoint3 = fEndpoints[2];
         HTTPEndpointExtensions httpEndpointExts3 = 
             (HTTPEndpointExtensions) endpoint3
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         HTTPAuthenticationScheme actual3 = httpEndpointExts3.getHttpAuthenticationScheme();
         assertNull("Http authentication scheme did not default to null.", 
@@ -138,8 +137,8 @@ public class HTTPEndpointExtensionsTest extends TestCase {
         Endpoint endpoint = fEndpoints[0];
         HTTPEndpointExtensions httpEndpointExts = 
             (HTTPEndpointExtensions) endpoint
-                .getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(
+                        HTTPConstants.NS_URI_HTTP);
         
         String actual = httpEndpointExts.getHttpAuthenticationRealm();
         assertEquals("Unexpected value for http authentication realm.", 

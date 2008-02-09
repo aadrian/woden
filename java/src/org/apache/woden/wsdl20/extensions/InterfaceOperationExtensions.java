@@ -19,21 +19,38 @@ package org.apache.woden.wsdl20.extensions;
 
 /**
  * <code>InterfaceOperationExtensions</code> represents the WSDL 2.0
- * predefined extensions, as specified on Part 2: Adjuncts, for the Interface
+ * predefined extensions, as specified by WSDL 2.0 Part 2: Adjuncts, for the Interface
  * Operation component.
- * 
- * The only predefined extension property is:
- * {safety}
+ * <p>
+ * Provides access to the extension properties of the Interface Operation component
+ * that are in the <code>http://www.w3.org/ns/wsdl-extensions</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
+ * <p>
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>safe</td>
+ * <td>java.lang.Boolean</td>
+ * </tr>
+ * </table>
+ * <p>
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each extension property. 
  * 
  * @author Arthur Ryman (ryman@ca.ibm.com)
  * 
  */
-public interface InterfaceOperationExtensions extends ComponentExtensions {
+public interface InterfaceOperationExtensions extends ComponentExtensionContext {
 
-	/*
-	 * Returns the value of the {safety} extension property of Interface
-	 * Operation as defined by the wsdlx:safe attribute.
+	/**
+	 * Returns the value of the {safe} extension property of Interface
+	 * Operation as defined by the <code>wsdlx:safe</code> attribute.
 	 */
-	public boolean isSafety();
+	public boolean isSafe();
 
 }

@@ -29,7 +29,6 @@ import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingFault;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of HTTPBindingFaultExtensions.
@@ -82,7 +81,7 @@ public class HTTPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBindFaults[0];
         HTTPBindingFaultExtensions httpBindFaultExts = (HTTPBindingFaultExtensions)bindFault
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         assertNotNull("The BindingFault does not contain an HTTPBindingFaultExtensions object.",
                 httpBindFaultExts);
         
@@ -94,7 +93,7 @@ public class HTTPBindingFaultExtensionsTest extends TestCase
 
         bindFault = fBindFaults[1];
         httpBindFaultExts =  (HTTPBindingFaultExtensions)bindFault
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         assertNotNull("The BindingFault does not contain an HTTPBindingFaultExtensions object.",
                 httpBindFaultExts);
         
@@ -113,7 +112,7 @@ public class HTTPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBindFaults[0];
         HTTPBindingFaultExtensions httpBindFaultExts = (HTTPBindingFaultExtensions)bindFault
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindFaultExts.getHttpContentEncoding();
         assertNotNull("The value for http transfer coding was null", actual);
@@ -141,7 +140,7 @@ public class HTTPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBindFaults[2];
         HTTPBindingFaultExtensions httpBindFaultExts =  (HTTPBindingFaultExtensions)bindFault
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         assertNotNull("The BindingFault does not contain an HTTPBindingFaultExtensions object.",
                 httpBindFaultExts);
         
@@ -185,7 +184,7 @@ public class HTTPBindingFaultExtensionsTest extends TestCase
     {
         BindingFault bindFault = fBindFaults[3];
         HTTPBindingFaultExtensions httpBindFaultExts = (HTTPBindingFaultExtensions)bindFault
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         assertNotNull("The BindingFault does not contain an HTTPBindingFaultExtensions object.",
                 httpBindFaultExts);
 

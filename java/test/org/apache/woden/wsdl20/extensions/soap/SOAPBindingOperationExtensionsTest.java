@@ -30,7 +30,6 @@ import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of SoapBindingOperationExtensions.
@@ -97,7 +96,7 @@ public class SOAPBindingOperationExtensionsTest extends TestCase
     public void testGetSoapMep()
     {
         SOAPBindingOperationExtensions soapBindOperExts = 
-            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         URI soapMep = soapBindOperExts.getSoapMep();
         
         assertNotNull("The SOAPBindingOperationExtensions did not return a value for {soap mep}.", soapMep);
@@ -111,7 +110,7 @@ public class SOAPBindingOperationExtensionsTest extends TestCase
     public void testGetSoapAction()
     {
         SOAPBindingOperationExtensions soapBindOperExts = 
-            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         URI soapAction = soapBindOperExts.getSoapAction();
         
         assertNotNull("The SOAPBindingOperationExtensions did not return a value for {soap action}.", soapAction);
@@ -125,7 +124,7 @@ public class SOAPBindingOperationExtensionsTest extends TestCase
     public void testGetSoapModules()
     {
         SOAPBindingOperationExtensions soapBindOperExts = 
-            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPModule[] actual = soapBindOperExts.getSoapModules();
         assertEquals("Unexpected number of SOAPModule objects.", 1, actual.length);
     }
@@ -138,14 +137,14 @@ public class SOAPBindingOperationExtensionsTest extends TestCase
     public void testGetHttpQueryParameterSeparator()
     {
         SOAPBindingOperationExtensions soapBindOperExts = 
-            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingOperationExtensions) fBindOper.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         String actual = soapBindOperExts.getHttpQueryParameterSeparator();
         
         assertNotNull("The SOAPBindingOperationExtensions did not return a value for {http query parameter separator}.", actual);
         assertEquals("Unexpected value for http query parameter separator.", "$", actual);
         
         SOAPBindingOperationExtensions soapBind2OperExts = 
-            (SOAPBindingOperationExtensions) fBind2Oper.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingOperationExtensions) fBind2Oper.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         String actual2 = soapBind2OperExts.getHttpQueryParameterSeparator();
         
         assertNull("Non-null value for http query parameter separator.", actual2);

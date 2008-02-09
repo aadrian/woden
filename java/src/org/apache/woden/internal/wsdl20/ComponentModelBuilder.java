@@ -25,8 +25,6 @@ import javax.xml.namespace.QName;
 
 import org.apache.woden.WSDLException;
 import org.apache.woden.internal.schema.SchemaConstants;
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
-import org.apache.woden.internal.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.schema.Schema;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingFault;
@@ -35,8 +33,11 @@ import org.apache.woden.wsdl20.BindingMessageReference;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Endpoint;
 import org.apache.woden.wsdl20.InterfaceOperation;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
+import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.wsdl20.xml.BindingElement;
 import org.apache.woden.wsdl20.xml.BindingFaultElement;
 import org.apache.woden.wsdl20.xml.BindingFaultReferenceElement;
@@ -50,7 +51,6 @@ import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 import org.apache.woden.wsdl20.xml.ServiceElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
-import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaExternal;
 import org.apache.ws.commons.schema.XmlSchemaImport;
@@ -376,9 +376,9 @@ public class ComponentModelBuilder {
 		for (int i = 0; i < extNamespaces.length; i++) {
 			URI extNS = extNamespaces[i];
 			if (oper.hasExtensionAttributesForNamespace(extNS)) {
-				ComponentExtensions compExt = createComponentExtensions(
+				ComponentExtensionContext compExt = createComponentExtensions(
 						InterfaceOperation.class, oper, extNS);
-				oper.setComponentExtensions(extNS, compExt);
+				oper.setComponentExtensionContext(extNS, compExt);
 			}
 		}
         
@@ -387,13 +387,13 @@ public class ComponentModelBuilder {
          * so if an InterfaceOperationExtensions object has not already been
          * created, create one now.
          */
-        if (oper.getComponentExtensionsForNamespace(
-                ComponentExtensions.NS_URI_WSDL_EXTENSIONS) == null) {
-            ComponentExtensions compExt = createComponentExtensions(
+        if (oper.getComponentExtensionContext(
+                WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS) == null) {
+            ComponentExtensionContext compExt = createComponentExtensions(
                     InterfaceOperation.class, oper,
-                    ComponentExtensions.NS_URI_WSDL_EXTENSIONS);
-            oper.setComponentExtensions(
-                    ComponentExtensions.NS_URI_WSDL_EXTENSIONS, compExt);
+                    WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS);
+            oper.setComponentExtensionContext(
+                    WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS, compExt);
         }
         
         /*
@@ -413,13 +413,13 @@ public class ComponentModelBuilder {
         }
         
         if(isRPCStyle) {
-            if (oper.getComponentExtensionsForNamespace(
-                    ComponentExtensions.NS_URI_RPC) == null) {
-                ComponentExtensions compExt = createComponentExtensions(
+            if (oper.getComponentExtensionContext(
+                    RPCConstants.NS_URI_RPC) == null) {
+                ComponentExtensionContext compExt = createComponentExtensions(
                         InterfaceOperation.class, oper,
-                        ComponentExtensions.NS_URI_RPC);
-                oper.setComponentExtensions(
-                        ComponentExtensions.NS_URI_RPC, compExt);
+                        RPCConstants.NS_URI_RPC);
+                oper.setComponentExtensionContext(
+                        RPCConstants.NS_URI_RPC, compExt);
             }
         }
 	}
@@ -493,9 +493,9 @@ public class ComponentModelBuilder {
         
         fBindingType = binding.getType();
         if(fBindingType != null) {
-            ComponentExtensions compExt = createComponentExtensions(
+            ComponentExtensionContext compExt = createComponentExtensions(
                     Binding.class, binding, fBindingType);
-            binding.setComponentExtensions(fBindingType, compExt);
+            binding.setComponentExtensionContext(fBindingType, compExt);
         }
 	}
 
@@ -506,9 +506,9 @@ public class ComponentModelBuilder {
          */
         
         if(fBindingType != null) {
-            ComponentExtensions compExt = createComponentExtensions(
+            ComponentExtensionContext compExt = createComponentExtensions(
                     BindingFault.class, bindFault, fBindingType);
-            bindFault.setComponentExtensions(fBindingType, compExt);
+            bindFault.setComponentExtensionContext(fBindingType, compExt);
         }
 	}
 
@@ -519,9 +519,9 @@ public class ComponentModelBuilder {
          */
         
         if(fBindingType != null) {
-            ComponentExtensions compExt = createComponentExtensions(
+            ComponentExtensionContext compExt = createComponentExtensions(
                     BindingOperation.class, bindOper, fBindingType);
-            bindOper.setComponentExtensions(fBindingType, compExt);
+            bindOper.setComponentExtensionContext(fBindingType, compExt);
         }
 	}
 
@@ -533,9 +533,9 @@ public class ComponentModelBuilder {
          */
         
         if(fBindingType != null) {
-            ComponentExtensions compExt = createComponentExtensions(
+            ComponentExtensionContext compExt = createComponentExtensions(
                     BindingMessageReference.class, bindMsgRef, fBindingType);
-            bindMsgRef.setComponentExtensions(fBindingType, compExt);
+            bindMsgRef.setComponentExtensionContext(fBindingType, compExt);
         }
 	}
 
@@ -547,9 +547,9 @@ public class ComponentModelBuilder {
          */
         
         if(fBindingType != null) {
-            ComponentExtensions compExt = createComponentExtensions(
+            ComponentExtensionContext compExt = createComponentExtensions(
                     BindingFaultReference.class, bindFaultRef, fBindingType);
-            bindFaultRef.setComponentExtensions(fBindingType, compExt);
+            bindFaultRef.setComponentExtensionContext(fBindingType, compExt);
         }
 	}
 
@@ -581,23 +581,23 @@ public class ComponentModelBuilder {
          */
         
         if(fBindingType != null) {
-            ComponentExtensions compExt = createComponentExtensions(
+            ComponentExtensionContext compExt = createComponentExtensions(
                     Endpoint.class, endpoint, fBindingType);
-            endpoint.setComponentExtensions(fBindingType, compExt);
+            endpoint.setComponentExtensionContext(fBindingType, compExt);
         }
 	}
 
 	/*
 	 * This helper method factors out common code for creating
-	 * ComponentExtensions registered in the ExtensionRegistry.
+	 * ComponentExtensionContexts registered in the ExtensionRegistry.
 	 */
-	private ComponentExtensions createComponentExtensions(Class parentClass,
-			WSDLElement parentElem, URI extNS) {
+	private ComponentExtensionContext createComponentExtensions(Class parentClass,
+			WSDLComponent parentComp, URI extNS) {
 		ExtensionRegistry er = fDesc.getWsdlContext().extensionRegistry;
-		ComponentExtensions compExt = null;
+		ComponentExtensionContext compExt = null;
 		try {
-			compExt = er.createComponentExtension(parentClass, extNS);
-			((ComponentExtensionsImpl) compExt).init(parentElem, extNS);
+			compExt = er.createComponentExtension(parentClass, parentComp, extNS);
+			//TODO remove with woden-47 ((ComponentExtensionsImpl) compExt).init(parentElem, extNS);
 		} catch (WSDLException e) {
 			// This exception occurs if there is no Java class registered for
 			// the namespace, but

@@ -28,7 +28,6 @@ import org.apache.woden.WSDLReader;
 import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of HTTPBindingExtensions.
@@ -78,7 +77,7 @@ public class HTTPBindingExtensionsTest extends TestCase
     {
         Binding binding1 = fBindings[0];
         HTTPBindingExtensions httpBindExts = (HTTPBindingExtensions)binding1
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         assertNotNull("The Binding '" + binding1.getName() + "' does not contain an HTTPBindingExtensions object.",
                 httpBindExts);
         
@@ -99,7 +98,7 @@ public class HTTPBindingExtensionsTest extends TestCase
     {
         Binding binding1 = fBindings[0];
         HTTPBindingExtensions httpBindExts = (HTTPBindingExtensions)binding1
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindExts.getHttpQueryParameterSeparatorDefault();
         assertNotNull("The value for http query parameter separator default was null", actual);
@@ -118,7 +117,7 @@ public class HTTPBindingExtensionsTest extends TestCase
         //test that a whttp:cookies value "true" equates to Boolean(true)
         Binding binding1 = fBindings[0];
         HTTPBindingExtensions httpBindExts = (HTTPBindingExtensions)binding1
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         
         assertTrue("Expected 'true' for for http cookies.",
                 httpBindExts.isHttpCookies().booleanValue());
@@ -126,7 +125,7 @@ public class HTTPBindingExtensionsTest extends TestCase
         //test that a whttp:cookies value "false" equates to Boolean(false)
         Binding binding3 = fBindings[2];
         httpBindExts = (HTTPBindingExtensions)binding3
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         
         assertFalse("Expected 'false' for for http cookies.",
                 httpBindExts.isHttpCookies().booleanValue());
@@ -141,7 +140,7 @@ public class HTTPBindingExtensionsTest extends TestCase
     {
         Binding binding1 = fBindings[0];
         HTTPBindingExtensions httpBindExts = (HTTPBindingExtensions)binding1
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         
         String actual = httpBindExts.getHttpContentEncodingDefault();
         assertEquals("Unexpected value for http content encoding default.", 
@@ -171,7 +170,7 @@ public class HTTPBindingExtensionsTest extends TestCase
     {
         Binding binding2 = fBindings[1];
         HTTPBindingExtensions httpBindExts = (HTTPBindingExtensions)binding2
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+            .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         assertNotNull("The Binding '" + 
                 binding2.getName() + 
                 "' does not contain an HTTPBindingExtensions object.");

@@ -18,8 +18,8 @@ package org.apache.woden.wsdl20;
 
 import java.net.URI;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
-
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.PropertyExtensible;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 
 /**
@@ -31,7 +31,7 @@ import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
  * 
  * @author John Kaputin (jkaputin@apache.org)
  */
-public interface WSDLComponent 
+public interface WSDLComponent extends PropertyExtensible
 {
     /**
      * Tests whether this component is logically equivalent the specified component.
@@ -44,16 +44,24 @@ public interface WSDLComponent
     public boolean equals(WSDLComponent comp);
     
     /**
-     * Gets the group of extension properties, belonging to the specified non-WSDL
-     * namespace, that extend this WSDL component.
+     * Stores the ComponentExtensionContext object that provides access to this WSDL component's
+     * extension properties from the specified namespace.
      * 
-     * @param namespace a namespace URI different to the WSDL 2.0 namespace.
-     * @return the <code>ComponentExtensions</code> with the specified namespace.
+     * @param extNamespace the namespace URI of the extension properties 
+     * @param compExtCtx the ComponentExtensionContext object for accessing the extension properties
      */
-    public ComponentExtensions getComponentExtensionsForNamespace(URI namespace);
+    public void setComponentExtensionContext(URI extNamespace, ComponentExtensionContext compExtCtx);
     
-    //TODO consider a getExtensionProperty(N/S, propName) method here. 
+    /**
+     * Returns the ComponentExtensionContext object that provides access to this WSDL component's
+     * extension properties from the specified namespace.
+     * 
+     * @param extNamespace the namespace URI of the extension properties 
+     * @return the ComponentExtensionContext object for accessing the extension properties
+     */
+    public ComponentExtensionContext getComponentExtensionContext(URI extNamespace);
     
+   
     /**
      * Returns the fragment identifier for this WSDL 2.0 component.
      * 

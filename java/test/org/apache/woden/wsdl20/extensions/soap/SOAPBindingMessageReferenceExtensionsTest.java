@@ -31,7 +31,6 @@ import org.apache.woden.wsdl20.BindingMessageReference;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Description;
 import org.apache.woden.wsdl20.enumeration.Direction;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 import org.apache.woden.wsdl20.xml.BindingMessageReferenceElement;
 
 /**
@@ -100,7 +99,7 @@ public class SOAPBindingMessageReferenceExtensionsTest extends TestCase
         assertTrue("The BindingMessageReference does not represent an <input> element.", Direction.IN.equals(direction));
 
         SOAPBindingMessageReferenceExtensions soapBindMsgRefExts = 
-            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPModule[] actual = soapBindMsgRefExts.getSoapModules();
         assertEquals("Unexpected number of SOAPModule objects.", 2, actual.length);
     }
@@ -119,7 +118,7 @@ public class SOAPBindingMessageReferenceExtensionsTest extends TestCase
         assertTrue("The BindingMessageReference does not represent an <output> element.", Direction.OUT.equals(direction));
 
         SOAPBindingMessageReferenceExtensions soapBindMsgRefExts = 
-            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPModule[] actual = soapBindMsgRefExts.getSoapModules();
         assertEquals("Unexpected number of SOAPModule objects.", 1, actual.length);
     }
@@ -134,7 +133,7 @@ public class SOAPBindingMessageReferenceExtensionsTest extends TestCase
         assertNotNull("The BindingOperation does not contain a BindingMessageReference.", bindMsgRef);
 
         SOAPBindingMessageReferenceExtensions soapBindMsgRefExts = 
-            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPHeaderBlock[] actual = soapBindMsgRefExts.getSoapHeaders();
         assertEquals("Unexpected number of SOAPHeaderBlock objects.", 2, actual.length);
     }
@@ -149,7 +148,7 @@ public class SOAPBindingMessageReferenceExtensionsTest extends TestCase
         assertNotNull("The BindingOperation does not contain the expected BindingMessageReference.", bindMsgRef);
 
         SOAPBindingMessageReferenceExtensions soapBindMsgRefExts = 
-            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingMessageReferenceExtensions) bindMsgRef.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPHeaderBlock[] actual = soapBindMsgRefExts.getSoapHeaders();
         assertEquals("Unexpected number of SOAPHeaderBlock objects.", 1, actual.length);
     }

@@ -16,34 +16,55 @@
  */
 package org.apache.woden.wsdl20.extensions.soap;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 import org.apache.woden.wsdl20.extensions.http.HTTPHeader;
 
 /**
- * This interface represents the properties from the SOAP namespace
- * added to the WSDL 2.0 <code>BindingFault</code> component as part 
- * of the SOAP binding extension.
+ * Provides access to the extension properties of the Binding Fault component 
+ * that are in the <code>http://www.w3.org/ns/wsdl/soap</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
  * <p>
- * These include:
- * <ul>
- * <li>{soap fault code}</li>
- * <li>{soap fault subcodes}</li>
- * <li>{soap modules}</li>
- * <li>{soap headers}</li>
- * </ul> 
- * It also defines the properties from the HTTP extensions that
- * are present in the SOAP BindingFault extensions when the underlying
- * protocol of the SOAP Binding is HTTP.
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>soap fault code</td>
+ * <td>org.apache.woden.wsdl20.extensions.soap.SOAPFaultCode</td>
+ * </tr>
+ * <tr>
+ * <td>soap fault subcodes</td>
+ * <td>org.apache.woden.wsdl20.extensions.soap.SOAPFaultSubcodes</td>
+ * </tr>
+ * <tr>
+ * <td>soap modules</td>
+ * <td>org.apache.woden.wsdl20.extensions.soap.SOAPModule[]</td>
+ * </tr>
+ * <tr>
+ * <td>soap headers</td>
+ * <td>org.apache.woden.wsdl20.extensions.soap.SOAPHeaderBlock[]</td>
+ * </tr>
+ * </table>
  * <p>
- * These include:
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each SOAP extension property. 
+ * It also provides accessor methods for some additional HTTP extension properties 
+ * that are present in a SOAP binding when the underlying protocol is HTTP.
+ * <p>
+ * These are:
  * <ul>
  * <li>{http content encoding}</li>
  * <li>{http headers}</li>
  * </ul>
+ * <p> 
+ * TODO Re HTTP methods, consider WODEN-158 which proposes keeping extension interfaces namespace-specific, not binding-type-specific
  * 
  * @author John Kaputin (jkaputin@apache.org)
  */
-public interface SOAPBindingFaultExtensions extends ComponentExtensions 
+public interface SOAPBindingFaultExtensions extends ComponentExtensionContext 
 {
     /**
      * Returns an object representing the {soap fault code} property, which may

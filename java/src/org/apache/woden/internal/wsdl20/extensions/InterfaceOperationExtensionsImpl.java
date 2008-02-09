@@ -16,7 +16,16 @@
  */
 package org.apache.woden.internal.wsdl20.extensions;
 
+import java.net.URI;
+
+import org.apache.woden.ErrorReporter;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.InterfaceOperationExtensions;
+import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
+import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.BooleanAttr;
 
 /**
@@ -27,13 +36,56 @@ import org.apache.woden.xml.BooleanAttr;
  * @author Arthur Ryman (ryman@ca.ibm.com)
  */
 
-public class InterfaceOperationExtensionsImpl extends ComponentExtensionsImpl
+public class InterfaceOperationExtensionsImpl extends BaseComponentExtensionContext
 		implements InterfaceOperationExtensions {
 
-	public boolean isSafety() {
+    public InterfaceOperationExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
 
-		BooleanAttr safe = 
-            (BooleanAttr)fParentElement.getExtensionAttribute(ExtensionConstants.Q_ATTR_SAFE);
-        return safe != null ? safe.getBoolean().booleanValue() : false;
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        return new ExtensionProperty[] {getProperty(WSDLExtensionConstants.PROP_SAFE)};
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        if(WSDLExtensionConstants.PROP_SAFE.equals(propertyName) ) {
+            BooleanAttr safe = (BooleanAttr) ((WSDLElement)getParent())
+            .getExtensionAttribute(WSDLExtensionConstants.Q_ATTR_SAFE);
+            return newExtensionProperty(WSDLExtensionConstants.PROP_SAFE, 
+                    safe != null ? safe.getBoolean() : Boolean.FALSE);
+        } else {
+            return null; //the specified property name does not exist
+        }
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by InterfaceOperationExtensions
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.InterfaceOperationExtensionContext#isSafe()
+     */
+	public boolean isSafe() {
+		Boolean safe = (Boolean)getProperty(WSDLExtensionConstants.PROP_SAFE).getContent();
+		return safe == Boolean.TRUE ? true : false;
 	}
 }

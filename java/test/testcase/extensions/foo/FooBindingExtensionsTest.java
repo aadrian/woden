@@ -82,7 +82,7 @@ public class FooBindingExtensionsTest extends TestCase {
         FooBindingExtensions exts = null;
         binding = fBindings[0];
         exts = (FooBindingExtensions)binding
-    		.getComponentExtensionsForNamespace(FooConstants.NS_URI_FOO);
+    		.getComponentExtensionContext(FooConstants.NS_URI_FOO);
         assertNotNull("The Binding '" + binding.getName() + "' does not contain an FooBindingExtensions object.",
             exts);
         Integer actual = exts.getFooBar();
@@ -91,7 +91,7 @@ public class FooBindingExtensionsTest extends TestCase {
 
     	binding = fBindings[1];
         exts = (FooBindingExtensions)binding
-        	.getComponentExtensionsForNamespace(FooConstants.NS_URI_FOO);
+        	.getComponentExtensionContext(FooConstants.NS_URI_FOO);
         assertNotNull("The Binding '" + binding.getName() + "' does not contain an FooBindingExtensions object.",
                 exts);
         
@@ -107,7 +107,7 @@ public class FooBindingExtensionsTest extends TestCase {
 	public void testGetFooBaz() {
         Binding binding1 = fBindings[1];
         FooBindingExtensions exts = (FooBindingExtensions)binding1
-        	.getComponentExtensionsForNamespace(FooConstants.NS_URI_FOO);
+        	.getComponentExtensionContext(FooConstants.NS_URI_FOO);
         assertNotNull("The Binding '" + binding1.getName() + "' does not contain an FooBindingExtensions object.",
                 exts);
         

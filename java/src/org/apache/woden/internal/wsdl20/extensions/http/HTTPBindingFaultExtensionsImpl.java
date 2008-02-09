@@ -16,10 +16,16 @@
  */
 package org.apache.woden.internal.wsdl20.extensions.http;
 
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
+import java.net.URI;
+
+import org.apache.woden.ErrorReporter;
 import org.apache.woden.internal.xml.IntOrTokenAnyAttrImpl;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
 import org.apache.woden.wsdl20.extensions.ExtensionElement;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingFaultExtensions;
+import org.apache.woden.wsdl20.extensions.http.HTTPConstants;
 import org.apache.woden.wsdl20.extensions.http.HTTPErrorStatusCode;
 import org.apache.woden.wsdl20.extensions.http.HTTPHeader;
 import org.apache.woden.wsdl20.xml.WSDLElement;
@@ -32,9 +38,59 @@ import org.apache.woden.xml.StringAttr;
  * 
  * @author John Kaputin (jkaputin@apache.org)
  */
-public class HTTPBindingFaultExtensionsImpl extends ComponentExtensionsImpl
+public class HTTPBindingFaultExtensionsImpl extends BaseComponentExtensionContext
                                             implements HTTPBindingFaultExtensions 
 {
+
+    public HTTPBindingFaultExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        
+        return new ExtensionProperty[] {
+                getProperty(HTTPConstants.PROP_HTTP_ERROR_STATUS_CODE),
+                getProperty(HTTPConstants.PROP_HTTP_CONTENT_ENCODING),
+                getProperty(HTTPConstants.PROP_HTTP_HEADERS)};
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        if(HTTPConstants.PROP_HTTP_ERROR_STATUS_CODE.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_ERROR_STATUS_CODE, getHttpErrorStatusCode());
+            
+        } else if(HTTPConstants.PROP_HTTP_CONTENT_ENCODING.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_CONTENT_ENCODING, getHttpContentEncoding());
+            
+        } else if(HTTPConstants.PROP_HTTP_HEADERS.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_HEADERS, getHttpHeaders());
+            
+        } else {
+            return null; //the specified property name does not exist
+        }
+        
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by HTTPBindingFaultExtensions
+     * ************************************************************/
 
     /* (non-Javadoc)
      * @see org.apache.woden.wsdl20.extensions.http.HTTPBindingFaultExtensions#getHttpErrorStatusCode()
@@ -45,8 +101,8 @@ public class HTTPBindingFaultExtensionsImpl extends ComponentExtensionsImpl
          * here, rather than the IntOrTokenAttr interface, to guarantee that if the code contains an 
          * xs:token it is of type #any.
          */
-        IntOrTokenAnyAttrImpl code = (IntOrTokenAnyAttrImpl)
-            ((WSDLElement)fParent).getExtensionAttribute(HTTPConstants.Q_ATTR_CODE);
+        IntOrTokenAnyAttrImpl code = (IntOrTokenAnyAttrImpl) ((WSDLElement) getParent())
+            .getExtensionAttribute(HTTPConstants.Q_ATTR_CODE);
         
         if(code == null)
         {
@@ -77,7 +133,7 @@ public class HTTPBindingFaultExtensionsImpl extends ComponentExtensionsImpl
     public String getHttpContentEncoding() 
     {
         String ce = null;
-        StringAttr contEncoding = (StringAttr) ((WSDLElement)fParent)
+        StringAttr contEncoding = (StringAttr) ((WSDLElement) getParent())
             .getExtensionAttribute(HTTPConstants.Q_ATTR_CONTENT_ENCODING);
         if(contEncoding != null) {
             ce = contEncoding.getString();
@@ -90,7 +146,7 @@ public class HTTPBindingFaultExtensionsImpl extends ComponentExtensionsImpl
      */
     public HTTPHeader[] getHttpHeaders() 
     {
-        ExtensionElement[] extEls =  ((WSDLElement)fParent)
+        ExtensionElement[] extEls =  ((WSDLElement) getParent())
             .getExtensionElementsOfType(HTTPConstants.Q_ELEM_HTTP_HEADER);
         int len = extEls.length;
         HTTPHeader[] httpHeaders = new HTTPHeader[len];

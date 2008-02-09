@@ -17,14 +17,17 @@
 package org.apache.woden.internal.wsdl20;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.woden.wsdl20.WSDLComponent;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
-import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 
 /**
  * All classes implementing the WSDL 2.0 Component and Element
@@ -40,7 +43,7 @@ import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 public abstract class WSDLComponentImpl extends DocumentableImpl
                                      implements WSDLComponent
 {
-    private Map fCompExtensions = new HashMap(); //map of ComponentExtensions keyed by namespace
+    private Map fCompExtensionContexts = new HashMap(); //key=extNS, value=ComponentExtensionsContext
     
     /* ************************************************************
      *  WSDLComponent interface methods (i.e. WSDL Component API)
@@ -58,11 +61,85 @@ public abstract class WSDLComponentImpl extends DocumentableImpl
     }
     
     /* (non-Javadoc)
-     * @see org.apache.woden.wsdl20.WSDLComponent#getWSDLExtensionsForNamespace(java.net.URI)
+     * @see org.apache.woden.wsdl20.WSDLComponent#setComponentExtensionContext(java.net.URI, org.apache.woden.wsdl20.extensions.ComponentExtensionsContext)
      */
-    public ComponentExtensions getComponentExtensionsForNamespace(URI namespace)
-    {
-        return (ComponentExtensions)fCompExtensions.get(namespace);
+    public void setComponentExtensionContext(URI extNamespace, ComponentExtensionContext compExtCtx) {
+        
+        if(extNamespace == null) {
+            String msg = getWsdlContext().errorReporter.getFormattedMessage("WSDL023", null);
+            throw new NullPointerException(msg);
+        }
+        
+        if(compExtCtx != null) {
+            fCompExtensionContexts.put(extNamespace.toString(), compExtCtx);
+        } else {
+            fCompExtensionContexts.remove(extNamespace.toString());
+        }
+    }
+    
+    /* (non-Javadoc)
+     * @see org.apache.woden.wsdl20.WSDLComponent#getComponentExtensionContext(java.net.URI)
+     */
+    public ComponentExtensionContext getComponentExtensionContext(URI extNamespace) {
+        if(extNamespace == null) {
+            return null;
+        }
+        return (ComponentExtensionContext) fCompExtensionContexts.get(extNamespace.toString());
+    }
+        
+    
+    /* (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.PropertyExtensible#getExtensionProperties()
+     */
+    public ExtensionProperty[] getExtensionProperties() {
+        int i, len;
+        List properties = new Vector();
+        Collection compExtCtxs = fCompExtensionContexts.values();
+        Iterator it = compExtCtxs.iterator();
+        while(it.hasNext()) {
+            BaseComponentExtensionContext compExtCtx = (BaseComponentExtensionContext)it.next();
+            ExtensionProperty[] extProps = compExtCtx.getProperties();
+            len = extProps.length;
+            for(i=0; i<len; i++) {
+                properties.add(extProps[i]);
+            }
+        }
+        
+        ExtensionProperty[] array = new ExtensionProperty[properties.size()];
+        properties.toArray(array);
+        return array;
+    }
+    
+    /* (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.PropertyExtensible#getExtensionProperties(java.net.URI)
+     */
+    public ExtensionProperty[] getExtensionProperties(URI extNamespace) {
+        if(extNamespace == null) {
+            return new ExtensionProperty[] {};
+        }
+        
+        ComponentExtensionContext compExtCtx = getComponentExtensionContext(extNamespace);
+        if(compExtCtx == null) {
+            return new ExtensionProperty[] {};
+        }
+        
+        return compExtCtx.getProperties();
+    }
+    
+    /* (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.PropertyExtensible#getExtensionProperty(java.net.URI, java.lang.String)
+     */
+    public ExtensionProperty getExtensionProperty(URI extNamespace, String propertyName) {
+        if(extNamespace == null || propertyName == null) {
+            return null;
+        }
+        
+        ComponentExtensionContext compExtCtx = getComponentExtensionContext(extNamespace);
+        if(compExtCtx == null) {
+            return null;
+        }
+        
+        return compExtCtx.getProperty(propertyName);
     }
     
     /* ************************************************************
@@ -85,26 +162,9 @@ public abstract class WSDLComponentImpl extends DocumentableImpl
         return false;
     }
     
-    
-    /*
-     * Store the extensions in a map using the namespace string as the key.
-     * If the extensions value is null, delete any existing entry in the map
-     * for this namespace. If the namespace string is null, do nothing.
-     * TODO check if still needed after compbuilder refactored.
-     */
-    public void setComponentExtensions(URI namespace, ComponentExtensions extensions)
-    {
-        if(namespace != null)
-        {
-            if(extensions != null) {
-                fCompExtensions.put(namespace, extensions);
-            } else {
-                fCompExtensions.remove(namespace);
-            }
-        }
-    }
-
     public String toString() {
         return getFragmentIdentifier().toString();
     }
+    
+    
 }

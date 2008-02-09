@@ -18,14 +18,18 @@ package org.apache.woden.internal.wsdl20.extensions.http;
 
 import java.net.URI;
 
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
-import org.apache.woden.internal.wsdl20.extensions.ExtensionConstants;
+import org.apache.woden.ErrorReporter;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.InterfaceOperation;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.InterfaceOperationExtensions;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingExtensions;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingOperationExtensions;
+import org.apache.woden.wsdl20.extensions.http.HTTPConstants;
 import org.apache.woden.wsdl20.extensions.http.HTTPLocation;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.BooleanAttr;
@@ -40,15 +44,87 @@ import org.apache.woden.xml.StringAttr;
  * @author Arthur Ryman (ryman@ca.ibm.com, arthur.ryman@gmail.com) - added
  *         support for {http location ignore uncited}
  */
-public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
+public class HTTPBindingOperationExtensionsImpl extends BaseComponentExtensionContext
 		implements HTTPBindingOperationExtensions {
-	/*
+
+    public HTTPBindingOperationExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        
+        return new ExtensionProperty[] {
+                getProperty(HTTPConstants.PROP_HTTP_LOCATION),
+                getProperty(HTTPConstants.PROP_HTTP_LOCATION_IGNORE_UNCITED),
+                getProperty(HTTPConstants.PROP_HTTP_METHOD),
+                getProperty(HTTPConstants.PROP_HTTP_INPUT_SERIALIZATION),
+                getProperty(HTTPConstants.PROP_HTTP_OUTPUT_SERIALIZATION),
+                getProperty(HTTPConstants.PROP_HTTP_FAULT_SERIALIZATION),
+                getProperty(HTTPConstants.PROP_HTTP_QUERY_PARAMETER_SEPARATOR),
+                getProperty(HTTPConstants.PROP_HTTP_CONTENT_ENCODING_DEFAULT)};
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        if(HTTPConstants.PROP_HTTP_LOCATION.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_LOCATION, getHttpLocation());
+            
+        } else if(HTTPConstants.PROP_HTTP_LOCATION_IGNORE_UNCITED.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_LOCATION_IGNORE_UNCITED, isHttpLocationIgnoreUncited());
+            
+        } else if(HTTPConstants.PROP_HTTP_METHOD.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_METHOD, getHttpMethod());
+            
+        } else if(HTTPConstants.PROP_HTTP_INPUT_SERIALIZATION.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_INPUT_SERIALIZATION, getHttpInputSerialization());
+            
+        } else if(HTTPConstants.PROP_HTTP_OUTPUT_SERIALIZATION.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_OUTPUT_SERIALIZATION, getHttpOutputSerialization());
+            
+        } else if(HTTPConstants.PROP_HTTP_FAULT_SERIALIZATION.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_FAULT_SERIALIZATION, getHttpFaultSerialization());
+            
+        } else if(HTTPConstants.PROP_HTTP_QUERY_PARAMETER_SEPARATOR.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_QUERY_PARAMETER_SEPARATOR, 
+                    getHttpQueryParameterSeparator());
+            
+        } else if(HTTPConstants.PROP_HTTP_CONTENT_ENCODING_DEFAULT.equals(propertyName)) {
+            return newExtensionProperty(HTTPConstants.PROP_HTTP_CONTENT_ENCODING_DEFAULT, getHttpContentEncodingDefault());
+            
+        } else {
+            return null; //the specified property name does not exist
+        }
+        
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by HTTPBindingOperationExtensions
+     * ************************************************************/
+    
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.apache.woden.wsdl20.extensions.http.HTTPBindingOperationExtensions#getHttpLocation()
 	 */
 	public HTTPLocation getHttpLocation() {
-		StringAttr httpLoc = (StringAttr) ((WSDLElement) fParent)
+		StringAttr httpLoc = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_LOCATION);
 		return httpLoc != null ? new HTTPLocation(httpLoc.getString()) : null;
 	}
@@ -63,7 +139,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
 	 */
 	public Boolean isHttpLocationIgnoreUncited() {
 
-		BooleanAttr ignoreUncited = (BooleanAttr) ((WSDLElement) fParent)
+		BooleanAttr ignoreUncited = (BooleanAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_IGNORE_UNCITED);
 		
 		return ignoreUncited != null ? ignoreUncited.getBoolean()
@@ -89,7 +165,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
 	public String getHttpMethod() {
 
 		// 1. try whttp:method
-		StringAttr methodAttr = (StringAttr) ((WSDLElement) fParent)
+		StringAttr methodAttr = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_METHOD);
 		if (methodAttr != null) {
 			return methodAttr.getString();
@@ -147,7 +223,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
 	 */
 	public String getHttpInputSerialization() {
         
-		StringAttr serialization = (StringAttr) ((WSDLElement) fParent)
+		StringAttr serialization = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_INPUT_SERIALIZATION);
 		if (serialization != null) {
 			return serialization.getString();
@@ -176,7 +252,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
      * value.
 	 */
 	public String getHttpOutputSerialization() {
-		StringAttr serialization = (StringAttr) ((WSDLElement) fParent)
+		StringAttr serialization = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_OUTPUT_SERIALIZATION);
 		return serialization != null ? serialization.getString()
 				: HTTPConstants.SERIAL_APP_XML;
@@ -190,7 +266,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
      * Per Part 2, sect 6.4.5, if attribute omitted default to application/xml.
 	 */
 	public String getHttpFaultSerialization() {
-		StringAttr serialization = (StringAttr) ((WSDLElement) fParent)
+		StringAttr serialization = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_FAULT_SERIALIZATION);
 		return serialization != null ? serialization.getString()
 				: HTTPConstants.SERIAL_APP_XML;
@@ -203,7 +279,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
 	 */
 	public String getHttpQueryParameterSeparator() {
         
-		StringAttr separator = (StringAttr) ((WSDLElement) fParent)
+		StringAttr separator = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_QUERY_PARAMETER_SEPARATOR);
         return separator != null ? separator.getString() : null;
 	}
@@ -214,7 +290,7 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
 	 * @see org.apache.woden.wsdl20.extensions.http.HTTPBindingOperationExtensions#getHttpContentEncodingDefault()
 	 */
 	public String getHttpContentEncodingDefault() {
-		StringAttr contEncodingDef = (StringAttr) ((WSDLElement) fParent)
+		StringAttr contEncodingDef = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_CONTENT_ENCODING_DEFAULT);
 		return contEncodingDef != null ? contEncodingDef.getString() : null;
 	}
@@ -234,10 +310,10 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
         if(method != null) return method;
         
         // 2. try whttp:methodDefault
-        Binding binding = (Binding) ((BindingOperation) fParent).getParent();
+        Binding binding = (Binding) ((BindingOperation) getParent()).getParent();
         
         HTTPBindingExtensions httpBindExts = (HTTPBindingExtensions) binding
-                .getComponentExtensionsForNamespace(HTTPConstants.NS_URI_HTTP);
+                .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         
         // no need to check for a null httpBindExts because Binding has REQUIRED
         // http extension properties
@@ -245,12 +321,11 @@ public class HTTPBindingOperationExtensionsImpl extends ComponentExtensionsImpl
         if (methodDef != null) return methodDef;
                
         // 3. try {safety} equals True
-        InterfaceOperation intOper = ((BindingOperation) fParent)
-                .getInterfaceOperation();
+        InterfaceOperation intOper = ((BindingOperation) getParent()).getInterfaceOperation();
         if (intOper != null) {
             InterfaceOperationExtensions intOperExts = (InterfaceOperationExtensions) intOper
-                    .getComponentExtensionsForNamespace(ExtensionConstants.NS_URI_WSDL_EXTENSIONS);
-           if (intOperExts != null && intOperExts.isSafety()) {
+                    .getComponentExtensionContext(WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS);
+           if (intOperExts != null && intOperExts.isSafe()) {
               return HTTPConstants.METHOD_GET;
            }
         }

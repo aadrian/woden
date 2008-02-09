@@ -16,20 +16,71 @@
  */
 package testcase.extensions.foo;
 
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
+import java.net.URI;
+
+import org.apache.woden.ErrorReporter;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.StringAttr;
 
-public class FooBindingExtensionsImpl extends ComponentExtensionsImpl implements
-		FooBindingExtensions {
+public class FooBindingExtensionsImpl extends BaseComponentExtensionContext 
+        implements FooBindingExtensions {
 
+    public FooBindingExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        
+        return new ExtensionProperty[] {
+                getProperty(FooConstants.PROP_FOO_BAR),
+                getProperty(FooConstants.PROP_FOO_BAZ)};
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        if(FooConstants.PROP_FOO_BAR.equals(propertyName)) {
+            return newExtensionProperty(FooConstants.PROP_FOO_BAR, getFooBar());
+            
+        } else if(FooConstants.PROP_FOO_BAZ.equals(propertyName)) {
+            return newExtensionProperty(FooConstants.PROP_FOO_BAZ, getFooBaz());
+            
+        } else {
+            return null; //the specified property name does not exist
+        }
+        
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by FooBindingExtensions
+     * ************************************************************/
+    
 	public Integer getFooBar() {
-        FooOddAttr def = (FooOddAttr) ((WSDLElement)fParent).getExtensionAttribute(FooConstants.Q_ATTR_BAR);
+        FooOddAttr def = (FooOddAttr) ((WSDLElement) getParent()).getExtensionAttribute(FooConstants.Q_ATTR_BAR);
         return def != null ? new Integer(def.getValue()) : null;
 	}
 
 	public String getFooBaz() {
-		StringAttr def = (StringAttr) ((WSDLElement)fParent).getExtensionAttribute(FooConstants.Q_ATTR_BAZ);
+		StringAttr def = (StringAttr) ((WSDLElement) getParent()).getExtensionAttribute(FooConstants.Q_ATTR_BAZ);
 		return def != null ? def.getString() : null;
 	}
 

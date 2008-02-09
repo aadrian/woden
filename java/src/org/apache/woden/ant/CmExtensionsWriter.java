@@ -47,7 +47,7 @@ public class CmExtensionsWriter extends NamespaceWriter {
 
         out.beginElement(WSDL_INTERFACE_OPERATION_EXTENSION);
 
-        out.write(SAFETY, extensions.isSafety());
+        out.write(SAFETY, extensions.isSafe());
 
         out.endElement();
     }

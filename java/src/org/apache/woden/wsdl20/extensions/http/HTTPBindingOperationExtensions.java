@@ -16,30 +16,62 @@
  */
 package org.apache.woden.wsdl20.extensions.http;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 
 /**
- * This interface represents the properties from the HTTP namespace
- * added to the WSDL 2.0 <code>BindingOperation</code> component as part 
- * of the HTTP binding extension. 
+ * Provides access to the extension properties of the Binding Operation component 
+ * that are in the <code>http://www.w3.org/ns/wsdl/http</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
  * <p>
- * These include:
- * <ul>
- * <li>{http location}</li>
- * <li>{http location ignore uncited}</li>
- * <li>{http method}</li>
- * <li>{http input serialization}</li>
- * <li>{http output serialization}</li>
- * <li>{http fault serialization}</li>
- * <li>{http query parameter separator}</li>
- * <li>{http content encoding default}</li>
- * </ul> 
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>http location</td>
+ * <td>org.apache.woden.wsdl20.extensions.http.HTTPLocation</td>
+ * </tr>
+ * <tr>
+ * <td>http location ignore uncited</td>
+ * <td>java.lang.Boolean</td>
+ * </tr>
+ * <tr>
+ * <td>http method</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>http input serialization</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>http output serialization</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>http fault serialization</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>http query parameter separator</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>http content encoding default</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * </table>
+ * <p>
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each HTTP extension property. 
  * 
  * @author John Kaputin (jkaputin@apache.org)
  * @author Arthur Ryman (ryman@ca.ibm.com, arthur.ryman@gmail.com)
  * - added support for {http location ignore uncited}
  */
-public interface HTTPBindingOperationExtensions extends ComponentExtensions 
+public interface HTTPBindingOperationExtensions extends ComponentExtensionContext 
 {
     /**
      * @return HTTPLocation the {http location} property, represented by the whttp:location extension attribute

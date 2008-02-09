@@ -39,19 +39,22 @@ import org.apache.woden.wsdl20.InterfaceMessageReference;
 import org.apache.woden.wsdl20.InterfaceOperation;
 import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.TypeDefinition;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
 import org.apache.woden.wsdl20.extensions.InterfaceOperationExtensions;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingExtensions;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingFaultExtensions;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingMessageReferenceExtensions;
 import org.apache.woden.wsdl20.extensions.http.HTTPBindingOperationExtensions;
+import org.apache.woden.wsdl20.extensions.http.HTTPConstants;
 import org.apache.woden.wsdl20.extensions.http.HTTPEndpointExtensions;
+import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.wsdl20.extensions.rpc.RPCInterfaceOperationExtensions;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingExtensions;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingFaultExtensions;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingFaultReferenceExtensions;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingMessageReferenceExtensions;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingOperationExtensions;
+import org.apache.woden.wsdl20.extensions.soap.SOAPConstants;
 import org.apache.woden.wsdl20.extensions.soap.SOAPEndpointExtensions;
 
 /**
@@ -126,9 +129,9 @@ public class CmWriter extends NamespaceWriter {
         attributes += cmbase.idAttribute(component);
         out.beginElement("descriptionComponent", attributes);
 
-        URI[] extensions = { ComponentExtensions.NS_URI_WSDL_EXTENSIONS,
-                ComponentExtensions.NS_URI_HTTP,
-                ComponentExtensions.NS_URI_RPC, ComponentExtensions.NS_URI_SOAP };
+        URI[] extensions = { WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS,
+                HTTPConstants.NS_URI_HTTP,
+                RPCConstants.NS_URI_RPC, SOAPConstants.NS_URI_SOAP };
 
         cmbase.writeUris("extensions", extensions);
         write("interfaces", component.getInterfaces());
@@ -271,11 +274,11 @@ public class CmWriter extends NamespaceWriter {
         cmbase.parent(component.getParent());
 
         InterfaceOperationExtensions extensions = (InterfaceOperationExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_WSDL_EXTENSIONS);
+                .getComponentExtensionContext(WSDLExtensionConstants.NS_URI_WSDL_EXTENSIONS);
         cmextensions.wsdlInterfaceOperationExtension(extensions);
 
         RPCInterfaceOperationExtensions rpcExtensions = (RPCInterfaceOperationExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_RPC);
+                .getComponentExtensionContext(RPCConstants.NS_URI_RPC);
         cmrpc.rpcInterfaceOperationExtension(rpcExtensions);
 
         out.endElement();
@@ -407,11 +410,11 @@ public class CmWriter extends NamespaceWriter {
         write("bindingOperations", component.getBindingOperations());
 
         HTTPBindingExtensions http = (HTTPBindingExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         cmhttp.httpBindingExtension(http);
 
         SOAPBindingExtensions soap = (SOAPBindingExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+                .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         cmsoap.soapBindingExtension(soap);
 
         out.endElement();
@@ -459,11 +462,11 @@ public class CmWriter extends NamespaceWriter {
         cmbase.parent(component.getParent());
 
         HTTPBindingFaultExtensions http = (HTTPBindingFaultExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         cmhttp.httpBindingFaultExtension(http);
 
         SOAPBindingFaultExtensions soap = (SOAPBindingFaultExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+                .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         cmsoap.soapBindingFaultExtension(soap);
 
         out.endElement();
@@ -506,11 +509,11 @@ public class CmWriter extends NamespaceWriter {
         cmbase.parent(component.getParent());
 
         HTTPBindingOperationExtensions http = (HTTPBindingOperationExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         cmhttp.httpBindingOperationExtension(http);
 
         SOAPBindingOperationExtensions soap = (SOAPBindingOperationExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+                .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         cmsoap.soapBindingOperationExtension(soap);
 
         out.endElement();
@@ -554,11 +557,11 @@ public class CmWriter extends NamespaceWriter {
         cmbase.parent(component.getParent());
 
         HTTPBindingMessageReferenceExtensions http = (HTTPBindingMessageReferenceExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         cmhttp.httpBindingMessageReferenceExtension(http);
 
         SOAPBindingMessageReferenceExtensions soap = (SOAPBindingMessageReferenceExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+                .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         cmsoap.soapBindingMessageReferenceExtension(soap);
 
         out.endElement();
@@ -608,7 +611,7 @@ public class CmWriter extends NamespaceWriter {
         cmbase.parent(component.getParent());
 
         SOAPBindingFaultReferenceExtensions soap = (SOAPBindingFaultReferenceExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+                .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         cmsoap.soapBindingFaultReferenceExtension(soap);
 
         out.endElement();
@@ -681,11 +684,11 @@ public class CmWriter extends NamespaceWriter {
         cmbase.parent(component.getParent());
 
         HTTPEndpointExtensions http = (HTTPEndpointExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_HTTP);
+                .getComponentExtensionContext(HTTPConstants.NS_URI_HTTP);
         cmhttp.httpEndpointExtension(http);
 
         SOAPEndpointExtensions soap = (SOAPEndpointExtensions) component
-                .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+                .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         cmsoap.soapEndpointExtension(soap);
 
         out.endElement();

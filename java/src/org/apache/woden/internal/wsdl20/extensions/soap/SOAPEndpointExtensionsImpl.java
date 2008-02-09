@@ -18,14 +18,16 @@ package org.apache.woden.internal.wsdl20.extensions.soap;
 
 import java.net.URI;
 
-import org.apache.woden.internal.wsdl20.extensions.ComponentExtensionsImpl;
-import org.apache.woden.internal.wsdl20.extensions.http.HTTPConstants;
+import org.apache.woden.ErrorReporter;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.Endpoint;
-import org.apache.woden.wsdl20.NestedComponent;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
+import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.http.HTTPAuthenticationScheme;
+import org.apache.woden.wsdl20.extensions.http.HTTPConstants;
 import org.apache.woden.wsdl20.extensions.soap.SOAPBindingExtensions;
+import org.apache.woden.wsdl20.extensions.soap.SOAPConstants;
 import org.apache.woden.wsdl20.extensions.soap.SOAPEndpointExtensions;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.HTTPAuthenticationSchemeAttr;
@@ -39,9 +41,45 @@ import org.apache.woden.xml.StringAttr;
  * @author Arthur Ryman (ryman@ca.ibm.com, arthur.ryman@gmail.com)
  * 
  */
-public class SOAPEndpointExtensionsImpl extends ComponentExtensionsImpl
+public class SOAPEndpointExtensionsImpl extends BaseComponentExtensionContext
 		implements SOAPEndpointExtensions {
 
+
+    public SOAPEndpointExtensionsImpl(WSDLComponent parent, 
+            URI extNamespace, ErrorReporter errReporter) {
+        
+        super(parent, extNamespace, errReporter);
+    }
+    
+    /* ************************************************************
+     *  Methods declared by ComponentExtensionContext
+     *  
+     *  These are the abstract methods inherited from BaseComponentExtensionContext,
+     *  to be implemented by this subclass.
+     * ************************************************************/
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperties()
+     */
+    public ExtensionProperty[] getProperties() {
+        
+        return new ExtensionProperty[0]; //no SOAP extensions properties for Endpoint
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.woden.wsdl20.extensions.ComponentExtensionContext#getProperty(java.lang.String)
+     */
+    public ExtensionProperty getProperty(String propertyName) {
+        
+        return null; //no SOAP extension properties for Endpoint
+        
+    }
+    
+    /* ************************************************************
+     *  Additional methods declared by SOAPEndpointExtensions
+     * ************************************************************/
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -49,14 +87,14 @@ public class SOAPEndpointExtensionsImpl extends ComponentExtensionsImpl
 	 */
 	public HTTPAuthenticationScheme getHttpAuthenticationScheme() {
 
-        Endpoint endpoint = (Endpoint) fParent;
+        Endpoint endpoint = (Endpoint) getParent();
         Binding binding = endpoint.getBinding();
         if(binding == null) {
-            return null; //the wsdl is invalid
+            return null; //the wsdl is invalid  TODO - remove this check? (extensions require valid wsdl?)
         }
         
         SOAPBindingExtensions soapBindExt = (SOAPBindingExtensions)binding
-           .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+           .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         String version = soapBindExt.getSoapVersion();
         URI protocol = soapBindExt.getSoapUnderlyingProtocol();
         if(protocol == null) {
@@ -66,7 +104,7 @@ public class SOAPEndpointExtensionsImpl extends ComponentExtensionsImpl
         if( ("1.2".equals(version) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP12_HTTP)) ||
             ("1.1".equals(version) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP11_HTTP)) )
         {
-		    HTTPAuthenticationSchemeAttr scheme = (HTTPAuthenticationSchemeAttr) ((WSDLElement) fParent)
+		    HTTPAuthenticationSchemeAttr scheme = (HTTPAuthenticationSchemeAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_AUTHENTICATION_SCHEME);
 		    return scheme != null ? scheme.getScheme() : null;
         }
@@ -83,14 +121,14 @@ public class SOAPEndpointExtensionsImpl extends ComponentExtensionsImpl
 	 */
 	public String getHttpAuthenticationRealm() {
 
-        Endpoint endpoint = (Endpoint) fParent;
+        Endpoint endpoint = (Endpoint) getParent();
         Binding binding = endpoint.getBinding();
         if(binding == null) {
-            return null; //the wsdl is invalid
+            return null; //the wsdl is invalid TODO - remove this check? (extensions require valid wsdl?)
         }
         
         SOAPBindingExtensions soapBindExt = (SOAPBindingExtensions)binding
-            .getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            .getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         String version = soapBindExt.getSoapVersion();
         URI protocol = soapBindExt.getSoapUnderlyingProtocol();
         if(protocol == null) {
@@ -100,7 +138,7 @@ public class SOAPEndpointExtensionsImpl extends ComponentExtensionsImpl
         if( ("1.2".equals(version) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP12_HTTP)) ||
             ("1.1".equals(version) && protocol.toString().equals(SOAPConstants.PROTOCOL_STRING_SOAP11_HTTP)) )
         {
-		    StringAttr realm = (StringAttr) ((WSDLElement) fParent)
+		    StringAttr realm = (StringAttr) ((WSDLElement) getParent())
 				.getExtensionAttribute(HTTPConstants.Q_ATTR_AUTHENTICATION_REALM);
 		    return realm != null ? realm.getString() : null;
         }

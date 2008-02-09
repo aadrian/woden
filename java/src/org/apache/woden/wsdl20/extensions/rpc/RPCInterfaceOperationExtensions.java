@@ -17,22 +17,39 @@
 
 package org.apache.woden.wsdl20.extensions.rpc;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 
 /**
  * <code>RPCInterfaceOperationExtensions</code> represents the WSDL 2.0 predefined
- * RPC extensions, as specified on Part 2: Adjuncts, for the Interface Operation
- * component.
- * 
- * The only predefined extension attribute is:
- * {rpc signature} 
+ * RPC extensions, as specified in the WSDL 2.0 Part 2: Adjuncts specification, 
+ * for the Interface Operation component.
+ * <p>
+ * Provides access to the extension properties of the Interface Operation component 
+ * that are in the <code>http://www.w3.org/ns/wsdl/rpc</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
+ * <p>
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>rpc signature</td>
+ * <td>org.apache.woden.wsdl20.extensions.rpc.Argument[]</td>
+ * </tr>
+ * </table>
+ * <p>
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each extension property. 
  *  
  * @author Arthur Ryman (ryman@ca.ibm.com)
  *
  */
-public interface RPCInterfaceOperationExtensions extends ComponentExtensions {
+public interface RPCInterfaceOperationExtensions extends ComponentExtensionContext {
 	
-	/*
+	/**
 	 * Returns the {rpc signature} extension property of Interface Operation 
 	 * as defined by the wrpc:signature attribute.
 	 */

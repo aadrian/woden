@@ -41,5 +41,9 @@ public class FooConstants {
     
     public static final QName Q_ATTR_BAZ=
         new QName(NS_STRING_FOO, ATTR_BAZ, PFX_WFOO);
+    
+    // Property names
+    public static final String PROP_FOO_BAR = "foo bar";
+    public static final String PROP_FOO_BAZ = "foo baz";
 
 }

@@ -29,7 +29,6 @@ import org.apache.woden.WSDLReader;
 import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.Description;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of SoapBindingExtensions.
@@ -69,13 +68,13 @@ public class SOAPBindingExtensionsTest extends TestCase
         Binding binding = descComp.getBindings()[0];
         assertNotNull("The Description does not contain a Binding.", binding);
         
-        fSoapBindExts = (SOAPBindingExtensions)binding.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+        fSoapBindExts = (SOAPBindingExtensions)binding.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         assertNotNull("The Binding does not contain a SOAPBindingExtensions object.");
         
         Binding binding2 = descComp.getBindings()[1];
         assertNotNull("The Description does not contain a second Binding.", binding2);
         
-        fSoapBind2Exts = (SOAPBindingExtensions)binding2.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+        fSoapBind2Exts = (SOAPBindingExtensions)binding2.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         assertNotNull("The second Binding does not contain a SOAPBindingExtensions object.");
     }
     

@@ -32,7 +32,6 @@ import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Description;
 import org.apache.woden.wsdl20.InterfaceFaultReference;
 import org.apache.woden.wsdl20.enumeration.Direction;
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
 
 /**
  * Functional verification test of SoapBindingFaultReferenceExtensions.
@@ -100,7 +99,7 @@ public class SOAPBindingFaultReferenceExtensionsTest extends TestCase
         assertTrue("The BindingFaultReference does not represent an <infault> element.", Direction.IN.equals(direction));
 
         SOAPBindingFaultReferenceExtensions soapBindFaultRefExts = 
-            (SOAPBindingFaultReferenceExtensions) bindFaultRef.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultReferenceExtensions) bindFaultRef.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPModule[] actual = soapBindFaultRefExts.getSoapModules();
         assertEquals("Unexpected number of SOAPModule objects.", 2, actual.length);
     }
@@ -119,7 +118,7 @@ public class SOAPBindingFaultReferenceExtensionsTest extends TestCase
         assertTrue("The BindingFaultReference does not represent an <outfault> element.", Direction.OUT.equals(direction));
 
         SOAPBindingFaultReferenceExtensions soapBindFaultRefExts = 
-            (SOAPBindingFaultReferenceExtensions) bindFaultRef.getComponentExtensionsForNamespace(ComponentExtensions.NS_URI_SOAP);
+            (SOAPBindingFaultReferenceExtensions) bindFaultRef.getComponentExtensionContext(SOAPConstants.NS_URI_SOAP);
         SOAPModule[] actual = soapBindFaultRefExts.getSoapModules();
         assertEquals("Unexpected number of SOAPModule objects.", 1, actual.length);
     }

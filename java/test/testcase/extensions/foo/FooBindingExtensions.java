@@ -16,9 +16,9 @@
  */
 package testcase.extensions.foo;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 
-public interface FooBindingExtensions extends ComponentExtensions {
+public interface FooBindingExtensions extends ComponentExtensionContext {
 
 	public Integer getFooBar();
 	

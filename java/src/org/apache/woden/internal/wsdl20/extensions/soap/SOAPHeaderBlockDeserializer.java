@@ -26,6 +26,7 @@ import org.apache.woden.internal.wsdl20.Constants;
 import org.apache.woden.wsdl20.extensions.ExtensionDeserializer;
 import org.apache.woden.wsdl20.extensions.ExtensionElement;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
+import org.apache.woden.wsdl20.extensions.soap.SOAPConstants;
 import org.apache.woden.wsdl20.extensions.soap.SOAPHeaderBlockElement;
 import org.apache.woden.wsdl20.xml.DescriptionElement;
 import org.apache.woden.wsdl20.xml.DocumentableElement;

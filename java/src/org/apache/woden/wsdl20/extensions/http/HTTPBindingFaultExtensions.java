@@ -16,23 +16,40 @@
  */
 package org.apache.woden.wsdl20.extensions.http;
 
-import org.apache.woden.wsdl20.extensions.ComponentExtensions;
+import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
 
 /**
- * This interface represents the properties from the HTTP namespace
- * added to the WSDL 2.0 <code>BindingFault</code> component as part 
- * of the HTTP binding extension. 
+ * Provides access to the extension properties of the Binding Fault component 
+ * that are in the <code>http://www.w3.org/ns/wsdl/http</code> namespace.
+ * These extension properties can be accessed as <code>ExtensionProperty</code> objects 
+ * via the <code>getProperties</code> and <code>getProperty</code> methods  
+ * using the property names and Java types shown in the following table.
  * <p>
- * These include:
- * <ul>
- * <li>{http error status code}</li>
- * <li>{http content encoding}</li>
- * <li>{http headers}</li>
- * </ul> 
+ * <table border="1">
+ * <tr>
+ * <th>Property name</th>
+ * <th>Java type</th>
+ * </tr>
+ * <tr>
+ * <td>http error status code</td>
+ * <td>org.apache.woden.wsdl20.extensions.http.HTTPErrorStatusCode</td>
+ * </tr>
+ * <tr>
+ * <td>http content encoding</td>
+ * <td>java.lang.String</td>
+ * </tr>
+ * <tr>
+ * <td>http headers</td>
+ * <td>org.apache.woden.wsdl20.extensions.http.HTTPHeader[]</td>
+ * </tr>
+ * </table>
+ * <p>
+ * In addition to the <code>getProperties</code> and <code>getProperty</code> methods, 
+ * this interface defines accessor methods specific to each HTTP extension property. 
  * 
  * @author John Kaputin (jkaputin@apache.org)
  */
-public interface HTTPBindingFaultExtensions extends ComponentExtensions 
+public interface HTTPBindingFaultExtensions extends ComponentExtensionContext 
 {
     public HTTPErrorStatusCode getHttpErrorStatusCode();
     
