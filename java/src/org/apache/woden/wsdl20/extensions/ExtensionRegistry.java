@@ -175,9 +175,9 @@ public class ExtensionRegistry
    *
    * @param parentType a class object indicating where in the WSDL
    * definition this extension was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this extensibility element was found in the list of
-   * extensibility elements belonging to a javax.wsdl.Binding.
+   * extensibility elements belonging to a org.apache.woden.Binding.
    * @param elementType the qname of the extensibility element
    * @param es the extension serializer to use
    *
@@ -207,7 +207,7 @@ public class ExtensionRegistry
    *
    * @param parentType a class object indicating where in the WSDL
    * document this extensibility element was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this element was encountered as an immediate child of
    * a &lt;wsdl:binding&gt; element.
    * @param elementType the qname of the extensibility element
@@ -238,9 +238,9 @@ public class ExtensionRegistry
    *
    * @param parentType a class object indicating where in the WSDL
    * definition this extension was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this extensibility element was found in the list of
-   * extensibility elements belonging to a javax.wsdl.Binding.
+   * extensibility elements belonging to a org.apache.woden.Binding.
    * @param elementType the qname of the extensibility element
    *
    * @return the extension serializer, if one was found. If none was
@@ -288,7 +288,7 @@ public class ExtensionRegistry
    *
    * @param parentType a class object indicating where in the WSDL
    * document this extensibility element was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this element was encountered as an immediate child of
    * a &lt;wsdl:binding&gt; element.
    * @param elementType the qname of the extensibility element
@@ -336,7 +336,7 @@ public class ExtensionRegistry
    *
    * @param parentClass a class object indicating where in the WSDL
    * document this extensibility attribute was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this attribute was defined on a &lt;wsdl:binding> element.
    * @param elemQN the qname of the extensibility attribute
    *
@@ -386,9 +386,9 @@ public class ExtensionRegistry
    *
    * @param parentType a class object indicating where in the WSDL
    * definition this extension would exist. For example,
-   * javax.wsdl.Binding.class would be used to indicate
+   * org.apache.woden.Binding.class would be used to indicate
    * this extensibility element would be added to the list of
-   * extensibility elements belonging to a javax.wsdl.Binding,
+   * extensibility elements belonging to a org.apache.woden.Binding,
    * after being instantiated.
    * @param elementType the qname of the extensibility element
    * @param extensionType the concrete class which should be instantiated
@@ -420,9 +420,9 @@ public class ExtensionRegistry
    *
    * @param parentType a class object indicating where in the WSDL
    * definition this extension will exist. For example,
-   * javax.wsdl.Binding.class would be used to indicate
+   * org.apache.woden.Binding.class would be used to indicate
    * this extensibility element is going to be added to the list of
-   * extensibility elements belonging to a javax.wsdl.Binding,
+   * extensibility elements belonging to a org.apache.woden.Binding,
    * after being instantiated.
    * @param elementType the qname of the extensibility element
    *
@@ -496,7 +496,7 @@ public class ExtensionRegistry
    *
    * @param ownerClass a class object indicating where in the WSDL
    * document this extensibility attribute was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this attribute was defined on a &lt;wsdl:binding> element.
    * @param attrQName the qname of the extensibility attribute
    * @param attrClass one of the constants defined on the AttributeExtensible
@@ -528,7 +528,7 @@ public class ExtensionRegistry
    *
    * @param parentClass a class object indicating where in the WSDL
    * document this extensibility attribute was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this attribute was defined on a &lt;wsdl:binding> element.
    * @param attrQN the qname of the extensibility attribute
    *

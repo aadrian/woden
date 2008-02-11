@@ -40,9 +40,9 @@ public interface ExtensionSerializer
    *
    * @param parentType a class object indicating where in the WSDL
    * definition this extension was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this extensibility element was found in the list of
-   * extensibility elements belonging to a javax.wsdl.Binding.
+   * extensibility elements belonging to a org.apache.woden.Binding.
    * @param elementType the qname of the extensibility element
    * @param extension the extensibility element to serialize
    * @param pw the print writer on which to serialize the extension

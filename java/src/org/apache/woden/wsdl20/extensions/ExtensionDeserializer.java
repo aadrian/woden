@@ -41,7 +41,7 @@ public interface ExtensionDeserializer
    *
    * @param parentType a class object indicating where in the WSDL
    * document this extension element was encountered. For
-   * example, javax.wsdl.Binding.class would be used to indicate
+   * example, org.apache.woden.Binding.class would be used to indicate
    * this element was encountered as an immediate child of
    * a &lt;wsdl:binding&gt; element.
    * @param parent the parent object of this extension element 
