@@ -41,6 +41,7 @@ import org.apache.woden.internal.util.StringUtils;
 import org.apache.woden.internal.wsdl20.Constants;
 import org.apache.woden.internal.wsdl20.validation.WSDLComponentValidator;
 import org.apache.woden.internal.wsdl20.validation.WSDLDocumentValidator;
+import org.apache.woden.internal.wsdl20.validation.WSDLValidator;
 import org.apache.woden.internal.xpointer.DOMXMLElementEvaluator;
 import org.apache.woden.schema.Schema;
 import org.apache.woden.wsdl20.Description;
@@ -189,6 +190,7 @@ public class DOMWSDLReader extends BaseWSDLReader {
         // Validate the model if validation is enabled.
         if(features.getValue(WSDLReader.FEATURE_VALIDATION))
         {
+            /*
             if(docValidator == null)
             {
                 docValidator = new WSDLDocumentValidator();
@@ -201,6 +203,8 @@ public class DOMWSDLReader extends BaseWSDLReader {
                 }
                 compValidator.validate(descComp, getErrorReporter());
             }
+            */
+            (new WSDLValidator()).validate(descComp, fWsdlContext);
         }
         
         return descComp;

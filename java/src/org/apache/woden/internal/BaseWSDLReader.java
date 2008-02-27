@@ -84,15 +84,13 @@ public abstract class BaseWSDLReader implements WSDLReader {
 	private final String DEFAULT_RESOLVER_PROPERTY="org.apache.woden.resolver.default";
     
     private String fFactoryImplName = null; //TODO deprecate/remove?
-    private URIResolver fResolver = null;
     
     protected WSDLContext fWsdlContext;
     final protected ReaderFeatures features;
 
     protected BaseWSDLReader(WSDLContext wsdlContext) throws WSDLException {
-        fWsdlContext = wsdlContext;
         //TODO decide what to do with fact impl name...re- only known use case is to change newDescription factory method
-        fFactoryImplName = fWsdlContext.wsdlFactory.getClass().getName();
+        fFactoryImplName = wsdlContext.wsdlFactory.getClass().getName();
         features = new ReaderFeatures();
 
         /* Establish the default URIResolver.
@@ -109,18 +107,19 @@ public abstract class BaseWSDLReader implements WSDLReader {
          */
        
         String defaultURIResolver = PropertyUtils.findProperty(DEFAULT_RESOLVER_PROPERTY);
+        URIResolver resolver;
         if (defaultURIResolver == null)
         {
         	// property not set (an allowable condition)
         	// use the "default default" URI resolver
-        	fResolver = new SimpleURIResolver();
+        	resolver = new SimpleURIResolver();
         }
         else
         {
 	        try 
 	        {
 	        	Class resolverClass = Class.forName(defaultURIResolver);
-	        	fResolver = (URIResolver) resolverClass.newInstance();
+	        	resolver = (URIResolver) resolverClass.newInstance();
 	        } 
 	        catch (Exception e)
 	        {
@@ -137,6 +136,12 @@ public abstract class BaseWSDLReader implements WSDLReader {
                        e);
            }
         }
+        
+        fWsdlContext = new WSDLContext(
+                wsdlContext.wsdlFactory,
+                wsdlContext.errorReporter,
+                wsdlContext.extensionRegistry,
+                resolver);
     }
     
     /* ************************************************************
@@ -197,7 +202,8 @@ public abstract class BaseWSDLReader implements WSDLReader {
         fWsdlContext = new WSDLContext(
                 fWsdlContext.wsdlFactory,
                 fWsdlContext.errorReporter,
-                extReg);
+                extReg,
+                fWsdlContext.uriResolver);
     }
     
     public ExtensionRegistry getExtensionRegistry() {
@@ -1638,11 +1644,24 @@ public abstract class BaseWSDLReader implements WSDLReader {
             throws WSDLException;
 
     /**
-     * Provides the capability of setting a supplied URI Resolver.
+     * Provides the capability of setting a custom URI Resolver.
      * 
+     * @param resolver the custom URIResolver
+     * @throws NullPointerException if the 'resolver' parameter is null.
      */
     public void setURIResolver(URIResolver resolver) {
-        fResolver = resolver;
+       
+        if(resolver == null) {
+            String msg = fWsdlContext.errorReporter.getFormattedMessage(
+                    "WSDL026", new Object[] {"resolver"});
+            throw new NullPointerException(msg);
+        }
+        
+        fWsdlContext = new WSDLContext(
+                fWsdlContext.wsdlFactory,
+                fWsdlContext.errorReporter,
+                fWsdlContext.extensionRegistry,
+                resolver);
     }
 
     /*
@@ -1697,7 +1716,7 @@ public abstract class BaseWSDLReader implements WSDLReader {
      * Find the current URI Resolver
      */
     public URIResolver getURIResolver() {
-        return fResolver;
+        return fWsdlContext.uriResolver;
     }
     
     

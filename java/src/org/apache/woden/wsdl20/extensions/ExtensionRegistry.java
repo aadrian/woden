@@ -19,10 +19,13 @@ package org.apache.woden.wsdl20.extensions;
 import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.xml.namespace.QName;
 
@@ -30,9 +33,12 @@ import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
 import org.apache.woden.XMLElement;
 import org.apache.woden.wsdl20.WSDLComponent;
+import org.apache.woden.wsdl20.validation.Assertion;
+import org.apache.woden.wsdl20.validation.AssertionInfo;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.UnknownAttr;
 import org.apache.woden.xml.XMLAttr;
+
 
 /**
  * This class is used to associate serializers, deserializers, and
@@ -119,6 +125,12 @@ public class ExtensionRegistry
   {
       return this.errorReporter;
   }
+  
+  /*
+   * A Map of assertions, where the key is an assertion id string and 
+   * the value is an AssertionInfo object.
+   */
+  protected Map assertionReg = new Hashtable();
 
   /**
    * Set the serializer to be used when none is found for an extensibility
@@ -777,6 +789,36 @@ public class ExtensionRegistry
     public String[] queryResourceBundleNames() {
         String[] array = new String[fResourceBundleNames.size()];
         fResourceBundleNames.toArray(array);
+        return array;
+    }
+    
+    /**
+     * Register an Assertion along with the target Class that the assertion applies to.
+     * TODO assertion dependencies.
+     * 
+     * @param assertion an Assertion object representing the assertion to be registered.
+     * @param targetClass the Class representing the component in the WSDL that the assertion applies to.
+     */
+    public void registerAssertion(Assertion assertion, Class targetClass) {
+        if(assertion == null) {
+            String msg = this.errorReporter.getFormattedMessage("WSDL026", new Object[] {"assertion"});
+            throw new NullPointerException(msg);
+        } else if(targetClass == null) {
+            String msg = this.errorReporter.getFormattedMessage("WSDL026", new Object[] {"targetClass"});
+            throw new NullPointerException(msg);
+        }
+        
+        this.assertionReg.put(assertion.getId(), new AssertionInfo(assertion, targetClass));
+    }
+    
+    public AssertionInfo queryAssertion(String assertionId) {
+        return (AssertionInfo) this.assertionReg.get(assertionId);
+    }
+    
+    public AssertionInfo[] queryAssertions() {
+        Collection values = this.assertionReg.values();
+        AssertionInfo[] array = new AssertionInfo[values.size()];
+        values.toArray(array);
         return array;
     }
     

@@ -39,7 +39,7 @@ public abstract class BaseWSDLFactory extends WSDLFactory {
         ErrorReporter errRpt = new ErrorReporterImpl();
         ExtensionRegistry extReg = new PopulatedExtensionRegistry(errRpt);
         ((ErrorReporterImpl)errRpt).setExtensionRegistry(extReg);
-        fWsdlContext = new WSDLContext(this, errRpt, extReg);
+        fWsdlContext = new WSDLContext(this, errRpt, extReg, null);
     }
     
     abstract public WSDLReader newWSDLReader() throws WSDLException;

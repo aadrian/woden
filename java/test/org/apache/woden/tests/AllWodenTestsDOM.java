@@ -23,6 +23,7 @@ import org.apache.woden.DOMXMLElementTest;
 import org.apache.woden.WSDLFactoryTest;
 import org.apache.woden.WSDLReaderTest;
 import org.apache.woden.internal.ReaderFeaturesTest;
+import org.apache.woden.internal.wsdl20.assertions.AssertionTestSuite;
 import org.apache.woden.internal.wsdl20.validation.WSDLComponentValidatorTest;
 import org.apache.woden.internal.wsdl20.validation.WSDLDocumentValidatorTest;
 import org.apache.woden.resolver.SimpleURIResolverTest;
@@ -111,6 +112,7 @@ public class AllWodenTestsDOM extends TestSuite
 	addTestSuite(ReaderFeaturesTest.class);
 	addTest(WSDLDocumentValidatorTest.suite());
 	addTest(WSDLComponentValidatorTest.suite());
+	addTest(AssertionTestSuite.suite());
     addTest(ServiceElementTest.suite());
     addTest(EndpointElementTest.suite());
     addTest(NameAttributeTest.suite());
