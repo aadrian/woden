@@ -149,6 +149,37 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+      <plugins>
+          <plugin>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+              <archive>
+                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+              </archive>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>${bundle.plugin.version}</version>
+            <configuration>
+                <instructions>
+                    <Bundle-Version>${woden.osgi.version}</Bundle-Version>
+                </instructions>
+            </configuration>
+            <executions>
+              <execution>
+                <id>bundle-manifest</id>
+                <phase>process-classes</phase>
+                <goals>
+                  <goal>manifest</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+      </plugins>
+  </build>
   <distributionManagement>
     <snapshotRepository>
       <id>apache.snapshots</id>
@@ -161,4 +192,8 @@
     <module>woden-om</module>
     <module>woden-api</module>
   </modules>
+    <properties>
+        <woden.osgi.version>1.0.0</woden.osgi.version>
+        <bundle.plugin.version>1.4.0</bundle.plugin.version>
+    </properties>
 </project>
