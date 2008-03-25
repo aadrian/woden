@@ -477,7 +477,8 @@ public class WSDLDocumentValidatorTest extends TestCase
       Document schemaDoc2 = builder.getDocument();
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
-      XmlSchema xs2 = xsc.read(schemaDoc2.getDocumentElement());
+      XmlSchemaCollection xsc2 = new XmlSchemaCollection();
+      XmlSchema xs2 = xsc2.read(schemaDoc2.getDocumentElement());
 	  inlinedSchemas[0].setSchemaDefinition(xs1);
 	  inlinedSchemas[1].setSchemaDefinition(xs2);
 	  if(val.testAssertionSchema1073(inlinedSchemas, reporter))
@@ -718,7 +719,8 @@ public class WSDLDocumentValidatorTest extends TestCase
       Document schemaDoc2 = builder.getDocument();
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
-      XmlSchema xs2 = xsc.read(schemaDoc2.getDocumentElement());
+      XmlSchemaCollection xsc2 = new XmlSchemaCollection();
+      XmlSchema xs2 = xsc2.read(schemaDoc2.getDocumentElement());
 	  inlinedSchemas[0].setSchemaDefinition(xs1);
 	  inlinedSchemas[1].setSchemaDefinition(xs2);
 	  if(val.testAssertionSchema1073(inlinedSchemas, reporter))
