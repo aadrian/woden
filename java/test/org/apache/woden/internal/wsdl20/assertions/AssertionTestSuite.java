@@ -30,6 +30,7 @@ public class AssertionTestSuite {
 		TestSuite suite = new TestSuite(
 				"Test for org.apache.woden.internal.wsdl20.assertions");
 		//$JUnit-BEGIN$
+		suite.addTestSuite(TestDescription1001.class);
 		suite.addTestSuite(TestInterface1009.class);
 		suite.addTestSuite(TestInterface1010.class);
 		//$JUnit-END$
