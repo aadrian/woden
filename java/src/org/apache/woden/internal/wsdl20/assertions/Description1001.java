@@ -58,7 +58,7 @@ public class Description1001 implements Assertion {
             // Only check if the scheme is a type that we can locate.
             // TODO: See if the searchable schemes should be extensible.
             Object o = null;
-            if(searchableSchemes.contains(scheme)) {
+            if(searchableSchemes.indexOf(scheme)!=-1) {
             	URL url = uri.toURL();
             	o = url.getContent();
             }
