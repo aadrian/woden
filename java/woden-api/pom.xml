@@ -51,6 +51,13 @@
                    <include>NOTICE</include>
                </includes>
            </resource>
+           <resource>
+               <targetPath>META-INF</targetPath>
+               <directory>../resources</directory>
+               <includes>
+                   <include>schema.catalog</include>
+               </includes>
+           </resource>
        </resources>
 
        <plugins>
