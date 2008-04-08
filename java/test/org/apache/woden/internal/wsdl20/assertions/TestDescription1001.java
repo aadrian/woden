@@ -112,7 +112,7 @@ public class TestDescription1001 extends TestCase {
 	 */
 	public void testTargetNamespaceResolves() {
 		DescriptionElement descEl = factory.newDescription();
-		descEl.setTargetNamespace(URI.create("http://apache.org"));
+		descEl.setTargetNamespace(URI.create("http://ws.apache.org"));
 
 		try {
 			assertion.validate(descEl, wodenContext);
