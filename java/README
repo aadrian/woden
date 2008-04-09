@@ -1,19 +1,5 @@
 
                                  W  o  d  e  n
- 
-
-  Incubation Disclaimer
-  ---------------------
-
-  The Woden project is an effort undergoing incubation at the Apache 
-  Software Foundation (ASF), sponsored by the Apache Web Services PMC. Incubation is 
-  required of all newly accepted projects until a further review indicates 
-  that the infrastructure, communications, and decision making process have 
-  stabilized in a manner consistent with other successful ASF projects. While 
-  incubation status is not necessarily a reflection of the completeness or 
-  stability of the code, it does indicate that the project has yet to be fully 
-  endorsed by the ASF.
-  
   
   What is it? 
   -----------
@@ -26,7 +12,7 @@
   ------------------
 
   Details of the latest version can be found on the Apache Woden
-  Project web site <http://incubator.apache.org/woden/>.
+  Project web site <http://ws.apache.org/woden/>.
 
 
   Documentation
@@ -46,4 +32,4 @@
   Thanks for using Woden.
 
                                           The Apache Woden Project
-                                      <http://incubator.apache.org/woden/>
+                                      <http://ws.apache.org/woden/>
