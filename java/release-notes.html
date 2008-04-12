@@ -45,9 +45,6 @@ The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestonepl
     Woden passed all of these 80 testcases. 
     Any further change to the test suite will be implemented in Woden
     after the M8 release to maintain this level of compliance.
-    The latest 'Component Model Tests Results' can be seen on the 
-	<a href="http://dev.w3.org/cvsweb/~checkout~/2002/ws/desc/test-suite/Dashboard.html">
-	WSDL 2.0 Interop Dashboard</a>.
 </p>
 <p>
 	The M8 release includes a new validation framework, which will support the WSDL 2.0
@@ -60,6 +57,7 @@ The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestonepl
 	<ul>
 	<li>Completing the API to fully support the programmatic creation and editing of WSDL 2.0 documents.</li>
 	<li>Modifying the extensions API to improve its usability</li>
+	<li>Serializing Woden's WSDL object model to WSDL 2.0 XML documents (i.e. a WSDLWriter).</li>
 	<li>Parsing WSDL 1.1 documents into Woden's WSDL 2.0 object model.</li>
 	</ul>
 <p>
@@ -75,10 +73,6 @@ The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestonepl
     <li>
         Many JIRAs have been resolved during M8 development. See 
         <a href="http://issues.apache.org/jira/browse/Woden">Woden's Jira issue tracker</a> for details.
-    </li>
-    <li>
-        Woden now supports serialization of a WSDL model from the Woden DOM based model. Work is continuing
-        on serialization for the OM based model.
     </li>
     <li>
         A new validation framework that simplifies the development and contribution of new assertion checks
@@ -161,7 +155,7 @@ you're interested & able! A more complete and up-to-date list of ToDos is the Wo
   		has not yet been implemented.
   	</li>
   	<li>
-  		Serialization (e.g. WSDLWriter) of the OM model has not been implemented.
+  		Serialization (e.g. WSDLWriter) of the Woden model has not been implemented.
   	</li>
   	<li>
 		Support for non-XML Schema type systems has not yet been implemented (e.g. RelaxNG, DTDs).
