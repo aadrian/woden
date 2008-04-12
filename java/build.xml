@@ -32,6 +32,7 @@
 	<property name="w3cDir" value="${downloads}/w3c" />
 	<property name="w3cAssertsDir" value="${downloads}/wsdl20" />
 	<property name="build.classes" value="${build.output}/classes" />
+	<property name="build.classes.qname" value="${build.output}/classes/qname" />
    <property name="build.classes.api" value="${build.output}/classes/api" />
    <property name="build.classes.impl" value="${build.output}/classes/impl" />
    <property name="build.classes.dom" value="${build.output}/classes/dom" />
@@ -287,12 +288,20 @@
    <!-- This task builds the Woden API and implementation jar files. -->
    <target name="buildImplAndAPI" depends="buildAPI, buildDOM, buildOM" />
 
+	<!-- This task builds the Woden API jar file. -->
+	<target name="buildQName" depends="init">
+		<mkdir dir="${build.classes.qname}" />
+		<javac debug="true" debuglevel="vars,lines,source" sourcepath="" srcdir="${src.home}" destdir="${build.classes.qname}">
+	    	<include name="**/javax/xml/namespace/*.java" />
+		</javac>
+	</target>
    <!-- This task builds the Woden API jar file. -->
-   <target name="buildAPI" depends="init">
+   <target name="buildAPI" depends="init, buildQName">
        <mkdir dir="${build.classes.api}" />
        <javac debug="true" debuglevel="vars,lines,source" sourcepath="" srcdir="${src.home}" destdir="${build.classes.api}">
 			<classpath>
                <pathelement location="${libraryDir}/${XmlSchemaFile}" />
+				<pathelement location="${build.classes.qname}"/>
 			</classpath>
 			<include name="**/*.java" />
            <exclude name="**/internal/**/*.java" />
