@@ -16,6 +16,9 @@
  */
 package org.apache.woden.types;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -86,6 +89,33 @@ public class NCNameTest extends TestCase {
         } catch (IllegalArgumentException iae) {
             // do nothing as this is the expected result
         }
-        
+    }
+
+    public void testMapWithStringKeyAndNCNameValue() {
+        String keyStr = new String("bar");
+        NCName nOrig = new NCName(keyStr);
+        NCName n;
+        Map ncnameMap = new HashMap();
+        ncnameMap.put(keyStr, nOrig);
+        n = (NCName)ncnameMap.get(keyStr);
+        assertNotNull("Couldn't find NCName in Map keyed off String key object used to put it there", n);
+        assertTrue("Didn't find the right NCName in the map", n==nOrig);
+        n = (NCName)ncnameMap.get(new String("bar"));
+        assertNotNull("Couldn't find NCName in Map keyed off new equivalent String", n);
+        assertTrue("Didn't find the right NCName in the map", n==nOrig);
+    }
+
+    public void testMapWithNCNameKeyAndStringValue() {
+        NCName keyNCName = new NCName("bar");
+        String sOrig = keyNCName.toString();
+        String s;
+        Map stringMap = new HashMap();
+        stringMap.put(keyNCName, sOrig);
+        s = (String)stringMap.get(keyNCName);
+        assertNotNull("Couldn't find String in Map keyed off NCName key object used to put it there", s);
+        assertTrue("Didn't find the right NCName in the map", s==sOrig);
+        s = (String)stringMap.get(new NCName("bar"));
+        assertNotNull("Couldn't find NCName in Map keyed off new equivalent NCName", s);
+        assertTrue("Didn't find the right NCName in the map", s==sOrig);
     }
 }

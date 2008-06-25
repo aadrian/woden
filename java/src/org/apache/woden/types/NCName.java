@@ -101,5 +101,8 @@ public class NCName
         return false;
         
     }
-
+    
+    public int hashCode() {
+        return fValue.hashCode();
+    }
 }
