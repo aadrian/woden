@@ -2,6 +2,7 @@
 java/ant-test/test-suite-results.zip -text
 java/test/javax/xml/namespace/serialized_QName_no_prefix -text
 java/test/testcase/resolver/schemaloc/resources/SchemaLocationTest.jar -text
+java/woden-eclipse-formatter-conventions.xml svn_keywords=Id
 java/wsdl-viewer-test/prepare-test.xsl -text
 java/wsdl-viewer/build/all-in-one.xsl -text
 java/wsdl-viewer/src/wsdl-viewer-css.xsl -text
