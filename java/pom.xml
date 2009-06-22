@@ -101,7 +101,7 @@
     <dependency>
       <groupId>org.apache.ws.commons.schema</groupId>
       <artifactId>XmlSchema</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.4.6-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
@@ -126,13 +126,13 @@
     <dependency>
       <groupId>org.apache.ws.commons.axiom</groupId>
       <artifactId>axiom-api</artifactId>
-      <version>SNAPSHOT</version>
+      <version>1.2.9-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.ws.commons.axiom</groupId>
       <artifactId>axiom-impl</artifactId>
-      <version>SNAPSHOT</version>
+      <version>1.2.9-SNAPSHOT</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
