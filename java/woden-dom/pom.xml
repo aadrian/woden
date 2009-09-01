@@ -30,23 +30,9 @@
    <name>Woden - DOM</name>
 
    <build>
-       <sourceDirectory>../src</sourceDirectory>
-       <testSourceDirectory>../test</testSourceDirectory>
        <resources>
            <resource>
-               <directory>../src</directory>
-               <includes>
-                   <include>**/internal/**</include>
-                   <include>**/javax/xml/namespace/**</include>
-                   <include>**/tool/converter/**</include>
-               </includes>
-               <excludes>
-                   <exclude>**/internal/OM**</exclude>
-                   <exclude>**/internal/resolver/OM**</exclude>
-                   <exclude>**/internal/util/om/**</exclude>
-                   <exclude>**/internal/xpointer/OM**</exclude>
-                   <exclude>**/*.java</exclude>
-               </excludes>
+               <directory>src/main/resources</directory>
            </resource>
            <resource>
                <targetPath>META-INF</targetPath>
@@ -58,39 +44,14 @@
                </includes>
            </resource>
        </resources>
-       <testResources>
-           <testResource>
-               <directory>../test</directory>
-               <excludes>
-                   <exclude>**/*.java</exclude>
-               </excludes>
-           </testResource>
-       </testResources>
        <plugins>
            <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-compiler-plugin</artifactId>
                <configuration>
-                   <includes>
-                       <include>**/internal/**</include>
-                       <include>**/javax/xml/namespace/**</include>
-                       <include>**/tool/converter/**</include>
-                   </includes>
-                   <excludes>
-                       <exclude>**/internal/OM**</exclude>
-                       <exclude>**/internal/resolver/OM**</exclude>
-                       <exclude>**/internal/util/om/**</exclude>
-                       <exclude>**/internal/xpointer/OM**</exclude>
-                   </excludes>
                    <source>1.4</source>
                    <target>1.4</target>
                    <compilerArgument>-g</compilerArgument>
-                   <testExcludes>
-                       <exclude>**/ant/*</exclude>
-                       <exclude>**/OM*</exclude>
-                       <exclude>**/AllWodenTests.java</exclude>
-                       <exclude>**/AllWodenTestsOM.java</exclude>
-                   </testExcludes>
                </configuration>
            </plugin>
            <plugin>
@@ -110,7 +71,7 @@
                    </remoteRepositoryUrl>
                </configuration>
            </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -118,15 +79,25 @@
                         <include>**/AllWodenTestsDOM.class</include>
                     </includes>
                 </configuration>
-            </plugin>
+            </plugin>-->
        </plugins>
    </build>
 
    <dependencies>
        <dependency>
            <groupId>org.apache.woden</groupId>
-           <artifactId>woden-api</artifactId>
+           <artifactId>woden-impl-commons</artifactId>
            <version>1.0-SNAPSHOT</version>
        </dependency>
+     <!-- This dependency is need for getting shared test resources.
+          See http://tildemh.com/2007/12/19/maven2-unit-test-dependencies
+      -->
+     <dependency>
+       <groupId>org.apache.woden</groupId>
+       <artifactId>woden-impl-commons</artifactId>
+       <version>1.0-SNAPSHOT</version>
+       <scope>test</scope>
+       <classifier>tests</classifier>
+     </dependency>
    </dependencies>
 </project>
