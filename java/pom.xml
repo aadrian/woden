@@ -189,9 +189,13 @@
     </snapshotRepository>
   </distributionManagement>
   <modules>
+    <module>woden-api</module>
+    <module>woden-commons</module>
     <module>woden-dom</module>
     <module>woden-om</module>
-    <module>woden-api</module>
+    <module>woden-tests</module>
+    <module>woden-ant</module>
+    <module>woden-tool</module>
   </modules>
     <properties>
         <woden.osgi.version>1.0.0</woden.osgi.version>
