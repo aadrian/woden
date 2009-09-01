@@ -226,7 +226,56 @@ public class InterfaceImpl extends WSDLComponentImpl
     }
     
     /* (non-Javadoc)
+     * @see org.apache.woden.wsdl20.WSDLComponent#isEquivalentTo(WSDLComponent)
+     */
+    public boolean isEquivalentTo(WSDLComponent comp)
+    {
+        //compare object refs
+        if(this == comp) return true;
+        
+        if(!(comp instanceof Interface)) {
+            return false;
+        }
+        
+        Interface other = (Interface)comp;
+        
+        //compare {name}
+        QName myName = getName();
+        if(myName != null && !myName.equals(other.getName())) return false;
+        
+        /* To compare {extended interfaces} we cannot just retrieve and compare the two sets 
+         * of extended Interface components because we'd enter a recursive loop. To get the
+         * extended interfaces (i.e. to resolve the qnames in the 'extends' attribute)
+         * we need to get the set of interfaces available to the Description, which in turn 
+         * invokes this equivalence checking method.
+         * Instead, compare just the qnames in the 'extends' attributes, but we first 
+         * eliminate any duplicate qnames to ensure we make a logical test for 
+         * equivalence (i.e. use Set comparison).
+         */
+        Set thisExtendsSet = new HashSet(fExtends);
+        QName[] otherExtends = ((InterfaceElement)other).getExtendedInterfaceNames();
+        Set otherExtendsSet = new HashSet(); 
+        for(int i=0; i<otherExtends.length; i++)
+        {
+            otherExtendsSet.add(otherExtends[i]);
+        }
+        if(thisExtendsSet.size() != otherExtendsSet.size()) return false;
+        if(!(thisExtendsSet.containsAll(otherExtendsSet) && otherExtendsSet.containsAll(thisExtendsSet)))
+        {
+            return false;
+        }
+        
+        //TODO compare {interface faults}
+        //TODO compare {interface operations}
+            
+        return true;    
+    }
+    
+    /* (non-Javadoc)
      * @see org.apache.woden.wsdl20.WSDLComponent#equals(WSDLComponent)
+     * @deprecated Use isEquivalentTo(WSDLComponent)
+     * 
+     * TODO Remove. Deprecated, replaced by isEquivalentTo.
      */
     public boolean equals(WSDLComponent comp)
     {
