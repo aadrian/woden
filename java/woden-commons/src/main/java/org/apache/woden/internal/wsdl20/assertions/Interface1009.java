@@ -68,7 +68,7 @@ public class Interface1009 implements Assertion {
 		
 		int numExtInterfaces = extendedInterfaces.length;
 		for(int i = 0; i < numExtInterfaces && !foundInterface; i++) {
-		  if(interfac.equals(extendedInterfaces[i]))
+		  if(interfac.isEquivalentTo(extendedInterfaces[i]))
 		    foundInterface = true;
 		  else if(containsInterface(interfac, extendedInterfaces[i].getExtendedInterfaces()))
 			foundInterface = true;
