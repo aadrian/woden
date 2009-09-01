@@ -172,6 +172,7 @@ java/woden-api/src/test/java/org/apache/woden/types/NCNameTest.java -text
 java/woden-api/src/test/java/org/apache/woden/types/QNameTokenUnionTest.java -text
 java/woden-api/src/test/java/org/apache/woden/xpointer/XPointerTest.java -text
 java/woden-api/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
+java/woden-commons/pom.xml -text
 java/woden-dom/src/main/java/org/apache/woden/internal/DOMWSDLFactory.java -text
 java/woden-dom/src/main/java/org/apache/woden/internal/DOMWSDLReader.java -text
 java/woden-dom/src/main/java/org/apache/woden/internal/DOMWSDLSource.java -text
