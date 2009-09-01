@@ -5,6 +5,7 @@ java/test/testcase/resolver/schemaloc/resources/SchemaLocationTest.jar -text
 java/woden-ant/identify-test-case-roots.xsl -text
 java/woden-ant/pom.xml -text
 java/woden-ant/test-suite-results.zip -text
+java/woden-api/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
 java/woden-commons/pom.xml -text
 java/woden-dom/src/main/java/org/apache/woden/internal/DOMWSDLFactory.java -text
 java/woden-dom/src/main/java/org/apache/woden/internal/DOMWSDLReader.java -text
