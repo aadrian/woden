@@ -41,6 +41,18 @@ public interface WSDLComponent extends PropertyExtensible
      * @param comp the WSDL component that this component will be compared to
      * @return true if the components are logically equivalent
      */
+    public boolean isEquivalentTo(WSDLComponent comp);
+    
+    /**
+     * Tests whether this component is logically equivalent the specified component.
+     * Equivalence is determined per spec WSDL 2.0 Part 1 Section 2.17 Equivalence
+     * of Components.
+     * 
+     * @param comp the WSDL component that this component will be compared to
+     * @return true if the components are logically equivalent
+     * @deprecated Use isEquivalentTo(WSDLComponent)
+     * @see isEquivalentTo(WSDLComponent)
+     */
     public boolean equals(WSDLComponent comp);
     
     /**
