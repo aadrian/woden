@@ -317,6 +317,14 @@ java/woden-dom/src/test/java/org/apache/woden/DOMXMLElementTest.java -text
 java/woden-dom/src/test/java/org/apache/woden/WSDLReaderTest.java -text
 java/woden-dom/src/test/java/org/apache/woden/schema/SchemaTest.java -text
 java/woden-eclipse-formatter-conventions.xml svn_keywords=Id
+java/woden-om/src/main/java/org/apache/woden/internal/OMWSDLFactory.java -text
+java/woden-om/src/main/java/org/apache/woden/internal/OMWSDLReader.java -text
+java/woden-om/src/main/java/org/apache/woden/internal/OMXMLElement.java -text
+java/woden-om/src/main/java/org/apache/woden/internal/util/om/OMQNameUtils.java -text
+java/woden-om/src/main/java/org/apache/woden/internal/util/om/OMUtils.java -text
+java/woden-om/src/main/java/org/apache/woden/internal/xpointer/OMXMLElementEvaluator.java -text
+java/woden-om/src/test/java/org/apache/woden/OMWSDLReaderTest.java -text
+java/woden-om/src/test/java/org/apache/woden/OMXMLElementTest.java -text
 java/woden-tests/pom-impl-dom.xml -text
 java/woden-tests/pom-impl-om.xml -text
 java/woden-tests/pom.xml -text
