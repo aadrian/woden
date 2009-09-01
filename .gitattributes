@@ -2,6 +2,9 @@
 java/ant-test/test-suite-results.zip -text
 java/test/javax/xml/namespace/serialized_QName_no_prefix -text
 java/test/testcase/resolver/schemaloc/resources/SchemaLocationTest.jar -text
+java/woden-ant/identify-test-case-roots.xsl -text
+java/woden-ant/pom.xml -text
+java/woden-ant/test-suite-results.zip -text
 java/woden-api/src/main/java/javax/xml/namespace/QName.java -text
 java/woden-api/src/main/java/org/apache/woden/ErrorHandler.java -text
 java/woden-api/src/main/java/org/apache/woden/ErrorInfo.java -text
