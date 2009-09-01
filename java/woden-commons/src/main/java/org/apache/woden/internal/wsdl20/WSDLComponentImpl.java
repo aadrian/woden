@@ -50,7 +50,21 @@ public abstract class WSDLComponentImpl extends DocumentableImpl
      * ************************************************************/
     
     /* (non-Javadoc)
+     * @see org.apache.woden.wsdl20.WSDLComponent#isEquivalentTo(WSDLComponent)
+     * 
+     * TODO implement this method in all concrete component classes and make this
+     * implementation abstract or throw UnsupportedExc.
+     */
+    public boolean isEquivalentTo(WSDLComponent comp)
+    {
+        return super.equals(comp);
+    }
+    
+    /* (non-Javadoc)
      * @see org.apache.woden.wsdl20.WSDLComponent#equals(WSDLComponent)
+     * @deprecated Use isEquivalentTo(WSDLComponent)
+
+     * TODO - deprecated. Remove. Replaced by isEquivalentTo.
      * 
      * TODO implement this method in all concrete component classes and make this
      * implementation abstract or throw UnsupportedExc.
@@ -155,7 +169,7 @@ public abstract class WSDLComponentImpl extends DocumentableImpl
         for(Iterator i=components.iterator(); i.hasNext(); )
         {
             WSDLComponent tempComp = (WSDLComponent)i.next();
-            if(tempComp.equals(comp)) {
+            if(tempComp.isEquivalentTo(comp)) {
                 return true;
             }
         }
