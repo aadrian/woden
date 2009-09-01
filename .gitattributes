@@ -194,6 +194,11 @@ java/woden-om/src/main/java/org/apache/woden/internal/util/om/OMUtils.java -text
 java/woden-om/src/main/java/org/apache/woden/internal/xpointer/OMXMLElementEvaluator.java -text
 java/woden-om/src/test/java/org/apache/woden/OMWSDLReaderTest.java -text
 java/woden-om/src/test/java/org/apache/woden/OMXMLElementTest.java -text
+java/woden-tests/pom-impl-dom.xml svn_keywords=Id
+java/woden-tests/pom-impl-om.xml svn_keywords=Id
+java/woden-tests/pom.xml svn_keywords=Id
+java/woden-tests/src/main/resources/META-INF/MANIFEST.MF -text
+java/woden-tests/src/test/resources/testcase/resolver/schemaloc/resources/SchemaLocationTest.jar -text
 java/woden-tool/all-in-one.xsl -text
 java/woden-tool/pom.xml svn_keywords=Id
 java/woden-tool/src/main/css/org/apache/woden/tool/wsdl-viewer/wsdl-viewer.css -text
