@@ -8,14 +8,6 @@ java/woden-ant/test-suite-results.zip -text
 java/woden-api/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
 java/woden-commons/pom.xml -text
 java/woden-eclipse-formatter-conventions.xml svn_keywords=Id
-java/woden-om/src/main/java/org/apache/woden/internal/OMWSDLFactory.java -text
-java/woden-om/src/main/java/org/apache/woden/internal/OMWSDLReader.java -text
-java/woden-om/src/main/java/org/apache/woden/internal/OMXMLElement.java -text
-java/woden-om/src/main/java/org/apache/woden/internal/util/om/OMQNameUtils.java -text
-java/woden-om/src/main/java/org/apache/woden/internal/util/om/OMUtils.java -text
-java/woden-om/src/main/java/org/apache/woden/internal/xpointer/OMXMLElementEvaluator.java -text
-java/woden-om/src/test/java/org/apache/woden/OMWSDLReaderTest.java -text
-java/woden-om/src/test/java/org/apache/woden/OMXMLElementTest.java -text
 java/woden-tests/pom-impl-dom.xml svn_keywords=Id
 java/woden-tests/pom-impl-om.xml svn_keywords=Id
 java/woden-tests/pom.xml svn_keywords=Id
