@@ -336,7 +336,7 @@ public class WSDLComponentValidator
 	int numExtInterfaces = extendedInterfaces.length;
 	for(int i = 0; i < numExtInterfaces; i++)
 	{
-	  if(interfac.equals(extendedInterfaces[i]))
+	  if(interfac.isEquivalentTo(extendedInterfaces[i]))
 	    return extendedInterfaces[i];
 	  else if(containsInterface(interfac, extendedInterfaces[i].getExtendedInterfaces()) != null)
 		return extendedInterfaces[i];
@@ -879,7 +879,7 @@ public class WSDLComponentValidator
 	  
 	  // If an interface hasn't been specified on the service this assertion doesn't apply.
 	  // If the binding interface is null this assertion passes.
-	  if(serviceInterface != null && bindingInterface != null && !serviceInterface.equals(bindingInterface))
+	  if(serviceInterface != null && bindingInterface != null && !serviceInterface.isEquivalentTo(bindingInterface))
 	  {
 		errorReporter.reportError(new ErrorLocatorImpl(), "Endpoint-1062", new Object[]{binding, bindingInterface, serviceInterface}, ErrorReporter.SEVERITY_ERROR);
 		return false;  
