@@ -19,16 +19,20 @@ package org.apache.woden.internal.util.om;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.axiom.om.OMAttribute;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.apache.woden.WSDLException;
+import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.xml.sax.InputSource;
 
 /**
@@ -107,5 +111,111 @@ public class OMUtils {
 
         return new InputSource(inputStream);
     }
+    
+    public static String getQualifiedValue(URI namespaceURI, String localPart,
+            WSDLElement elem) throws WSDLException {
+        String prefix = null;
+
+        if (namespaceURI != null && !namespaceURI.toString().equals("")) {
+            prefix = elem.getNamespacePrefix(namespaceURI);
+        }
+
+        String qv = ((prefix != null && !prefix.equals("")) ? prefix + ":" : "")
+                + localPart;
+
+        return qv;
+    }
+    
+    public static void printAttribute(String name, String value, PrintWriter pw) {
+        if (value != null) {
+            pw.print(' ' + name + "=\"" + cleanString(value) + '\"');
+        }
+    }
+    
+    public static String cleanString(String orig) {
+        if (orig == null) {
+            return "";
+        }
+
+        StringBuffer strBuf = new StringBuffer();
+        char[] chars = orig.toCharArray();
+        boolean inCDATA = false;
+
+        for (int i = 0; i < chars.length; i++) {
+            if (!inCDATA) {
+                switch (chars[i]) {
+                case '&':
+                    strBuf.append("&amp;");
+                    break;
+                case '\"':
+                    strBuf.append("&quot;");
+                    break;
+                case '\'':
+                    strBuf.append("&apos;");
+                    break;
+                case '<': {
+                    if (chars.length >= i + 9) {
+                        String tempStr = new String(chars, i, 9);
+
+                        if (tempStr.equals("<![CDATA[")) {
+                            strBuf.append(tempStr);
+                            i += 8;
+                            inCDATA = true;
+                        } else {
+                            strBuf.append("&lt;");
+                        }
+                    } else {
+                        strBuf.append("&lt;");
+                    }
+                }
+                    break;
+                case '>':
+                    strBuf.append("&gt;");
+                    break;
+                default:
+                    strBuf.append(chars[i]);
+                    break;
+                }
+            } else {
+                strBuf.append(chars[i]);
+
+                if (chars[i] == '>' && chars[i - 1] == ']'
+                        && chars[i - 2] == ']') {
+                    inCDATA = false;
+                }
+            }
+        }
+
+        return strBuf.toString();
+    }
+
+    public static String getQualifiedValue(String namespaceURI,
+            String localPart, WSDLElement elem) throws WSDLException {
+        URI nsUri = null;
+        if (namespaceURI != null) {
+            try {
+                nsUri = new URI(namespaceURI);
+            } catch (URISyntaxException e) {
+                // TODO handle this correctly
+                throw new RuntimeException(e);
+            }
+        }
+        return getQualifiedValue(nsUri, localPart, elem);
+    }
+    
+    public static void printQualifiedAttribute(String name,
+            QName value,
+            WSDLElement elem,
+            PrintWriter pw)
+              throws WSDLException {
+        if (value != null)
+            {
+            printAttribute(name,getQualifiedValue(value.getNamespaceURI(),
+                    value.getLocalPart(),elem),pw);
+            }
+        }
+
+
+
     
 }
