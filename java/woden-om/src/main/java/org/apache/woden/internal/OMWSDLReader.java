@@ -160,8 +160,9 @@ public class OMWSDLReader extends BaseWSDLReader{
                                      throws WSDLException {
 
         ImportedSchemaImpl schema = new ImportedSchemaImpl();
+        schema.setXMLElement(importEl);
 
-        String ns = importEl.getAttributeValue(SchemaConstants.ATTR_NAMESPACE);
+        String ns = importEl.getAttributeValue(Constants.ATTR_NAMESPACE);
 
         if(ns != null) {
             schema.setNamespace(getURI(ns));
@@ -317,8 +318,10 @@ public class OMWSDLReader extends BaseWSDLReader{
                                      throws WSDLException{
 
         InlinedSchemaImpl schema = new InlinedSchemaImpl();
-        schema.setId(schemaElement.getAttributeValue(SchemaConstants.ATTR_ID));
-        String tns = schemaElement.getAttributeValue(SchemaConstants.ATTR_TARGET_NAMESPACE);
+        schema.setXMLElement(schemaElement);
+        
+        schema.setId(schemaElement.getAttributeValue(Constants.ATTR_ID));
+        String tns = schemaElement.getAttributeValue(Constants.ATTR_TARGET_NAMESPACE);
         if(tns != null) {
             schema.setNamespace(getURI(tns));
         }
