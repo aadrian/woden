@@ -16,11 +16,17 @@
  */
 package org.apache.woden.internal.util.dom;
 
+import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
+import javax.xml.namespace.QName;
+
 import org.apache.woden.WSDLException;
+import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Element;
@@ -278,7 +284,6 @@ public class DOMUtils {
     throw wsdlExc;
   }
 
-  /*
   public static void printAttribute(String name,
                                     String value,
                                     PrintWriter pw)
@@ -288,7 +293,6 @@ public class DOMUtils {
       pw.print(' ' + name + "=\"" + cleanString(value) + '\"');
     }
   }
-  */
 
   /**
    * Prints attributes with qualified names.
@@ -327,10 +331,11 @@ public class DOMUtils {
                      pw);
     }
   }
+  */
 
   public static void printQualifiedAttribute(String name,
                                              QName value,
-                                             Definition def,
+                                             WSDLElement elem,
                                              PrintWriter pw)
                                                throws WSDLException
   {
@@ -339,28 +344,46 @@ public class DOMUtils {
       printAttribute(name,
                      getQualifiedValue(value.getNamespaceURI(),
                                        value.getLocalPart(),
-                                       def),
+                                       elem),
                      pw);
     }
   }
 
-  public static String getQualifiedValue(String namespaceURI,
+  public static String getQualifiedValue(URI namespaceURI,
                                          String localPart,
-                                         Definition def)
+                                         WSDLElement elem)
                                            throws WSDLException
   {
     String prefix = null;
 
-    if (namespaceURI != null && !namespaceURI.equals(""))
+    if (namespaceURI != null && !namespaceURI.toString().equals(""))
     {
-      prefix = getPrefix(namespaceURI, def);
+      prefix = elem.getNamespacePrefix(namespaceURI);
     }
+    
+    String qv = ((prefix != null && !prefix.equals("")) ? prefix + ":" : "") + localPart;
 
-    return ((prefix != null && !prefix.equals(""))
-            ? prefix + ":"
-            : "") + localPart;
+    return qv;
   }
 
+  public static String getQualifiedValue(String namespaceURI,
+                                         String localPart,
+                                         WSDLElement elem)
+                                         throws WSDLException
+  {
+    URI nsUri = null;
+    if(namespaceURI != null) {
+        try {
+            nsUri = new URI(namespaceURI);
+        } catch (URISyntaxException e) {
+            // TODO handle this correctly
+            throw new RuntimeException(e);
+        }
+    }
+    return getQualifiedValue(nsUri,localPart,elem);
+  }
+
+  /*
   public static String getPrefix(String namespaceURI,
                                  Definition def)
                                    throws WSDLException
@@ -378,6 +401,7 @@ public class DOMUtils {
 
     return prefix;
   }
+  */
 
   public static String cleanString(String orig)
   {
@@ -446,7 +470,6 @@ public class DOMUtils {
 
     return strBuf.toString();
   }
-  */
   
 }
 
