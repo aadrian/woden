@@ -179,6 +179,7 @@ public abstract class WSDLFactory {
         
         return fFullPropertyFileName;
     }
+    public abstract WSDLWriter newWSDLWriter() throws WSDLException;
     
     public abstract WSDLReader newWSDLReader() throws WSDLException;
     
