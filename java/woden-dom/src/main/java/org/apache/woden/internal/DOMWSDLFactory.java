@@ -18,6 +18,7 @@ package org.apache.woden.internal;
 
 import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLReader;
+import org.apache.woden.WSDLWriter;
 
 
 /**
@@ -31,6 +32,11 @@ public class DOMWSDLFactory extends BaseWSDLFactory {
     
     public WSDLReader newWSDLReader() throws WSDLException {
         return new DOMWSDLReader(fWsdlContext);
+    }
+    
+//  Returns an DOMWSDLWriter
+    public  WSDLWriter newWSDLWriter() throws WSDLException{
+        return new DOMWSDLWriter(fWsdlContext);
     }
     
 }
