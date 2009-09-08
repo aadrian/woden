@@ -18,6 +18,7 @@ package org.apache.woden.internal;
 
 import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLReader;
+import org.apache.woden.WSDLWriter;
 
 public class OMWSDLFactory extends BaseWSDLFactory {
 
@@ -28,6 +29,11 @@ public class OMWSDLFactory extends BaseWSDLFactory {
     //Returns an OMWSDLReader
     public WSDLReader newWSDLReader() throws WSDLException {
         return new OMWSDLReader(fWsdlContext);
+    }
+    
+//  Returns an OMWSDLWriter
+    public  WSDLWriter newWSDLWriter() throws WSDLException{
+        return new OMWSDLWriter(fWsdlContext);
     }
 
 }
