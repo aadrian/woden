@@ -117,7 +117,8 @@ import org.apache.woden.internal.wsdl20.Constants;
          fWsdlContext = new WSDLContext(
                  fWsdlContext.wsdlFactory,
                  fWsdlContext.errorReporter,
-                 extReg);
+                 extReg,
+                 fWsdlContext.uriResolver);
      }
 
      public ExtensionRegistry getExtensionRegistry()
