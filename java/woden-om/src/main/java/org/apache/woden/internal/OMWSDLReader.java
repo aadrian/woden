@@ -35,6 +35,7 @@ import org.apache.woden.ErrorHandler;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLFactory;
+import org.apache.woden.WSDLReader;
 import org.apache.woden.WSDLSource;
 import org.apache.woden.XMLElement;
 import org.apache.woden.internal.resolver.OMSchemaResolverAdapter;
@@ -45,6 +46,7 @@ import org.apache.woden.internal.util.StringUtils;
 import org.apache.woden.internal.util.om.OMQNameUtils;
 import org.apache.woden.internal.util.om.OMUtils;
 import org.apache.woden.internal.wsdl20.Constants;
+import org.apache.woden.internal.wsdl20.validation.WSDLValidator;
 import org.apache.woden.internal.xpointer.OMXMLElementEvaluator;
 import org.apache.woden.schema.Schema;
 import org.apache.woden.types.NamespaceDeclaration;
@@ -397,7 +399,72 @@ public class OMWSDLReader extends BaseWSDLReader{
     //TODO
     public Description readWSDL(WSDLSource wsdlSource)
                                     throws WSDLException {
-        return null;
+      //TODO decide on how to handle null args in readWSDL methods (e.g.
+        //IllegalArgExc, WSDLExc, return null, etc).
+
+        Object source = wsdlSource.getSource();
+        URI baseURI = wsdlSource.getBaseURI();
+        
+        String wsdlURL = null;
+        if(baseURI != null)
+        {
+            URL url;
+            try {
+                url = StringUtils.getURL(null, baseURI.toString());
+                
+            } catch (MalformedURLException e) {
+                
+                String msg = getErrorReporter().getFormattedMessage(
+                        "WSDL502", new Object[] {null, baseURI.toString()});
+                throw new WSDLException(WSDLException.PARSER_ERROR, msg, e);
+            }
+            wsdlURL = url.toString();
+        }
+        
+        if(source instanceof OMElement) {
+            return readWSDL(wsdlURL, (OMElement)source);
+        }
+        else {
+            //This exception is checked in WSDLSource.setSource but we check
+            //again here in case the wrong type of WSDLSource has been used
+            //with this type of WSDLReader.
+            String sourceClass = source.getClass().getName();
+            String readerClass = this.getClass().getName();
+            String msg = getErrorReporter().getFormattedMessage(
+                    "WSDL017", new Object[] {sourceClass, readerClass});
+            throw new WSDLException(WSDLException.PARSER_ERROR, msg);
+        }
+    }
+    
+    private Description readWSDL(String wsdlURL, OMElement docEl) 
+    throws WSDLException {
+        XMLElement descEl = createXMLElement(docEl);
+        DescriptionElement descElem = parseDescription(wsdlURL, descEl, null);
+        Description descComp = descElem.toComponent();
+                  
+        //TODO if schema errors, don't do any further validation (i.e. assertions assume WSDL is schema valid)
+        
+        // Validate the model if validation is enabled.
+        if(features.getValue(WSDLReader.FEATURE_VALIDATION))
+        {
+            /*
+            if(docValidator == null)
+            {
+                docValidator = new WSDLDocumentValidator();
+            }
+            if(docValidator.validate(descElem, getErrorReporter()))
+            {
+                if(compValidator == null)
+                {
+                    compValidator = new WSDLComponentValidator();
+                }
+                compValidator.validate(descComp, getErrorReporter());
+            }
+            */
+            (new WSDLValidator()).validate(descComp, fWsdlContext);
+        }
+        
+        return descComp;
     }
 
     //////////////////////////
@@ -515,7 +582,7 @@ public class OMWSDLReader extends BaseWSDLReader{
 
     //TODO
     public WSDLSource createWSDLSource() {
-        return null;
+        return new OMWSDLSource(getErrorReporter());
     }
 
     protected XMLElement createXMLElement(Object elem) {
