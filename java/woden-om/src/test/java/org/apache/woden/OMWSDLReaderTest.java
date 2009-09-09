@@ -16,12 +16,21 @@
  */
 package org.apache.woden;
 
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
+
+import javax.xml.stream.FactoryConfigurationError;
+import javax.xml.stream.XMLStreamException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Description;
 
@@ -116,5 +125,42 @@ public class OMWSDLReaderTest extends TestCase{
             }
             fail("XPointer parse didn't not throw exception for invalid fragid: " + badFragids[i]);
         }
+    }
+    
+    public void testReadWSDLSourceDoc()
+    {
+        Description desc = null;
+        try
+        {
+          URL wsdlURL = getClass().getClassLoader().getResource("org/apache/woden/primer-hotelReservationService.wsdl");                  
+          String wsdlURLStr = wsdlURL.toString();
+          URI wsdlURI = URI.create(wsdlURLStr);          
+          OMElement ele = null;
+          try {              
+           // create a builder instance
+              InputStream inputStream =wsdlURL.openStream();             
+              StAXOMBuilder stAXOMBuilder = new StAXOMBuilder(inputStream);            
+                    
+           // get the document element
+              ele = stAXOMBuilder.getDocumentElement();          
+              WSDLSource source=omWSDLReader.createWSDLSource();
+              source.setSource(ele);             
+          
+          } catch (IOException e1) {
+              fail("Unexpected exception: " + e1.getMessage());
+          } catch (XMLStreamException e2) {
+              fail("Unexpected exception: " + e2.getMessage());           
+        } 
+          
+          WSDLSource wsdlSource=omWSDLReader.createWSDLSource();
+          wsdlSource.setSource(ele);         
+          wsdlSource.setBaseURI(wsdlURI);         
+          desc = omWSDLReader.readWSDL(wsdlSource);
+        }
+        catch(WSDLException e)
+        {
+            fail("Unexpected exception: " + e.getMessage());
+        }
+        assertNotNull("The description returned is null.", desc);
     }
 }
