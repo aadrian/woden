@@ -68,6 +68,7 @@
                    <remoteRepositoryUrl>scpexe://people.apache.org/www/people.apache.org/repo/m1-snapshot-repository</remoteRepositoryUrl>
                </configuration>
            </plugin>
+		   <!--
            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -76,7 +77,7 @@
                         <include>**/AllWodenTestsOM.class</include>
                     </includes>
                 </configuration>
-            </plugin>
+            </plugin> -->
        </plugins>
    </build>
    
