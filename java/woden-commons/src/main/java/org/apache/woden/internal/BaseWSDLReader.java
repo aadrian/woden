@@ -360,7 +360,15 @@ public abstract class BaseWSDLReader implements WSDLReader {
             Map wsdlModules) 
             throws WSDLException {
 
-        if (!Constants.Q_ELEM_DESCRIPTION.equals(descEl.getQName()))
+         if(Constants.Q_ELEM_DEFINITIONS.equals(descEl.getQName())){
+            //To identify wsdl1.1 documents
+            getErrorReporter().reportError(
+                    new ErrorLocatorImpl(),  //TODO line&col nos.
+                    "WSDL514", 
+                    new Object[] {Constants.Q_ELEM_DEFINITIONS, descEl.getQName()},
+                    ErrorReporter.SEVERITY_FATAL_ERROR);
+        }
+		if (!Constants.Q_ELEM_DESCRIPTION.equals(descEl.getQName()))
         {
             getErrorReporter().reportError(
                 new ErrorLocatorImpl(),  //TODO line&col nos.
