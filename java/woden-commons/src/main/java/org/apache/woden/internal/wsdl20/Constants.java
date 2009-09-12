@@ -36,6 +36,8 @@ public class Constants
         "http://www.w3.org/2000/xmlns/";
     public static final String NS_STRING_XSI =
         "http://www.w3.org/2001/XMLSchema-instance";
+	public static final String NS_STRING_WSDL11 =
+      "http://schemas.xmlsoap.org/wsdl/";
 
     // Namespace URIs.
     public static final URI NS_URI_WSDL20 = URI.create(NS_STRING_WSDL20);
@@ -60,6 +62,9 @@ public class Constants
     public static final String ELEM_INFAULT = "infault";
     public static final String ELEM_OUTFAULT = "outfault";
     public static final String ELEM_ENDPOINT = "endpoint";
+	
+	// Top-level WSDL 1.1 element names.
+    public static final String ELEM_DEFINITIONS = "definitions";
 
     // Top-level WSDL 2.0 qualified element names.
     public static final QName Q_ELEM_DESCRIPTION =
@@ -94,6 +99,10 @@ public class Constants
         new QName(NS_STRING_WSDL20, ELEM_OUTFAULT);
     public static final QName Q_ELEM_ENDPOINT =
         new QName(NS_STRING_WSDL20, ELEM_ENDPOINT);
+		
+	// Top-level WSDL 1.1 qualified element names.    
+    public static final QName Q_ELEM_DEFINITIONS = 
+        new QName(NS_STRING_WSDL11,ELEM_DEFINITIONS); 
     
     // Attribute names.
     public static final String ATTR_ID = "id";
