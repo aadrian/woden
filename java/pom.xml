@@ -189,6 +189,7 @@
     </snapshotRepository>
   </distributionManagement>
   <modules>
+    <module>woden-qname</module>
     <module>woden-api</module>
     <module>woden-commons</module>
     <module>woden-dom</module>
