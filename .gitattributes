@@ -3,7 +3,6 @@ java/ant-test/test-suite-results.zip -text
 java/woden-ant/identify-test-case-roots.xsl -text
 java/woden-ant/pom.xml -text
 java/woden-ant/test-suite-results.zip -text
-java/woden-api/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
 java/woden-commons/pom.xml -text
 java/woden-eclipse-formatter-conventions.xml svn_keywords=Id
 java/woden-qname/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
