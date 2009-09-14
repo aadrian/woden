@@ -6,6 +6,7 @@ java/woden-ant/test-suite-results.zip -text
 java/woden-api/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
 java/woden-commons/pom.xml -text
 java/woden-eclipse-formatter-conventions.xml svn_keywords=Id
+java/woden-qname/src/test/resources/javax/xml/namespace/serialized_QName_no_prefix -text
 java/woden-tests/pom-impl-dom.xml svn_keywords=Id
 java/woden-tests/pom-impl-om.xml svn_keywords=Id
 java/woden-tests/pom.xml svn_keywords=Id
