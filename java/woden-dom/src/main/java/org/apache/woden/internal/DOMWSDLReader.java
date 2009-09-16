@@ -25,7 +25,9 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
@@ -57,15 +59,14 @@ import org.apache.woden.xpointer.XPointer;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaCollection;
 import org.apache.ws.commons.schema.XmlSchemaException;
-import org.apache.xerces.parsers.DOMParser;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.SAXParseException;
 
 /**
@@ -76,6 +77,30 @@ import org.xml.sax.SAXParseException;
 public class DOMWSDLReader extends BaseWSDLReader {
     
     private static final String emptyString = "".intern();
+    
+    static final String JAXP_SCHEMA_LANGUAGE =
+        "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
+    
+    static final String W3C_XML_SCHEMA =
+        "http://www.w3.org/2001/XMLSchema"; 
+    
+    static final String JAXP_SCHEMA_SOURCE =
+        "http://java.sun.com/xml/jaxp/properties/schemaSource";
+    
+    // TODO: This external schema location should be removed once an URI resolution framework
+    // with a catalog is added to Woden.
+    static final String WSDL120_SCHEMA_SOURCE = 
+        "http://www.w3.org/2007/03/wsdl/wsdl20.xsd";
+    static final String WSDL120_EXTENSIONS_SCHEMA_SOURCE = 
+        "http://www.w3.org/2007/03/wsdl/wsdl20-extensions.xsd";
+    static final String W3C_XML_SCHEMA_SCHEMA_SOURCE = 
+        "http://www.w3.org/2001/XMLSchema.xsd";
+
+    static final String[] schemas = {
+        WSDL120_SCHEMA_SOURCE,
+        WSDL120_EXTENSIONS_SCHEMA_SOURCE, 
+        W3C_XML_SCHEMA_SCHEMA_SOURCE,
+        };
     
     //a map of imported schema definitions keyed by schema location URI
     private Map fImportedSchemas = new Hashtable();
@@ -669,88 +694,110 @@ public class DOMWSDLReader extends BaseWSDLReader {
         return schemaDef;
     }
     
-    private Document getDocument(InputSource inputSource, String desc)
-                                 throws WSDLException, IOException
-    {
+    // replaced with JAXP API
+    /*
+    private Document getDocument(InputSource inputSource, String desc) throws WSDLException,
+            IOException {
         //TODO use 'desc' URL in any error message(s) for problem resolution.
-        
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//            
-//        factory.setNamespaceAware(true);
-        
+
+        //DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        //
+        //factory.setNamespaceAware(true);
+
         DOMParser parser = new DOMParser();
         parser.setEntityResolver(new EntityResolverAdapter(getURIResolver()));
-        
-        try
-        {
-        	parser.setFeature(org.apache.xerces.impl.Constants.SAX_FEATURE_PREFIX + org.apache.xerces.impl.Constants.NAMESPACES_FEATURE, true);
-        	parser.setFeature(org.apache.xerces.impl.Constants.SAX_FEATURE_PREFIX + org.apache.xerces.impl.Constants.NAMESPACE_PREFIXES_FEATURE, true);
+
+        try {
+            parser.setFeature(org.apache.xerces.impl.Constants.SAX_FEATURE_PREFIX
+                    + org.apache.xerces.impl.Constants.NAMESPACES_FEATURE, true);
+            parser.setFeature(org.apache.xerces.impl.Constants.SAX_FEATURE_PREFIX
+                    + org.apache.xerces.impl.Constants.NAMESPACE_PREFIXES_FEATURE, true);
+        } catch (SAXNotRecognizedException e) {
+
+        } catch (SAXNotSupportedException e) {
+
         }
-        catch(SAXNotRecognizedException e)
-        {
-        	
-        }
-        catch(SAXNotSupportedException e)
-        {
-        	
-        }
-        
+
         // Enable validation on the XML parser if it has been enabled 
         // for the Woden parser.
-        if(features.getValue(WSDLReader.FEATURE_VALIDATION))
-        {
-        	//factory.setValidating(true);
-        	try
-        	{
-        		parser.setFeature(org.apache.xerces.impl.Constants.SAX_FEATURE_PREFIX + org.apache.xerces.impl.Constants.VALIDATION_FEATURE, true);
-        		parser.setFeature(org.apache.xerces.impl.Constants.XERCES_FEATURE_PREFIX + org.apache.xerces.impl.Constants.SCHEMA_VALIDATION_FEATURE, true);
-        		// TODO: This external schema location should be removed once an URI resolution framework
-        		// with a catalog is added to Woden.
-        		
-        		parser.setProperty(org.apache.xerces.impl.Constants.XERCES_PROPERTY_PREFIX + org.apache.xerces.impl.Constants.SCHEMA_LOCATION, "http://www.w3.org/ns/wsdl " + resolveURI("http://www.w3.org/2007/03/wsdl/wsdl20.xsd") + " http://www.w3.org/ns/wsdl-extensions " + resolveURI("http://www.w3.org/2007/03/wsdl/wsdl20-extensions.xsd") + " http://www.w3.org/2001/XMLSchema " + resolveURI("http://www.w3.org/2001/XMLSchema.xsd"));
-        	}
-            catch(SAXNotRecognizedException e)
-            {
-            	System.out.println("validation not supported by parser.");
+        if (features.getValue(WSDLReader.FEATURE_VALIDATION)) {
+            //factory.setValidating(true);
+            try {
+                parser.setFeature(org.apache.xerces.impl.Constants.SAX_FEATURE_PREFIX
+                        + org.apache.xerces.impl.Constants.VALIDATION_FEATURE, true);
+                parser.setFeature(org.apache.xerces.impl.Constants.XERCES_FEATURE_PREFIX
+                        + org.apache.xerces.impl.Constants.SCHEMA_VALIDATION_FEATURE, true);
+                // TODO: This external schema location should be removed once an URI resolution framework
+                // with a catalog is added to Woden.
+
+                parser
+                        .setProperty(
+                                org.apache.xerces.impl.Constants.XERCES_PROPERTY_PREFIX
+                                        + org.apache.xerces.impl.Constants.SCHEMA_LOCATION,
+                                "http://www.w3.org/ns/wsdl "
+                                        + resolveURI("http://www.w3.org/2007/03/wsdl/wsdl20.xsd")
+                                        + " http://www.w3.org/ns/wsdl-extensions "
+                                        + resolveURI("http://www.w3.org/2007/03/wsdl/wsdl20-extensions.xsd")
+                                        + " http://www.w3.org/2001/XMLSchema "
+                                        + resolveURI("http://www.w3.org/2001/XMLSchema.xsd"));
+            } catch (SAXNotRecognizedException e) {
+                System.out.println("validation not supported by parser.");
+            } catch (SAXNotSupportedException e) {
+
             }
-            catch(SAXNotSupportedException e)
-            {
-            	
-            }
+        } else {
+            //factory.setValidating(false);
         }
-        else
-        {
-        	//factory.setValidating(false);
-        }
-            
+
         Document doc = null;
-            
+
         try {
-              
+
             //DocumentBuilder builder = factory.newDocumentBuilder();
             //builder.getDOMImplementation().hasFeature();
             //builder.setErrorHandler(new ErrorHandlerWrapper(getErrorReporter()));
             //builder.setEntityResolver(new DefaultHandler());
             //doc = builder.parse(inputSource);
-        	parser.parse(inputSource);
-        	doc = parser.getDocument();
-                
-        } 
-//        catch (ParserConfigurationException e) 
-//        {
-//            String msg = getErrorReporter().getFormattedMessage("WSDL002", new Object[] {"XML"});
-//            throw new WSDLException(WSDLException.CONFIGURATION_ERROR, msg, e);
-//        } 
-        catch (SAXException e) 
-        {
-            getErrorReporter().reportError(
-                new ErrorLocatorImpl(),  //TODO line&col nos.
-                "WSDL500", 
-                new Object[] {"SAX", desc}, 
-                ErrorReporter.SEVERITY_FATAL_ERROR, 
-                e);
-        } 
-            
+            parser.parse(inputSource);
+            doc = parser.getDocument();
+
+        }
+        //catch (ParserConfigurationException e) 
+        //{
+        //String msg = getErrorReporter().getFormattedMessage("WSDL002", new Object[] {"XML"});
+        //throw new WSDLException(WSDLException.CONFIGURATION_ERROR, msg, e);
+        //} 
+        catch (SAXException e) {
+            getErrorReporter().reportError(new ErrorLocatorImpl(), //TODO line&col nos.
+                    "WSDL500", new Object[] { "SAX", desc }, ErrorReporter.SEVERITY_FATAL_ERROR, e);
+        }
+
+        //TODO - potentially returns null. correct after deciding how 
+        //to handle exceptions (e.g. return inside try block).
+        return doc;
+    }
+    
+    */
+    
+    private Document getDocument(InputSource inputSource, String desc) throws WSDLException,
+            IOException {
+        //TODO use 'desc' URL in any error message(s) for problem resolution.             
+        Document doc = null;
+        try {
+            DocumentBuilderFactory factory = createDocumentBuilderFactory(true);
+            EntityResolverAdapter entityResolver = new EntityResolverAdapter(getURIResolver());
+            ErrorHandler errorHandler = new ErrorHandlerWrapper(getErrorReporter());
+            DocumentBuilder builder = createDocumentBuilder(factory, entityResolver, errorHandler);
+            doc = builder.parse(inputSource);
+
+        } catch (ParserConfigurationException e) {
+            String msg = getErrorReporter().getFormattedMessage("WSDL002", new Object[] { "XML" });
+            throw new WSDLException(WSDLException.CONFIGURATION_ERROR, msg, e);
+        } catch (SAXException e) {
+            getErrorReporter().reportError(new ErrorLocatorImpl(), //TODO line&col nos.
+                    "WSDL500", new Object[] { "SAX", desc }, ErrorReporter.SEVERITY_FATAL_ERROR, e);
+        }
+
         //TODO - potentially returns null. correct after deciding how 
         //to handle exceptions (e.g. return inside try block).
         return doc;
@@ -865,6 +912,66 @@ public class DOMWSDLReader extends BaseWSDLReader {
         }
             
         return referencedDesc;
+    }
+    
+    /**
+     * Create the JAXP DocumentBuilderFactory instance.Use JAXP 1.2 API for validation.     
+     * @param namespaceAware whether the returned factory is to provide support for XML namespaces
+     * @return the JAXP DocumentBuilderFactory
+     * @throws ParserConfigurationException if we failed to build a proper DocumentBuilderFactory
+     */
+    protected DocumentBuilderFactory createDocumentBuilderFactory(boolean namespaceAware)
+    throws ParserConfigurationException, WSDLException {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(namespaceAware);
+        
+        // Enable validation on the XML parser if it has been enabled 
+        // for the Woden parser.
+        if (features.getValue(WSDLReader.FEATURE_VALIDATION)) {
+           factory.setValidating(true);
+            // Enforce namespace aware for XSD...
+            factory.setNamespaceAware(true);
+            try {
+                factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
+                factory.setAttribute(JAXP_SCHEMA_SOURCE, schemas);
+                
+            } catch (IllegalArgumentException e) {                
+                getErrorReporter().reportError(
+                        new ErrorLocatorImpl(),  //TODO line&col nos.
+                        "WSDL515", 
+                        new Object[] {factory.getClass().getName()}, 
+                        ErrorReporter.SEVERITY_FATAL_ERROR, 
+                        e);
+                }
+        }else{
+            factory.setValidating(false);
+        }
+
+        return factory;
+    }
+    
+    /**
+     * Create a JAXP DocumentBuilder will use for parsing XML documents. 
+     * @param factory the JAXP DocumentBuilderFactory that the DocumentBuilder
+     * should be created with
+     * @param entityResolver the SAX EntityResolver to use
+     * @param errorHandler the SAX ErrorHandler to use
+     * @return the JAXP DocumentBuilder
+     * @throws ParserConfigurationException if thrown by JAXP methods
+     */
+    protected DocumentBuilder createDocumentBuilder(DocumentBuilderFactory factory,
+            EntityResolver entityResolver, ErrorHandler errorHandler)
+            throws ParserConfigurationException {
+
+        DocumentBuilder docBuilder = factory.newDocumentBuilder();
+        if (entityResolver != null) {
+            docBuilder.setEntityResolver(entityResolver);
+        }
+        if (errorHandler != null) {
+            docBuilder.setErrorHandler(errorHandler);
+        }
+        return docBuilder;
     }
     
     /**
