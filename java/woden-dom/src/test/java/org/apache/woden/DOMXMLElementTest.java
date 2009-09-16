@@ -19,6 +19,9 @@ package org.apache.woden;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -27,7 +30,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import org.xml.sax.InputSource;
-import org.apache.xerces.parsers.DOMParser;
 import org.apache.woden.internal.DOMXMLElement;
 import org.apache.woden.internal.ErrorReporterImpl;
 import org.apache.woden.internal.wsdl20.Constants;
@@ -47,10 +49,20 @@ public class DOMXMLElementTest extends TestCase {
 
   protected void setUp() throws Exception{
       try {
+          //replaced with JAXP
+          /*
           DOMParser parser = new DOMParser();
           parser.parse(inputSource);
           Document doc = parser.getDocument();
           elem = doc.getDocumentElement();
+          */
+          DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+          factory.setNamespaceAware(true);
+          DocumentBuilder builder=factory.newDocumentBuilder();
+          Document doc = builder.parse(inputSource);
+          elem = doc.getDocumentElement();
+          
+          
           errorReporter = new ErrorReporterImpl();
 
       } catch (IOException e) {
