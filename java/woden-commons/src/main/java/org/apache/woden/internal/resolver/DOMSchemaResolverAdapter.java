@@ -18,15 +18,18 @@ package org.apache.woden.internal.resolver;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.woden.XMLElement;
 import org.apache.woden.internal.schema.SchemaConstants;
-import org.apache.woden.internal.wsdl20.Constants;
 import org.apache.woden.resolver.URIResolver;
-import org.apache.xml.serialize.OutputFormat;
-import org.apache.xml.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -77,7 +80,8 @@ public class DOMSchemaResolverAdapter extends SchemaResolverAdapter {
         }
         
         //TODO need to check for other prefixes requiring NS decls to be added to the schema element
-        
+        //replaced with JAXP 
+        /*
         OutputFormat format = new OutputFormat(doc);
         ByteArrayOutputStream oStream = new ByteArrayOutputStream();
         XMLSerializer serializer = new XMLSerializer(oStream, format);
@@ -86,7 +90,20 @@ public class DOMSchemaResolverAdapter extends SchemaResolverAdapter {
         } catch (IOException e) {
             // TODO this conforms to parent, but needs an error message via ErrorReporter and maybe it should be handled differently?
             throw new RuntimeException(e);
-        }
+        } 
+        */
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer;
+        ByteArrayOutputStream oStream = new ByteArrayOutputStream();
+        try {
+            transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty("indent", "yes");
+            transformer.transform(new DOMSource(doc), new StreamResult(oStream));
+        } catch (TransformerConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
+        }  
         ByteArrayInputStream iStream = new ByteArrayInputStream(oStream.toByteArray());
         return iStream;
     }
