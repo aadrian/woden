@@ -23,6 +23,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -44,9 +47,9 @@ import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaCollection;
-import org.apache.xerces.parsers.DOMParser;
-import org.apache.xerces.xni.parser.XMLInputSource;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * A test class to test the assertion tests in the WSDLDocumentValidator.
@@ -465,15 +468,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  inlinedSchemas[1].setNamespace(new URI("http://www.sample.org"));
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+	  DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);      
+      Document schemaDoc1 = builder.parse(is);
       reader = new StringReader(schemaString);
-      is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc2 = builder.getDocument();
+      is = new InputSource(reader);      
+      Document schemaDoc2 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
       XmlSchemaCollection xsc2 = new XmlSchemaCollection();
@@ -496,6 +499,14 @@ public class WSDLDocumentValidatorTest extends TestCase
 	catch(WSDLException e)
 	{
 	  fail("There was a problem running the test assertion method " + e);
+	  
+    } catch (ParserConfigurationException e) {
+        
+      fail("There was a problem parsing the test inline schema document");
+      
+    } catch (SAXException e) {
+        
+        fail("There was a problem parsing the test inline schema document");
     }
 	
 
@@ -512,15 +523,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  inlinedSchemas[1].setNamespace(new URI("http://www.sample2.org"));
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+      DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);      
+      Document schemaDoc1 = builder.parse(is);
       reader = new StringReader(schemaStringNS2);
-      is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc2 = builder.getDocument();
+      is = new InputSource(reader);
+      Document schemaDoc2 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
       XmlSchema xs2 = xsc.read(schemaDoc2.getDocumentElement());
@@ -543,6 +554,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	{
 	  fail("There was a problem running the test assertion method " + e);
     }
+	catch (ParserConfigurationException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	      
+	}
+	catch(SAXException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+    }
 	
     // Test that only one inline schema does not produce an error.
 	handler.reset();
@@ -554,11 +574,12 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  inlinedSchemas[0].setNamespace(new URI("http://www.sample.org"));
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+      DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);      
+      Document schemaDoc1 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
 	  inlinedSchemas[0].setSchemaDefinition(xs1);
@@ -579,6 +600,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	{
 	  fail("There was a problem running the test assertion method " + e);
     }
+	catch (ParserConfigurationException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	      
+	 }
+	catch (SAXException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	}
 	
 	// Test that an inline schema that can not be read (that's null) does not produce an error.
 	handler.reset();
@@ -613,11 +643,12 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  inlinedSchemas[0].setNamespace(new URI("http://www.sample.org"));
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+      DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);
+      Document schemaDoc1 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
 	  inlinedSchemas[0].setSchemaDefinition(xs1);
@@ -638,6 +669,16 @@ public class WSDLDocumentValidatorTest extends TestCase
 	{
 	  fail("There was a problem running the test assertion method " + e);
     }
+	 catch (ParserConfigurationException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	      
+	} 
+	catch (SAXException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	}
+	
 	
 	// Test that an inline schema with no defined target namespace doesn't produce an error.
 	handler.reset();
@@ -707,15 +748,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
 	  
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+      DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);     
+      Document schemaDoc1 = builder.parse(is);
       reader = new StringReader(schemaString);
-      is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc2 = builder.getDocument();
+      is = new InputSource(reader);
+      Document schemaDoc2 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
       XmlSchemaCollection xsc2 = new XmlSchemaCollection();
@@ -739,6 +780,16 @@ public class WSDLDocumentValidatorTest extends TestCase
 	{
 	  fail("There was a problem running the test assertion method " + e);
     }
+	catch (ParserConfigurationException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	      
+	}
+	catch (SAXException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	}
+	
 	
 
 	// Test that two inline schemas with different target namespaces
@@ -754,15 +805,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  inlinedSchemas[1].setNamespace(new URI("http://www.sample2.org"));
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+      DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);     
+      Document schemaDoc1 = builder.parse(is);
       reader = new StringReader(schemaStringNS2);
-      is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc2 = builder.getDocument();
+      is = new InputSource(reader);
+      Document schemaDoc2 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
       XmlSchema xs2 = xsc.read(schemaDoc2.getDocumentElement());
@@ -785,6 +836,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	{
 	  fail("There was a problem running the test assertion method " + e);
     }
+	catch (ParserConfigurationException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	      
+	}
+	catch (SAXException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	}
 	
     // Test that only one inline schema does not produce an error.
 	handler.reset();
@@ -796,11 +856,12 @@ public class WSDLDocumentValidatorTest extends TestCase
 	  inlinedSchemas[0].setNamespace(new URI("http://www.sample.org"));
 	  
 	  // Create DOM representation of schema, have XmlSchema parse it.
-	  DOMParser builder = new DOMParser();
+	  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	  factory.setNamespaceAware(true);
+      DocumentBuilder builder=factory.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);
+      Document schemaDoc1 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
 	  inlinedSchemas[0].setSchemaDefinition(xs1);
@@ -820,6 +881,15 @@ public class WSDLDocumentValidatorTest extends TestCase
 	catch(WSDLException e)
 	{
 	  fail("There was a problem running the test assertion method " + e);
+    }
+	catch (ParserConfigurationException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
+	      
+	} 
+	catch (SAXException e) {
+	        
+	  fail("There was a problem parsing the test inline schema document");
     }
 	
 	// Test that an inline schema that can not be read (that's null) does not produce an error.
@@ -1009,11 +1079,12 @@ public class WSDLDocumentValidatorTest extends TestCase
               + "</complexType>" 
               + "<element name=\"myElement\" type=\"string\"/>"
               + "</schema>";
-      DOMParser builder = new DOMParser();
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+      dbf.setNamespaceAware(true);
+      DocumentBuilder builder=dbf.newDocumentBuilder();
 	  Reader reader = new StringReader(schemaString);
-      XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-      builder.parse(is);
-      Document schemaDoc1 = builder.getDocument();
+      InputSource is = new InputSource(reader);
+      Document schemaDoc1 = builder.parse(is);
       XmlSchemaCollection xsc = new XmlSchemaCollection();
       xs1 = xsc.read(schemaDoc1.getDocumentElement());
       schemaNS = new URI("http://www.sample.org");
