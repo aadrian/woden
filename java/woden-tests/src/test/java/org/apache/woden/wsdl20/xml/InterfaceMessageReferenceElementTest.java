@@ -21,6 +21,8 @@ import java.io.StringReader;
 import java.net.URI;
 
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -37,9 +39,8 @@ import org.apache.woden.wsdl20.enumeration.Direction;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaCollection;
 import org.apache.ws.commons.schema.XmlSchemaElement;
-import org.apache.xerces.parsers.DOMParser;
-import org.apache.xerces.xni.parser.XMLInputSource;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 
 
@@ -169,11 +170,12 @@ public class InterfaceMessageReferenceElementTest extends TestCase {
                   + "</complexType>" 
                   + "<element name=\"myElement\" type=\"string\"/>"
                   + "</schema>";
-        DOMParser builder = new DOMParser();
+        DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder builder = dbf.newDocumentBuilder();
         Reader reader = new StringReader(schemaString);
-        XMLInputSource is = new XMLInputSource(null,null,null,reader,null);
-        builder.parse(is);  //throws IOException
-        Document schemaDoc1 = builder.getDocument();
+        InputSource is = new InputSource(reader);       
+        Document schemaDoc1 = builder.parse(is);
         XmlSchemaCollection xsc = new XmlSchemaCollection();
         XmlSchema xs1 = xsc.read(schemaDoc1.getDocumentElement());
         schema.setSchemaDefinition(xs1);
