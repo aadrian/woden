@@ -16,7 +16,6 @@
  */
 package org.apache.woden.wsdl20.xml;
 
-import javax.xml.namespace.QName;
 
 import org.apache.woden.types.NCName;
 import org.apache.woden.types.QNameTokenUnion;
