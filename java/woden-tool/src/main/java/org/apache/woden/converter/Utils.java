@@ -21,11 +21,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Matthew J. Duftler <duftler@us.ibm.com>
  */
 public class Utils
-{
+ {
+    /** SLF based logger. */
+    private static final Logger logger=LoggerFactory.getLogger(Utils.class);
+    
   public static OutputStream getOutputStream(String root,
                                              String name,
                                              boolean overwrite,
@@ -44,7 +50,7 @@ public class Utils
         }
         else if (verbose)
         {
-          System.out.println("Created directory '" +
+          logger.info("Created directory '" +
                              directory.getAbsolutePath() + "'.");
         }
       }
@@ -67,14 +73,14 @@ public class Utils
 
         if (verbose)
         {
-          System.out.println("Deleted file '" + absolutePath + "'.");
+          logger.info("Deleted file '" + absolutePath + "'.");
         }
       }
     }
 
     if (verbose)
     {
-      System.out.println("Created file '" + absolutePath + "'.");
+      logger.info("Created file '" + absolutePath + "'.");
     }
 
     return new FileOutputStream(absolutePath);
