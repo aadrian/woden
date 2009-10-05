@@ -75,6 +75,8 @@
                 will generate a JAR for the test resources so that they can be used by these POMs.
                 See http://tildemh.com/2007/12/19/maven2-unit-test-dependencies
             -->
+			
+			<!--
            <plugin>
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-jar-plugin</artifactId>
@@ -86,6 +88,7 @@
              </execution>
            </executions>
          </plugin>
+		 -->
        </plugins>
    </build>
 
