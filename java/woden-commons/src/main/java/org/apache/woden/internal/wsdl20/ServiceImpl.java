@@ -28,13 +28,11 @@ import org.apache.woden.wsdl20.Endpoint;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
-import org.apache.woden.wsdl20.fragids.TypeDefinitionPart;
 import org.apache.woden.wsdl20.xml.EndpointElement;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.ServiceElement;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 
-import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.ServicePart;
 
 /**
