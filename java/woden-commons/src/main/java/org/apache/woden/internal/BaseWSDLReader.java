@@ -80,8 +80,7 @@ import org.apache.woden.wsdl20.xml.WSDLElement;
  */
 public abstract class BaseWSDLReader implements WSDLReader {
 	
-    private static final String emptyString = "".intern();
-	private final String DEFAULT_RESOLVER_PROPERTY="org.apache.woden.resolver.default";
+    private final String DEFAULT_RESOLVER_PROPERTY="org.apache.woden.resolver.default";
     
     private String fFactoryImplName = null; //TODO deprecate/remove?
     
