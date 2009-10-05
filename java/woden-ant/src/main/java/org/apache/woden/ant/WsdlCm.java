@@ -39,6 +39,8 @@ import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
 import org.apache.woden.wsdl20.Description;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The <code>WsdlCm</code> class writes the component model in the W3C interchange format.
@@ -49,6 +51,9 @@ import org.apache.woden.wsdl20.Description;
 public class WsdlCm extends XMLWriter {
 
     private CmWriter cm;
+    
+    /** SLF based logger. */
+    private static final Logger logger=LoggerFactory.getLogger(WsdlCm.class);
 
     /**
      * Constructs a component model writer.
@@ -92,6 +97,8 @@ public class WsdlCm extends XMLWriter {
         String wsdlLoc = "file:///D:/workspaces/WSD2/woden/ant-test/test.wsdl";
         String wsdlCmLoc = "D:\\workspaces\\WSD2\\woden\\ant-test\\test.xml";
         String reportLoc = "D:\\workspaces\\WSD2\\woden\\ant-test\\report.xml";
+        
+       
 
         if (args.length > 0) {
             wsdlLoc = args[0];
@@ -105,7 +112,7 @@ public class WsdlCm extends XMLWriter {
             reportLoc = args[2];
         }
 
-        System.out.println("Starting: " + wsdlLoc);
+        logger.info("Starting: " + wsdlLoc);
 
         Report reportWriter = Report.openReport(new File(reportLoc));
         reportWriter.beginWsdl(wsdlLoc);
@@ -147,6 +154,6 @@ public class WsdlCm extends XMLWriter {
         reportWriter.endWsdl();
         reportWriter.closeReport();
 
-        System.out.println("Finished.");
+        logger.info("Finished.");
     }
 }
