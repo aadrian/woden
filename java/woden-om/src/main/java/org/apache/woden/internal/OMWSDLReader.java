@@ -31,10 +31,8 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMNamespace;
-import org.apache.woden.ErrorHandler;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
-import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
 import org.apache.woden.WSDLSource;
 import org.apache.woden.XMLElement;
