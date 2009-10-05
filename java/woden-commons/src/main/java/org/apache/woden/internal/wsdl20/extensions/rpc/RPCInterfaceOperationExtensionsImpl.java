@@ -22,14 +22,13 @@ import java.net.URI;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.wsdl20.WSDLComponent;
 import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
-import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
 import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.rpc.Argument;
 import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.wsdl20.extensions.rpc.RPCInterfaceOperationExtensions;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.ArgumentArrayAttr;
-import org.apache.woden.xml.BooleanAttr;
+
 
 /**
  * This class defines the properties from the WSDL RPC extensions namespace
