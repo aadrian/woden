@@ -24,7 +24,6 @@ import org.apache.woden.wsdl20.Description;
 import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.InterfaceFault;
-import org.apache.woden.wsdl20.InterfaceOperation;
 import org.apache.woden.wsdl20.xml.DescriptionElement;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.InterfaceFaultElement;
