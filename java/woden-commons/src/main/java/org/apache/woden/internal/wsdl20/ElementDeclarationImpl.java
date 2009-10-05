@@ -22,7 +22,6 @@ import javax.xml.namespace.QName;
 
 import org.apache.woden.WSDLReader;
 
-import org.apache.woden.types.NCName;
 import org.apache.woden.wsdl20.ElementDeclaration;
 
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
