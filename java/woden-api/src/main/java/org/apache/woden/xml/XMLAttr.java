@@ -18,9 +18,7 @@ package org.apache.woden.xml;
 
 import javax.xml.namespace.QName;
 
-import org.apache.woden.ErrorReporter;
-import org.apache.woden.WSDLException;
-import org.apache.woden.XMLElement;
+
 
 /**
  * This interface represents an XML attribute information item. It can be initialized
