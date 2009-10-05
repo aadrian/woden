@@ -21,8 +21,6 @@ import javax.xml.namespace.QName;
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
 import org.apache.woden.XMLElement;
-import org.apache.woden.internal.ErrorReporterImpl;
-import org.apache.woden.internal.WSDLContext;
 import org.apache.woden.xml.XMLAttr;
 
 /**
