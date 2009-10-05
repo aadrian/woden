@@ -29,7 +29,6 @@ import org.apache.woden.internal.wsdl20.extensions.ElementExtensibleImpl;
 import org.apache.woden.wsdl20.Description;
 import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.NestedComponent;
-import org.apache.woden.wsdl20.TypeDefinition;
 import org.apache.woden.wsdl20.WSDLComponent;
 import org.apache.woden.wsdl20.extensions.ExtensionElement;
 import org.apache.woden.wsdl20.extensions.soap.SOAPHeaderBlock;
