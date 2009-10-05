@@ -18,7 +18,7 @@
 package org.apache.woden.internal;
 
 import java.util.Hashtable;
-import org.apache.woden.WSDLWriter;
+
 
 /**
  * This class contains all supported Woden writer features .
