@@ -40,7 +40,6 @@ import org.apache.woden.wsdl20.xml.InterfaceMessageReferenceElement;
 import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.ws.commons.schema.XmlSchema;
-import org.apache.ws.commons.schema.XmlSchemaElement;
 import org.apache.ws.commons.schema.XmlSchemaObjectTable;
 
 /**
