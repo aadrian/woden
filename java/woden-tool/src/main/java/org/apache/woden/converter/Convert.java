@@ -59,6 +59,9 @@ import javax.wsdl.factory.WSDLFactory;
 import javax.wsdl.xml.WSDLReader;
 import javax.xml.namespace.QName;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //We may want to remove these 2 dependencies at some point.
 import com.ibm.wsdl.util.StringUtils;
 import com.ibm.wsdl.util.xml.DOMUtils;
@@ -162,6 +165,9 @@ public class Convert
      */
     // MJD - debug
   }
+  
+  /** SLF based logger. */
+  private static final Logger logger=LoggerFactory.getLogger(Convert.class);
 
   private Map extToBehaviorMap = baseExtToBehaviorMap;
 
@@ -1543,7 +1549,7 @@ public class Convert
 
   private static void printUsage(String errorMessage)
   {
-    System.err.println("Error: " + errorMessage + "\n\n" +
+    logger.error("Error: " + errorMessage + "\n\n" +
                        "Usage:\n\n" +
                        "  java " + Convert.class.getName() +
                        " [args]\n\n" +
@@ -1632,7 +1638,7 @@ public class Convert
 
     if (verbose)
     {
-      System.out.println("Done.\n" +
+      logger.info("Done.\n" +
                          "Elapsed time: " + (endTime - startTime) + "ms");
     }
   }
