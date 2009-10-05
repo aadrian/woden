@@ -21,10 +21,8 @@ import java.net.URI;
 import javax.xml.namespace.QName;
 
 import org.apache.woden.WSDLReader;
-import org.apache.woden.types.NCName;
 import org.apache.woden.wsdl20.TypeDefinition;
 
-import org.apache.woden.wsdl20.fragids.ElementDeclarationPart;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.TypeDefinitionPart;
 
