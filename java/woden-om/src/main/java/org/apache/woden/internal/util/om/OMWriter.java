@@ -101,6 +101,10 @@ public class OMWriter {
             return;
         }
         try{
+           
+            //TODO - The method serialize(Writer) from the
+            //       type OMNode is deprecated on AXIOM
+
             node.serialize(out);
         }catch(Exception e){
             e.printStackTrace();
