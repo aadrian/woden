@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.xml.namespace.QName;
 
@@ -45,6 +43,8 @@ import org.apache.woden.wsdl20.xml.ServiceElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.XMLAttr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -58,6 +58,9 @@ import org.apache.woden.xml.XMLAttr;
  */
 
 public class OMWSDLWriter extends BaseWSDLWriter{
+    
+    /** SLF based logger. */
+    private static final Logger logger=LoggerFactory.getLogger(OMWSDLWriter.class);
 
     public OMWSDLWriter(WSDLContext wsdlContext)
     {
@@ -857,8 +860,7 @@ public class OMWSDLWriter extends BaseWSDLWriter{
 
         for (int i = 0; i < inlinedSchema.length; i++) {
             InlinedSchema schema = inlinedSchema[i];
-            XMLElement ele = schema.getXMLElement();
-            //System.out.println("xxxxxxxxxx "+  schema.getXMLElement().getSource().getClass().getName());
+            XMLElement ele = schema.getXMLElement();          
             OMWriter.serializeAsXML((OMNode)ele.getSource(), pw);
 
         }
