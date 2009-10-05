@@ -59,6 +59,8 @@ import org.apache.woden.xpointer.XPointer;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaCollection;
 import org.apache.ws.commons.schema.XmlSchemaException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -101,6 +103,9 @@ public class DOMWSDLReader extends BaseWSDLReader {
         WSDL120_EXTENSIONS_SCHEMA_SOURCE, 
         W3C_XML_SCHEMA_SCHEMA_SOURCE,
         };
+    
+    /** SLF based logger. */
+    private static final Logger logger=LoggerFactory.getLogger(DOMWSDLReader.class);
     
     //a map of imported schema definitions keyed by schema location URI
     private Map fImportedSchemas = new Hashtable();
@@ -593,7 +598,7 @@ public class DOMWSDLReader extends BaseWSDLReader {
         }
         catch(Exception e)
         {
-          System.out.println("A problem was encountered while creating the build in XML schema types: " + e);
+          logger.error("A problem was encountered while creating the build in XML schema types: " + e);
         }
     }
     
@@ -741,7 +746,7 @@ public class DOMWSDLReader extends BaseWSDLReader {
                                         + " http://www.w3.org/2001/XMLSchema "
                                         + resolveURI("http://www.w3.org/2001/XMLSchema.xsd"));
             } catch (SAXNotRecognizedException e) {
-                System.out.println("validation not supported by parser.");
+                 logger.error("validation not supported by parser.");
             } catch (SAXNotSupportedException e) {
 
             }
