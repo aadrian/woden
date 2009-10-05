@@ -37,6 +37,8 @@ import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.TypeDefinition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is an Ant task to validate WSDL 2.0 files.
@@ -106,6 +108,9 @@ public class ValidateWSDL20 extends MatchingTask {
     
     // default extension for Component Model interchange format output
     private static final String CMEXT_DEFAULT = ".wsdlcm";
+    
+    /** SLF based logger. */
+    private static final Logger logger=LoggerFactory.getLogger(ValidateWSDL20.class);
 
     /**
      * Gets the input WSDL fileset directory.
@@ -259,8 +264,9 @@ public class ValidateWSDL20 extends MatchingTask {
             if (!cmdir.isDirectory()) {
 
                 // cmdir MUST be a directory
-                System.out.println("Invalid cm output directory: "
+                logger.info("Invalid cm output directory: "
                         + cmdir.toString());
+                
 
                 // disable cm output
                 setCm(false);
@@ -280,11 +286,11 @@ public class ValidateWSDL20 extends MatchingTask {
         try {
            //If an implementation name is given use that to test against, else use the default one.
            if (implName != null && !implName.equals("")) {
-               System.out.println("Using woden with implementation from " + implName);
+               logger.info("Using woden with implementation from " + implName);
                WSDLFactory factory = WSDLFactory.newInstance(implName);
                reader = factory.newWSDLReader();
            } else {
-               System.out.println("Using default woden implementation.");
+               logger.info("Using default woden implementation.");
                WSDLFactory factory = WSDLFactory.newInstance();
                reader = factory.newWSDLReader();
            }
@@ -307,15 +313,15 @@ public class ValidateWSDL20 extends MatchingTask {
             reader.setFeature(WSDLReader.FEATURE_CONTINUE_ON_ERROR,
                     !isFailOnError());
         } catch (IllegalArgumentException e) {
-            System.out.println("warning: " + e.getMessage());
+            logger.warn("warning: " + e.getMessage());
         }
 
         if (isVerbose()) {
-            System.out.println("File dir = " + dir.getAbsolutePath());
+            logger.info("File dir = " + dir.getAbsolutePath());
 
             Project project = getProject();
             File baseDir = project.getBaseDir();
-            System.out.println("File baseDir = " + baseDir.getAbsolutePath());
+            logger.info("File baseDir = " + baseDir.getAbsolutePath());
         }
 
         DirectoryScanner directoryScanner = getDirectoryScanner(dir);
@@ -331,7 +337,7 @@ public class ValidateWSDL20 extends MatchingTask {
 
             // make a URL for the file
             String wsdlLoc = file.toURI().toString();
-            System.out.println("validating " + wsdlLoc);
+            logger.info("validating " + wsdlLoc);
 
             reportWriter.beginWsdl(wsdlLoc);
             try {
@@ -365,7 +371,7 @@ public class ValidateWSDL20 extends MatchingTask {
     private void writeVerbose(Description descComp) {
         ElementDeclaration elementDeclarations[] = descComp
                 .getElementDeclarations();
-        System.out.println("There are " + elementDeclarations.length
+        logger.info("There are " + elementDeclarations.length
                 + " ElementDeclaration components.");
 
         for (int j = 0; j < elementDeclarations.length; j++) {
@@ -373,48 +379,47 @@ public class ValidateWSDL20 extends MatchingTask {
             ElementDeclaration elementDeclaration = elementDeclarations[j];
 
             QName name = elementDeclaration.getName();
-            System.out
-                    .println("ElementDeclaration[" + j + "] : name = " + name);
+            logger.info("ElementDeclaration[" + j + "] : name = " + name);
         }
 
         TypeDefinition typeDefinitions[] = descComp.getTypeDefinitions();
-        System.out.println("There are " + typeDefinitions.length
+        logger.info("There are " + typeDefinitions.length
                 + " TypeDefinition components.");
 
         for (int j = 0; j < typeDefinitions.length; j++) {
             TypeDefinition typeDefinition = typeDefinitions[j];
 
             QName name = typeDefinition.getName();
-            System.out.println("TypeDefinition[" + j + "] : name = " + name);
+            logger.info("TypeDefinition[" + j + "] : name = " + name);
         }
 
         Interface interfaces[] = descComp.getInterfaces();
-        System.out.println("There are " + interfaces.length
+        logger.info("There are " + interfaces.length
                 + " Interface components.");
 
         for (int j = 0; j < interfaces.length; j++) {
 
-            System.out.println("Interface[" + j + "] : name = "
+            logger.info("Interface[" + j + "] : name = "
                     + interfaces[j].getName());
         }
 
         Binding bindings[] = descComp.getBindings();
-        System.out.println("There are " + bindings.length
+        logger.info("There are " + bindings.length
                 + " Binding components.");
 
         for (int j = 0; j < bindings.length; j++) {
 
-            System.out.println("Binding[" + j + "] : name = "
+            logger.info("Binding[" + j + "] : name = "
                     + bindings[j].getName());
         }
 
         Service services[] = descComp.getServices();
-        System.out.println("There are " + services.length
+        logger.info("There are " + services.length
                 + " Service components.");
 
         for (int j = 0; j < services.length; j++) {
 
-            System.out.println("Service[" + j + "] : name = "
+            logger.info("Service[" + j + "] : name = "
                     + services[j].getName());
         }
     }
@@ -433,7 +438,7 @@ public class ValidateWSDL20 extends MatchingTask {
             if (!parent.exists()) {
                 boolean created = parent.mkdirs();
                 if (!created) {
-                    System.out.println("Unable to create directory: "
+                    logger.warn("Unable to create directory: "
                             + parent.toString());
                 }
             }
@@ -473,7 +478,7 @@ public class ValidateWSDL20 extends MatchingTask {
             try {
                 return localFile.toURI().toURL().toString();
             } catch (MalformedURLException mue) {
-                System.err.println("Got MalformedURLException trying to create a URL from " + localPath);
+                logger.error("Got MalformedURLException trying to create a URL from " + localPath);
                 return localPath;
             }
         } else {
