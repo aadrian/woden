@@ -21,13 +21,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.xml.namespace.QName;
 
 import org.apache.woden.WSDLException;
-import org.apache.woden.internal.MessageFormatter;
 import org.apache.woden.internal.WSDLContext;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.Description;
@@ -35,7 +33,6 @@ import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.TypeDefinition;
-import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
 import org.apache.woden.wsdl20.fragids.DescriptionPart;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.xml.BindingElement;
