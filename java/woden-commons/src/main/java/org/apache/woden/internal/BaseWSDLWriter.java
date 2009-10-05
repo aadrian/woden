@@ -16,27 +16,16 @@
  */
 package org.apache.woden.internal;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.woden.ErrorHandler;
+
+
 import org.apache.woden.ErrorReporter;
 import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLWriter;
-import org.apache.woden.internal.resolver.SimpleURIResolver;
-import org.apache.woden.internal.util.PropertyUtils;
-import org.apache.woden.resolver.URIResolver;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
 import org.apache.woden.internal.WSDLContext;
-import org.apache.woden.wsdl20.Description;
-import org.w3c.dom.Document;
-import org.apache.woden.internal.wsdl20.Constants;
+
 
 /**
  * This abstract class contains properties and methods common
