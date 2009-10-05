@@ -24,7 +24,6 @@ import org.apache.woden.wsdl20.extensions.BaseComponentExtensionContext;
 import org.apache.woden.wsdl20.extensions.WSDLExtensionConstants;
 import org.apache.woden.wsdl20.extensions.ExtensionProperty;
 import org.apache.woden.wsdl20.extensions.InterfaceOperationExtensions;
-import org.apache.woden.wsdl20.extensions.rpc.RPCConstants;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.BooleanAttr;
 
