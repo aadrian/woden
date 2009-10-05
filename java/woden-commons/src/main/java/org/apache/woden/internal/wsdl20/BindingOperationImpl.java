@@ -28,7 +28,6 @@ import org.apache.woden.wsdl20.BindingMessageReference;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.InterfaceOperation;
-import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.xml.BindingElement;
 import org.apache.woden.wsdl20.xml.BindingFaultReferenceElement;
 import org.apache.woden.wsdl20.xml.BindingMessageReferenceElement;
