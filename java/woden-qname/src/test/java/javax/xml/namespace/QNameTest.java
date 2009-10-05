@@ -18,13 +18,10 @@ package javax.xml.namespace;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URI;
-import java.net.URL;
+
 
 import junit.framework.Test;
 import junit.framework.TestCase;
