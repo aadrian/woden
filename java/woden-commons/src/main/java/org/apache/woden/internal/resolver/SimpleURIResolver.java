@@ -18,9 +18,7 @@
  */
 package org.apache.woden.internal.resolver;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -35,6 +33,8 @@ import java.util.Properties;
 import org.apache.woden.WSDLException;
 import org.apache.woden.internal.util.PropertyUtils;
 import org.apache.woden.resolver.URIResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
  * A Simple URI Resolver.
@@ -93,6 +93,9 @@ public class SimpleURIResolver implements URIResolver {
 	private static final String LOGGING_ON = "on";
 	private final String loggingRequest = PropertyUtils.findProperty(RESOLVER_LOGGING_PROPERTY);	
 	private boolean logging;
+	
+	/** SLF based logger. */
+    private static final Logger logger=LoggerFactory.getLogger(SimpleURIResolver.class);
 	
 	public SimpleURIResolver() throws WSDLException {
 		
@@ -220,7 +223,7 @@ public class SimpleURIResolver implements URIResolver {
 						"Invalid URL '" + urlStrings[i] + "' in base URL list '" + rootURLs + "'",
 	                    e);
 				// TODO or logging like :
-				//System.out.println("Invalid URL "+urlStrings[i]+": "+e.getMessage());
+				//logger.error("Invalid URL "+urlStrings[i]+": "+e.getMessage());
 			}
 		}		
 		// convert to array of URLs, for later consumption
@@ -243,13 +246,13 @@ public class SimpleURIResolver implements URIResolver {
 	
 	private void logNoResolve(URI uri) {
 		if (logging) {
-			System.out.println("resolver:NO:  URI " + uri + " did not resolve");
+		    logger.info("resolver:NO:  URI " + uri + " did not resolve");
 		}	
 	}
 
 	private void logResolve(URI uri, URI resolvedURI) {
 		if (logging) {
-			System.out.println("resolver:YES: URI " + uri + " successfully resolved to URI " + resolvedURI);
+		    logger.info("resolver:YES: URI " + uri + " successfully resolved to URI " + resolvedURI);
 		}	
 	}
 
@@ -309,7 +312,7 @@ public class SimpleURIResolver implements URIResolver {
 						{
 							// Report failed lookup on relative URL on RHS of catalog entry
 							// TODO ignore noisily
-							System.out.println("Lookup failed for URL "+value);
+							logger.error("Lookup failed for URL "+value);
 						}
 					}
 					else
@@ -320,7 +323,7 @@ public class SimpleURIResolver implements URIResolver {
 				}
 				catch (URISyntaxException e) {
 					// TODO ignore noisily
-					System.out.println("Invalid URL "+value+": "+e.getMessage());
+					logger.error("Invalid URL "+value+": "+e.getMessage());
 				}		
 			}
 		}
