@@ -90,12 +90,13 @@
      <!-- This dependency is need for getting shared test resources.
           See http://tildemh.com/2007/12/19/maven2-unit-test-dependencies
       -->
+	  <!--
      <dependency>
        <groupId>org.apache.woden</groupId>
        <artifactId>woden-impl-commons</artifactId>
        <version>1.0-SNAPSHOT</version>
        <scope>test</scope>
        <classifier>tests</classifier>
-     </dependency>
+     </dependency> -->
    </dependencies>
 </project>
