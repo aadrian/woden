@@ -19,6 +19,8 @@ package org.apache.woden;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,7 +31,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.apache.woden.tests.TestErrorHandler;
 import org.apache.woden.wsdl20.Description;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -202,4 +203,110 @@ public class WSDLReaderTest extends TestCase
           fail("XPointer parse didn't not throw exception for invalid fragid: " + badFragids[i]);
       }
   }
+  class TestErrorHandler implements ErrorHandler {
+        public Hashtable warnings = new Hashtable();
+        public int numWarnings = 0;
+        public Hashtable errors = new Hashtable();
+        public int numErrors = 0;
+        public Hashtable fatalErrors = new Hashtable();
+        public int numFatalErrors = 0;
+
+        /**
+         * Reset the handler. Remove all messages stored in the handler.
+         */
+        public void reset() {
+            warnings.clear();
+            numWarnings = 0;
+            errors.clear();
+            numErrors = 0;
+            fatalErrors.clear();
+            numFatalErrors = 0;
+        }
+
+        /**
+         * Determine whether an error or fatal error message has been reported.
+         * 
+         * @return True if an error or fatal error message has been reported, false otherwise.
+         */
+        public boolean errorMessageHasBeenReported() {
+            if (numErrors + numFatalErrors == 0)
+                return false;
+            return true;
+        }
+
+        /**
+         * Determine whether any message has been reported (warning, error or fatal error).
+         * 
+         * @return True if a message has been reported, false otherwise.
+         */
+        public boolean messageHasBeenReported() {
+            if (numWarnings + numErrors + numFatalErrors == 0)
+                return false;
+            return true;
+        }
+
+        /**
+         * Get a summary of the message keys. This is used in
+         * reporting the keys of messages that were reported.
+         * 
+         * @return A summary string of the message keys.
+         */
+        public String getSummaryOfMessageKeys() {
+            StringBuffer summary = new StringBuffer();
+
+            if (numFatalErrors > 0) {
+                summary.append("Fatal Errors: ");
+                Enumeration keys = fatalErrors.keys();
+                while (keys.hasMoreElements()) {
+                    summary.append(keys.nextElement()).append(" ");
+                }
+                summary.append("\n");
+            }
+
+            if (numErrors > 0) {
+                summary.append("Errors: ");
+                Enumeration keys = errors.keys();
+                while (keys.hasMoreElements()) {
+                    summary.append(keys.nextElement()).append(" ");
+                }
+                summary.append("\n");
+            }
+
+            if (numWarnings > 0) {
+                summary.append("Warnings: ");
+                Enumeration keys = warnings.keys();
+                while (keys.hasMoreElements()) {
+                    summary.append(keys.nextElement()).append(" ");
+                }
+            }
+
+            return summary.toString();
+        }
+
+        /* (non-Javadoc)
+         * @see org.apache.woden.ErrorHandler#warning(org.apache.woden.ErrorInfo)
+         */
+        public void warning(ErrorInfo errorInfo) {
+            warnings.put(errorInfo.getKey(), errorInfo);
+            numWarnings++;
+        }
+
+        /* (non-Javadoc)
+         * @see org.apache.woden.ErrorHandler#error(org.apache.woden.ErrorInfo)
+         */
+        public void error(ErrorInfo errorInfo) {
+            errors.put(errorInfo.getKey(), errorInfo);
+            numErrors++;
+        }
+
+        /* (non-Javadoc)
+         * @see org.apache.woden.ErrorHandler#fatalError(org.apache.woden.ErrorInfo)
+         */
+        public void fatalError(ErrorInfo errorInfo) {
+            fatalErrors.put(errorInfo.getKey(), errorInfo);
+            numFatalErrors++;
+        }
+
+    }
+
 }
