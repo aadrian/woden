@@ -1,15 +1,21 @@
 package testcase.resolver.schemaloc;
 
+import java.lang.reflect.Constructor;
 import java.net.URL;
+
+
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.apache.woden.internal.resolver.DOMSchemaResolverAdapter;
 import org.apache.woden.internal.resolver.SchemaResolverAdapter;
 import org.apache.woden.internal.resolver.SimpleURIResolver;
+import org.apache.woden.resolver.URIResolver;
+import org.apache.woden.XMLElement;
 import org.xml.sax.InputSource;
+
+
 
 import testcase.extensions.foo.FooBindingExtensionsTest;
 
@@ -24,14 +30,36 @@ public class SchemaLocationTest extends TestCase {
     private String fSchemaFileName = "SchemaLocationTest.xsd";
     private String fWsdlWebPath = "http://example.com/resources/SchemaLocationTest.wsdl";
     private String fSchemaWebPath = "http://example.com/resources/SchemaLocationTest.xsd";
+    
 
-    public static Test suite() {
+    public static Test suite() {       
         return new TestSuite(SchemaLocationTest.class);
     }
 
     protected void setUp() throws Exception {
         super.setUp();
-        fResolver = new DOMSchemaResolverAdapter(new SimpleURIResolver(), null);
+        /*
+         * check the "org.apache.woden.WSDLFactory" system property value and load 
+         * either DOMSchemaResolverAdapter or OMSchemaResolverAdapter as the
+         * SchemaResolverAdapter
+         */
+        String factory = System.getProperty("org.apache.woden.WSDLFactory");
+        if ("org.apache.woden.internal.DOMWSDLFactory".equals(factory)) {
+            Constructor cons = Class.forName(
+                    "org.apache.woden.internal.resolver.DOMSchemaResolverAdapter").getConstructor(
+                    new Class[] { URIResolver.class, XMLElement.class });
+            fResolver = (SchemaResolverAdapter) cons.newInstance(new Object[] {
+                    new SimpleURIResolver(), null });
+
+        } else if ("org.apache.woden.internal.OMWSDLFactory".equals(factory)) {
+            Constructor cons = Class.forName(
+                    "org.apache.woden.internal.resolver.OMSchemaResolverAdapter").getConstructor(
+                    new Class[] { URIResolver.class, XMLElement.class });
+            fResolver = (SchemaResolverAdapter) cons.newInstance(new Object[] {
+                    new SimpleURIResolver(), null });
+
+        }
+        
     }
     
     public void testRelativePath_File() {
