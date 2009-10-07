@@ -71,6 +71,34 @@
                    </remoteRepositoryUrl>
                </configuration>
            </plugin>
+		   <plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>
+							${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${bundle.plugin.version}</version>
+				<configuration>
+					<instructions>
+						<Bundle-Version>${woden.osgi.version}</Bundle-Version>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -83,22 +111,19 @@
        </plugins>
    </build>
 
-   <dependencies>
-       <dependency>
-           <groupId>org.apache.woden</groupId>
-           <artifactId>woden-impl-commons</artifactId>
-           <version>1.0-SNAPSHOT</version>
-       </dependency>
-     <!-- This dependency is need for getting shared test resources.
-          See http://tildemh.com/2007/12/19/maven2-unit-test-dependencies
-      -->
-	  <!--
-     <dependency>
-       <groupId>org.apache.woden</groupId>
-       <artifactId>woden-impl-commons</artifactId>
-       <version>1.0-SNAPSHOT</version>
-       <scope>test</scope>
-       <classifier>tests</classifier>
-     </dependency> -->
-   </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.woden</groupId>
+			<artifactId>woden-impl-commons</artifactId>
+			<version>${woden.version}</version>
+		</dependency>
+		
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
