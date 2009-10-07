@@ -54,6 +54,34 @@
                    <compilerArgument>-g</compilerArgument>
                </configuration>
            </plugin>
+		   <plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>
+							${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${bundle.plugin.version}</version>
+				<configuration>
+					<instructions>
+						<Bundle-Version>${woden.osgi.version}</Bundle-Version>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
            <plugin>
                <artifactId>maven-one-plugin</artifactId>
                <executions>
@@ -86,7 +114,7 @@
                         <property name="runtime_classpath" refid="maven.runtime.classpath"/>
                         <property name="test_classpath" refid="maven.test.classpath"/>                       					
 						<ant antfile="${basedir}/build.xml"> 
-			              <target name="getW3cWsdl20"/>		
+			            <target name="getW3cWsdl20"/>		
 						  <target name="main"/> 						   
                         </ant>
                        </tasks>
@@ -97,16 +125,17 @@
           </execution>
         </executions>
 		<dependencies>
+		 
 		  <dependency>
            <groupId>org.apache.ant</groupId>
            <artifactId>ant-trax</artifactId>
-           <version>1.7.0</version>
+           <version>${apache.ant.version}</version>
 		   <scope>test</scope>
 		   </dependency>
 		   <dependency>
            <groupId>org.apache.ant</groupId>
            <artifactId>ant-nodeps</artifactId>
-           <version>1.7.0</version>
+           <version>${apache.ant.version}</version>
 		   <scope>test</scope>
        </dependency>
 		</dependencies>
@@ -115,25 +144,30 @@
    </build>
 
    <dependencies>
+	    <dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>${apache.ant.version}</version>
+		  </dependency>
        <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-api</artifactId>
-           <version>1.0-SNAPSHOT</version>
+           <version>${woden.version}</version>
        </dependency>
 	   <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-commons</artifactId>
-           <version>1.0-SNAPSHOT</version>
+           <version>${woden.version}</version>
        </dependency>
 	   <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-dom</artifactId>
-           <version>1.0-SNAPSHOT</version>
+           <version>${woden.version}</version>
        </dependency>
 	   <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-om</artifactId>
-           <version>1.0-SNAPSHOT</version>
+           <version>${woden.version}</version>
        </dependency>	  
    </dependencies>
 </project>
