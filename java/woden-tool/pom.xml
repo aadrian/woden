@@ -54,6 +54,34 @@
                    <compilerArgument>-g</compilerArgument>
                </configuration>
            </plugin>
+		   <plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>
+							${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${bundle.plugin.version}</version>
+				<configuration>
+					<instructions>
+						<Bundle-Version>${woden.osgi.version}</Bundle-Version>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
            <plugin>
                <artifactId>maven-one-plugin</artifactId>
                <executions>
@@ -89,4 +117,12 @@
            </plugin>
        </plugins>
    </build>
+  
+	<dependencies>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<version>${wsdl4j.version}</version>
+		</dependency>
+	</dependencies>
 </project>
