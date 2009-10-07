@@ -71,24 +71,34 @@
                    </remoteRepositoryUrl>
                </configuration>
            </plugin>
-           <!-- this POM contains test resources shared by the OM, DOM and tests POMs. This configuration
-                will generate a JAR for the test resources so that they can be used by these POMs.
-                See http://tildemh.com/2007/12/19/maven2-unit-test-dependencies
-            -->
-			
-			<!--
            <plugin>
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-jar-plugin</artifactId>
-             <executions>
-               <execution>
-                 <goals>
-                   <goal>test-jar</goal>
-                 </goals>
-             </execution>
-           </executions>
-         </plugin>
-		 -->
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>
+							${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${bundle.plugin.version}</version>
+				<configuration>
+					<instructions>
+						<Bundle-Version>${woden.osgi.version}</Bundle-Version>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
        </plugins>
    </build>
 
@@ -96,7 +106,7 @@
        <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-api</artifactId>
-           <version>1.0-SNAPSHOT</version>
+           <version>${woden.version}</version>
        </dependency>
    </dependencies>
 </project>
