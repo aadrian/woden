@@ -217,6 +217,7 @@
 				<module>woden-om</module>
 				<module>woden-tests</module>
 				<module>woden-tool</module>
+				<module>woden-converter-maven-plugin</module>
 				<module>woden-ant</module>
 			</modules>
 		</profile>
@@ -233,6 +234,7 @@
 				<module>woden-dom</module>
 				<module>woden-om</module>
 				<module>woden-tool</module>
+				<module>woden-converter-maven-plugin</module>
 				<module>woden-ant</module>
 			</modules>
 			
