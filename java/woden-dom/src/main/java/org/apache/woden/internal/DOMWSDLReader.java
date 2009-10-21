@@ -59,8 +59,8 @@ import org.apache.woden.xpointer.XPointer;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaCollection;
 import org.apache.ws.commons.schema.XmlSchemaException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -105,7 +105,7 @@ public class DOMWSDLReader extends BaseWSDLReader {
         };
     
     /** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(DOMWSDLReader.class);
+    private static final Log logger=LogFactory.getLog(DOMWSDLReader.class);
     
     //a map of imported schema definitions keyed by schema location URI
     private Map fImportedSchemas = new Hashtable();
