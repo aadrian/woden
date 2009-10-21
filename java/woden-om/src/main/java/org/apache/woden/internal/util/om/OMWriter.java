@@ -22,6 +22,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMNode;
 import org.apache.woden.internal.util.ObjectRegistry;
 import org.apache.woden.internal.wsdl20.Constants;
@@ -102,10 +103,8 @@ public class OMWriter {
         }
         try{
            
-            //TODO - The method serialize(Writer) from the
-            //       type OMNode is deprecated on AXIOM
-
-            node.serialize(out);
+            // OMNode#serialize(out) is deprecated from AXIOM 1.2.9
+            ((OMElement)node).serialize(out);
         }catch(Exception e){
             e.printStackTrace();
         }  
