@@ -18,8 +18,9 @@ package org.apache.woden.internal;
 
 import org.apache.woden.ErrorHandler;
 import org.apache.woden.ErrorInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 /**
  * This class implements the default error handling behaviour, which is simply
@@ -34,7 +35,7 @@ import org.slf4j.LoggerFactory;
 public class ErrorHandlerImpl implements ErrorHandler {
     
     /** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(ErrorHandlerImpl.class);
+    private static final Log logger=LogFactory.getLog(ErrorHandlerImpl.class);
 
     /* (non-Javadoc)
      * @see org.apache.woden.ErrorHandler#warning(org.apache.woden.ErrorInfo)
@@ -59,7 +60,7 @@ public class ErrorHandlerImpl implements ErrorHandler {
      */
     public void fatalError(ErrorInfo errorInfo) {
 
-        logger.error("Woden[Fatal Error]," + errorInfo.toString());
+        logger.fatal("Woden[Fatal Error]," + errorInfo.toString());
 
     }
 
