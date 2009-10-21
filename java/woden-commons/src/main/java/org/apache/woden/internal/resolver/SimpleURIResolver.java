@@ -33,8 +33,8 @@ import java.util.Properties;
 import org.apache.woden.WSDLException;
 import org.apache.woden.internal.util.PropertyUtils;
 import org.apache.woden.resolver.URIResolver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /*
  * A Simple URI Resolver.
@@ -95,7 +95,7 @@ public class SimpleURIResolver implements URIResolver {
 	private boolean logging;
 	
 	/** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(SimpleURIResolver.class);
+    private static final Log logger=LogFactory.getLog(SimpleURIResolver.class);
 	
 	public SimpleURIResolver() throws WSDLException {
 		
