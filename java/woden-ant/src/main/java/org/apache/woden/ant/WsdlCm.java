@@ -39,8 +39,8 @@ import org.apache.woden.WSDLException;
 import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
 import org.apache.woden.wsdl20.Description;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * The <code>WsdlCm</code> class writes the component model in the W3C interchange format.
@@ -53,7 +53,7 @@ public class WsdlCm extends XMLWriter {
     private CmWriter cm;
     
     /** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(WsdlCm.class);
+    private static final Log logger=LogFactory.getLog(WsdlCm.class);
 
     /**
      * Constructs a component model writer.

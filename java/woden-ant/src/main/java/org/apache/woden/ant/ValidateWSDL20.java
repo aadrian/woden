@@ -37,8 +37,8 @@ import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.TypeDefinition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This is an Ant task to validate WSDL 2.0 files.
@@ -110,7 +110,7 @@ public class ValidateWSDL20 extends MatchingTask {
     private static final String CMEXT_DEFAULT = ".wsdlcm";
     
     /** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(ValidateWSDL20.class);
+    private static final Log logger=LogFactory.getLog(ValidateWSDL20.class);
 
     /**
      * Gets the input WSDL fileset directory.
