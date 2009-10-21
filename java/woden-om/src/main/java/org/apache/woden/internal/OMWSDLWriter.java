@@ -43,8 +43,8 @@ import org.apache.woden.wsdl20.xml.ServiceElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 import org.apache.woden.xml.XMLAttr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 public class OMWSDLWriter extends BaseWSDLWriter{
     
     /** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(OMWSDLWriter.class);
+    private static final Log logger=LogFactory.getLog(OMWSDLWriter.class);
 
     public OMWSDLWriter(WSDLContext wsdlContext)
     {
