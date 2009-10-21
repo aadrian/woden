@@ -59,8 +59,8 @@ import javax.wsdl.factory.WSDLFactory;
 import javax.wsdl.xml.WSDLReader;
 import javax.xml.namespace.QName;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 //We may want to remove these 2 dependencies at some point.
 import com.ibm.wsdl.util.StringUtils;
@@ -167,7 +167,7 @@ public class Convert
   }
   
   /** SLF based logger. */
-  private static final Logger logger=LoggerFactory.getLogger(Convert.class);
+  private static final Log logger=LogFactory.getLog(Convert.class);
 
   private Map extToBehaviorMap = baseExtToBehaviorMap;
 
