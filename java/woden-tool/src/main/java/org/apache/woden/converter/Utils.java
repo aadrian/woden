@@ -21,8 +21,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Matthew J. Duftler <duftler@us.ibm.com>
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public class Utils
  {
     /** SLF based logger. */
-    private static final Logger logger=LoggerFactory.getLogger(Utils.class);
+    private static final Log logger=LogFactory.getLog(Utils.class);
     
   public static OutputStream getOutputStream(String root,
                                              String name,
