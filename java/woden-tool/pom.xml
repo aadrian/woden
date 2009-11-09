@@ -83,23 +83,6 @@
 				</executions>
 			</plugin>		
            <plugin>
-               <artifactId>maven-one-plugin</artifactId>
-               <executions>
-                   <execution>
-                       <goals>
-                           <goal>install-maven-one-repository</goal>
-                           <goal>deploy-maven-one-repository</goal>
-                       </goals>
-                   </execution>
-               </executions>
-               <configuration>
-                   <remoteRepositoryId>apache</remoteRepositoryId>
-                   <remoteRepositoryUrl>
-                       scpexe://people.apache.org/www/people.apache.org/repo/m1-snapshot-repository
-                   </remoteRepositoryUrl>
-               </configuration>
-           </plugin>
-           <plugin>
              <groupId>org.codehaus.mojo</groupId>
              <artifactId>xslt-maven-plugin</artifactId>
              <executions>
