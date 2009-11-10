@@ -42,6 +42,12 @@
               Note that this part is going to disappear as the OM implementation
               will make progress
           -->
+          <systemProperties>
+            <property>
+              <name>org.apache.woden.WSDLFactory</name>
+              <value>${org.apache.woden.WSDLFactory}</value>
+            </property>
+          </systemProperties>
            <testFailureIgnore>false</testFailureIgnore>
 		   <excludes>
 			   <!-- W3C testsuite is run via /ant-test/build.xml and results
