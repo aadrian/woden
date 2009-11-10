@@ -73,6 +73,11 @@ public class FooBindingExtensionsTest extends TestCase {
         assertEquals("The Description should contain 2 Binding components.", 2, fBindings.length);       
 	}
 
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        System.getProperties().remove(ExtensionRegistry.REGISTRAR_PROPERTY);
+    }
+
 	/**
      * Test that the value for the {bar} property returned by the <code>getFooBar</code> 
      * method matches the expected value parsed from the WSDL.
