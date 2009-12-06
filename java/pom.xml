@@ -194,8 +194,90 @@
 				<module>woden-tool</module>
 				<module>woden-converter-maven-plugin</module>
 				<module>woden-ant</module>
+			</modules>			
+		</profile>
+		<!-- use for distrubution-->
+		<!-- mvn clean package assembly:assembly  antrun:run  -P dist -->
+		<profile>
+			<id>dist</id>
+			<modules>
+				<module>woden-qname</module>
+				<module>woden-ant</module>   
+				<module>woden-api</module>
+				<module>woden-commons</module>
+				<module>woden-dom</module>
+			    <module>woden-om</module>
+				<!--<module>woden-tests</module> -->
+				<module>woden-tool</module>
+				<module>woden-converter-maven-plugin</module>
+				<module>woden-ant</module> 
 			</modules>
-			
+			<build>  
+               <plugins>
+			     <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.6.1</version>
+					<configuration> 
+                        <excludePackageNames>org.apache.woden.internal</excludePackageNames>
+			    	</configuration>
+					<executions>
+						<execution>
+							<id>aggregate</id>
+							<goals>
+								<goal>aggregate</goal>
+							</goals>
+							<phase>package</phase>
+						</execution>
+                 </executions>
+				</plugin>
+		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>  
+          <version>1.2</version>
+		 <inherited>false</inherited>                
+         <configuration> 
+            <tasks>		 
+                  <echo message="Create checksums for the .zip, .tar.gz and .tar.bz2 files in dist "/>
+				    <checksum todir="${project.build.directory}">
+                       <fileset dir="${project.build.directory}">
+						<include name="*.tar.gz" />
+						<include name="*.tar.bz2" />
+						<include name="*.zip" />
+                    </fileset>
+                   </checksum>
+				    <checksum algorithm="SHA" todir="${project.build.directory}">
+                       <fileset dir="${project.build.directory}">
+						<include name="*.tar.gz" />
+						<include name="*.tar.bz2" />
+						<include name="*.zip" />
+                    </fileset>
+                   </checksum>
+			</tasks>
+
+	     </configuration>
+        
+      </plugin>
+      </plugins> 	  
+	  	<pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/main/assembly/dom.xml</descriptor>
+                            <descriptor>src/main/assembly/om.xml</descriptor> 
+                            <descriptor>src/main/assembly/src.xml</descriptor>
+                        </descriptors>
+                        <tarLongFileMode>gnu</tarLongFileMode>
+                    </configuration>
+                </plugin>
+	
+
+            </plugins>
+        </pluginManagement>
+  </build>
 		</profile>
 	</profiles>
 	
@@ -206,7 +288,7 @@
 		<bundle.plugin.version>1.4.0</bundle.plugin.version>
 		<apache.xmlSchema.version>1.4.6-SNAPSHOT</apache.xmlSchema.version>
 		<apache.axiom.version>1.2.9-SNAPSHOT</apache.axiom.version>
-		<apache.ant.version>1.7.0</apache.ant.version>
+		<apache.ant.version>1.7.1</apache.ant.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
 		<slf4.version>1.5.8</slf4.version>
 		<lof4j.version>1.2.15</lof4j.version>
