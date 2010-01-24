@@ -161,6 +161,11 @@
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-om</artifactId>
            <version>${woden.version}</version>
-       </dependency>	  
+       </dependency>
+	   <dependency>
+			<groupId>org.apache.woden</groupId>
+			<artifactId>woden-tool</artifactId>
+			<version>${woden.version}</version>
+		</dependency>	  
    </dependencies>
 </project>
