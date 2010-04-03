@@ -645,9 +645,9 @@ public class DOMWSDLWriter extends BaseWSDLWriter
                             binding.getType().toString(),
                             pw);
                     
-                   printExtensibilityAttributes(binding.getExtensionAttributes(), binding, pw);
-                   pw.println('>');
+                   printExtensibilityAttributes(binding.getExtensionAttributes(), binding, pw);                   
                 }
+                pw.println('>');
                 printDocumentation(binding.getDocumentationElements(), des, pw);
                 printExtensibilityElements(binding.getClass(), binding.getExtensionElements(), des, pw);
                 printBindingOperations(binding.getBindingOperationElements(), des, pw);
