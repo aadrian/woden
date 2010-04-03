@@ -20,6 +20,7 @@ import org.apache.woden.internal.util.om.OMWriter;
 import org.apache.woden.internal.wsdl20.Constants;
 import org.apache.woden.schema.ImportedSchema;
 import org.apache.woden.schema.InlinedSchema;
+import org.apache.woden.types.NCName;
 import org.apache.woden.types.NamespaceDeclaration;
 import org.apache.woden.types.QNameTokenUnion;
 import org.apache.woden.wsdl20.enumeration.Direction;
@@ -144,12 +145,15 @@ public class OMWSDLWriter extends BaseWSDLWriter{
         String tagName =OMUtils.getQualifiedValue(Constants.NS_URI_WSDL20,
                 Constants.ELEM_DESCRIPTION, desEle);
         pw.print('<' + tagName);
-        String targetNamespace = desEle.getTargetNamespace().toString();
+        URI targetNamespace=desEle.getTargetNamespace();
+        if(targetNamespace!=null){
+            String targetNamespaceStr =targetNamespace.toString();           
+            OMUtils.printAttribute(Constants.ATTR_TARGET_NAMESPACE,
+                                    targetNamespaceStr,
+                                    pw);
+            
+        }
         NamespaceDeclaration[] namespaces = desEle.getDeclaredNamespaces();
-        OMUtils.printAttribute(Constants.ATTR_TARGET_NAMESPACE,
-                                targetNamespace,
-                                pw);
-
         printExtensibilityAttributes(desEle.getExtensionAttributes(), desEle, pw);
         printNamespaceDeclarations(namespaces, pw);
         pw.println('>');
@@ -778,10 +782,14 @@ public class OMWSDLWriter extends BaseWSDLWriter{
             if(endPoint!=null){
 
                 pw.print("    <" + tagName);
-                String name=endPoint.getName().toString();
-                OMUtils.printAttribute(Constants.ATTR_NAME,
-                        name, pw);
-
+                NCName ncName=endPoint.getName();
+                if(ncName!=null){
+                    String name=ncName.toString();
+                    OMUtils.printAttribute(Constants.ATTR_NAME,
+                            name, pw);
+                    
+                }
+                
                 BindingElement binding =endPoint.getBindingElement();
                 if (binding != null){
                     OMUtils.printQualifiedAttribute(Constants.ATTR_BINDING,
