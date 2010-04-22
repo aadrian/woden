@@ -70,18 +70,26 @@
 	<target name="getW3cWsdl20" depends="getW3cWsdl20File, getW3cAssertsFile" description="--> Gets the W3C Test Suite"/>
 	
 	<target name="getW3cWsdl20File" unless="W3cWsdl20File.exists">	  
+	    <!-- Use local copy  -->
+		<!--
 		<mkdir dir="${downloads.dir}" /> 
-		<get src="${W3cWsdl20URL}" dest="${downloads.dir}/${W3cWsdl20File}" />          
+		<get src="${W3cWsdl20URL}" dest="${downloads.dir}/${W3cWsdl20File}" />    
+                      -->		
 		<unzip src="${downloads.dir}/${W3cWsdl20File}" dest="${w3cDir}" />  
 	</target>
 
 	<target name="clean-w3c-test-suite" description="--> Deletes W3C test suite.">
+	     <!--
 		<delete file="${downloads}/${W3cWsdl20File}" />
+		    -->
 		<delete dir="${w3cDir}" />
 	</target>
 
 	<target name="getW3cAssertsFile" unless="W3cAssertsFile.exists">	
+	     <!-- Use local copy -->
+		 <!--
 		<get src="${W3cAssertsURL}" dest="${downloads.dir}/${W3cAssertsFile}" />
+		  -->
 		<unzip src="${downloads.dir}/${W3cAssertsFile}" dest="${w3cAssertsDir}"/>
 	</target>
 	
