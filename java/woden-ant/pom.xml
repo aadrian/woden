@@ -145,27 +145,27 @@
        <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-api</artifactId>
-           <version>${woden.version}</version>
+           <version>${pom.version}</version>
        </dependency>
 	   <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-commons</artifactId>
-           <version>${woden.version}</version>
+           <version>${pom.version}</version>
        </dependency>
 	   <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-dom</artifactId>
-           <version>${woden.version}</version>
+           <version>${pom.version}</version>
        </dependency>
 	   <dependency>
            <groupId>org.apache.woden</groupId>
            <artifactId>woden-impl-om</artifactId>
-           <version>${woden.version}</version>
+           <version>${pom.version}</version>
        </dependency>
 	   <dependency>
 			<groupId>org.apache.woden</groupId>
 			<artifactId>woden-tool</artifactId>
-			<version>${woden.version}</version>
+			<version>${pom.version}</version>
 		</dependency>	  
    </dependencies>
 </project>
