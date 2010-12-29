@@ -78,7 +78,7 @@ public class OMWSDLReader extends BaseWSDLReader{
             url = StringUtils.getURL(null, wsdlURI);
         } catch (MalformedURLException e) {
             String msg = getErrorReporter().getFormattedMessage(
-                            "WSDL502", new Object[] {null, wsdlURI});
+                            "WSDL516", new Object[] {wsdlURI});
             throw new WSDLException(WSDLException.PARSER_ERROR, msg, e);
         }
         String wsdlURL = url.toString();
@@ -413,7 +413,7 @@ public class OMWSDLReader extends BaseWSDLReader{
             } catch (MalformedURLException e) {
                 
                 String msg = getErrorReporter().getFormattedMessage(
-                        "WSDL502", new Object[] {null, baseURI.toString()});
+                        "WSDL516", new Object[] {baseURI.toString()});
                 throw new WSDLException(WSDLException.PARSER_ERROR, msg, e);
             }
             wsdlURL = url.toString();
