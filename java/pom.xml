@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
  !
  ! Licensed to the Apache Software Foundation (ASF) under one or more
@@ -16,10 +16,7 @@
  ! See the License for the specific language governing permissions and
  ! limitations under the License.
  !-->
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
 	<groupId>org.apache</groupId>
@@ -28,7 +25,7 @@
   </parent>
   <groupId>org.apache.woden</groupId>
   <artifactId>woden</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0M9</version>
   <packaging>pom</packaging>
   <inceptionYear>2005</inceptionYear>
   <name>Woden</name>
@@ -44,9 +41,9 @@
   </description>
   <url>http://ws.apache.org/woden/</url>
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/trunk/java/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/trunk/java/</developerConnection>
-    <url>http://svn.apache.org/viewvc/webservices/woden/trunk/java/</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/tags/1.0M9</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/tags/1.0M9</developerConnection>
+    <url>http://svn.apache.org/viewvc/webservices/woden/tags/1.0M9</url>
   </scm>
   <reporting>
     <plugins>
@@ -299,7 +296,7 @@
 		 <inherited>false</inherited>                
          <configuration> 
             <tasks>		 
-                  <echo message="Create checksums for the .zip, .tar.gz and .tar.bz2 files in dist "/>
+                  <echo message="Create checksums for the .zip, .tar.gz and .tar.bz2 files in dist " />
 				    <checksum todir="${project.build.directory}">
                        <fileset dir="${project.build.directory}">
 						<include name="*.tar.gz" />
@@ -346,8 +343,8 @@
  <properties>
 		<woden.osgi.version>1.0.0</woden.osgi.version>
 		<bundle.plugin.version>1.4.0</bundle.plugin.version>
-		<apache.xmlSchema.version>1.4.8-SNAPSHOT</apache.xmlSchema.version>
-		<apache.axiom.version>1.2.12-SNAPSHOT</apache.axiom.version>
+		<apache.xmlSchema.version>1.4.7</apache.xmlSchema.version>
+		<apache.axiom.version>1.2.11</apache.axiom.version>
 		<apache.ant.version>1.7.1</apache.ant.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
 		<slf4.version>1.5.8</slf4.version>
