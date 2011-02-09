@@ -18,9 +18,9 @@
 <html>
 <head></head>
 <body>
-<h1>Woden 1.0M8 Release Notes</h1>
+<h1>Woden 1.0M9 Release Notes</h1>
 
-April 2008. This is the Milestone 8 (M8) release of <a href="http://ws.apache.org/woden">Apache Woden</a>.<br />
+February 2011. This is the Milestone 9 (M9) release of <a href="http://ws.apache.org/woden">Apache Woden</a>.<br />
 The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestoneplan.html">http://ws.apache.org/woden/dev/1.0/milestoneplan.html</a>.
 
 <h2>Key points</h2>
@@ -36,19 +36,19 @@ The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestonepl
     was published as a W3C Recommendation on June 26, 2007. 
 </p>
 <p>
-	<b>The M8 release</b> fully supports the parsing of valid WSDL 2.0 documents 
+	<b>The M9 release</b> fully supports the parsing of valid WSDL 2.0 documents 
     into the WSDL 2.0 Component model, as defined by the WSDL 2.0 spec and embodied in its
-    Test Suite as at the <b>9th April 2008</b>. Within the WSDL 2.0 Test Suite at that date,
+    Test Suite as at the <b>9th February 2011</b>. Within the WSDL 2.0 Test Suite at that date,
     there were 80 testcases in the Component Model Tests (the 'good' document testcases)
     whose WSDL documents collectively covered all of the WSDL 2.0 elements and attributes 
     defined by the spec and those defined for the SOAP and HTTP binding extensions. 
     Woden passed all of these 80 testcases. 
     Any further change to the test suite will be implemented in Woden
-    after the M8 release to maintain this level of compliance.
+    after the M9 release to maintain this level of compliance.
 </p>
 <p>
-	The M8 release includes a new validation framework, which will support the WSDL 2.0
-	assertions. As of M8 many of the assertions still need to be implemented.
+	The M9 release includes a new validation framework, which will support the WSDL 2.0
+	assertions. As of M9 many of the assertions still need to be implemented.
     The main focus of the next release will be to complete Woden's WSDL 2.0 compliance by fully supporting
     the assertions defined in the WSDL 2.0 spec. That is, completing Woden's validation logic to capture 
     violations of these assertions in the 'bad' WSDL documents in the W3C WSDL 2.0 test suite.
@@ -71,19 +71,22 @@ The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestonepl
 <p>This release includes the following new features:</p>
 <ul>
     <li>
-        Many JIRAs have been resolved during M8 development. See 
+        Many JIRAs have been resolved during M9 development. See 
         <a href="http://issues.apache.org/jira/browse/Woden">Woden's Jira issue tracker</a> for details.
     </li>
     <li>
         A new validation framework that simplifies the development and contribution of new assertion checks
         has been added. This framework will assist in developing tests for the WSDL 2.0 assertions.
     </li>
+    <li>
+  	Serialization (e.g. WSDLWriter) of the Woden model has been implemented.
+    </li>
 </ul>
 
 <h2>Current Release Structure</h2>
 
 <p>
-    The M8 release is available in 3 types of archives; zip, tar.gz and tar.bz2.
+    The M9 release is available in 3 types of archives; zip, tar.gz and tar.bz2.
     For each archive type there is a binary and a source distribution archive, each with 
     its own MD5 and sha1 checksums.
     The source distribution contains the entire Woden Subversion source code tree.
@@ -91,33 +94,30 @@ The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestonepl
 	The binary distribution contains the Woden API Javadoc and the three Woden jar files described below:<br />
 	<ul>
 		<li>
-			woden-api-1.0M8.jar - Contains only the public Woden API (not yet final). 
+			woden-api-1.0M9.jar - Contains only the public Woden API (not yet final). 
 			This jar is suitable for those that wish to create their own implementation of 
 			the API.
 		</li>
 		<li>
-			woden-impl-dom-1.0M8.jar - Contains the public Woden API (not yet final) and current DOM 
+			woden-impl-dom-1.0M9.jar - Contains the public Woden API (not yet final) and current DOM 
 			implementation.
 		</li>
 		<li>
-			woden-impl-om-1.0M8.jar - Contains the public Woden API (not yet final) and current Axiom 
+			woden-impl-om-1.0M9.jar - Contains the public Woden API (not yet final) and current Axiom 
 			implementation.
 		</li>
 		<li>
-			woden-ant-1.0M8.jar - Contains the Ant task ValidateWSDL20 used to produce
+			woden-ant-1.0M9.jar - Contains the Ant task ValidateWSDL20 used to produce
 			Woden results for the W3C WSDL 2.0 test suite.
 		</li>
 	</ul>
 	Woden depends on the following libraries and these are also included in the binary distribution:
 	<ul>
 	    <li>
-            Apache WS Commons XmlSchema 1.4.2 (for representing schemas in the Woden API)
-	    </li>
+            Apache WS Commons XmlSchema 1.4.7 (for representing schemas in the Woden API)
+	    </li>	 
 	    <li>
-            Apache Xerces 2.8.1 (used by XmlSchema and by the DOM implementation of Woden)
-	    </li>
-	    <li>
-            Apache WS Commons AXIOM 1.2.7
+            Apache WS Commons AXIOM 1.2.
 	    </li>
 	    <li>
             Apache Commons Logging API 1.1 (used by the AXIOM implementation of Woden)
@@ -154,9 +154,7 @@ you're interested & able! A more complete and up-to-date list of ToDos is the Wo
   		Validation of MEPs and extension elements (such as those for SOAP and HTTP bindings) 
   		has not yet been implemented.
   	</li>
-  	<li>
-  		Serialization (e.g. WSDLWriter) of the Woden model has not been implemented.
-  	</li>
+  	
   	<li>
 		Support for non-XML Schema type systems has not yet been implemented (e.g. RelaxNG, DTDs).
 	</li>
