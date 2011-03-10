@@ -39,10 +39,15 @@ There are two main deliverables: an API and an implementation. The Woden API wil
     <category rdf:resource="http://projects.apache.org/category/xml" />
     <release>
       <Version>
-        <name>Woden</name>
+        <name>Apache Woden</name>
         <created>2008-04-09</created>
         <revision>1.0M8</revision>
       </Version>
+      <Version>
+        <name>Apache Woden</name>
+        <created>2011-02-17</created>
+        <revision>1.0M9</revision>
+     </Version>
     </release>
     <repository>
       <SVNRepository>
