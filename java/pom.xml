@@ -41,9 +41,9 @@
   </description>
   <url>http://ws.apache.org/woden/</url>
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/branches/java1.4</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/branches/java1.4</developerConnection>
-    <url>http://svn.apache.org/viewvc/webservices/woden/branches/java1.4</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/trunk/java/</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/trunk/java/</developerConnection>
+    <url>http://svn.apache.org/viewvc/webservices/woden/trunk/java/</url>
   </scm>
   <reporting>
     <plugins>
