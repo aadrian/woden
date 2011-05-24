@@ -203,8 +203,7 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<modules>
-				<module>woden-qname</module>
+			<modules>				
 				<module>woden-api</module>
 				<module>woden-commons</module>
 				<module>woden-dom</module>
@@ -221,8 +220,7 @@
 			 -->
 		<profile>
 			<id>m2_release</id>
-			<modules>
-				<module>woden-qname</module>
+			<modules>				
 				<module>woden-api</module>
 				<module>woden-commons</module>
 				<module>woden-dom</module>
@@ -258,8 +256,7 @@
 		<!-- mvn clean package assembly:assembly  antrun:run  -P dist -->
 		<profile>
 			<id>dist</id>
-			<modules>
-				<module>woden-qname</module>
+			<modules>				
 				<module>woden-ant</module>   
 				<module>woden-api</module>
 				<module>woden-commons</module>
