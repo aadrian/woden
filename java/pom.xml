@@ -341,7 +341,7 @@
 		<woden.osgi.version>1.0.0</woden.osgi.version>
 		<bundle.plugin.version>1.4.0</bundle.plugin.version>
 		<apache.xmlSchema.version>1.4.8-SNAPSHOT</apache.xmlSchema.version>
-		<apache.axiom.version>1.2.12-SNAPSHOT</apache.axiom.version>
+		<apache.axiom.version>1.2.13-SNAPSHOT</apache.axiom.version>
 		<apache.ant.version>1.7.1</apache.ant.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
 		<slf4.version>1.5.8</slf4.version>
