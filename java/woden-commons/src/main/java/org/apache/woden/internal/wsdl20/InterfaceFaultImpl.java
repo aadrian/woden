@@ -30,6 +30,7 @@ import org.apache.woden.wsdl20.xml.InterfaceFaultElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.ws.commons.schema.XmlSchemaElement;
 
+import org.apache.woden.wsdl20.editable.EdInterfaceFault;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.InterfaceFaultPart;
 
@@ -41,7 +42,8 @@ import org.apache.woden.wsdl20.fragids.InterfaceFaultPart;
  */
 public class InterfaceFaultImpl extends NestedImpl
                                 implements InterfaceFault,
-                                           InterfaceFaultElement 
+                                           InterfaceFaultElement,
+                                           EdInterfaceFault
 {
     //WSDL Component model data
     private NCName fName = null;
@@ -162,6 +164,12 @@ public class InterfaceFaultImpl extends NestedImpl
         return new FragmentIdentifier(new InterfaceFaultPart(interfaceName, fName));
     }
 
+	public void setName(QName name) {
+
+		fName = new NCName(name.getLocalPart());
+
+	}
+	
     /* ************************************************************
      *  Non-API implementation methods
      * ************************************************************/

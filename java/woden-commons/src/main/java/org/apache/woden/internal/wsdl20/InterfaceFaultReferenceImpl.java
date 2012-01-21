@@ -23,6 +23,7 @@ import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.InterfaceFault;
 import org.apache.woden.wsdl20.InterfaceFaultReference;
 import org.apache.woden.wsdl20.InterfaceOperation;
+import org.apache.woden.wsdl20.editable.EdInterfaceFaultReference;
 import org.apache.woden.wsdl20.enumeration.Direction;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.InterfaceFaultElement;
@@ -41,7 +42,8 @@ import org.apache.woden.wsdl20.fragids.InterfaceFaultReferencePart;
  */
 public class InterfaceFaultReferenceImpl extends NestedImpl
                                          implements InterfaceFaultReference,
-                                                    InterfaceFaultReferenceElement 
+                                                    InterfaceFaultReferenceElement,
+                                                    EdInterfaceFaultReference
 {
     private NCName fMessageLabel = null;
     private Direction fDirection = null;
@@ -148,6 +150,15 @@ public class InterfaceFaultReferenceImpl extends NestedImpl
         //Return a new FragmentIdentifier.
         return new FragmentIdentifier(new InterfaceFaultReferencePart(interfaceName, interfaceOperation, fMessageLabel, fRef));
     }
+
+	public void setInterfaceFault(InterfaceFault interfaceFault) {
+
+		if (interfaceFault != null) {
+			fRef = interfaceFault.getName();
+		}
+	}
+    
+    
 
     /* ************************************************************
      *  Non-API implementation methods

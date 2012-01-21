@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.woden.wsdl20.editable.EdDescription;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
 import org.apache.woden.wsdl20.xml.DescriptionElement;
 
@@ -184,6 +185,8 @@ public abstract class WSDLFactory {
     public abstract WSDLReader newWSDLReader() throws WSDLException;
     
     public abstract DescriptionElement newDescription();
+    
+    public abstract EdDescription newEdDescription();
     
     public abstract ExtensionRegistry newPopulatedExtensionRegistry() throws WSDLException;
     

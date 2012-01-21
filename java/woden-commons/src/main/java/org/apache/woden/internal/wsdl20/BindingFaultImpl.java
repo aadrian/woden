@@ -28,6 +28,7 @@ import org.apache.woden.wsdl20.xml.BindingFaultElement;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.InterfaceFaultElement;
 
+import org.apache.woden.wsdl20.editable.EdBindingFault;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.BindingFaultPart;
 
@@ -38,7 +39,7 @@ import org.apache.woden.wsdl20.fragids.BindingFaultPart;
  * @author jkaputin@apache.org
  */
 public class BindingFaultImpl extends NestedImpl 
-                              implements BindingFault, BindingFaultElement 
+                              implements BindingFault, BindingFaultElement, EdBindingFault 
 {
     private QName fRef = null;
     
@@ -114,7 +115,14 @@ public class BindingFaultImpl extends NestedImpl
         //Return a new FragmentIdentifier.
         return new FragmentIdentifier(new BindingFaultPart(binding,  fRef));
     }
-    
+
+	public void setInterfaceFault(InterfaceFault interfaceFault) {
+
+		if (interfaceFault != null) {
+			fRef = interfaceFault.getName();
+		}
+
+	}      
     /* ************************************************************
      *  Non-API implementation methods
      * ************************************************************/

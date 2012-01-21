@@ -24,6 +24,7 @@ import org.apache.woden.wsdl20.BindingMessageReference;
 import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.InterfaceMessageReference;
 import org.apache.woden.wsdl20.InterfaceOperation;
+import org.apache.woden.wsdl20.editable.EdBindingMessageReference;
 import org.apache.woden.wsdl20.enumeration.Direction;
 import org.apache.woden.wsdl20.fragids.BindingMessageReferencePart;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
@@ -40,7 +41,8 @@ import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
  */
 public class BindingMessageReferenceImpl extends NestedImpl
                                          implements BindingMessageReference, 
-                                                    BindingMessageReferenceElement 
+                                                    BindingMessageReferenceElement,
+                                                    EdBindingMessageReference
 {
     private Direction fDirection = null;
     private NCName fMessageLabel = null;
@@ -192,6 +194,18 @@ public class BindingMessageReferenceImpl extends NestedImpl
         //Return a new FragmentIdentifier.
         return new FragmentIdentifier(new BindingMessageReferencePart(binding, interfaceOperation, fMessageLabel));
     }
+
+	public void setInterfaceMessageReference(
+			InterfaceMessageReference interfaceMessageReference) {
+
+		if (interfaceMessageReference != null) {
+			fMessageLabel = interfaceMessageReference.getMessageLabel();
+
+		}
+
+	}
+    
+    
 
     /* ************************************************************
      *  Non-API implementation methods

@@ -35,6 +35,9 @@ import org.apache.woden.wsdl20.xml.BindingOperationElement;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 
+import org.apache.woden.wsdl20.editable.EdBinding;
+import org.apache.woden.wsdl20.editable.EdBindingFault;
+import org.apache.woden.wsdl20.editable.EdBindingOperation;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.BindingPart;
 
@@ -45,7 +48,7 @@ import org.apache.woden.wsdl20.fragids.BindingPart;
  * @author John Kaputin (jkaputin@apache.org)
  */
 public class BindingImpl extends WSDLComponentImpl 
-                         implements Binding, BindingElement 
+                         implements Binding, BindingElement, EdBinding 
 {
     private WSDLElement fParentElem = null;
     
@@ -314,5 +317,34 @@ public class BindingImpl extends WSDLComponentImpl
     public FragmentIdentifier getFragmentIdentifier() {
         return new FragmentIdentifier(new BindingPart(this));
     }
+
+	public EdBindingFault addBindingFault() {
+		
+		BindingFaultImpl fault = new BindingFaultImpl();
+		fFaults.add(fault);
+		fault.setParentElement(this);
+		return fault;
+	}
+
+	public EdBindingOperation addBindingOperation() {
+		
+		BindingOperationImpl operation = new BindingOperationImpl();
+		fOperations.add(operation);
+		operation.setParentElement(this);
+		return operation;
+	}
+
+	public void setInterface(Interface interfaceComp) {
+
+		if (interfaceComp != null) {
+			fInterfaceName = interfaceComp.getName();
+		}
+	}
+
+	public void setName(QName name) {
+
+		fName = new NCName(name.getLocalPart());
+
+	}    
 
 }

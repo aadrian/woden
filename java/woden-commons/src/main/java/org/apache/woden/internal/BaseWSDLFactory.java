@@ -22,6 +22,7 @@ import org.apache.woden.WSDLFactory;
 import org.apache.woden.WSDLReader;
 import org.apache.woden.internal.wsdl20.DescriptionImpl;
 import org.apache.woden.internal.wsdl20.extensions.PopulatedExtensionRegistry;
+import org.apache.woden.wsdl20.editable.EdDescription;
 import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
 import org.apache.woden.wsdl20.xml.DescriptionElement;
 
@@ -50,6 +51,10 @@ public abstract class BaseWSDLFactory extends WSDLFactory {
 
     //TODO change the name of this API method to newDescriptionElement()
     public DescriptionElement newDescription() {
+        return new DescriptionImpl(fWsdlContext);
+    }
+    
+    public EdDescription newEdDescription() {
         return new DescriptionImpl(fWsdlContext);
     }
 

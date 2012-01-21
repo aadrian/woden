@@ -36,6 +36,9 @@ import org.apache.woden.wsdl20.xml.InterfaceFaultElement;
 import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 import org.apache.woden.wsdl20.xml.WSDLElement;
 
+import org.apache.woden.wsdl20.editable.EdInterface;
+import org.apache.woden.wsdl20.editable.EdInterfaceFault;
+import org.apache.woden.wsdl20.editable.EdInterfaceOperation;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.InterfacePart;
 
@@ -46,7 +49,7 @@ import org.apache.woden.wsdl20.fragids.InterfacePart;
  * @author jkaputin@apache.org
  */
 public class InterfaceImpl extends WSDLComponentImpl
-                           implements Interface, InterfaceElement 
+                           implements Interface, InterfaceElement, EdInterface 
 {
     private WSDLElement fParentElem = null;
     
@@ -599,5 +602,22 @@ public class InterfaceImpl extends WSDLComponentImpl
     public FragmentIdentifier getFragmentIdentifier() {
         return new FragmentIdentifier(new InterfacePart(fName));
     }
+
+	public void addExtendedInterface(Interface interfaceComp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public EdInterfaceFault addInterfaceFault() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public EdInterfaceOperation addInterfaceOperation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+    
     
 }

@@ -25,6 +25,7 @@ import org.apache.woden.wsdl20.BindingOperation;
 import org.apache.woden.wsdl20.InterfaceFault;
 import org.apache.woden.wsdl20.InterfaceFaultReference;
 import org.apache.woden.wsdl20.InterfaceOperation;
+import org.apache.woden.wsdl20.editable.EdBindingFaultReference;
 import org.apache.woden.wsdl20.enumeration.Direction;
 import org.apache.woden.wsdl20.xml.BindingFaultReferenceElement;
 import org.apache.woden.wsdl20.xml.BindingOperationElement;
@@ -42,7 +43,7 @@ import org.apache.woden.wsdl20.fragids.BindingFaultReferencePart;
  * @author jkaputin@apache.org
  */
 public class BindingFaultReferenceImpl extends NestedImpl 
-                                       implements BindingFaultReference, BindingFaultReferenceElement 
+                                       implements BindingFaultReference, BindingFaultReferenceElement, EdBindingFaultReference 
 {
     private QName fRef = null;
     private Direction fDirection = null;
@@ -204,6 +205,21 @@ public class BindingFaultReferenceImpl extends NestedImpl
         //Return a new Fragment Identifier.
         return new FragmentIdentifier(new BindingFaultReferencePart(binding, interfaceOperation, fMessageLabel, fRef));
     }
+
+	public void setInterfaceFaultReference(
+			InterfaceFaultReference interfaceFaultReference) {	
+		
+		  if(fRef != null){
+			  InterfaceFault tempIntFault = interfaceFaultReference.getInterfaceFault();
+		      QName intFaultName = (tempIntFault != null ? tempIntFault.getName() : null);
+		      fRef=intFaultName;
+			  
+		  }
+        
+		
+	}
+    
+    
 
     /* ************************************************************
      *  Non-API implementation methods

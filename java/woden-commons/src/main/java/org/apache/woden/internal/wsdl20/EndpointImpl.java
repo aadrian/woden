@@ -28,6 +28,7 @@ import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.xml.BindingElement;
 import org.apache.woden.wsdl20.xml.EndpointElement;
 
+import org.apache.woden.wsdl20.editable.EdEndpoint;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.EndpointPart;
 
@@ -39,7 +40,8 @@ import org.apache.woden.wsdl20.fragids.EndpointPart;
  */
 public class EndpointImpl extends NestedImpl 
                           implements Endpoint,
-                                     EndpointElement 
+                                     EndpointElement,
+                                     EdEndpoint
 {
     private NCName fName = null;
     private QName fBindingName = null;
@@ -141,6 +143,14 @@ public class EndpointImpl extends NestedImpl
         
         return new FragmentIdentifier(new EndpointPart(service ,fName));
     }
+
+	public void setBinding(Binding bindingComp) {	
+		
+		if( bindingComp != null ){
+			fBindingName=bindingComp.getName();
+		}
+		
+	}   
 
     /* ************************************************************
      *  Non-API implementation methods

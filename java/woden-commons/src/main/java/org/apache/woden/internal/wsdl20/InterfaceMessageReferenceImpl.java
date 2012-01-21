@@ -23,6 +23,7 @@ import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.InterfaceMessageReference;
 import org.apache.woden.wsdl20.InterfaceOperation;
+import org.apache.woden.wsdl20.editable.EdInterfaceMessageReference;
 import org.apache.woden.wsdl20.enumeration.Direction;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.InterfaceMessageReferencePart;
@@ -41,7 +42,8 @@ import org.apache.ws.commons.schema.XmlSchemaElement;
  */
 public class InterfaceMessageReferenceImpl extends NestedImpl
                                   implements InterfaceMessageReference, 
-                                             InterfaceMessageReferenceElement 
+                                             InterfaceMessageReferenceElement,
+                                             EdInterfaceMessageReference
 {
     //WSDL Component model data
     private NCName fMessageLabel = null;

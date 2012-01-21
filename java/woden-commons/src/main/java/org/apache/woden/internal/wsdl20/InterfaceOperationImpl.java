@@ -32,6 +32,9 @@ import org.apache.woden.wsdl20.xml.InterfaceFaultReferenceElement;
 import org.apache.woden.wsdl20.xml.InterfaceMessageReferenceElement;
 import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 
+import org.apache.woden.wsdl20.editable.EdInterfaceFaultReference;
+import org.apache.woden.wsdl20.editable.EdInterfaceMessageReference;
+import org.apache.woden.wsdl20.editable.EdInterfaceOperation;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.InterfaceOperationPart;
 
@@ -43,7 +46,8 @@ import org.apache.woden.wsdl20.fragids.InterfaceOperationPart;
  */
 public class InterfaceOperationImpl extends NestedImpl
                                     implements InterfaceOperation, 
-                                               InterfaceOperationElement 
+                                               InterfaceOperationElement,
+                                               EdInterfaceOperation
 {
     //Component data
     private NCName fName = null;
@@ -241,4 +245,35 @@ public class InterfaceOperationImpl extends NestedImpl
         NCName interfaceName = new NCName(((Interface)this.getParent()).getName().getLocalPart());
         return new FragmentIdentifier(new InterfaceOperationPart(interfaceName, fName));
     }
+
+	public EdInterfaceFaultReference addInterfaceFaultReference() {
+		
+		 InterfaceFaultReferenceImpl faultRef = new InterfaceFaultReferenceImpl();
+	     fFaultRefs.add(faultRef);
+	     faultRef.setParentElement(this);
+	     return faultRef;
+	}
+
+	public EdInterfaceMessageReference addInterfaceMessageReference() {
+		
+		InterfaceMessageReferenceImpl msgRef = new InterfaceMessageReferenceImpl();
+        fMessageRefs.add(msgRef);
+        msgRef.setParentElement(this);
+        return msgRef;
+	}
+
+	public void setMessageExchangePattern(URI mep) {
+
+		if (mep != null) {
+			fMessageExchangePattern = mep;
+		}
+	}
+
+	public void setName(QName name) {
+
+		fName = new NCName(name.getLocalPart());
+
+	}
+    
+    
 }

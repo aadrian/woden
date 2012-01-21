@@ -35,6 +35,9 @@ import org.apache.woden.wsdl20.xml.BindingOperationElement;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
 import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 
+import org.apache.woden.wsdl20.editable.EdBindingFaultReference;
+import org.apache.woden.wsdl20.editable.EdBindingMessageReference;
+import org.apache.woden.wsdl20.editable.EdBindingOperation;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.fragids.BindingOperationPart;
 
@@ -45,7 +48,9 @@ import org.apache.woden.wsdl20.fragids.BindingOperationPart;
  * @author jkaputin@apache.org
  */
 public class BindingOperationImpl extends NestedImpl 
-                                  implements BindingOperation, BindingOperationElement 
+                                  implements BindingOperation,
+                                             BindingOperationElement,
+                                             EdBindingOperation
 {
     private QName fRef = null;
     private List fMessageRefs = new Vector();
@@ -197,6 +202,29 @@ public class BindingOperationImpl extends NestedImpl
         return new FragmentIdentifier(new BindingOperationPart (binding , fRef));
     }
 
+	public EdBindingFaultReference addBindingFaultReference() {
+		
+		BindingFaultReferenceImpl faultRef = new BindingFaultReferenceImpl();
+        fFaultRefs.add(faultRef);
+        faultRef.setParentElement(this);
+        return faultRef;
+	}
+
+	public EdBindingMessageReference addBindingMessageReference() {
+		
+		BindingMessageReferenceImpl msgRef = new BindingMessageReferenceImpl();
+        fMessageRefs.add(msgRef);
+        msgRef.setParentElement(this);
+        return msgRef;
+	}
+
+	public void setInterfaceOperation(InterfaceOperation interfaceOperationComp) {
+
+		if (interfaceOperationComp != null) {
+			fRef = interfaceOperationComp.getName();
+		}
+
+	}
     /* ************************************************************
      *  Non-API implementation methods
      * ************************************************************/

@@ -16,6 +16,10 @@
  */
 package org.apache.woden.internal.wsdl20;
 
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +29,9 @@ import java.util.Vector;
 
 import javax.xml.namespace.QName;
 
+import org.apache.woden.SerializationStrategy;
 import org.apache.woden.WSDLException;
+import org.apache.woden.internal.SingleFileSerializationStrategy;
 import org.apache.woden.internal.WSDLContext;
 import org.apache.woden.wsdl20.Binding;
 import org.apache.woden.wsdl20.Description;
@@ -33,6 +39,11 @@ import org.apache.woden.wsdl20.ElementDeclaration;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.Service;
 import org.apache.woden.wsdl20.TypeDefinition;
+import org.apache.woden.wsdl20.editable.EdBinding;
+import org.apache.woden.wsdl20.editable.EdDescription;
+import org.apache.woden.wsdl20.editable.EdInterface;
+import org.apache.woden.wsdl20.editable.EdService;
+import org.apache.woden.wsdl20.editable.EdTypeDefinition;
 import org.apache.woden.wsdl20.fragids.DescriptionPart;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.xml.BindingElement;
@@ -62,7 +73,7 @@ import org.apache.woden.wsdl20.xml.WSDLElement;
  * @author jkaputin@apache.org
  */
 public class DescriptionImpl extends WSDLComponentImpl
-                             implements Description, DescriptionElement 
+                             implements Description, DescriptionElement ,EdDescription 
 {
     private static final String emptyString = "".intern();
     
@@ -96,6 +107,8 @@ public class DescriptionImpl extends WSDLComponentImpl
     
     private boolean fComponentsInitialized = false;
     private WSDLContext fWsdlContext;
+    
+    private String serializationStrategy;
     
     /*
      * Constructors
@@ -637,5 +650,70 @@ public class DescriptionImpl extends WSDLComponentImpl
         }
         return namespace;
     }
+
+	public EdBinding addBinding() {
+		BindingImpl binding = new BindingImpl();
+        fBindingElements.add(binding);
+        binding.setParentElement(this);
+        return binding;
+	}
+
+	public EdInterface addInterface() {
+		InterfaceImpl intface = new InterfaceImpl();
+        fInterfaceElements.add(intface);
+        intface.setParentElement(this);
+        return intface; 
+	}
+
+	public EdService addService() {
+		ServiceImpl service = new ServiceImpl();
+        fServiceElements.add(service);
+        service.setParentElement(this);
+        return service;
+	}
+	
+	
+
+	public void serialize(OutputStream sink) {
+		
+		 PrintWriter pw = new PrintWriter(sink);
+		 serialize(pw);
+		
+	}
+
+	public void serialize(Writer sink) {	
+		findSearalizationStrategy().serializeInternal(this, sink);
+		
+	}
+
+	public EdTypeDefinition addTypeDefinition() {
+		
+		return null;
+	}
+
+	public String getserializationStrategy() {
+		return serializationStrategy;
+	}
+
+	public void setserializationStrategy(String searalizationStrategy) {
+		this.serializationStrategy = searalizationStrategy;
+	}
+	
+	private SerializationStrategy findSearalizationStrategy(){
+		
+		SerializationStrategy searalizationStrategy;
+		
+		if(getserializationStrategy()==SerializationStrategy.SingleFileSerializationStrategy){
+			searalizationStrategy=new  SingleFileSerializationStrategy(fWsdlContext);
+			
+		}else{
+			searalizationStrategy=new  SingleFileSerializationStrategy(fWsdlContext);
+			
+		}
+		
+		return searalizationStrategy;
+		
+		
+	}   
 
 }

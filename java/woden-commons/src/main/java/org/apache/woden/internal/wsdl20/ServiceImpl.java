@@ -27,6 +27,8 @@ import org.apache.woden.wsdl20.Description;
 import org.apache.woden.wsdl20.Endpoint;
 import org.apache.woden.wsdl20.Interface;
 import org.apache.woden.wsdl20.Service;
+import org.apache.woden.wsdl20.editable.EdEndpoint;
+import org.apache.woden.wsdl20.editable.EdService;
 import org.apache.woden.wsdl20.fragids.FragmentIdentifier;
 import org.apache.woden.wsdl20.xml.EndpointElement;
 import org.apache.woden.wsdl20.xml.InterfaceElement;
@@ -42,7 +44,7 @@ import org.apache.woden.wsdl20.fragids.ServicePart;
  * @author John Kaputin (jkaputin@apache.org)
  */
 public class ServiceImpl extends WSDLComponentImpl 
-                         implements Service, ServiceElement 
+                         implements Service, ServiceElement, EdService 
 {
     private WSDLElement fParentElem = null;
     
@@ -224,5 +226,27 @@ public class ServiceImpl extends WSDLComponentImpl
     public FragmentIdentifier getFragmentIdentifier() {
         return new FragmentIdentifier(new ServicePart(fName));
     }
+
+	public EdEndpoint addEndpoint() {
+		
+		 EndpointImpl endpoint = new EndpointImpl();
+	     fEndpoints.add(endpoint);
+	     endpoint.setParentElement(this);
+	     return endpoint;
+	}
+
+	public void setInterface(Interface interfaceComp) {
+
+		if (interfaceComp != null) {
+			fInterfaceName = interfaceComp.getName();
+		}
+
+	}
+
+	public void setName(QName name) {
+
+		fName = new NCName(name.getLocalPart());
+
+	}    
 
 }
