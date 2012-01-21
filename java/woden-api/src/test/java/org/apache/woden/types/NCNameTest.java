@@ -95,7 +95,7 @@ public class NCNameTest extends TestCase {
         String keyStr = new String("bar");
         NCName nOrig = new NCName(keyStr);
         NCName n;
-        Map ncnameMap = new HashMap();
+        Map<String, NCName> ncnameMap = new HashMap<String, NCName>();
         ncnameMap.put(keyStr, nOrig);
         n = (NCName)ncnameMap.get(keyStr);
         assertNotNull("Couldn't find NCName in Map keyed off String key object used to put it there", n);
@@ -109,7 +109,7 @@ public class NCNameTest extends TestCase {
         NCName keyNCName = new NCName("bar");
         String sOrig = keyNCName.toString();
         String s;
-        Map stringMap = new HashMap();
+        Map<NCName, String> stringMap = new HashMap<NCName, String>();
         stringMap.put(keyNCName, sOrig);
         s = (String)stringMap.get(keyNCName);
         assertNotNull("Couldn't find String in Map keyed off NCName key object used to put it there", s);

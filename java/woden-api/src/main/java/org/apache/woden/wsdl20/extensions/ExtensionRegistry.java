@@ -87,36 +87,36 @@ public class ExtensionRegistry
     This is a Map of Maps. The top-level Map is keyed by (Class)parentType,
     and the inner Maps are keyed by (QName)elementQN.
   */
-  protected Map serializerReg = new Hashtable();
+  protected Map<Class, Map<QName, ExtensionSerializer>> serializerReg = new Hashtable<Class, Map<QName, ExtensionSerializer>>();
   /*
     This is a Map of Maps. The top-level Map is keyed by (Class)parentType,
     and the inner Maps are keyed by (QName)elementQN.
   */
-  protected Map deserializerReg = new Hashtable();
+  protected Map<Class, Map<QName, ExtensionDeserializer>> deserializerReg = new Hashtable<Class, Map<QName, ExtensionDeserializer>>();
   /*
     This is a Map of Maps. The top-level Map is keyed by (Class)parentType,
     and the inner Maps are keyed by (QName)elementQN.
   */
-  protected Map extElementReg = new Hashtable();
+  protected Map<Class, Map<QName, Class>> extElementReg = new Hashtable<Class, Map<QName, Class>>();
   protected ExtensionSerializer defaultSer = null;
   protected ExtensionDeserializer defaultDeser = null;
   /*
     This is a Map of Maps. The top-level Map is keyed by (Class)parentType,
     and the inner Maps are keyed by (QName)attrName.
   */
-  protected Map extAttributeReg = new Hashtable();
+  protected Map<Class, Map<QName, Class>> extAttributeReg = new Hashtable<Class, Map<QName, Class>>();
   
   /*
    * This is a Map of Maps. The top-level Map is keyed by (Class)parentComponent
    * and the inner Map is keyed by (URI)extensionNamespace with a value of
    * (Class)componentExtensions.
    */
-  protected Map compExtReg = new Hashtable();
+ protected Map<Class, Map<URI, Class<ComponentExtensionContext>>> compExtReg = new Hashtable<Class, Map<URI, Class<ComponentExtensionContext>>>();
   
   /*
    * Error message property files.
    */
-  private List fResourceBundleNames = new ArrayList();
+  private List<String> fResourceBundleNames = new ArrayList<String>();
   
   private ErrorReporter errorReporter = null;
   
@@ -129,7 +129,7 @@ public class ExtensionRegistry
    * A Map of assertions, where the key is an assertion id string and 
    * the value is an AssertionInfo object.
    */
-  protected Map assertionReg = new Hashtable();
+  protected Map<String, AssertionInfo> assertionReg = new Hashtable<String, AssertionInfo> ();
 
   /**
    * Set the serializer to be used when none is found for an extensibility
@@ -198,11 +198,11 @@ public class ExtensionRegistry
                                  QName elementType,
                                  ExtensionSerializer es)
   {
-    Map innerSerializerReg = (Map)serializerReg.get(parentType);
+    Map<QName, ExtensionSerializer> innerSerializerReg = serializerReg.get(parentType);
 
     if (innerSerializerReg == null)
     {
-      innerSerializerReg = new Hashtable();
+      innerSerializerReg = new Hashtable<QName, ExtensionSerializer>();
 
       serializerReg.put(parentType, innerSerializerReg);
     }
@@ -230,11 +230,11 @@ public class ExtensionRegistry
                                    QName elementType,
                                    ExtensionDeserializer ed)
   {
-    Map innerDeserializerReg = (Map)deserializerReg.get(parentType);
+    Map<QName, ExtensionDeserializer> innerDeserializerReg = deserializerReg.get(parentType);
 
     if (innerDeserializerReg == null)
     {
-      innerDeserializerReg = new Hashtable();
+      innerDeserializerReg = new Hashtable<QName, ExtensionDeserializer>();
 
       deserializerReg.put(parentType, innerDeserializerReg);
     }
@@ -267,12 +267,12 @@ public class ExtensionRegistry
                                              QName elementType)
                                                throws WSDLException
   {
-    Map innerSerializerReg = (Map)serializerReg.get(parentType);
+    Map<QName, ExtensionSerializer> innerSerializerReg = serializerReg.get(parentType);
     ExtensionSerializer es = null;
 
     if (innerSerializerReg != null)
     {
-      es = (ExtensionSerializer)innerSerializerReg.get(elementType);
+      es = innerSerializerReg.get(elementType);
     }
 
     if (es == null)
@@ -316,12 +316,12 @@ public class ExtensionRegistry
                                                  QName elementType)
                                                    throws WSDLException
   {
-    Map innerDeserializerReg = (Map)deserializerReg.get(parentType);
+    Map<QName, ExtensionDeserializer> innerDeserializerReg = deserializerReg.get(parentType);
     ExtensionDeserializer ed = null;
 
     if (innerDeserializerReg != null)
     {
-      ed = (ExtensionDeserializer)innerDeserializerReg.get(elementType);
+      ed = innerDeserializerReg.get(elementType);
     }
 
     if (ed == null)
@@ -358,13 +358,12 @@ public class ExtensionRegistry
    */
   public Class queryExtElementType(Class parentClass, QName elemQN)
   {
-    Map innerExtensionAttributeReg =
-      (Map)extAttributeReg.get(parentClass);
-    Class elemClass = null;
+    Map<QName, Class> innerExtensionAttributeReg = extAttributeReg.get(parentClass);
+    Class<XMLAttr> elemClass = null;
 
     if (innerExtensionAttributeReg != null)
     {
-        elemClass = (Class)innerExtensionAttributeReg.get(elemQN);
+        elemClass = innerExtensionAttributeReg.get(elemQN);
     }
 
     return elemClass;
@@ -380,9 +379,9 @@ public class ExtensionRegistry
    * Returns null if no extension deserializers are registered for
    * this parent type.
    */
-  public Set getAllowableExtensions(Class parentType)
+  public Set<QName> getAllowableExtensions(Class parentType)
   {
-    Map innerDeserializerReg = (Map)deserializerReg.get(parentType);
+    Map<QName, ExtensionDeserializer> innerDeserializerReg = deserializerReg.get(parentType);
 
     return (innerDeserializerReg != null)
            ? innerDeserializerReg.keySet()
@@ -410,11 +409,11 @@ public class ExtensionRegistry
                                 QName elementType,
                                 Class extensionType)
   {
-    Map innerExtensionTypeReg = (Map)extElementReg.get(parentType);
+    Map<QName, Class> innerExtensionTypeReg = extElementReg.get(parentType);
 
     if (innerExtensionTypeReg == null)
     {
-      innerExtensionTypeReg = new Hashtable();
+      innerExtensionTypeReg = new Hashtable<QName, Class>();
 
       extElementReg.put(parentType, innerExtensionTypeReg);
     }
@@ -446,12 +445,12 @@ public class ExtensionRegistry
                                               QName elementType)
                                                 throws WSDLException
   {
-    Map innerExtensionTypeReg = (Map)extElementReg.get(parentType);
-    Class extensionType = null;
+    Map<QName, Class> innerExtensionTypeReg = extElementReg.get(parentType);
+    Class<ExtensionElement> extensionType = null;
 
     if (innerExtensionTypeReg != null)
     {
-      extensionType = (Class)innerExtensionTypeReg.get(elementType);
+      extensionType = innerExtensionTypeReg.get(elementType);
     }
 
     if (extensionType == null)
@@ -475,7 +474,7 @@ public class ExtensionRegistry
 
     try
     {
-        ExtensionElement ee = (ExtensionElement)extensionType.newInstance();
+        ExtensionElement ee = extensionType.newInstance();
       /*
       if (ee.getElementType() == null)
       {
@@ -520,12 +519,11 @@ public class ExtensionRegistry
                                        QName attrQName,
                                        Class attrClass)
   {
-    Map innerExtensionAttributeReg =
-      (Map)extAttributeReg.get(ownerClass);
+    Map<QName, Class> innerExtensionAttributeReg = extAttributeReg.get(ownerClass);
 
     if (innerExtensionAttributeReg == null)
     {
-      innerExtensionAttributeReg = new Hashtable();
+      innerExtensionAttributeReg = new Hashtable<QName, Class>();
 
       extAttributeReg.put(ownerClass, innerExtensionAttributeReg);
     }
@@ -548,15 +546,14 @@ public class ExtensionRegistry
    * @see #registerExtAttributeType(Class, QName, Class)
    * @see AttributeExtensible
    */
-  public Class queryExtAttributeType(Class parentClass, QName attrQN)
+  public Class<XMLAttr> queryExtAttributeType(Class parentClass, QName attrQN)
   {
-    Map innerExtensionAttributeReg =
-      (Map)extAttributeReg.get(parentClass);
-    Class attrClass = null;
+    Map<QName, Class> innerExtensionAttributeReg = extAttributeReg.get(parentClass);
+    Class<XMLAttr> attrClass = null;
 
     if (innerExtensionAttributeReg != null)
     {
-        attrClass = (Class)innerExtensionAttributeReg.get(attrQN);
+        attrClass = innerExtensionAttributeReg.get(attrQN);
     }
 
     return attrClass;
@@ -565,13 +562,13 @@ public class ExtensionRegistry
   public XMLAttr createExtAttribute(Class ownerClass, QName attrQName, XMLElement ownerElement, String attrValue)
                                           throws WSDLException
   {
-      Map innerExtensionAttributeReg = (Map)extAttributeReg.get(ownerClass);
-      Class implClass = null;
+      Map<QName, Class> innerExtensionAttributeReg = extAttributeReg.get(ownerClass);
+      Class<XMLAttr> implClass = null;
       XMLAttr attr = null;
       
       if (innerExtensionAttributeReg != null)
       {
-          implClass = (Class)innerExtensionAttributeReg.get(attrQName);
+          implClass = innerExtensionAttributeReg.get(attrQName);
       }
       
       if (implClass == null)
@@ -587,7 +584,7 @@ public class ExtensionRegistry
                   new QName("http://ws.apache.org/woden", "DefaultAttr"));
 
           //If no default Java class is registered, use the UnknownAttr class.
-          if(implClass == null) implClass = UnknownAttr.class;
+          if(implClass == null) implClass = (Class)UnknownAttr.class;
           
            
           //Decided it is not necessary to report WSDL010 as a warning to the user, 
@@ -618,9 +615,9 @@ public class ExtensionRegistry
       
       try {
           Class[] ctorParms = new Class[] {XMLElement.class, QName.class, String.class, ErrorReporter.class};
-          Constructor ctor = implClass.getConstructor(ctorParms);
+          Constructor<XMLAttr> ctor = implClass.getConstructor(ctorParms);
           Object[] ctorParmValues = new Object[] {ownerElement, attrQName, attrValue, getErrorReporter()};
-          attr = (XMLAttr)ctor.newInstance(ctorParmValues);
+          attr = ctor.newInstance(ctorParmValues);
       } 
       catch (Exception e) {
           //SecurityException
@@ -656,12 +653,11 @@ public class ExtensionRegistry
           throw new IllegalArgumentException(msg);
       }
       
-      Map innerCompExtReg =
-          (Map)compExtReg.get(parentClass);
+      Map<URI, Class<ComponentExtensionContext>> innerCompExtReg = compExtReg.get(parentClass);
       
       if (innerCompExtReg == null)
       {
-          innerCompExtReg = new Hashtable();
+          innerCompExtReg = new Hashtable<URI, Class<ComponentExtensionContext>>();
           
           compExtReg.put(parentClass, innerCompExtReg);
       }
@@ -678,15 +674,14 @@ public class ExtensionRegistry
    * @param extNamespace the extension namespace
    * @return the Class of the component extensions
    */
-  public Class queryComponentExtension(Class parentClass, URI extNamespace)
+  public Class<ComponentExtensionContext> queryComponentExtension(Class parentClass, URI extNamespace)
   {
-      Map innerCompExtReg =
-          (Map)compExtReg.get(parentClass);
-      Class compExtClass = null;
+      Map<URI, Class<ComponentExtensionContext>> innerCompExtReg = compExtReg.get(parentClass);
+      Class<ComponentExtensionContext> compExtClass = null;
       
       if (innerCompExtReg != null)
       {
-          compExtClass = (Class)innerCompExtReg.get(extNamespace);
+          compExtClass = innerCompExtReg.get(extNamespace);
       }
       
       return compExtClass;
@@ -700,12 +695,11 @@ public class ExtensionRegistry
    */
   public URI[] queryComponentExtensionNamespaces(Class parentClass)
   {
-      Map innerCompExtReg =
-          (Map)compExtReg.get(parentClass);
+      Map<URI, Class<ComponentExtensionContext>> innerCompExtReg = compExtReg.get(parentClass);
       
       if (innerCompExtReg != null)
       {
-          Set namespaceKeys = innerCompExtReg.keySet();
+          Set<URI> namespaceKeys = innerCompExtReg.keySet();
           URI[] extNamespaces = new URI[namespaceKeys.size()];
           namespaceKeys.toArray(extNamespaces);
           return extNamespaces;
@@ -762,9 +756,9 @@ public class ExtensionRegistry
       
       try {
           Class[] ctorParms = new Class[] {WSDLComponent.class, URI.class, ErrorReporter.class};
-          Constructor ctor = compExtCtxClass.getConstructor(ctorParms);
+          Constructor<ComponentExtensionContext> ctor = compExtCtxClass.getConstructor(ctorParms);
           Object[] ctorParmValues = new Object[] {parentComp, extNamespace, getErrorReporter()};
-          compExtCtx = (ComponentExtensionContext)ctor.newInstance(ctorParmValues);
+          compExtCtx = ctor.newInstance(ctorParmValues);
       } 
       catch (Exception e) {
           //SecurityException
@@ -811,11 +805,11 @@ public class ExtensionRegistry
     }
     
     public AssertionInfo queryAssertion(String assertionId) {
-        return (AssertionInfo) this.assertionReg.get(assertionId);
+        return this.assertionReg.get(assertionId);
     }
     
     public AssertionInfo[] queryAssertions() {
-        Collection values = this.assertionReg.values();
+        Collection<AssertionInfo> values = this.assertionReg.values();
         AssertionInfo[] array = new AssertionInfo[values.size()];
         values.toArray(array);
         return array;

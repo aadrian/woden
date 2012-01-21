@@ -36,7 +36,7 @@ import java.lang.NumberFormatException;
  */
 public class ElementPointerPart implements PointerPart {
     private final NCName ncname;
-    private final List childSequence;
+    private final List<Integer> childSequence;
     
     /**
      * Constructs an ElementPointerPart with only an elementID NCName.
@@ -59,18 +59,13 @@ public class ElementPointerPart implements PointerPart {
      * @throws NullPointerException if childSequence is null.
      * @throws IllegalArgumentException if childSequence is empty or contains elements other than Integers.
      */
-    public ElementPointerPart(List childSequence) {
+    public ElementPointerPart(List<Integer> childSequence) {
         if(childSequence == null) {
             throw new NullPointerException("The childSequence argument is null.");
         }
         if(childSequence.isEmpty()) {
             throw new IllegalArgumentException("The childSequence list is empty.");
-        }
-        for(Iterator it = childSequence.iterator(); it.hasNext();) {
-            if(!(it.next() instanceof Integer)){
-                throw new IllegalArgumentException("The childSequence list must only contain Integers.");
-            }
-        }
+        }       
         this.ncname = null;
         this.childSequence = childSequence;
     }
@@ -83,7 +78,7 @@ public class ElementPointerPart implements PointerPart {
      * @throws NullPointerException if elementID or childSequence are null.
      * @throws IllegalArgumentException if childSequence is empty or contains elements other than Integers.
      */
-    public ElementPointerPart(NCName elementID, List childSequence) {
+    public ElementPointerPart(NCName elementID, List<Integer> childSequence) {
         if(elementID == null) {
             throw new NullPointerException("The elementID argument is null.");
         }
@@ -93,14 +88,11 @@ public class ElementPointerPart implements PointerPart {
         if(childSequence.isEmpty()) {
             throw new IllegalArgumentException("The childSequence list is empty.");
         }
-        for(Iterator it = childSequence.iterator(); it.hasNext();) {
-            Object integer = it.next();
-            if(!(integer instanceof Integer)){
-                throw new IllegalArgumentException("the childSequence list must only contain Integers.");
-            } else if (((Integer)integer).intValue() == 0){
-                throw new IllegalArgumentException("the childSequence list must only contain Integers bigger than 0.");
-            }
+        if (childSequence.contains(0)) {
+            throw new IllegalArgumentException(
+                    "the childSequence list must only contain Integers bigger than 0.");
         }
+        
         this.ncname = elementID;
         this.childSequence = childSequence;
     }
@@ -169,7 +161,7 @@ public class ElementPointerPart implements PointerPart {
      */
     private String serialiseChildSequence() {
         StringBuffer buffer = new StringBuffer();
-        for(Iterator it = childSequence.iterator(); it.hasNext();) {
+        for(Iterator<Integer> it = childSequence.iterator(); it.hasNext();) {
             Integer child = (Integer)it.next();
             buffer.append("/" + child.toString());
         }
@@ -184,7 +176,7 @@ public class ElementPointerPart implements PointerPart {
      * @throws IllegalArgumentException if the schemeData has invalid scheme syntax.
      */
     public static ElementPointerPart parseFromString(final String schemeData) throws InvalidXPointerException {
-        List childSequence = null;
+        List<Integer> childSequence = null;
         NCName elementID = null;
         int startChar;
         int endChar;
@@ -214,7 +206,7 @@ public class ElementPointerPart implements PointerPart {
         }
         
         //Find remaining child sequence.
-        childSequence = new ArrayList();
+        childSequence = new ArrayList<Integer>();
         
         endChar = schemeData.indexOf("/", startChar+1);
         // -1 Only single child sequence element. > 0 A childSequence.

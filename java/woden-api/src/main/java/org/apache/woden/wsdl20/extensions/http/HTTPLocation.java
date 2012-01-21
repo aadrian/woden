@@ -69,8 +69,8 @@ public class HTTPLocation {
     private String fOriginalLocation;
     boolean fValid = true;
     
-    private List fValidatedList = null; //used for validating the HTTP location string
-    private List fConsolidatedList = null; //used for substitution and formatting
+    private List<String> fValidatedList = null; //used for validating the HTTP location string
+    private List<String> fConsolidatedList = null; //used for substitution and formatting
     
     private static final String emptyString = "".intern();
     private static final String questionMark = "?".intern();
@@ -96,9 +96,9 @@ public class HTTPLocation {
             //TODO throw NPE with suitable error message
             fValid = false;
         } else if(location.equals(emptyString)) {
-            fValidatedList = new Vector();
+            fValidatedList = new Vector<String>();
             fValidatedList.add(emptyString);
-            fConsolidatedList = new Vector();
+            fConsolidatedList = new Vector<String>();
             fConsolidatedList.add(emptyString);
         } else {
             List tokenizedList = tokenizeLocation();
@@ -154,7 +154,7 @@ public class HTTPLocation {
         StringBuffer buffer = new StringBuffer();
         Object currToken;
         HTTPLocationTemplate template;
-        Iterator it = fConsolidatedList.iterator();
+        Iterator<String> it = fConsolidatedList.iterator();
         
         while(it.hasNext()) {
             currToken = it.next();
@@ -194,7 +194,7 @@ public class HTTPLocation {
         List templates = new Vector();
         
         if(fValid) {
-            Iterator it = fConsolidatedList.iterator();
+            Iterator<String> it = fConsolidatedList.iterator();
             while(it.hasNext()) {
                 Object next = it.next();
                 if(next instanceof HTTPLocationTemplate) {
@@ -221,7 +221,7 @@ public class HTTPLocation {
         List templates = new Vector();
         
         if(fValid) {
-            Iterator it = fConsolidatedList.iterator();
+            Iterator<String> it = fConsolidatedList.iterator();
             while(it.hasNext()) {
                 Object next = it.next();
                 if(next instanceof HTTPLocationTemplate) {
@@ -251,7 +251,7 @@ public class HTTPLocation {
         List templates = new Vector();
         
         if(fValid) {
-            Iterator it = fConsolidatedList.iterator();
+            Iterator<String> it = fConsolidatedList.iterator();
             while(it.hasNext()) {
                 Object next = it.next();
                 if(next instanceof HTTPLocationTemplate) {
@@ -280,7 +280,7 @@ public class HTTPLocation {
         List names = new Vector();
         
         if(fValid) {
-            Iterator it = fConsolidatedList.iterator();
+            Iterator<String> it = fConsolidatedList.iterator();
             while(it.hasNext()) {
                 Object next = it.next();
                 if(next instanceof HTTPLocationTemplate) {
@@ -308,7 +308,7 @@ public class HTTPLocation {
         List names = new Vector();
         
         if(fValid) {
-            Iterator it = fConsolidatedList.iterator();
+            Iterator<String> it = fConsolidatedList.iterator();
             while(it.hasNext()) {
                 Object next = it.next();
                 if(next instanceof HTTPLocationTemplate) {
@@ -338,7 +338,7 @@ public class HTTPLocation {
         List names = new Vector();
         
         if(fValid) {
-            Iterator it = fConsolidatedList.iterator();
+            Iterator<String> it = fConsolidatedList.iterator();
             while(it.hasNext()) {
                 Object next = it.next();
                 if(next instanceof HTTPLocationTemplate) {
@@ -688,7 +688,7 @@ public class HTTPLocation {
         StringBuffer buffer = new StringBuffer();
         Object currToken;
         List tokens = new Vector();
-        Iterator it = fValidatedList.iterator();
+        Iterator<String> it = fValidatedList.iterator();
         
         while(it.hasNext()) {
             currToken = it.next();

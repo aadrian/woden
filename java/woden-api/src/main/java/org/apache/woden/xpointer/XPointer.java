@@ -36,10 +36,10 @@ import org.apache.woden.types.NCName;
  */
 public class XPointer {
     private static final String emptyString = "".intern();
-    private final Map prefixBindingContex;
-    private final Map namespaceBindingContex;
+    private final Map<NCName, String> prefixBindingContex;
+    private final Map<String, NCName>namespaceBindingContex;
     private NCName shorthandPointer;
-    private final List pointerParts;
+    private final List<PointerPart> pointerParts;
     
     private static final NCName emptyNCName = new NCName(emptyString);
     
@@ -52,12 +52,12 @@ public class XPointer {
      * 
      */
     public XPointer() {
-        pointerParts = new ArrayList();
+        pointerParts = new ArrayList<PointerPart>();
         shorthandPointer = emptyNCName;
         
         //Setup prefix/namespace binding context.
-        prefixBindingContex = new HashMap();
-        namespaceBindingContex = new HashMap();
+        prefixBindingContex = new HashMap<NCName, String>();
+        namespaceBindingContex = new HashMap<String, NCName>();
         addPrefixNamespaceBinding(new NCName("xml"), NS_URI_XML);
     }
     
@@ -184,7 +184,7 @@ public class XPointer {
      * @return A String of the namespace bound to this prefix or null if none exists.
      */
     public String getPrefixBinding(NCName prefix) {
-        return (String)prefixBindingContex.get(prefix);
+        return prefixBindingContex.get(prefix);
     }
     
     /**
@@ -195,7 +195,7 @@ public class XPointer {
      * @return A NCName of the prefix bound to this namespace or null if none exists.
      */
     public NCName getNamespaceBinding(String namespace) {
-        return (NCName)namespaceBindingContex.get(namespace);
+        return namespaceBindingContex.get(namespace);
     }
     
     /**
@@ -244,7 +244,7 @@ public class XPointer {
     public String toString() {
         if (shorthandPointer.equals(emptyNCName)) {
             StringBuffer buffer = new StringBuffer();
-            Iterator parts = pointerParts.iterator();
+            Iterator<PointerPart> parts = pointerParts.iterator();
             while (parts.hasNext()) {
                 buffer.append(parts.next());
             }
