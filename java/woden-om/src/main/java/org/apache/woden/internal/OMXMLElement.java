@@ -155,13 +155,12 @@ public class OMXMLElement extends BaseXMLElement{
         OMElement elem = (OMElement)fSource;
         Iterator elems = elem.getChildElements();
         List children = new Vector();
-        Object next = elems.next();
-        while(next != null)
+        while(elems.hasNext())
         {
+            Object next = elems.next();
             OMXMLElement omXMLElement = new OMXMLElement(fErrorReporter);
             omXMLElement.setSource(next);
             children.add(omXMLElement);
-            next = elems.next();
         }
         XMLElement[] array = new XMLElement[children.size()];
         children.toArray(array);
