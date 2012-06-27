@@ -307,8 +307,7 @@
 	
 
  <properties>
-		<woden.osgi.version>1.0.0</woden.osgi.version>
-		<bundle.plugin.version>1.4.0</bundle.plugin.version>
+		<bundle.plugin.version>2.3.7</bundle.plugin.version>
 		<apache.xmlSchema.version>1.4.8-SNAPSHOT</apache.xmlSchema.version>
 		<apache.ant.version>1.7.1</apache.ant.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
