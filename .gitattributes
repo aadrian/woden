@@ -20,7 +20,6 @@ java/woden-ant/downloads/wsdl20.zip -text
 java/woden-ant/identify-test-case-roots.xsl -text
 java/woden-ant/pom.xml -text
 java/woden-ant/test-suite-results.zip -text
-java/woden-commons/pom.xml -text
 java/woden-tests/pom-impl-dom.xml svn_keywords=Id
 java/woden-tests/pom-impl-om.xml svn_keywords=Id
 java/woden-tests/pom.xml svn_keywords=Id
