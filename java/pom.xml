@@ -113,35 +113,7 @@
   </dependencies>
   <build>
  
-      <plugins>
-	   <!--
-          <plugin>
-            <artifactId>maven-jar-plugin</artifactId>
-            <configuration>
-              <archive>
-                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-              </archive>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>maven-bundle-plugin</artifactId>
-            <version>${bundle.plugin.version}</version>
-            <configuration>
-                <instructions>
-                    <Bundle-Version>${woden.osgi.version}</Bundle-Version>
-                </instructions>
-            </configuration>
-            <executions>
-              <execution>
-                <id>bundle-manifest</id>
-                <phase>process-classes</phase>
-                <goals>
-                  <goal>manifest</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>-->
+      <plugins>	
 		<plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
@@ -212,10 +184,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>				
-				<module>woden-api</module>
-				<module>woden-commons</module>
-				<module>woden-dom</module>
-				<module>woden-om</module>
+				<module>woden-core</module>
 				<module>woden-tests</module>
 				<module>woden-tool</module>
 				<module>woden-converter-maven-plugin</module>
@@ -229,10 +198,7 @@
 		<profile>
 			<id>m2_release</id>
 			<modules>				
-				<module>woden-api</module>
-				<module>woden-commons</module>
-				<module>woden-dom</module>
-				<module>woden-om</module>
+				<module>woden-core</module>
 				<module>woden-tool</module>
 				<module>woden-converter-maven-plugin</module>
 				<module>woden-ant</module>
@@ -266,14 +232,9 @@
 			<id>dist</id>
 			<modules>				
 				<module>woden-ant</module>   
-				<module>woden-api</module>
-				<module>woden-commons</module>
-				<module>woden-dom</module>
-			    <module>woden-om</module>
-				<!--<module>woden-tests</module> -->
+				<module>woden-core</module>
 				<module>woden-tool</module>
 				<module>woden-converter-maven-plugin</module>
-				<module>woden-ant</module> 
 			</modules>
 			<build>  
                <plugins>
@@ -349,7 +310,6 @@
 		<woden.osgi.version>1.0.0</woden.osgi.version>
 		<bundle.plugin.version>1.4.0</bundle.plugin.version>
 		<apache.xmlSchema.version>1.4.8-SNAPSHOT</apache.xmlSchema.version>
-		<apache.axiom.version>1.2.14-SNAPSHOT</apache.axiom.version>
 		<apache.ant.version>1.7.1</apache.ant.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
 		<slf4.version>1.5.8</slf4.version>
