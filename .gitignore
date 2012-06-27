@@ -11,10 +11,10 @@ java/etc/ant-test/report.xml
 java/etc/ant-test/results
 java/etc/ant-test/test
 java/etc/ant-test/test.xml
+java/etc/wsdl-viewer-test/html
 java/getBalance.wsdlcm
 java/myresources
 java/out.wsdlcm
 java/target
 java/woden-1.0.0M4-test-results.html
 java/woden-1.0.0M5-test-results.html
-java/wsdl-viewer-test/html
