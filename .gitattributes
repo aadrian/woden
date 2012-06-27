@@ -1,6 +1,6 @@
 * text=auto !eol
-java/ant-test/test-suite-results.zip -text
 java/doap_Woden.rdf -text
+java/etc/ant-test/test-suite-results.zip -text
 java/woden-ant/downloads/test-suite.zip -text
 java/woden-ant/downloads/wsdl20.zip -text
 java/woden-ant/identify-test-case-roots.xsl -text
