@@ -44,7 +44,6 @@ import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaExternal;
 import org.apache.ws.commons.schema.XmlSchemaImport;
 import org.apache.ws.commons.schema.XmlSchemaInclude;
-import org.apache.ws.commons.schema.XmlSchemaObjectCollection;
 
 /**
  * Functional verification test of SimpleURIResolver.
@@ -88,7 +87,7 @@ public class SimpleURIResolverTest extends TestCase
         	testConnection = new URL("www.apache.org").openConnection();
         } 
     	catch (IOException e){
-        	
+
         }
         assertNull("Expected no connection IOException due to non-existent HTTP Proxy.", testConnection);
         
@@ -112,7 +111,7 @@ public class SimpleURIResolverTest extends TestCase
                 wsdlURL);
         
 
-		// set the resolver explicitly, using the root as a base URL 
+		// set the resolver explicitly, using the root as a base URL
 		// (SimpleURIResolver() default constructor is the default behaviour)
         
         // Base/root URL property no longer required in this test - now uses classpath
@@ -121,7 +120,7 @@ public class SimpleURIResolverTest extends TestCase
         //        wsdlURL);
         //System.setProperty(fCatalogBaseProperty, rootURL.toString());
 		reader.setURIResolver(new SimpleURIResolver());
-		
+
 		Description descComp = reader.readWSDL(wsdlURL.toString());
         assertNotNull("The reader did not return a WSDL description.", descComp);
         
@@ -129,7 +128,7 @@ public class SimpleURIResolverTest extends TestCase
         fInterfaces = descComp.getInterfaces();
         
         DescriptionElement descElem = descComp.toElement();
-        TypesElement types = descElem.getTypesElement();	
+        TypesElement types = descElem.getTypesElement();
 		fSchemas = types.getSchemas();
 		fImportedSchemas = types.getImportedSchemas();
 		fInlinedSchemas = types.getInlinedSchemas();
@@ -170,12 +169,9 @@ public class SimpleURIResolverTest extends TestCase
      XmlSchema xmlSchema = schema1.getSchemaDefinition();
      assertEquals("Unexpected targetNamespace.", "http://example.org/getAccountDetails/", schema1.getNamespace().toString());
      
-     XmlSchemaObjectCollection schemaIncludes = xmlSchema.getIncludes(); // returns both includes and imports
-	 Iterator schemaIterator = schemaIncludes.getIterator();
-	 while (schemaIterator.hasNext()) 
+     for (XmlSchemaExternal xso : xmlSchema.getExternals()) // returns both includes and imports
 	 {
-		XmlSchemaExternal xso = (XmlSchemaExternal) schemaIterator.next();
-		if (xso instanceof XmlSchemaImport) 
+		if (xso instanceof XmlSchemaImport)
 		{
 			assertEquals("Unexpected namespace.", "http://example.org/getOverdraft", ((XmlSchemaImport)xso).getNamespace());
 			assertEquals("Unexpected schemaLocation.", "http://test.com/getOverdraft.xsd", xso.getSchemaLocation());
@@ -191,13 +187,10 @@ public class SimpleURIResolverTest extends TestCase
 	 InlinedSchema schema1 = fInlinedSchemas[0];
 	 XmlSchema xmlSchema = schema1.getSchemaDefinition();
 	 assertEquals("Unexpected targetNamespace.", "http://example.org/getAccountDetails/", schema1.getNamespace().toString());
-	     
-	 XmlSchemaObjectCollection schemaIncludes = xmlSchema.getIncludes(); // returns both includes and imports
-     Iterator schemaIterator = schemaIncludes.getIterator();
-	 while (schemaIterator.hasNext()) 
+
+     for (XmlSchemaExternal xso : xmlSchema.getExternals()) // returns both includes and imports
 	 {
-		XmlSchemaExternal xso = (XmlSchemaExternal) schemaIterator.next();
-		if (xso instanceof XmlSchemaInclude) 
+		if (xso instanceof XmlSchemaInclude)
 		{
 			assertEquals("Unexpected schemaLocation.", "http://test.com/getBalance.xsd", xso.getSchemaLocation());
 		}
@@ -212,16 +205,16 @@ public class SimpleURIResolverTest extends TestCase
 	 {
 		 p.remove(fCatalogProperty);
 	 }
-	 else 
+	 else
 	 {
 		 p.setProperty(fCatalogProperty, fCatalogPropValue);
 	 }
-	 
+
 	 if (fHttpProxyHostValue == null)
 	 {
 		 p.remove(fHttpProxyHostProperty);
 	 }
-	 else 
+	 else
 	 {
 		 p.setProperty(fHttpProxyHostProperty, fHttpProxyHostValue);
 	 }
@@ -229,7 +222,7 @@ public class SimpleURIResolverTest extends TestCase
 	 // above required as following throws NPE when arg1 == null (contrary to spec)
 	 //System.setProperty(fCatalogProperty, fCatalogPropValue);
 	 //System.setProperty("http.proxyHost", fHttpProxyHostValue);
-	 
+
 	 System.setProperties(p);
  }
    

@@ -17,8 +17,8 @@
 package org.apache.woden.internal.wsdl20;
 
 import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.xml.namespace.QName;
@@ -52,11 +52,11 @@ import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 import org.apache.woden.wsdl20.xml.ServiceElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.ws.commons.schema.XmlSchema;
+import org.apache.ws.commons.schema.XmlSchemaElement;
 import org.apache.ws.commons.schema.XmlSchemaExternal;
 import org.apache.ws.commons.schema.XmlSchemaImport;
 import org.apache.ws.commons.schema.XmlSchemaInclude;
-import org.apache.ws.commons.schema.XmlSchemaObjectCollection;
-import org.apache.ws.commons.schema.XmlSchemaObjectTable;
+import org.apache.ws.commons.schema.XmlSchemaType;
 import org.apache.ws.commons.schema.utils.NamespacePrefixList;
 
 /**
@@ -222,11 +222,7 @@ public class ComponentModelBuilder {
         //process elements and types declared in any included or imported schemas.
         //note that XmlSchema keeps included and imported schemas together, via getIncludes().
         
-        XmlSchemaObjectCollection includeColl = schemaDef.getIncludes();
-        Iterator includes = includeColl.getIterator();
-        while(includes.hasNext()) {
-            Object o = includes.next();
-            XmlSchemaExternal externalSchema = (XmlSchemaExternal)o;
+        for(XmlSchemaExternal externalSchema : schemaDef.getExternals()) {
             XmlSchema schema = externalSchema.getSchema();
             if(schema != null )
             {
@@ -244,11 +240,9 @@ public class ComponentModelBuilder {
 	 */
 	private void buildElementDeclarations(XmlSchema schemaDef, String schemaTns, URI typeSystemURI) {
         
-	    XmlSchemaObjectTable elementTable = schemaDef.getElements();
         NamespacePrefixList prefixes = schemaDef.getNamespaceContext();
-	    Iterator qnames = elementTable.getNames();
-	    while (qnames.hasNext()) {
-	        QName xseQN = (QName) qnames.next();
+	    for (Map.Entry<QName,XmlSchemaElement> entry : schemaDef.getElements().entrySet()) {
+	        QName xseQN = entry.getKey();
             if(fDesc.getElementDeclaration(xseQN) != null) {
                 //The Description already contains this Element Declaration.
                 continue;
@@ -280,7 +274,7 @@ public class ComponentModelBuilder {
 	            ed.setName(edQN);
 	            ed.setSystem(typeSystemURI);
 	            ed.setContentModel(Constants.API_APACHE_WS_XS);
-	            ed.setContent(elementTable.getItem(xseQN));
+	            ed.setContent(entry.getValue());
 	            fDesc.addElementDeclaration(ed);
 	        }
 	    }
@@ -291,11 +285,9 @@ public class ComponentModelBuilder {
 	 */
 	private void buildTypeDefinitions(XmlSchema schemaDef, String schemaTns, URI typeSystemURI) {
         
-	    XmlSchemaObjectTable typeTable = schemaDef.getSchemaTypes();
         NamespacePrefixList prefixes = schemaDef.getNamespaceContext();
-	    Iterator qnames = typeTable.getNames();
-	    while (qnames.hasNext()) {
-	        QName xstQN = (QName) qnames.next();
+	    for (Map.Entry<QName,XmlSchemaType> entry : schemaDef.getSchemaTypes().entrySet()) {
+	        QName xstQN = entry.getKey();
             
             if(SchemaConstants.NS_STRING_SCHEMA.equals(schemaTns) && 
                !SchemaConstants.LIST_Q_BUILT_IN_TYPES.contains(xstQN)) {
@@ -323,13 +315,13 @@ public class ComponentModelBuilder {
                     tdQN = new QName(tdQN.getNamespaceURI(), tdQN.getLocalPart(), pfx);
                 }
             }
-	        if (schemaTns == null || schemaTns.equals(tdQN.getNamespaceURI())) 
+	        if (schemaTns == null || schemaTns.equals(tdQN.getNamespaceURI()))
             {
 	            TypeDefinitionImpl td = new TypeDefinitionImpl();
 	            td.setName(tdQN);
 	            td.setSystem(typeSystemURI);
 	            td.setContentModel(Constants.API_APACHE_WS_XS);
-	            td.setContent(typeTable.getItem(xstQN));
+	            td.setContent(entry.getValue());
 	            fDesc.addTypeDefinition(td);
 	        }
 	    }
@@ -575,7 +567,7 @@ public class ComponentModelBuilder {
 	}
 
 	private void buildEndpointExtensions(EndpointImpl endpoint) {
-		
+
         /*
          * Create a ComponentExtensions subtype specific to the binding type.
          */

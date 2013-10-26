@@ -40,7 +40,7 @@ import org.apache.woden.wsdl20.xml.InterfaceMessageReferenceElement;
 import org.apache.woden.wsdl20.xml.InterfaceOperationElement;
 import org.apache.woden.wsdl20.xml.TypesElement;
 import org.apache.ws.commons.schema.XmlSchema;
-import org.apache.ws.commons.schema.XmlSchemaObjectTable;
+import org.apache.ws.commons.schema.XmlSchema;
 
 /**
  * The WSDL document validator validates a WSDL XML model against the
@@ -349,15 +349,12 @@ public class WSDLDocumentValidator
 	  if(iSchemaNs == null)
 		continue;
 	  String ns = iSchemaNs.toString();
-	  
+
 	  if(schemas.containsKey(ns))
 	  {
 		List schemaList = (List)schemas.get(ns);
-		XmlSchemaObjectTable elements = iSchema.getSchemaDefinition().getElements();
-		Iterator elementNames = elements.getNames();
-		while(elementNames.hasNext())
+		for(QName elementName : iSchema.getSchemaDefinition().getElements().keySet())
 		{
-		  QName elementName = (QName)elementNames.next();
 		  Iterator otherInlineSchemas = schemaList.iterator();
 		  while(otherInlineSchemas.hasNext())
 		  {
@@ -368,14 +365,11 @@ public class WSDLDocumentValidator
 			  isValid = false;
 			}
 		  }
-		
+
 		}
-		
-		XmlSchemaObjectTable types = iSchema.getSchemaDefinition().getSchemaTypes();
-		Iterator typeNames = types.getNames();
-		while(typeNames.hasNext())
+
+		for(QName typeName : iSchema.getSchemaDefinition().getSchemaTypes().keySet())
 		{
-		  QName typeName = (QName)typeNames.next();
 		  Iterator otherInlineSchemas = schemaList.iterator();
 		  while(otherInlineSchemas.hasNext())
 		  {
@@ -386,7 +380,7 @@ public class WSDLDocumentValidator
 			  isValid = false;
 		    }
 		  }
-			
+
 		}
 		  //Check if another element has been defined.
 		  //check if another type has been defined.
@@ -399,7 +393,7 @@ public class WSDLDocumentValidator
 		schemaList.add(iSchema);
 		schemas.put(ns, schemaList);
 	  }
-		 
+
 	}
 	return isValid;
   }
@@ -428,6 +422,7 @@ public class WSDLDocumentValidator
 	  }
 	}
 	return isValid;
+
   }
   
   /**
