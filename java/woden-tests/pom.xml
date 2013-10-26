@@ -59,7 +59,7 @@
    <dependencies>
      <dependency>
        <groupId>org.apache.woden</groupId>
-       <artifactId>woden-impl-dom</artifactId>
+       <artifactId>woden-core</artifactId>
        <version>${project.version}</version>
      </dependency>  
 	 <dependency>
