@@ -310,7 +310,7 @@
 
  <properties>
 		<bundle.plugin.version>2.3.7</bundle.plugin.version>
-		<apache.xmlSchema.version>2.0.4-SNAPSHOT</apache.xmlSchema.version>
+		<apache.xmlSchema.version>2.1.1-SNAPSHOT</apache.xmlSchema.version>
 		<apache.ant.version>1.7.1</apache.ant.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
 		<slf4.version>1.5.8</slf4.version>
