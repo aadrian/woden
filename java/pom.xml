@@ -204,6 +204,7 @@
 				<module>woden-tool</module>
 				<module>woden-converter-maven-plugin</module>
 				<module>woden-ant</module>
+				<module>woden-dist</module>
 			</modules>
                          <build>
                            <plugins>
@@ -211,6 +212,23 @@
                                 <groupId>org.apache.maven.plugins</groupId>
                                 <artifactId>maven-gpg-plugin</artifactId>
                                 <version>1.1</version>                                   
+                              </plugin>
+                              <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-javadoc-plugin</artifactId>
+                                <version>2.6.1</version>
+                                <configuration>
+                                  <excludePackageNames>org.apache.woden.internal</excludePackageNames>
+                                </configuration>
+                                <executions>
+                                  <execution>
+                                        <id>aggregate</id>
+                                        <goals>
+                                            <goal>aggregate</goal>
+                                        </goals>
+                                        <phase>package</phase>
+                                   </execution>
+                                 </executions>
                               </plugin>
                               <plugin>
                                  <groupId>org.apache.maven.plugins</groupId> 
