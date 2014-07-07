@@ -401,14 +401,13 @@ public class DOMWSDLWriter extends BaseWSDLWriter
                     }
 
                     URI[] styles=operation.getStyle();
-                    for(int i=0;i<styles.length;i++){
-                        if(styles[i]!=null){
-
-                            DOMUtils.printAttribute(
-                                    Constants.ATTR_STYLE,
-                                    styles[i].toString(),
-                                    pw);
-                        }
+                    if(styles != null && styles.length > 0){
+                    	String styleStr= getStyleStr(styles);
+                        DOMUtils.printAttribute(
+                                        Constants.ATTR_STYLE,
+                                        styleStr,
+                                        pw);
+                    	
                     }
                     printExtensibilityAttributes(operation.getExtensionAttributes(), operation, pw);
                     pw.println('>');
@@ -1055,6 +1054,17 @@ public class DOMWSDLWriter extends BaseWSDLWriter
                 }
             }
         }
+    }
+
+    private String getStyleStr(URI[] styles) {
+        String styleStr = "";
+        if (styles != null) {
+            for (URI uri : styles) {
+                styleStr = styleStr + uri.toString() + " ";
+            }
+            styleStr = styleStr.trim();
+        }
+        return styleStr;
     }
 
 }

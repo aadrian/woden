@@ -17,6 +17,7 @@
 package org.apache.woden;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -135,18 +136,41 @@ public class DOMWSDLWriterTest extends TestCase {
 		        //delete the temp file.
                 outFile.delete();
 
-		    } catch (WSDLException e) {
-		        fail("Can not instantiate the WSDLReader or WSDLWriter object.");
-		    }catch (IOException e) {
-		        fail("Can not access the specified file");
-		    }
-		    }
-
-
+		} catch (WSDLException e) {
+			fail("Can not instantiate the WSDLReader or WSDLWriter object.");
+		} catch (IOException e) {
+			fail("Can not access the specified file");
 		}
+	}
 
+    public void testECHOWSDL() throws WSDLException, IOException {
 
+        fReader = FWSDLFactory.newWSDLReader();
+        fWriter = FWSDLFactory.newWSDLWriter();
+        FileOutputStream fFileStream = new FileOutputStream(foutputWsdlPath);
+        URL wsdlInputURL = getClass().getClassLoader().getResource(
+                "org/apache/woden/echo.wsdl");
+        DescriptionElement descElem = (DescriptionElement) fReader
+                .readWSDL(wsdlInputURL.toString());
+        assertNotNull("DescriptionElement can not  be null", descElem);
+        fDescription = descElem.toComponent();
+        fWriter.writeWSDL(descElem, fFileStream);
+        fFileStream.flush();
+        fFileStream.close();
+        File outFile = new File(outputPath);
+        String outFilePath = outFile.toURL().toString();
+        DescriptionElement outDescElem = (DescriptionElement) fReader
+                .readWSDL(outFilePath);
+        assertNotNull("DescriptionElement can not  be null", outDescElem);
+        // TODO - complete after the WODEN-209
+        /*
+         * assertEquals("Two Description component should be same ",
+         * outDescElem.toComponent(), fDescription);
+         */
 
+        // delete the temp file.
+        outFile.delete();
 
+    }
 
-
+}
