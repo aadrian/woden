@@ -17,105 +17,104 @@
  ! limitations under the License.
  !-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <parent>
-       <groupId>org.apache.woden</groupId>
-       <artifactId>woden</artifactId>
-       <version>1.0-SNAPSHOT</version>
-   </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.apache.woden</groupId>
+        <artifactId>woden</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-   <artifactId>woden-ant</artifactId>
-   <name>Woden - Ant</name>
+    <artifactId>woden-ant</artifactId>
+    <name>Woden - Ant</name>
 
-   <build>
-       <resources>
-           <resource>
-               <targetPath>META-INF</targetPath>
-               <directory>../</directory>
-               <includes>
-                   <include>LICENSE</include>
-                   <include>README</include>
-                   <include>NOTICE</include>
-               </includes>
-           </resource>
-           <resource>
-             <directory>src/main/resources</directory>
-           </resource>
-       </resources>
-       <plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>${bundle.plugin.version}</version>			
-			</plugin>		  
-       </plugins>
-   </build>
-   
-   <profiles>
-      <profile>
-	     <!--  to run W3C testsuite and results are compared to W3C baseline -->
-		 <id>interop</id>
-		 <build>  
-            <plugins>			     
-		       <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-antrun-plugin</artifactId>
-                  <version>1.3</version>
-			      <executions>
-                    <execution>
-                       <phase>test</phase>
-                       <configuration>
-                           <tasks>					   
-					           <property name="compile_classpath" refid="maven.compile.classpath" />
-                               <property name="runtime_classpath" refid="maven.runtime.classpath" />
-                               <property name="test_classpath" refid="maven.test.classpath" />                       					
-						       <ant antfile="${basedir}/build.xml"> 
-			                       <target name="getW3cWsdl20" />		
-						           <target name="main" /> 						   
-                               </ant>
-                           </tasks>
-                       </configuration>
-                       <goals>
-                            <goal>run</goal>
-                       </goals>
-                   </execution>
-                  </executions>
-		         <dependencies>		 
-		            <dependency>
-                      <groupId>org.apache.ant</groupId>
-                      <artifactId>ant-trax</artifactId>
-                      <version>${apache.ant.version}</version>					 
-		              <scope>test</scope>
-		            </dependency>
-		            <dependency>
-                       <groupId>org.apache.ant</groupId>
-                       <artifactId>ant-nodeps</artifactId>
-                       <version>${apache.ant.version}</version>
-		               <scope>test</scope>
-                    </dependency>
-		         </dependencies>
-              </plugin>		   
-			 </plugins>
-			</build>
-		</profile>
-	</profiles>
-			   
+    <build>
+        <resources>
+            <resource>
+                <targetPath>META-INF</targetPath>
+                <directory>../</directory>
+                <includes>
+                    <include>LICENSE</include>
+                    <include>README</include>
+                    <include>NOTICE</include>
+                </includes>
+            </resource>
+            <resource>
+              <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${bundle.plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 
-   <dependencies>
-	    <dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>${apache.ant.version}</version>
-		  </dependency>
-       <dependency>
-           <groupId>org.apache.woden</groupId>
-           <artifactId>woden-core</artifactId>
-           <version>${project.version}</version>
-       </dependency>
-	   <dependency>
-			<groupId>org.apache.woden</groupId>
-			<artifactId>woden-tool</artifactId>
-			<version>${project.version}</version>
-		</dependency>	  
-   </dependencies>
+    <profiles>
+        <profile>
+            <!--  to run W3C testsuite and results are compared to W3C baseline -->
+            <id>interop</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <configuration>
+                                    <tasks>
+                                        <property name="compile_classpath" refid="maven.compile.classpath" />
+                                        <property name="runtime_classpath" refid="maven.runtime.classpath" />
+                                        <property name="test_classpath" refid="maven.test.classpath" />
+                                        <ant antfile="${basedir}/build.xml"> 
+                                            <target name="getW3cWsdl20" />
+                                            <target name="main" />
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-trax</artifactId>
+                                <version>${apache.ant.version}</version>
+                                <scope>test</scope>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>${apache.ant.version}</version>
+                                <scope>test</scope>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>${apache.ant.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.woden</groupId>
+            <artifactId>woden-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.woden</groupId>
+            <artifactId>woden-tool</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
