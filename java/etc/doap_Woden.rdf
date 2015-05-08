@@ -43,6 +43,8 @@ There are two main deliverables: an API and an implementation. The Woden API wil
         <created>2008-04-09</created>
         <revision>1.0M8</revision>
       </Version>
+    </release>
+    <release>
       <Version>
         <name>Apache Woden</name>
         <created>2011-02-17</created>
