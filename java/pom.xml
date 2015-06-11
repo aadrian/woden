@@ -75,15 +75,10 @@
   <mailingLists>
     <mailingList>
       <name>Woden Developers</name>
-      <subscribe>woden-dev-subscribe@ws.apache.org</subscribe>
-      <unsubscribe>woden-dev-unsubscribe@ws.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/ws-woden-dev/</archive>
-      <post>woden-dev@ws.apache.org</post>
-    </mailingList>
-    <mailingList>
-      <name>woden-cvs</name>
-      <subscribe>woden-cvs-subscribe@incubator.apache.org</subscribe>
-      <unsubscribe>woden-cvs-unsubscribe@incubator.apache.org</unsubscribe>
+      <subscribe>dev-subscribe@ws.apache.org</subscribe>
+      <unsubscribe>dev-unsubscribe@ws.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/ws-dev/</archive>
+      <post>dev@ws.apache.org</post>
     </mailingList>
   </mailingLists>
   <issueManagement>
