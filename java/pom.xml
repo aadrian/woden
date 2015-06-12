@@ -109,40 +109,47 @@
 	
   </dependencies>
   <build>
- 
-      <plugins>	
-		<plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <version>0.6</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-						    <!-- TO-DO 
-                                                                              Enable this goal but need to fix build breaking with incorrect check result of RAT plug-in.
-                                                                               Temporally disable to avoid build fails. 																					  
-							-->
-                           <!-- <goal>check</goal>  -->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludes>
-                         <exclude>legal/LICENSE.xerces</exclude>
-                         <exclude>legal/LICENSE.dom</exclude>
-                         <exclude>legal/LICENSE.sax</exclude>
-                         <exclude>legal/LICENSE.wsdl4j.html</exclude>
-						 <exclude>woden-1.0.0M6-test-results.html</exclude> 
-						 <exclude>ant-test/validation-results.xml</exclude>
-						 <exclude>ant-test/documents-bad-report.xml</exclude>
-						 <exclude>ant-test/documents-good-report.xml</exclude>
-						 <exclude>ant-test/validation-results-without-ids.xml</exclude>
-						 <exclude>ant-test/test-suite-results.zip</exclude>
-                         <exclude>eclipseplugin/META-INF/MANIFEST.MF</exclude>						 
-                    </excludes>
-                </configuration> 
-            </plugin>
+      <pluginManagement>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.rat</groupId>
+                  <artifactId>apache-rat-plugin</artifactId>
+                  <version>0.11</version>
+                  <configuration>
+                      <excludes>
+                          <exclude>legal/LICENSE.xerces</exclude>
+                          <exclude>legal/LICENSE.dom</exclude>
+                          <exclude>legal/LICENSE.sax</exclude>
+                          <exclude>legal/LICENSE.wsdl4j.html</exclude>
+                          <exclude>woden-1.0.0M6-test-results.html</exclude>
+                          <exclude>ant-test/validation-results.xml</exclude>
+                          <exclude>ant-test/documents-bad-report.xml</exclude>
+                          <exclude>ant-test/documents-good-report.xml</exclude>
+                          <exclude>ant-test/validation-results-without-ids.xml</exclude>
+                          <exclude>ant-test/test-suite-results.zip</exclude>
+                          <exclude>**/META-INF/MANIFEST.MF</exclude>
+                          <exclude>**/about-this-package</exclude>
+                      </excludes>
+                  </configuration>
+              </plugin>
+          </plugins>
+      </pluginManagement>
+
+
+      <plugins>
+          <plugin>
+              <groupId>org.apache.rat</groupId>
+              <artifactId>apache-rat-plugin</artifactId>
+              <version>0.11</version>
+              <executions>
+                  <execution>
+                      <phase>verify</phase>
+                      <goals>
+                          <goal>check</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
