@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Project Team</title>
+  </properties>
+  
+  <body>
+  
+    <section name="Committers">
+      <table>
+      	<tr>
+      		<td>
+      			Matthew Duftler
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			duftler AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Chathura Herath
+      		</td>
+      		<td>
+      			Indiana University
+      		</td>
+      		<td>
+      			chathura AT opensource.lk
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Jeremy Hughes
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			hughesj AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			John Kaputin
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			jkaputin AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Lawrence Mandel
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			lmandel AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Arthur Ryman
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			ryman AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Oshani Seneviratne
+      		</td>
+      		<td>
+      			WSO2
+      		</td>
+      		<td>
+      			oshanis AT gmail.com
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Graham Turrell
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			gturrell AT apache.org
+      		</td>
+      	</tr>
+		<tr>
+      		<td>
+      			Sagara Gunathunga
+      		</td>
+      		<td>
+      			-
+      		</td>
+      		<td>
+      			sagara AT apache.org
+      		</td>
+      	</tr>
+     </table>      
+    </section>
+    
+  </body>
+  
+</document>

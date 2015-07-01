@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2002-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"> 
+  <properties> 
+    <title>Woden 1.0 Builds</title> 
+  </properties> 
+  <body> 
+    <section name="Woden 1.0 Builds">
+      <p>
+      	The Woden 1.0 builds reflect the current state of Woden. Builds are not currently performed
+      	on a nightly basis. For specific information about the milestone and release dates see the
+      	<a href="milestoneplan.html">milestone plan</a>.
+      </p>
+      <table>
+      	<tr>
+      		<th>Build Type</th>
+      		<th>Build ID</th>
+      		<th>Download Location</th>
+      		<th>JUnit results</th>
+      	</tr>
+      	<tr>
+      		<td>Latest Release</td>
+      		<td></td>
+      		<td></td>
+      		<td></td>
+      	</tr>
+      	<tr>
+      		<td>Latest Milestone</td>
+      		<td>1.0M8</td>
+      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/">download</a></td>
+      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/test-results/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>Latest Integration</td>
+      		<td></td>
+      		<td></td>
+      		<td></td>
+      	</tr>
+      
+      </table>
+      <p></p>
+    </section>
+    <section name="Release Builds">
+      <table>
+      	<tr>
+      		<th>Build ID</th>
+      		<th>Download Location</th>
+      		<th>JUnit results</th>
+      	</tr>
+      </table>
+      <p></p>
+    </section>
+    <section name="Milestone Builds">
+      <table>
+      	<tr>
+      		<th>Build ID</th>
+      		<th>Download Location</th>
+      		<th>JUnit results</th>
+      	</tr>
+      	<tr>
+      		<td>1.0M8</td>
+      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/">download</a></td>
+      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/test-results/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0M7b - Incubating</td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7b-incubating">download</a></td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7b-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0M7a - Incubating</td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7a-incubating">download</a></td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7a-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0M7 - Incubating</td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7-incubating">download</a></td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0.0M6 - Incubating</td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0.0M6-incubating">download</a></td>
+      		<td><a href="http://people.apache.org/dist/ws/woden/milestones/1.0.0M6-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0.0M5 - Incubating</td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M5-incubating">download</a></td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M5-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0.0M4 - Incubating</td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M4-incubating">download</a></td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M4-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0.0M3 - Incubating</td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M3-incubating">download</a></td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M3-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0.0M2 - Incubating</td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M2-incubating">download</a></td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M2-incubating/junit-noframes.html">view test results</a></td>
+      	</tr>
+      	<tr>
+      		<td>1.0.0M1</td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/M1">download</a></td>
+      		<td><a href="http://cvs.apache.org/dist/ws/woden/milestones/M1/junit-noframes.html">view test results</a></td>
+      	</tr>
+      </table>
+      <p></p>
+    </section>
+	<section name="Integration Builds">
+      <table>
+      	<tr>
+      		<th>Build ID</th>
+      		<th>Download Location</th>
+      		<th>JUnit results</th>
+      	</tr>
+      </table>
+      <p></p>
+    </section>
+  </body>
+</document>

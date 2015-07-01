@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Projects Using Woden</title>
+  </properties>
+  
+  <body>
+   <section name="Projects Using Woden">
+  	<p>
+  		The following list contains the projects that we know about that are using Woden.
+  	</p>
+  	<p>
+  		Want to have your project or product listed on this page? Open a <a href="https://issues.apache.org/jira/browse/Woden">Jira issue</a> against Woden.
+  	</p>
+    
+    <ul>
+    	<li>
+      		<a href="http://ws.apache.org/axis2/">Apache Axis2</a>
+      	</li>
+      	<li>
+      		<a href="http://incubator.apache.org/servicemix/">Apache ServiceMix</a>
+      	</li>
+      	<li>
+      		<a href="http://lsdis.cs.uga.edu/projects/meteor-s/opensource/woden4sawsdl/index.html">Woden4SAWSDL</a>
+      	</li>
+  	</ul>      
+   </section>
+  </body>
+  
+</document>

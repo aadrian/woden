@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2002-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"> 
+  <properties> 
+    <title>Welcome to Woden</title> 
+  </properties> 
+  <body> 
+    <section name="Introduction">
+      <p>The Woden project is an incubation subproject of the Apache Web Services Project to develop a Java class library for reading, manipulating, creating and writing WSDL documents, initially to support WSDL 2.0 but with the longer term aim of supporting past, present and future versions of WSDL.</p>  
+
+<p>There are two main deliverables: an API and an implementation. The Woden API will consist of a set of Java interfaces. The WSDL 2.0-specific portion of the Woden API will conform to the W3C WSDL 2.0 specification. The implementation will be a high performance implementation directly usable in other Apache projects such as Axis2. </p>
+    </section>
+    
+    <section name="Your Help Wanted">
+      <p>Looking to get involved in an Open Source project? Interested in Web services or WSDL? Woden is looking for your help.</p>
+      <p>There are a number of different areas in which help is needed including:</p>
+      <ul>
+      	<li>Updating the Woden Axiom based implementation to the WSDL 2.0 recommendation</li>
+      	<li>Updating the WSDL 1.1 -> 2.0 converter to the WSDL 2.0 recommendation</li>
+      	<li>Adding validation logic for more WSDL 2.0 assertions</li>
+      	<li>Documenting design decisions and use patterns</li>
+      	<li>Creating more automated tests</li>
+      	<li>Reviewing the Woden API</li>
+      </ul>
+      <p>Getting involved is easy. Just send an e-mail to <a href="mailto:woden-dev@ws.apache.org">woden-dev@ws.apache.org</a> stating that you'd like to help and what you'd like to help with (if you know).</p>
+    </section>
+    
+    
+    <section name="News">
+    	<ul>
+    	    <li>
+    			<strong>Apr 24, 2008 - Woden 1.0 Milestone 8 released!</strong><br />
+    			1.0M8 is the first Woden release as part of the Apache Web services project.
+    			Download Woden 1.0M8 and view the release notes
+    			<a href="http://www.apache.org/dist/ws/woden/1.0M8/">here</a>.
+    		</li>
+    		<li>
+    			<strong>December 8, 2007 - Woden Graduated to the Web Services project!</strong><br />
+    			The Web Services and Incuator PMCs voted to accept Woden's graduation proposal. Woden
+    			is now a member of the Web Services project.
+    		</li>
+    	    <li>
+    			<strong>August 3, 2007 - Woden milestone 7b declared!</strong><br />
+    			This is a further incremental release of M7 which includes some minor corrections to accomodate 
+    			late changes to the WSDL 2.0 spec and a number of fixes, including Woden's use of WS-Commons XmlSchema. 
+    			Download Woden M7b and view the release notes
+    			<a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7b-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>April 23, 2007 - Woden milestone 7a declared!</strong><br />
+    			This is an incremental release of M7 which delivers an essential fix to support the 
+    			new shortened WSDL 2.0 namespace format. 
+    			Download Woden M7a and view the release notes
+    			<a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7a-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>February 19, 2007 - Woden milestone 7 declared!</strong><br />
+    			The focus of this release has been to fully support the parsing of 'valid' WSDL 2.0 documents, so
+    			that all of the WSDL 2.0 Infoset and Component Model can be represented in Woden.
+    			Woden M7 provides this level of compliance with the WSDL 2.0 spec as at 10th February. 
+    			Download Woden M7 and view the release notes
+    			<a href="http://people.apache.org/dist/ws/woden/milestones/1.0M7-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>October 6, 2006 - Woden milestone 6 declared!</strong><br />
+    			Woden milestone 6 introduces a StAX/AXIOM-based implementation of the Woden API
+    			in addition to the existing Xerces/DOM-based implementation. It also improves compliance with
+    			the WSDL 2.0 scoping rules by changing the way nested components are created and added to their
+    			parent components. Download the milestone and view the release notes
+    			<a href="http://people.apache.org/dist/ws/woden/milestones/1.0.0M6-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>October 6, 2006 - Second W3C WSDL 2.0 Working Group Interoperability Event</strong><br />
+    			The W3C WSDL 2.0 working group will host a second interoperability event November 14-18, 2006, in 
+    			Rennes, France. Woden will be represented at this event by members of the development
+    			team. The goals are to ensure full coverage of the WSDL 2.0 specification by the W3C WSDL 2.0 test 
+    			suite, to verify that participating WSDL 2.0 implementations such as Woden pass the test suite and 
+    			to perform further interoperability testing similar to the SOAP message testing performed
+    			at the first Interop event in July 2006.
+    		</li>
+    		<li>
+    			<strong>June 21, 2006 - Woden milestone 5 declared!</strong><br />
+    			Woden milestone 5 integrates the remaining extensions into the WSDL component model (HTTP, operation safety and rpc style),
+    			adds support for Interface Extension and introduces new ways to specify the WSDL source to the WSDL reader. 
+    			Download the milestone and view the release notes
+    			<a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M5-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>June 5, 2006 - W3C WSDL 2.0 Working Group Interoperability Event</strong><br />
+    			The W3C WSDL 2.0 working group will host an interoperability event July 5-7, 2006, in 
+    			Toronto, Ontario. Woden will be represented at this event by members of the development
+    			team. For more information see the the <a href="http://www.w3.org/2002/ws/desc/6/07/interop-logistic.html">
+    			call for participation</a> page at the W3C.
+    		</li>
+    		<li>
+    			<strong>May 30, 2006 - Woden Presentation at ApacheCon Europe 2006</strong><br />
+    			<a href="http://www.eu.apachecon.com/"><img src="images/apachecon_small.gif" alt="ApacheCon Europe 2006"/></a><br />
+    			Woden will be featured for the first time at ApacheCon during 
+    			<a href="http://www.eu.apachecon.com/">ApacheCon Europe 2006</a>,
+    			when John Kaputin and Jeremy Hughes present 
+    			<a href="http://www.eu.apachecon.com/konferenzen/psecom,id,488,track,1,nodeid,,_language,uk.html#session-we12">
+    			"Apache Woden WSDL 2.0 Processor"</a> on
+    			Wed. June 28. Come find out what WSDL 2.0 is all about. <a href="http://www.eu.apachecon.com/">Register now!</a>
+    			<p>UPDATED: PDF of presentation now available: <a href="http://people.apache.org/~hughesj/woden/WodenWSDL2Processor_WE12.pdf">WodenWSDL2Processor_WE12.pdf</a></p>
+    			
+    		</li>
+    		<li>
+    			<strong>Mar. 13, 2006 - Woden milestone 4 declared!</strong><br />
+    			Woden milestone 4 integrates extension SOAP components into the WSDL component model,
+    			includes validation of Service components and introduces a <a href="userguide.html">user guide</a> 
+    			to the Woden site. Download the milestone and view the release notes
+    			<a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M4-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>Jan. 26, 2006 - Woden milestone 3 declared!</strong><br />
+    			Woden milestone 3 includes parsing logic for WSDL 2.0
+    			service, import, and include elements into both element and component models and validation 
+    			of binding elements and components. Download the milestone and view the release notes
+    			<a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M3-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>Jan. 18, 2006 - Woden call for participation</strong><br />
+    			Like Web services? Want to keep up with the latest WSDL specification? Help answer
+    			the <a href="http://lists.w3.org/Archives/Public/www-ws-desc/2006Jan/0023.html">WSDL 2.0 working group's call for implementations</a> by participating in Woden.
+    			A task list is located on the 
+    			<a href="http://wiki.apache.org/ws/FrontPage/Woden/TaskList">Woden Wiki</a>.
+    			Get involved! Tell the Woden team how you want to help by posting to the <a href="mailinglists.html">Woden mailing
+    			list</a>.
+    		</li>
+    		<li>
+    			<strong>Dec. 9, 2005 - Woden milestone 2 declared!</strong><br />
+    			Woden milestone 2 includes parsing logic for WSDL 2.0
+    			interface and binding elements into both element and component models and validation 
+    			of type and interface elements and components. Download the milestone and view the release notes
+    			<a href="http://cvs.apache.org/dist/ws/woden/milestones/1.0.0M2-incubating">here</a>.
+    		</li>
+    		<li>
+    			<strong>Oct. 3, 2005 - Woden milestone 1 declared!</strong><br />
+    			Woden milestone 1 includes parsing logic for WSDL 2.0
+    			types and interface sections. Download the milestone and view the release notes
+    			<a href="http://cvs.apache.org/dist/ws/woden/milestones/M1">here</a>.
+    		</li>
+    	</ul>
+    </section>
+
+  </body>
+</document>

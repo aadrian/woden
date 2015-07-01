@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Version Control System</title>
+  </properties>
+  
+  <body>
+  
+    <section name="Overview">
+      <p>
+        The Woden source code resides in the Apache <a href="http://subversion.tigris.org/">Subversion
+	(SVN)</a> repository.
+      </p>
+      <p>The command-line SVN client can be obtained <a
+         href="http://subversion.tigris.org/project_packages.html">here</a>.
+      </p>
+      <p>The TortoiseSVN GUI client for Windows can be obtained <a
+	 href="http://tortoisesvn.tigris.org/">here</a>. There are also SVN plugins available for both 
+         <a href="http://subclipse.tigris.org/">Eclipse</a> and <a href="http://svnup.tigris.org/">
+         IntelliJ IDEA</a>.
+      </p>
+    </section>
+    
+    <section name="Web Access (read-only)">
+      <p>
+        The source code can be browsed via the Web at 
+        <a href="http://svn.apache.org/viewcvs.cgi/webservices/woden/">http://svn.apache.org/viewcvs.cgi/webservices/woden/</a>.
+        No SVN client software is required.
+      </p>
+    </section>
+    
+    <section name="Anonymous Access (read-only)">
+      <p>
+        The SVN URL for anonymous users is 
+        <a href="http://svn.apache.org/repos/asf/webservices/woden/">http://svn.apache.org/repos/asf/webservices/woden/</a>.
+        Instructions for anonymous SVN access are 
+        <a href="http://www.apache.org/dev/version-control.html#anon-svn">here</a>.
+      </p>
+    </section>
+    
+    <section name="Committer Access (read-write)">
+      <p>
+        The SVN URL for committers is 
+        <a href="https://svn.apache.org/repos/asf/webservices/woden/">https://svn.apache.org/repos/asf/webservices/woden/</a>.
+        Instructions for committer SVN access are 
+        <a href="http://www.apache.org/dev/version-control.html#https-svn">here</a>.
+      </p>
+    </section>
+    
+    <section name="SVN Client Configuration">
+      <p>
+        To ensure Subversion clients running on different platforms (e.g. Windows, Unix) maintain a consistent EOL style,
+        all developers will need to configure their Subversion clients in the following manner.
+      </p>
+      <p>
+        You need to add a few lines to your subversion <code>config</code> file to enable auto-props and then specify 
+        auto-props that set the property <code>eol-style=native</code> when you add new text files to Woden.
+        If you use the SVN command line client (which Subclipse does inside Eclipse) your <code>config</code> file 
+        is at <code>~/.subversion/config</code> on Unix and <code>%APPDATA%\Subversion</code> on Windows. 
+        For other clients, please consult their documentation.
+      </p>
+      <p>
+        The minimum you need to add to your Subversion client <code>config</code> file is:
+      </p>
+        <source>
+        [miscellany]
+        enable-auto-props = yes
+
+        [auto-props]
+        *.java = svn:eol-style=native
+        *.xml = svn:eol-style=native
+        *.html = svn:eol-style=native
+        *.properties = svn:eol-style=native
+        *.catalog = svn:eol-style=native
+        *.xsd = svn:eol-style=native
+        *.wsdl = svn:eol-style=native
+        </source>
+      <p>  
+        You can download these config settings <a href="http://people.apache.org/dist/ws/woden/svn.client.config/config">here</a>.
+      </p>
+    </section>
+
+    <section name="Access Via a Proxy">
+      <p>
+        SVN clients can go through a proxy if you configure them to do so. The 
+        <a href="http://subversion.tigris.org/faq.html#proxy">Subversion FAQ</a>
+        describes how to configure the command-line client to use a proxy. To 
+        configure TortoiseSVN to use a proxy, go to "TortoiseSVN Settings > Network".
+      </p>
+    </section>
+    
+  </body>
+  
+</document>

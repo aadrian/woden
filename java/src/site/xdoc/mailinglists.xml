@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Mailing Lists</title>
+  </properties>
+  
+  <body>
+  
+    <section name="Mailing Lists">
+      <p>
+        The Woden development list is
+        <a href="mailto:woden-dev@ws.apache.org">woden-dev@ws.apache.org</a>.        
+      </p>      
+      <ul>
+        <li><a href="mailto:woden-dev-subscribe@ws.apache.org">Subscribe to List</a></li>
+        <li><a href="mailto:woden-dev-unsubscribe@ws.apache.org">Unsubscribe from List</a></li>
+        <li><a href="http://mail-archives.apache.org/mod_mbox/ws-woden-dev/">View List Archive</a></li>
+		<li><a href="http://markmail.org/search/list:org.apache.ws.woden.dev">View Markmail Archive</a></li>
+      </ul>
+      <p>In order to post to the list, it is necessary to first subscribe to it.</p>
+      <p>
+        The Woden SVN list is woden-commits@incubator.apache.org.        
+      </p>      
+      <ul>
+        <li><a href="mailto:woden-commits-subscribe@incubator.apache.org">Subscribe to List</a></li>
+        <li><a href="mailto:woden-commits-unsubscribe@incubator.apache.org">Unsubscribe from List</a></li>
+      </ul>
+      <p>Posts are automatically made to this list upon commits to SVN. There is no list archive.</p>
+    </section>
+    
+  </body>
+  
+</document>

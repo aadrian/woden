@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Issue Tracking</title>
+  </properties>
+  
+  <body>
+   <section name="Woden Issue Tracking">
+    <p>
+      Woden issues (bugs, as well as enhancement requests) are tracked in 
+      Apache JIRA <a href="http://issues.apache.org/jira/browse/Woden">here</a>.
+      If you aren't sure whether something is a bug, post a question on the
+      Woden <a href="mailinglists.html">mailing list</a>.
+    </p>
+   </section>
+  </body>
+  
+</document>
