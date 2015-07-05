@@ -20,7 +20,7 @@
   </properties> 
   <body> 
     <section name="Introduction">
-      <p>The Woden project is an incubation subproject of the Apache Web Services Project to develop a Java class library for reading, manipulating, creating and writing WSDL documents, initially to support WSDL 2.0 but with the longer term aim of supporting past, present and future versions of WSDL.</p>  
+      <p>The Woden project is a subproject of the Apache Web Services Project to develop a Java class library for reading, manipulating, creating and writing WSDL documents, initially to support WSDL 2.0 but with the longer term aim of supporting past, present and future versions of WSDL.</p>
 
 <p>There are two main deliverables: an API and an implementation. The Woden API will consist of a set of Java interfaces. The WSDL 2.0-specific portion of the Woden API will conform to the W3C WSDL 2.0 specification. The implementation will be a high performance implementation directly usable in other Apache projects such as Axis2. </p>
     </section>
@@ -29,14 +29,13 @@
       <p>Looking to get involved in an Open Source project? Interested in Web services or WSDL? Woden is looking for your help.</p>
       <p>There are a number of different areas in which help is needed including:</p>
       <ul>
-      	<li>Updating the Woden Axiom based implementation to the WSDL 2.0 recommendation</li>
       	<li>Updating the WSDL 1.1 -> 2.0 converter to the WSDL 2.0 recommendation</li>
       	<li>Adding validation logic for more WSDL 2.0 assertions</li>
       	<li>Documenting design decisions and use patterns</li>
       	<li>Creating more automated tests</li>
       	<li>Reviewing the Woden API</li>
       </ul>
-      <p>Getting involved is easy. Just send an e-mail to <a href="mailto:woden-dev@ws.apache.org">woden-dev@ws.apache.org</a> stating that you'd like to help and what you'd like to help with (if you know).</p>
+      <p>Getting involved is easy. Just send an e-mail to <a href="mailto:dev@ws.apache.org">dev@ws.apache.org</a> stating that you'd like to help and what you'd like to help with (if you know).</p>
     </section>
     
     
