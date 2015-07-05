@@ -49,38 +49,6 @@
       		<a href="http://wiki.apache.org/ws/FrontPage/Woden/TaskList">Woden Task List</a>.
       	</p>
     </section>
-    <section name="Weekly Status Call">
-      <p>
-      	Woden holds weekly status calls on Tuesdays from 11am-12pm EST. These calls discuss the development
-      	of Woden.
-      </p>
-      <table>
-      	<tr>
-      		<td>Day:</td><td>Tuesday</td>
-      	</tr>
-      	<tr>
-      		<td>Time:</td><td>11:00 AM EST (<a href="http://www.timeanddate.com/worldclock/fixedtime.html?hour=11&amp;min=0&amp;sec=0&amp;p1=250">What time is this for me?</a>)</td>
-      	</tr>
-		<tr>
-			<td>Conference ID:</td><td>5823140</td>
-		</tr>
-		<tr>
-			<td>Toronto Dial-in:</td><td>416-343-2607</td>
-		</tr>
-		<tr>
-			<td>Toll-free Dial-in:</td><td>1 866-245-5059</td>
-		</tr>
-		<tr>
-			<td>Global Toll-free Dial-in:</td><td>800-4444-1010</td>
-		</tr>
-		<tr>
-			<td>Information:</td><td>1 866 224-5844</td>
-		</tr>
-		<tr>
-			<td>IRC:</td><td>Pick any <a href="http://www.freenode.net/irc_servers.shtml">freenode.org</a> server and join channel #apache-woden</td>
-		</tr>
-      </table>
-    </section>
 	<section name="Contributing WSDL Test Cases">
       <p>
       	Like many Java based projects, Woden contains a JUnit automated test suite. This test suite is
