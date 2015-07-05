@@ -41,6 +41,9 @@
     <property name="W3cWsdl20URL" value="http://dev.w3.org/cvsweb/~checkout~/2002/ws/desc/test-suite/zips/test-suite.zip" />
     <property name="W3cWsdl20File" value="test-suite.zip" />
     <property name="w3cDir" value="${downloads}/w3c" />
+    <property name="W3cAssertsURL" value="http://dev.w3.org/cvsweb/~checkout~/2002/ws/desc/test-suite/zips/wsdl20.zip" />
+    <property name="W3cAssertsFile" value="wsdl20.zip" />
+    <property name="w3cAssertsDir" value="${downloads}/wsdl20" />
 	<property name="resources.dir" location="${woden.dir}/resources" />
 
 	<property name="test-suite.dir" location="${w3cDir}" />
@@ -51,15 +54,25 @@
     
     <property name="W3CtestsCatalog" value="${woden.dir}/woden-tests/src/test/resources/org/apache/woden/resolver/resources/W3Ctests.catalog" />
 
+    <!-- Get the latest W3C WSDL 2.0 Test Cases and Schemas and unzip it -->
+    <target name="getW3cWsdl20" depends="getW3cWsdl20File, getW3cAssertsFile" description="--> Gets the W3C Test Suite"/>
+    
     <!-- W3C test suite zips -->
     <available file="${downloads}/${W3cWsdl20File}" property="W3cWsdl20File.exists" />
+    <available file="${downloads}/${W3cAssertsFile}" property="W3cAssertsFile.exists" />
 
-    <!-- Get the latest W3C WSDL 2.0 Test Cases and Schemas and unzip it -->
-    <target name="getW3cWsdl20" unless="W3cWsdl20File.exists">
+    <target name="getW3cWsdl20File" unless="W3cWsdl20File.exists">
         <mkdir dir="${w3cDir}" />
         <get src="${W3cWsdl20URL}" dest="${downloads}/${W3cWsdl20File}" />
 
         <unzip src="${downloads}/${W3cWsdl20File}" dest="${test-suite.dir}" />
+    </target>
+
+    <target name="getW3cAssertsFile" unless="W3cAssertsFile.exists">
+        <mkdir dir="${w3cAssertsDir}" />
+        <get src="${W3cAssertsURL}" dest="${downloads}/${W3cAssertsFile}" />
+
+        <unzip src="${downloads}/${W3cAssertsFile}" dest="${w3cAssertsDir}" />
     </target>
 
 	<!-- ================================= 
