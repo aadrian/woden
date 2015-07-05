@@ -40,9 +40,9 @@
       	</tr>
       	<tr>
       		<td>Latest Milestone</td>
-      		<td>1.0M8</td>
-      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/">download</a></td>
-      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/test-results/junit-noframes.html">view test results</a></td>
+      		<td>1.0M9</td>
+      		<td><a href="http://www.apache.org/dist/ws/woden/1.0M9/">download</a></td>
+      		<td><a href=""></a></td>
       	</tr>
       	<tr>
       		<td>Latest Integration</td>
@@ -71,6 +71,11 @@
       		<th>Download Location</th>
       		<th>JUnit results</th>
       	</tr>
+        <tr>
+          <td>1.0M9</td>
+          <td><a href="http://www.apache.org/dist/ws/woden/1.0M9/">download</a></td>
+          <td><a href=""></a></td>
+        </tr>
       	<tr>
       		<td>1.0M8</td>
       		<td><a href="http://www.apache.org/dist/ws/woden/1.0M8/">download</a></td>
