@@ -1,5 +1,5 @@
 * text=auto !eol
-java/etc/ant-test/test-suite-results.zip -text
+java/ant-test/test-suite-results.zip -text
 java/etc/doap_Woden.rdf -text
 java/etc/woden-eclipse-formatter-conventions.xml svn_keywords=Id
 java/etc/wsdl-viewer-test/prepare-test.xsl -text
@@ -39,11 +39,7 @@ java/src/site/xdoc/projectteam.xml -text
 java/src/site/xdoc/proposal.xml -text
 java/src/site/xdoc/userguide.xml -text
 java/src/site/xdoc/version_control.xml -text
-java/woden-ant/downloads/test-suite.zip -text
-java/woden-ant/downloads/wsdl20.zip -text
-java/woden-ant/identify-test-case-roots.xsl -text
 java/woden-ant/pom.xml -text
-java/woden-ant/test-suite-results.zip -text
 java/woden-core/src/test/resources/org/apache/woden/echo.wsdl -text
 java/woden-dist/pom.xml -text
 java/woden-dist/src/main/assembly/bin.xml -text
