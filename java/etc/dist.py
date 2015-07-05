@@ -35,10 +35,9 @@ if exists(dist_root):
 call(["svn", "checkout", "https://dist.apache.org/repos/dist/dev/ws/woden/", dist_root])
 mkdir(dist_dir)
 for classifier in [ "bin", "src" ]:
-    for format in [ "tar.bz2", "tar.gz", "zip" ]:
-        for suffix in [ format, "%s.asc" % format, "%s.md5" % format, "%s.sha1" % format ]:
-            file = "woden-" + release + "-" + classifier + "." + suffix
-            copyfile(join(woden_dir, "woden-dist", "target", file), join(dist_dir, file))
+    for suffix in [ "zip", "zip.asc", "zip.md5", "zip.sha1" ]:
+        file = "woden-" + release + "-" + classifier + "." + suffix
+        copyfile(join(woden_dir, "woden-dist", "target", file), join(dist_dir, file))
 call(["svn", "add", dist_dir])
 if release.endswith("-SNAPSHOT"):
     print "Skipping commit because version is a snapshot."
