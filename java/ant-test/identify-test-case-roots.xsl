@@ -47,8 +47,16 @@
 
 	<!-- $test-suite-dir-uri is the test suite directory uri, 
 		e.g. file:/D:/workspaces/WSD2/woden/downloads/w3c -->
-	<xsl:variable name="test-suite-dir-uri"
-		select="concat('file:/',translate ($test-suite-dir ,'\','/'))" />
+	<xsl:variable name="test-suite-dir-uri">
+		<xsl:choose>
+			<xsl:when test="starts-with($test-suite-dir, '/')">
+				<xsl:value-of select="concat('file:', $test-suite-dir)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="concat('file:/',translate ($test-suite-dir ,'\','/'))" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 
 	<!-- $test-cases is the list of test case noded in test-suite.xml -->
 	<xsl:variable name="test-cases"

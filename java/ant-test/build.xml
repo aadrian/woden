@@ -181,7 +181,7 @@
    <target name="createW3CReport">
        <ant dir="${test-suite.dir}/results" target="evaluate-Woden" />
        <ant dir="${test-suite.dir}/results" target="Interchange.html" />
-       <echo>View the W3C WSDL2 Interchange report at file://${test-suite.dir}/results/Interchange.html</echo>
+       <ant dir="${test-suite.dir}/results" target="Validation.html" />
    </target>
 
 </project>
