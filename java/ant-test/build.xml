@@ -110,7 +110,7 @@
 			<param name="test-suite-xml" expression="${test-suite-xml}" />
 			<param name="Identifier-base" expression="http://dev.w3.org/cvsweb/2002/ws/desc/test-suite" />
 		</xslt>
-		<schemavalidate failonerror="no">
+		<schemavalidate failonerror="yes">
 			<schema namespace="http://www.w3.org/2006/06/wsdl/ValidationReport" file="${xmlcatalog.dir}/wsdl/ValidationReport.xsd" />
 			<fileset dir=".">
 				<include name="${validation-results}" />

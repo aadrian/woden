@@ -64,9 +64,9 @@
 	</xsl:template>
 
 	<xsl:template match="*">
-		<xsl:element name="{name()}">
+		<xsl:copy>
 			<xsl:apply-templates />
-		</xsl:element>
+		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="text()">
