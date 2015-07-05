@@ -256,33 +256,6 @@
         <profile>
             <id>dist</id>
             <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.2</version>
-                        <inherited>false</inherited>
-                        <configuration>
-                            <tasks>
-                                <echo message="Create checksums for the .zip, .tar.gz and .tar.bz2 files in dist " />
-                                <checksum todir="${project.build.directory}">
-                                    <fileset dir="${project.build.directory}">
-                                        <include name="*.tar.gz" />
-                                        <include name="*.tar.bz2" />
-                                        <include name="*.zip" />
-                                    </fileset>
-                                </checksum>
-                                <checksum algorithm="SHA" todir="${project.build.directory}">
-                                    <fileset dir="${project.build.directory}">
-                                        <include name="*.tar.gz" />
-                                        <include name="*.tar.bz2" />
-                                        <include name="*.zip" />
-                                    </fileset>
-                                </checksum>
-                            </tasks>
-                        </configuration>
-                    </plugin>
-                </plugins>
                 <pluginManagement>
                     <plugins>
                         <plugin>
