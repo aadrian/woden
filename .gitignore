@@ -1,12 +1,6 @@
 java/.project
 java/.settings
-java/ant-test/build.desctestsuite.xml
-java/ant-test/build.jk.xml
-java/ant-test/interchange
-java/ant-test/report.xml
-java/ant-test/results
-java/ant-test/test
-java/ant-test/test.xml
+java/ant-test/target
 java/bin
 java/build
 java/doc

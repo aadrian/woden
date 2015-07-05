@@ -42,10 +42,10 @@
     <property name="W3cWsdl20File" value="test-suite.zip" />
     <property name="w3cDir" value="${downloads}/w3c" />
 	<property name="resources.dir" location="${woden.dir}/resources" />
-    <property name="w3cTests.dir" location="${woden.dir}/../desc" />
-	<available file="${w3cTests.dir}" type="dir" property="w3cTestsDir.exists" />
 
 	<property name="test-suite.dir" location="${w3cDir}" />
+    <property name="results.dir" location="${test-suite.dir}/results/Woden" />
+    <property name="validation-results" location="${results.dir}/validation-results.xml" />
 	<property name="interchange.dir" location="${test-suite.dir}/interchange" />
 	<property name="xmlcatalog.dir" location="${test-suite.dir}/xmlcatalog" />
     
@@ -78,18 +78,21 @@
        <antcall target="runTests" />
    </target>
 
-   <target name="runTests" depends="validation-results, documents-good, documents-bad, schemavalidate-results" />
+    <target name="clear-results">
+        <delete dir="${results.dir}" />
+        <mkdir dir="${results.dir}" />
+    </target>
+
+   <target name="runTests" depends="clear-results, validation-results, documents-good, documents-bad, schemavalidate-results" />
    
 	<target name="documents-good" description="---> Validates W3C WSDL 2.0 good document test suite and outputs component model">
-		<mkdir dir="results" />
-       <validatewsdl20 dir="${test-suite.dir}/documents/good" includes="**/*.wsdl" cm="yes" cmdir="results" report="${build.dir}/documents-good-report.xml" catalog="${W3CtestsCatalog}" baseURI="${test-suite.dir}" implName="${woden.implementation}"/>
-		<zip destfile="${build.dir}/test-suite-results.zip" basedir="results" />
+       <validatewsdl20 dir="${test-suite.dir}/documents/good" includes="**/*.wsdl" cm="yes" cmdir="${results.dir}" report="${build.dir}/documents-good-report.xml" catalog="${W3CtestsCatalog}" baseURI="${test-suite.dir}" implName="${woden.implementation}"/>
 	</target>
 
-	<target name="validation-results" description="--> Generates ${build.dir}/validation-results.xml for all documents.">
+	<target name="validation-results" description="--> Generates validation-results.xml for all documents.">
        <validatewsdl20 dir="${test-suite.dir}/documents" includes="**/*.wsdl" cm="no" report="${build.dir}/validation-results-without-ids.xml" catalog="${W3CtestsCatalog}" baseURI="${test-suite.dir}" implName="${woden.implementation}"/>
 		<property name="test-suite-xml" location="${test-suite.dir}/test-suite.xml" />
-		<xslt style="identify-test-case-roots.xsl" in="${build.dir}/validation-results-without-ids.xml" out="${build.dir}/validation-results.xml" force="yes">
+		<xslt style="identify-test-case-roots.xsl" in="${build.dir}/validation-results-without-ids.xml" out="${validation-results}" force="yes">
 			<param name="test-suite-dir" expression="${test-suite.dir}" />
 			<param name="test-suite-xml" expression="${test-suite-xml}" />
 			<param name="Identifier-base" expression="http://dev.w3.org/cvsweb/2002/ws/desc/test-suite" />
@@ -97,7 +100,7 @@
 		<schemavalidate failonerror="no">
 			<schema namespace="http://www.w3.org/2006/06/wsdl/ValidationReport" file="${xmlcatalog.dir}/wsdl/ValidationReport.xsd" />
 			<fileset dir=".">
-				<include name="${build.dir}/validation-results.xml" />
+				<include name="${validation-results}" />
 			</fileset>
 		</schemavalidate>
 	</target>
@@ -136,7 +139,7 @@
 		<schemavalidate failonerror="no">
 			<schema namespace="http://www.w3.org/2006/06/wsdl/ValidationReport" file="${xmlcatalog.dir}/wsdl/ValidationReport.xsd" />
 			<fileset dir=".">
-				<include name="*-report.xml, ${build.dir}/validation-results.xml" />
+				<include name="*-report.xml, ${validation-results}" />
 			</fileset>
 		</schemavalidate>
 	</target>
@@ -162,38 +165,10 @@
           target: createW3CReport              
          ================================= -->
    <!-- Create the W3C WSDL2 Interchange report using the Woden results produced by this script -->
-   <!-- Assumes the W3C WSDL2 project 'desc' has been checked out to location w3cTests.dir -->
-   <target name="createW3CReport" if="w3cTestsDir.exists" depends="copyResultsToW3C">
-       <ant dir="${w3cTests.dir}/test-suite/results" target="evaluate-Woden" />
-       <ant dir="${w3cTests.dir}/test-suite/results" target="Interchange.html" />
-       <echo>View the W3C WSDL2 Interchange report at file://${w3cTests.dir}/test-suite/results/Interchange.html</echo>
+   <target name="createW3CReport">
+       <ant dir="${test-suite.dir}/results" target="evaluate-Woden" />
+       <ant dir="${test-suite.dir}/results" target="Interchange.html" />
+       <echo>View the W3C WSDL2 Interchange report at file://${test-suite.dir}/results/Interchange.html</echo>
    </target>
 
-   <!-- Copy the Woden ant-test results produced by this script to the W3C WSDL2 project -->
-   <target name="copyResultsToW3C" if="w3cTestsDir.exists">
-   	
-       <!-- copy Woden results to the W3C WSDL2 project-->
-       <copy todir="${w3cTests.dir}/test-suite/results/downloads/Woden" overwrite="true">
-           <fileset dir="${basedir}">
-               <include name="${build.dir}/test-suite-results.zip" />
-               <include name="${build.dir}/validation-results.xml" />
-           </fileset>
-       </copy>
-   	
-	   <delete dir="${w3cTests.dir}/test-suite/results/Woden" />
-   	
-	   <unzip src="${w3cTests.dir}/test-suite/results/downloads/Woden/test-suite-results.zip" dest="${w3cTests.dir}/test-suite/results/Woden">
-		   <patternset>
-			   <include name="**/*" />
-		   </patternset>
-	   </unzip>
-   	
-       <copy todir="${w3cTests.dir}/test-suite/results/Woden" overwrite="true">
-           <fileset dir="${w3cTests.dir}/test-suite/results/downloads/Woden">
-               <include name="${build.dir}/validation-results.xml" />
-           </fileset>
-       </copy>
-       
-    </target>
-	
 </project>

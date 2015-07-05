@@ -50,6 +50,7 @@
                                 <property name="maven.test.classpath" refid="maven.test.classpath" />
                                 <ant antfile="${basedir}/build.xml"> 
                                     <target name="main" />
+                                    <target name="createW3CReport" />
                                 </ant>
                             </target>
                         </configuration>
