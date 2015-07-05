@@ -26,15 +26,24 @@
     <section name="Mailing Lists">
       <p>
         The Woden development list is
-        <a href="mailto:woden-dev@ws.apache.org">woden-dev@ws.apache.org</a>.        
+        <a href="mailto:dev@ws.apache.org">dev@ws.apache.org</a>.
       </p>      
       <ul>
-        <li><a href="mailto:woden-dev-subscribe@ws.apache.org">Subscribe to List</a></li>
-        <li><a href="mailto:woden-dev-unsubscribe@ws.apache.org">Unsubscribe from List</a></li>
-        <li><a href="http://mail-archives.apache.org/mod_mbox/ws-woden-dev/">View List Archive</a></li>
-		<li><a href="http://markmail.org/search/list:org.apache.ws.woden.dev">View Markmail Archive</a></li>
+        <li><a href="mailto:dev-subscribe@ws.apache.org">Subscribe to List</a></li>
+        <li><a href="mailto:dev-unsubscribe@ws.apache.org">Unsubscribe from List</a></li>
       </ul>
-      <p>In order to post to the list, it is necessary to first subscribe to it.</p>
+      <p><b>NOTE - In order to post to the list, it is necessary to first subscribe to it.</b></p>
+      <br/>
+      <ul>
+            <li>View List Archives
+                <ul>
+                    <li><a href="http://mail-archives.apache.org/mod_mbox/ws-dev/">WS dev list archive</a> </li>
+                    <li><a href="http://mail-archives.apache.org/mod_mbox/ws-woden-dev/">Old Woden dev list archive</a> </li>
+                </ul>
+            </li>
+            <li><a href="http://markmail.org/search/list:org.apache.ws.woden.dev">View Markmail Archive</a></li>
+      </ul>
+      <!--
       <p>
         The Woden SVN list is woden-commits@incubator.apache.org.        
       </p>      
@@ -42,7 +51,7 @@
         <li><a href="mailto:woden-commits-subscribe@incubator.apache.org">Subscribe to List</a></li>
         <li><a href="mailto:woden-commits-unsubscribe@incubator.apache.org">Unsubscribe from List</a></li>
       </ul>
-      <p>Posts are automatically made to this list upon commits to SVN. There is no list archive.</p>
+      <p>Posts are automatically made to this list upon commits to SVN. There is no list archive.</p>  -->
     </section>
     
   </body>
