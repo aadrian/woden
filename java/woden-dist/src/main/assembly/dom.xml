@@ -29,8 +29,8 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../target/site</directory>
-            <outputDirectory>docs</outputDirectory>
+            <directory>${project.build.directory}/apidocs</directory>
+            <outputDirectory>docs/apidocs</outputDirectory>
             <includes>
                 <include>**/*</include>
             </includes>
@@ -71,6 +71,9 @@
             <includes>
                 <include>*:*:jar</include>
             </includes>
+            <excludes>
+                <exclude>org.apache.ant:*:*</exclude>
+            </excludes>
         </dependencySet>
     </dependencySets>
 </assembly>

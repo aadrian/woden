@@ -25,6 +25,26 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>javadoc-no-fork</goal>
+                        </goals>
+                        <configuration>
+                            <reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
+                            <includeDependencySources>true</includeDependencySources>
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
+                            </dependencySourceIncludes>
+                            <excludePackageNames>org.apache.woden.internal</excludePackageNames>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
@@ -68,16 +88,6 @@
             <groupId>org.apache.woden</groupId>
             <artifactId>woden-ant</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.ant</groupId>
-                    <artifactId>ant</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.ant</groupId>
-                    <artifactId>ant-launcher</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.ws.xmlschema</groupId>
