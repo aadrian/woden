@@ -140,6 +140,23 @@
                     <compilerArgument>-g</compilerArgument>
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- We want to generate source JARs for all builds, not just release builds. -->
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>source-jars</id>
+                        <goals>
+                            <!-- Use "jar-no-fork" instead of "jar" to avoid forking the build
+                                 (which is not a problem, but unnecessary) -->
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+            </plugin>
         </plugins> 
     </build>
     <repositories>
@@ -300,6 +317,33 @@
                         </plugin>
                     </plugins>
                 </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>apache-release</id>
+            <modules>
+                <module>woden-core</module>
+                <module>woden-tests</module>
+                <module>woden-tool</module>
+                <module>woden-converter-maven-plugin</module>
+                <module>woden-ant</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <!-- Skip the execution configured in org.apache:apache. We use our own configuration. -->
+                                <id>attach-sources</id>
+                                <phase>none</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
     </profiles>
