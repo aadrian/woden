@@ -221,7 +221,7 @@
         </snapshotRepository>
         <site>
             <id>website</id>
-            <url>scm:svn:https://svn.apache.org/repos/asf/webservices/website/woden</url>
+            <url>scm:svn:https://svn.apache.org/repos/asf/webservices/website/woden-staging</url>
         </site>
     </distributionManagement>
     <profiles>
