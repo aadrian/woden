@@ -91,6 +91,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <modules>
+        <module>woden-core</module>
+        <module>woden-tests</module>
+        <module>woden-tool</module>
+        <module>woden-converter-maven-plugin</module>
+        <module>woden-ant</module>
+        <module>woden-dist</module>
+    </modules>
     <build>
         <pluginManagement>
             <plugins>
@@ -182,30 +190,9 @@
         </site>
     </distributionManagement>
     <profiles>
-        <!-- use for usual developer builds -->
-        <profile>
-            <id>build</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>                
-                <module>woden-core</module>
-                <module>woden-tests</module>
-                <module>woden-tool</module>
-                <module>woden-converter-maven-plugin</module>
-                <module>woden-ant</module>
-            </modules>
-        </profile>
         <!-- use for Maven2 releases -P m2_release -->
         <profile>
             <id>m2_release</id>
-            <modules>                
-                <module>woden-core</module>
-                <module>woden-tool</module>
-                <module>woden-converter-maven-plugin</module>
-                <module>woden-ant</module>
-                <module>woden-dist</module>
-            </modules>
             <build>
                 <plugins>
                     <plugin>
@@ -233,12 +220,6 @@
         <!-- mvn clean package assembly:assembly  antrun:run  -P dist -->
         <profile>
             <id>dist</id>
-            <modules>
-                <module>woden-ant</module>   
-                <module>woden-core</module>
-                <module>woden-tool</module>
-                <module>woden-converter-maven-plugin</module>
-            </modules>
             <build>
                 <plugins>
                     <plugin>
@@ -287,13 +268,6 @@
         </profile>
         <profile>
             <id>apache-release</id>
-            <modules>
-                <module>woden-core</module>
-                <module>woden-tests</module>
-                <module>woden-tool</module>
-                <module>woden-converter-maven-plugin</module>
-                <module>woden-ant</module>
-            </modules>
             <build>
                 <plugins>
                     <plugin>
