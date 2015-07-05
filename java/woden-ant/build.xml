@@ -42,7 +42,7 @@
 	<property name="woden.dir" location="." />	
     <property name="w3cTests.dir" location="${woden.dir}/../desc" />	
 	<property name="interchange.dir" location="${test-suite.dir}/interchange" />	
-	<property name="resources.dir" location="${woden.dir}/src/test/resources" />	
+	<property name="resources.dir" location="${woden.dir}/target/w3c-testsuites" />	
 	<property name="downloads.dir" location="${woden.dir}/downloads" />	
 	<property name="test-suite.dir" location="${resources.dir}/w3c" />
 	<property name="xmlcatalog.dir" location="${test-suite.dir}/xmlcatalog" />
@@ -176,11 +176,11 @@
 		<zip destfile="test-suite-results.zip" basedir="results" />
 	</target>
 
-	<target name="validation-results" description="--> Generates validation-results.xml for all documents.">	  
-       <validatewsdl20 dir="${test-suite.dir}/documents" includes="**/*.wsdl" cm="no" report="validation-results-without-ids.xml" catalog="file:///${woden.dir}/W3Ctests.catalog" baseURI="${test-suite.dir}" implName="${woden.implementation}"/>
+	<target name="validation-results" description="--> Generates target/validation-results.xml for all documents.">	  
+       <validatewsdl20 dir="${test-suite.dir}/documents" includes="**/*.wsdl" cm="no" report="target/validation-results-without-ids.xml" catalog="file:///${woden.dir}/W3Ctests.catalog" baseURI="${test-suite.dir}" implName="${woden.implementation}"/>
 	   <property name="test-suite-xml" location="${test-suite.dir}/test-suite.xml" />
 		
-		<xslt style="identify-test-case-roots.xsl" in="validation-results-without-ids.xml" out="validation-results.xml" force="yes">
+		<xslt style="identify-test-case-roots.xsl" in="target/validation-results-without-ids.xml" out="target/validation-results.xml" force="yes">
 			<param name="test-suite-dir" expression="${test-suite.dir}" />
 			<param name="test-suite-xml" expression="${test-suite-xml}" />
 			<param name="Identifier-base" expression="http://dev.w3.org/cvsweb/2002/ws/desc/test-suite" />
@@ -188,7 +188,7 @@
 		<schemavalidate failonerror="no">
 			<schema namespace="http://www.w3.org/2006/06/wsdl/ValidationReport" file="${xmlcatalog.dir}/wsdl/ValidationReport.xsd" />
 			<fileset dir=".">
-				<include name="validation-results.xml" />
+				<include name="target/validation-results.xml" />
 			</fileset>
 		</schemavalidate> 
 	</target>
@@ -226,7 +226,7 @@
 		<schemavalidate failonerror="no">
 			<schema namespace="http://www.w3.org/2006/06/wsdl/ValidationReport" file="${xmlcatalog.dir}/wsdl/ValidationReport.xsd" />
 			<fileset dir=".">
-				<include name="*-report.xml, validation-results.xml" />
+				<include name="*-report.xml, target/validation-results.xml" />
 			</fileset>
 		</schemavalidate>
 	</target>
@@ -266,7 +266,7 @@
        <copy todir="${w3cTests.dir}/test-suite/results/downloads/Woden" overwrite="true">
            <fileset dir="${basedir}">
                <include name="test-suite-results.zip" />
-               <include name="validation-results.xml" />
+               <include name="target/validation-results.xml" />
            </fileset>
        </copy>
    	
@@ -280,7 +280,7 @@
    	
        <copy todir="${w3cTests.dir}/test-suite/results/Woden" overwrite="true">
            <fileset dir="${w3cTests.dir}/test-suite/results/downloads/Woden">
-               <include name="validation-results.xml" />
+               <include name="target/validation-results.xml" />
            </fileset>
        </copy>
        
