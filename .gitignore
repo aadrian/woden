@@ -1,6 +1,5 @@
 java/.project
 java/.settings
-java/ant-test/target
 java/bin
 java/build
 java/doc
@@ -10,5 +9,6 @@ java/getBalance.wsdlcm
 java/myresources
 java/out.wsdlcm
 java/target
+java/w3c-tests/target
 java/woden-1.0.0M4-test-results.html
 java/woden-1.0.0M5-test-results.html

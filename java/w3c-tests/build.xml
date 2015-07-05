@@ -82,7 +82,7 @@
    <target name="main" depends="getW3cWsdl20" description="---> Validate test suite, generates interchange format, and validates results">
        <taskdef name="validatewsdl20" classname="org.apache.woden.ant.ValidateWSDL20">
            <classpath>
-               <pathelement path="${maven.test.classpath}" />
+               <pathelement path="${maven.runtime.classpath}" />
            </classpath>
        </taskdef>
        
@@ -182,6 +182,14 @@
        <ant dir="${test-suite.dir}/results" target="evaluate-Woden" />
        <ant dir="${test-suite.dir}/results" target="Interchange.html" />
        <ant dir="${test-suite.dir}/results" target="Validation.html" />
+       <mkdir dir="${build.dir}/site" />
+       <copy todir="${build.dir}/site">
+           <fileset dir="${test-suite.dir}/results">
+               <include name="Interchange.html" />
+               <include name="Validation.html" />
+               <include name="*.gif" />
+           </fileset>
+       </copy>
    </target>
 
 </project>

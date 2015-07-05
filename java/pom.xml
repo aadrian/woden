@@ -133,6 +133,7 @@
         <module>woden-converter-maven-plugin</module>
         <module>woden-ant</module>
         <module>woden-dist</module>
+        <module>w3c-tests</module>
     </modules>
     <build>
         <pluginManagement>

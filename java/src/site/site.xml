@@ -43,5 +43,9 @@
             <item name="Development Processes" href="dev/devprocess.html"/>
             <item name="Milestone Plan" href="dev/1.0/milestoneplan.html"/>
         </menu>
+        <menu name="W3C Test Reports">
+            <item name="Component Model Test Results" href="w3c-tests/Interchange.html"/>
+            <item name="Validation Results" href="w3c-tests/Validation.html"/>
+        </menu>
     </body>
 </project>
