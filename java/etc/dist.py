@@ -34,7 +34,7 @@ if exists(dist_root):
     rmtree(dist_root)
 call(["svn", "checkout", "https://dist.apache.org/repos/dist/dev/ws/woden/", dist_root])
 mkdir(dist_dir)
-for classifier in [ "dom", "src" ]:
+for classifier in [ "bin", "src" ]:
     for format in [ "tar.bz2", "tar.gz", "zip" ]:
         for suffix in [ format, "%s.asc" % format, "%s.md5" % format, "%s.sha1" % format ]:
             file = "woden-" + release + "-" + classifier + "." + suffix

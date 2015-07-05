@@ -46,7 +46,7 @@ java/woden-ant/pom.xml -text
 java/woden-ant/test-suite-results.zip -text
 java/woden-core/src/test/resources/org/apache/woden/echo.wsdl -text
 java/woden-dist/pom.xml -text
-java/woden-dist/src/main/assembly/dom.xml -text
+java/woden-dist/src/main/assembly/bin.xml -text
 java/woden-dist/src/main/assembly/src.xml -text
 java/woden-tests/pom-impl-dom.xml svn_keywords=Id
 java/woden-tests/pom-impl-om.xml svn_keywords=Id

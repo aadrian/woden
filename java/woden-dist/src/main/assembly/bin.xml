@@ -10,9 +10,9 @@
     License for the ~ specific language governing permissions and limitations 
     ~ under the License. -->
 <assembly>
-    <id>dom</id>
+    <id>bin</id>
     <includeBaseDirectory>false</includeBaseDirectory>
-    <baseDirectory>woden-dom-${version}</baseDirectory>
+    <baseDirectory>woden-${version}</baseDirectory>
     <formats>
         <format>zip</format>
         <format>tar.gz</format>
