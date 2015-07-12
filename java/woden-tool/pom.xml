@@ -102,13 +102,11 @@
         <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
-            <version>${wsdl4j.version}</version>
         </dependency>
         <!-- Logger dependencies -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>${commons.logging.version}</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
