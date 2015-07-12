@@ -184,10 +184,13 @@
        <ant dir="${test-suite.dir}/results" target="Validation.html" />
        <mkdir dir="${build.dir}/site" />
        <copy todir="${build.dir}/site">
-           <fileset dir="${test-suite.dir}/results">
-               <include name="Interchange.html" />
-               <include name="Validation.html" />
-               <include name="*.gif" />
+           <fileset dir="${test-suite.dir}">
+               <include name="results/Interchange.html" />
+               <include name="results/Validation.html" />
+               <include name="results/*.gif" />
+               <include name="results/results.xsl" />
+               <include name="results/Woden/**" />
+               <include name="documents/good/**" />
            </fileset>
        </copy>
    </target>
