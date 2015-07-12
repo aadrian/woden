@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>w3c-tests</artifactId>
+    <packaging>pom</packaging>
     <name>Woden - W3C tests</name>
     
     <dependencies>
