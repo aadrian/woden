@@ -17,6 +17,7 @@
 package org.apache.woden.internal.wsdl20;
 
 import java.net.URI;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -84,7 +85,10 @@ public class ComponentModelBuilder {
 	// buildElementDeclarations()
     private List fDescTypesDone = new Vector();
     
-	private List fSchemasDone = new Vector();
+    // XmlSchema implements equals, but in a way that is questionable and that causes problems
+    // for Woden. Since there is no IdentityHashSet, use an IdentityHashMap to track schemas
+    // we have already processed.
+	private Map<XmlSchema,XmlSchema> fSchemasDone = new IdentityHashMap<XmlSchema,XmlSchema>();
 
 	private List fInterfacesDone = new Vector();
 
@@ -161,7 +165,7 @@ public class ComponentModelBuilder {
             XmlSchema xmlSchema;
             for(int i=0; i<schemas.length; i++) {
                 xmlSchema = schemas[i].getSchemaDefinition();
-                if(xmlSchema != null && !fSchemasDone.contains(xmlSchema)) {
+                if(xmlSchema != null && !fSchemasDone.containsKey(xmlSchema)) {
                     buildElementsAndTypes(
                             xmlSchema, xmlSchema.getTargetNamespace(), typeSystemURI, importedNSpaces);
                 }
@@ -204,10 +208,10 @@ public class ComponentModelBuilder {
     
     private void buildElementsAndTypes(XmlSchema schemaDef, String schemaTns, URI typeSystemURI, List importedNSpaces) {
         
-        if(fSchemasDone.contains(schemaDef)) {
+        if(fSchemasDone.containsKey(schemaDef)) {
             return;
         } else {
-            fSchemasDone.add(schemaDef);
+            fSchemasDone.put(schemaDef, schemaDef);
         }
         
         //process elements and types declared directly in this schema
