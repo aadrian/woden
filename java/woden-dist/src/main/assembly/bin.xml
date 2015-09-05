@@ -54,10 +54,8 @@
             <fileMode>0644</fileMode>
         </file>
         <file>
-            <source>../release-notes.html</source>
+            <source>${project.build.directory}/RELEASE-NOTE</source>
             <outputDirectory>/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>0644</fileMode>
         </file>
     </files>
 

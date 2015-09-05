@@ -60,4 +60,10 @@
             </excludes>
         </fileSet>
     </fileSets>
+    <files>
+        <file>
+            <source>${project.build.directory}/RELEASE-NOTE</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+    </files>
 </assembly>
