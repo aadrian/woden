@@ -1,0 +1,47 @@
+##
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements. See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership. The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License. You may obtain a copy of the License at
+##
+## http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied. See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+
+Introduction
+------------
+
+The Woden project is a subproject of the Apache Web Services Project to develop a Java class
+library for reading, manipulating, creating and writing WSDL documents, initially to support
+WSDL 2.0 but with the longer term aim of supporting past, present and future versions of WSDL.
+
+There are two main deliverables: an API and an implementation. The Woden API will consist of a
+set of Java interfaces. The WSDL 2.0-specific portion of the Woden API will conform to the W3C
+WSDL 2.0 specification. The implementation will be a high performance implementation directly usable
+in other Apache projects such as Axis2.
+
+Your Help Wanted
+----------------
+
+Looking to get involved in an Open Source project? Interested in Web services or WSDL? Woden is
+looking for your help.
+
+There are a number of different areas in which help is needed including:
+
+* Updating the WSDL 1.1 -> 2.0 converter to the WSDL 2.0 recommendation
+* Adding validation logic for more WSDL 2.0 assertions
+* Documenting design decisions and use patterns
+* Creating more automated tests
+* Reviewing the Woden API
+
+Getting involved is easy. Just send an e-mail to [dev@ws.apache.org](mailto:dev@ws.apache.org)
+stating that you'd like to help and what you'd like to help with (if you know).

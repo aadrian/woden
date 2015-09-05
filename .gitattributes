@@ -15,6 +15,7 @@ java/etc/wsdl-viewer/src/wsdl-viewer.css -text
 java/etc/wsdl-viewer/src/wsdl-viewer.js -text
 java/etc/wsdl-viewer/wsdl-viewer.xsl -text
 java/src/site/markdown/download.md.vm -text
+java/src/site/markdown/index.md.vm -text
 java/src/site/markdown/release-notes/1.0M10.md -text
 java/src/site/markdown/release-notes/index.md -text
 java/src/site/resources/images/apachecon_small.gif -text
@@ -32,7 +33,6 @@ java/src/site/resources/images/ws-logo.gif -text
 java/src/site/xdoc/dev/1.0/milestoneplan.xml -text
 java/src/site/xdoc/dev/devprocess.xml -text
 java/src/site/xdoc/dev/index.xml -text
-java/src/site/xdoc/index.xml -text
 java/src/site/xdoc/issue_tracking.xml -text
 java/src/site/xdoc/mailinglists.xml -text
 java/src/site/xdoc/projectsusingwoden.xml -text
