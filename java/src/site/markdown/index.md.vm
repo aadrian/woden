@@ -20,11 +20,11 @@
 Introduction
 ------------
 
-The Woden project is a subproject of the Apache Web Services Project to develop a Java class
-library for reading, manipulating, creating and writing WSDL documents, initially to support
+The Apache Woden&trade; library is developed as a subproject of the Apache Web Services Project and provides a
+Java API for reading, manipulating, creating and writing WSDL documents, initially to support
 WSDL 2.0 but with the longer term aim of supporting past, present and future versions of WSDL.
 
-There are two main deliverables: an API and an implementation. The Woden API will consist of a
+The project has two main deliverables: an API and an implementation. The Woden API will consist of a
 set of Java interfaces. The WSDL 2.0-specific portion of the Woden API will conform to the W3C
 WSDL 2.0 specification. The implementation will be a high performance implementation directly usable
 in other Apache projects such as Axis2.
@@ -45,3 +45,9 @@ There are a number of different areas in which help is needed including:
 
 Getting involved is easy. Just send an e-mail to [dev@ws.apache.org](mailto:dev@ws.apache.org)
 stating that you'd like to help and what you'd like to help with (if you know).
+
+-----
+
+Apache Woden, Woden, Apache, the Apache feather logo, and the Apache Woden project logo are either
+registered trademarks or trademarks of [The Apache Software Foundation](http://apache.org) in the
+United States and other countries.
