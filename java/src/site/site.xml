@@ -33,7 +33,7 @@
             <item name="Projects Using Woden" href="projectsusingwoden.html"/>
         </menu>
         <menu name="Downloads">
-            <item name="Builds" href="dev/1.0/builds.html"/>
+            <item name="Releases" href="download.html"/>
         </menu>
         <menu name="Documentation">
             <item name="User Guide" href="userguide.html"/>

@@ -185,7 +185,7 @@
        <p>Obtain the Apache Woden WSDL processor in one of 2 ways:</p>
        <ul>
        <li>extract the source code from the Woden Subversion (SVN) <a href="version_control.html">repository</a> and compile it, or</li>
-       <li>obtain the Woden binary distribution from the latest <a href="dev/1.0/builds.html">milestone build</a>.</li>
+       <li>obtain the Woden binary distribution from the latest <a href="download.html">release</a>.</li>
        </ul>
        <p>
        Woden's DOM-based XML parsing depends on Apache Xerces 2.7.1.
