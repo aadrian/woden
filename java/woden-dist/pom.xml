@@ -39,6 +39,7 @@
                             <dependencySourceIncludes>
                                 <dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
                             </dependencySourceIncludes>
+                            <detectOfflineLinks>false</detectOfflineLinks>
                             <excludePackageNames>org.apache.woden.internal</excludePackageNames>
                         </configuration>
                     </execution>
