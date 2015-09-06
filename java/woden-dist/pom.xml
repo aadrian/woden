@@ -59,7 +59,7 @@
                         <configuration>
                             <scripts>
                                 <!-- Process the release note for the current release, converting relative URLs to absolute ones -->
-                                <script>
+                                <script><![CDATA[
                                     import java.text.MessageFormat
                                     
                                     def release_version = project.version.replaceAll("-SNAPSHOT", "")
@@ -76,7 +76,7 @@
                                     out.println()
                                     out.println("-- " + MessageFormat.format("{0,date,MMMMM dd, yyyy}", new Date()))
                                     out.close()
-                                </script>
+                                ]]></script>
                             </scripts>
                         </configuration>
                     </execution>
