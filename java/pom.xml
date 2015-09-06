@@ -163,6 +163,7 @@
                             <exclude>legal/LICENSE.dom</exclude>
                             <exclude>legal/LICENSE.sax</exclude>
                             <exclude>legal/LICENSE.wsdl4j.html</exclude>
+                            <exclude>src/site/markdown/release-notes/**</exclude>
                             <exclude>woden-1.0.0M6-test-results.html</exclude>
                             <exclude>ant-test/validation-results.xml</exclude>
                             <exclude>ant-test/documents-bad-report.xml</exclude>
