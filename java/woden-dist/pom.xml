@@ -41,6 +41,7 @@
                             </dependencySourceIncludes>
                             <detectOfflineLinks>false</detectOfflineLinks>
                             <excludePackageNames>org.apache.woden.internal</excludePackageNames>
+                            <doctitle>Apache Woden ${project.version}</doctitle>
                         </configuration>
                     </execution>
                 </executions>
