@@ -175,6 +175,14 @@
                         </excludes>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <tagBase>https://svn.apache.org/repos/asf/webservices/woden/tags/</tagBase>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <tagNameFormat>@{project.version}</tagNameFormat>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -240,14 +248,6 @@
             <id>apache-release</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <configuration>
-                            <tagBase>https://svn.apache.org/repos/asf/webservices/woden/tags/</tagBase>
-                            <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <tagNameFormat>@{project.version}</tagNameFormat>
-                        </configuration>
-                    </plugin>
                     <plugin>
                         <artifactId>maven-source-plugin</artifactId>
                         <executions>
