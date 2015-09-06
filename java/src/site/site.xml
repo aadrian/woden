@@ -28,7 +28,7 @@
             <item name="Proposal" href="proposal.html"/>
             <item name="Mailing Lists" href="mailinglists.html"/>
             <item name="Issue Tracking" href="issue_tracking.html"/>
-            <item name="Version Control" href="version_control.html"/>
+            <item name="Source Repository" href="source-repository.html"/>
             <item name="Project Team" href="projectteam.html"/>
             <item name="Projects Using Woden" href="projectsusingwoden.html"/>
         </menu>

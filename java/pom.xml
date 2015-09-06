@@ -52,7 +52,9 @@
                 <version>2.8</version>
                 <reportSets>
                     <reportSet>
-                        <reports/>
+                        <reports>
+                            <report>scm</report>
+                        </reports>
                     </reportSet>
                 </reportSets>
             </plugin>

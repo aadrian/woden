@@ -32,7 +32,6 @@ java/src/site/xdoc/projectsusingwoden.xml -text
 java/src/site/xdoc/projectteam.xml -text
 java/src/site/xdoc/proposal.xml -text
 java/src/site/xdoc/userguide.xml -text
-java/src/site/xdoc/version_control.xml -text
 java/woden-ant/pom.xml -text
 java/woden-core/src/test/resources/org/apache/woden/echo.wsdl -text
 java/woden-dist/pom.xml -text
