@@ -10,13 +10,12 @@
     WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. ! See the 
     License for the specific language governing permissions and ! limitations 
     under the License. ! -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.woden</groupId>
         <artifactId>woden</artifactId>
-        <version>1.0M10-SNAPSHOT</version>
+        <version>1.0M10</version>
     </parent>
     <artifactId>woden-dist</artifactId>
     <name>Woden - dist</name>
@@ -66,7 +65,7 @@
                                     def release_note = new File(project.basedir, "../src/site/markdown/release-notes/" + release_version + ".md")
                                     new File(project.build.directory).mkdirs()
                                     def out = new File(project.build.directory, "RELEASE-NOTE").newPrintWriter('UTF-8')
-                                    release_note.readLines('UTF-8').each({ line ->
+                                    release_note.readLines('UTF-8').each({ line -&gt;
                                         def m = line =~ /^(\[.*\]: *)(.*)/
                                         if (m) {
                                             line = m[0][1] + new URL(new URL("http://ws.apache.org/axiom/release-notes/"), m[0][2])

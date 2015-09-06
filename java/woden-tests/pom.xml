@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache.woden</groupId>
         <artifactId>woden</artifactId>
-        <version>1.0M10-SNAPSHOT</version>
+        <version>1.0M10</version>
     </parent>
 
     <artifactId>woden-tests</artifactId>
