@@ -190,6 +190,8 @@
                <include name="results/*.gif" />
                <include name="results/results.xsl" />
                <include name="results/Woden/**" />
+               <!-- This file contains file: URIs that depend on the local build environment -->
+               <exclude name="results/Woden/validation-results.xml" />
                <include name="documents/good/**" />
            </fileset>
        </copy>
