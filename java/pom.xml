@@ -253,10 +253,6 @@
                         <configuration>
                             <tagBase>https://svn.apache.org/repos/asf/webservices/woden/tags/</tagBase>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <!-- The default value "clean verify" is not appropriate. If the install
-                                 phase is not executed, then the current build will pick up artifacts
-                                 from a previous build. -->
-                            <preparationGoals>clean install</preparationGoals>
                         </configuration>
                     </plugin>
                 </plugins>
