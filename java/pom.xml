@@ -25,7 +25,7 @@
     </parent>
     <groupId>org.apache.woden</groupId>
     <artifactId>woden</artifactId>
-    <version>1.0M10</version>
+    <version>1.0M11-SNAPSHOT</version>
     <packaging>pom</packaging>
     <inceptionYear>2005</inceptionYear>
     <name>Woden</name>
@@ -41,9 +41,9 @@
     </description>
     <url>http://ws.apache.org/woden/</url>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/tags/1.0M10</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/tags/1.0M10</developerConnection>
-        <url>http://svn.apache.org/viewvc/webservices/woden/tags/1.0M10</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/webservices/woden/trunk/java/</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/webservices/woden/trunk/java/</developerConnection>
+        <url>http://svn.apache.org/viewvc/webservices/woden/trunk/java/</url>
     </scm>
     <reporting>
         <plugins>
