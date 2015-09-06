@@ -1,0 +1,227 @@
+<!--
+ !
+ ! Licensed to the Apache Software Foundation (ASF) under one or more
+ ! contributor license agreements.  See the NOTICE file distributed with
+ ! this work for additional information regarding copyright ownership.
+ ! The ASF licenses this file to You under the Apache License, Version 2.0
+ ! (the "License"); you may not use this file except in compliance with
+ ! the License.  You may obtain a copy of the License at
+ !
+ !      http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<html>
+<head></head>
+<body>
+<h1>Woden 1.0M9 Release Notes</h1>
+
+February 2011. This is the Milestone 9 (M9) release of <a href="http://ws.apache.org/woden">Apache Woden</a>.<br />
+The Milestone plan is at <a href="http://ws.apache.org/woden/dev/1.0/milestoneplan.html">http://ws.apache.org/woden/dev/1.0/milestoneplan.html</a>.
+
+<h2>Key points</h2>
+<p>
+    <b>Milestone releases </b>
+    will deliver Woden functionality gradually, leading up to a 1.0 release.
+    The objective of a 1.0 release will be to deliver a WSDL processor that fully implements the
+	W3C WSDL 2.0 specification, with functionality to parse WSDL 2.0 documents into the WSDL 2.0 
+	component model and validate their syntax and semantics.
+</p>
+<p>
+    <b>The WSDL 2.0 specification </b>
+    was published as a W3C Recommendation on June 26, 2007. 
+</p>
+<p>
+	<b>The M9 release</b> fully supports the parsing of valid WSDL 2.0 documents 
+    into the WSDL 2.0 Component model, as defined by the WSDL 2.0 spec and embodied in its
+    Test Suite as at the <b>9th February 2011</b>. Within the WSDL 2.0 Test Suite at that date,
+    there were 80 testcases in the Component Model Tests (the 'good' document testcases)
+    whose WSDL documents collectively covered all of the WSDL 2.0 elements and attributes 
+    defined by the spec and those defined for the SOAP and HTTP binding extensions. 
+    Woden passed all of these 80 testcases. 
+    Any further change to the test suite will be implemented in Woden
+    after the M9 release to maintain this level of compliance.
+</p>
+<p>
+	The M9 release includes a new validation framework, which will support the WSDL 2.0
+	assertions. As of M9 many of the assertions still need to be implemented.
+    The main focus of the next release will be to complete Woden's WSDL 2.0 compliance by fully supporting
+    the assertions defined in the WSDL 2.0 spec. That is, completing Woden's validation logic to capture 
+    violations of these assertions in the 'bad' WSDL documents in the W3C WSDL 2.0 test suite.
+</p>
+	Other significant functionality that remains to be delivered is:
+	<ul>
+	<li>Completing the API to fully support the programmatic creation and editing of WSDL 2.0 documents.</li>
+	<li>Modifying the extensions API to improve its usability</li>
+	<li>Serializing Woden's WSDL object model to WSDL 2.0 XML documents (i.e. a WSDLWriter).</li>
+	<li>Parsing WSDL 1.1 documents into Woden's WSDL 2.0 object model.</li>
+	</ul>
+<p>
+	The Woden parser framework and its programming model originated from WSDL4J, a WSDL 1.1 processor.
+	Differences in WSDL 2.0 mean that the Woden WSDL object model is quite different to WSDL4J's,
+	however other WSDL4J features have been reused or adapted, such as its extension architecture.
+</p>
+
+<h2>What's new in this release?</h2>
+
+<p>This release includes the following new features:</p>
+<ul>
+    <li>
+        Many JIRAs have been resolved during M9 development. See 
+        <a href="http://issues.apache.org/jira/browse/Woden">Woden's Jira issue tracker</a> for details.
+    </li>
+    <li>
+        A new validation framework that simplifies the development and contribution of new assertion checks
+        has been added. This framework will assist in developing tests for the WSDL 2.0 assertions.
+    </li>
+    <li>
+  	Serialization (e.g. WSDLWriter) of the Woden model has been implemented.
+    </li>
+</ul>
+
+<h2>Current Release Structure</h2>
+
+<p>
+    The M9 release is available in 3 types of archives; zip, tar.gz and tar.bz2.
+    For each archive type there is a binary and a source distribution archive, each with 
+    its own MD5 and sha1 checksums.
+    The source distribution contains the entire Woden Subversion source code tree.
+</p>
+	The binary distribution contains the Woden API Javadoc and the seven Woden jar files described below:<br />
+	<ul>
+		<li>
+			woden-api-1.0M9.jar - Contains only the public Woden API (not yet final). 
+			This jar is suitable for those that wish to create their own implementation of 
+			the API.
+		</li>
+		<li>
+			woden-impl-dom-1.0M9.jar - Contains the public Woden API (not yet final) and current DOM 
+			implementation.
+		</li>
+		<li>
+			woden-impl-om-1.0M9.jar - Contains the public Woden API (not yet final) and current Axiom 
+			implementation.
+		</li>
+		<li>
+			woden-ant-1.0M9.jar - Contains the Ant task ValidateWSDL20 used to produce
+			Woden results for the W3C WSDL 2.0 test suite.
+		</li>
+                <li>
+			woden-tool-1.0M9.jar - Contains tools such as WSDl 1.1 to WSDL 2.0 converter. 
+		</li>
+                 <li>
+			woden-converter-maven-plugin-1.0M9.jar - Woden - converter Maven plugin. 
+		</li>
+                <li>
+			woden-qname-1.0M9.jar - QName class for JDK 1.4 and older versions. 
+		</li>
+	</ul>
+	Woden depends on the following libraries and these are also included in the binary distribution:
+	<ul>
+	    <li>
+            Apache WS Commons XmlSchema 1.4.7 (for representing schemas in the Woden API)
+	    </li>	 
+	    <li>
+            Apache WS Commons AXIOM 1.2.
+	    </li>
+	    <li>
+            Apache Commons Logging API 1.1 (used by the AXIOM implementation of Woden)
+	    </li>
+	    <li>
+	        StAX 1.0.1 API and the Woodstox 3.2.0 implementation  (used by the AXIOM implementation of Woden)
+	    </li>
+	    <li>
+	        WSDL4J 1.6.2 (used by the standalone WSDL 1.1 conversion program)
+	    </li>
+	</ul>
+
+<h2>What's still to do?</h2>
+
+<p>Please see this list of what we think needs doing - and please consider helping out if 
+you're interested & able! A more complete and up-to-date list of ToDos is the Woden JIRA issues at
+<a href="http://issues.apache.org/jira/browse/Woden">http://issues.apache.org/jira/browse/Woden</a>.
+</p>
+<ul>
+	<li>
+	    Various API changes (see JIRA)
+	</li>
+	<li>
+	    The User Guide on the Woden website requires ongoing improvement.
+	</li>
+	<li>
+		Technical design documentation for developers needs to be created. 
+	</li>
+	<li>
+		Integrating the stand-alone WSDL 1.1 to 2.0 converter tool into Woden to produce
+		a Woden WSDL 2.0 object model from a parsed WSDL 1.1. document. 
+	</li>
+  	<li>
+  		Validation of MEPs and extension elements (such as those for SOAP and HTTP bindings) 
+  		has not yet been implemented.
+  	</li>
+  	
+  	<li>
+		Support for non-XML Schema type systems has not yet been implemented (e.g. RelaxNG, DTDs).
+	</li>
+</ul>
+
+<h2>Example Usage</h2>
+
+<pre>
+   WSDLFactory factory = WSDLFactory.newInstance();
+   WSDLReader reader = factory.newWSDLReader();
+   reader.setFeature(ReaderFeatures.VALIDATION_FEATURE_ID, true); &lt;-- enable WSDL 2.0 validation (optional) 
+   Description descComp = reader.readWSDL(wsdlLoc);               &lt;-- the Description component, always returned
+   DescriptionElement descElem = descComp.toElement();            &lt;-- the &lt;description&gt; element, if required
+</pre>
+   A custom error handler can also be specified as follows:<br />
+<pre>
+   Description descComp = reader.readWSDL(wsdlLoc, myErrorHandler);
+</pre>
+   WSDL can be parsed from some underlying object or byte stream content (rather than a URL) using a WSDLSource object:<br />
+<pre>
+   WSDLFactory factory = WSDLFactory.newInstance();
+   WSDLReader reader = factory.newWSDLReader();
+   reader.setFeature(WSDLReader.FEATURE_VALIDATION, true);
+   WSDLSource wsdlSource = reader.createWSDLSource();  //the WSDLSource impl is specific to the WSDLReader impl
+   wsdlSource.setBaseURI(wsdlURI);
+   wsdlSource.setSource(wsdlSrc);                      //where wsdlSrc might be a DOM Document or Element object
+   Description descComp = reader.readWSDL(wsdlSource);
+</pre>
+
+<h2>Known Problems/Issues</h2>
+
+<ol>
+   	<li>
+   	    The StAX/AXIOM implementation is less complete than the Xerces/DOM implementation and
+   	    some functionality is not yet implemented (e.g. parsing of extenions).
+   	</li>
+	<li>
+		Currently, the only type system supported is W3C XML Schema and this is exposed at 
+   		certain points of the API (through the use of the XmlSchema interface). Later on we
+   		will consider more general, extendable support for other type systems.
+   	</li>
+	<li>
+	    Validation does not yet cover all WSDL 2.0 assertions and in fact, the W3C WSDL 2.0 
+	    Assertion Test Suite Coverage report shows that 'bad' WSDL testcases for some of these 
+	    assertions do not not yet exist (i.e. this test suite is incomplete).
+	    So, there will currently be some Woden failures on the WSDL 2.0 Validation Tests 
+	    report on the Dashboard.
+	</li>
+	<li>
+	    To improve performance, a better mechanism is required for caching retrieved documents to
+	    reduce network requests. 
+	</li>
+</ol>
+
+</body>
+</html>
+
+
+
+
+ 

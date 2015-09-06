@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!--
+ ! Licensed to the Apache Software Foundation (ASF) under one or more
+ ! contributor license agreements.  See the NOTICE file distributed with
+ ! this work for additional information regarding copyright ownership.
+ ! The ASF licenses this file to You under the Apache License, Version 2.0
+ ! (the "License"); you may not use this file except in compliance with
+ ! the License.  You may obtain a copy of the License at
+ !
+ !      http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Project Proposal</title>
+  </properties>
+  
+  <body>
+    <section name="Project Proposal">
+       <p>March 2005.</p>
+
+       <p>The <a href="index.html">Woden</a> project is proposed as a subproject of the <a 
+          href="http://ws.apache.org">Apache Web Services Project</a> to develop a Java class library 
+          for reading, manipulating, creating and writing WSDL documents, initially to support 
+          <a href="http://www.w3.org/2002/ws/desc/">WSDL 2.0</a> but with the longer term aim of
+          supporting past, present and future versions of WSDL.
+       </p>  
+
+       <p>There are two main deliverables: an API and an implementation. The Woden API will consist of a
+          set of Java interfaces. The WSDL 2.0-specific portion of the Woden API will conform to the 
+          <a href="http://www.w3.org/2002/ws/desc/">W3C WSDL 2.0 specification</a>. The implementation 
+          will be a high performance implementation directly usable in other Apache projects such as 
+          <a href="http://ws.apache.org/axis/">Axis2</a>. 
+       </p>
+
+       <p>Members of the <a href="http://sourceforge.net/projects/wsdl4j">WSDL4J</a> team, 
+          <a href="http://ws.apache.org/axis/">Apache Axis</a>, 
+          <a href="http://www.eclipse.org">Eclipse</a> and <a href="http://www.w3c.org">W3C</a> will
+          collaborate on this project. The Axis2 community have already put some effort into a WSDL 2.0
+          Architecture. The Eclipse Web Tools project has experience in developing WSDL validators and one
+          of its members is also a member of the W3C WSDL 2.0 Working Group.
+       </p>
+    </section>
+    <section name="Potential applications">
+      <ul>
+        <li>Axis2, build time emitters and runtime parsing</li>
+        <li>Eclipse tools, WSDL editors</li>
+        <li>vendor products</li>
+        <li>user applications</li>
+      </ul>
+    </section>
+    <section name="About the name &quot;Woden&quot;">
+      <ul>
+        <li>Woden is a mnemonic for Web service Description (i.e. WoDen).</li>
+        <li>Woden is a Norse god and naming the project after a god is in keeping with other WS-Apache project names like Apollo, Hermes and Muse.</li>
+        <li>Woden invented a form of writing called Runes (i.e. a form of Description).</li>
+        <li>The symbol CEN in Runes looks like "&lt;", a left angle bracket, which may suggest we can trace the origins of XML back to Woden!</li>
+       </ul>
+    </section>
+    <section name="Rationale">
+      <p>There are current requirements for a WSDL 2.0 processor (e.g. Axis2, Eclipse tools, the WSDL4J
+         community). This demand is expected to increase when the W3C issues a Recommendation for WSDL 2.0.
+      </p>
+
+      <p>The W3C WSDL 2.0 specification is currently at the "Call for Implementations" stage, which expects
+         two independent implementations before progressing to the implementation review stage and then on
+         to a W3C Recommendation. A WSDL 2.0 Java implementation from Apache in response to this call could
+         help verify the quality of the specification and improve its implementation experience.
+      </p>
+
+      <p>Previous WSDL processors have been version specific, such as WSDL4J which is tightly bound to 
+         WSDL 1.1.  In the longer term the Woden project could take the experience gained developing
+         previous WSDL processors and deliver a WSDL processing "framework" that could accommodate future
+         WSDL specifications without the need to completely rewrite the processor.
+      </p>
+
+      <p>We anticipate that implementations of the Woden API will also be developed by other projects for
+         specific applications (e.g. the Eclipse Web Tools project may develop an EMF based implementation
+         to support WSDL 2.0 editors, as it has done with JWSDL for WSDL 1.1).  A common API will be a good
+         candidate for future standardization on a WSDL processing API.
+      </p>
+    </section>
+    <section name="Scope">
+      <p>In the short term, the scope of the Woden project is:</p>
+      <ul>
+        <li>A WSDL 2.0 API that will significantly cover the W3C WSDL 2.0 specification, including the
+            WSDL 2.0 Component Model, Soap bindings and message exchange patterns and XSD schema 
+            typing.</li>
+        <li>A high performance implementation of the API with read-write capability, but optimized for
+            run time applications rather than build time tooling.</li>
+        <li>Fast, efficient XML parsing (e.g. StAX-based).</li>
+        <li>A validator component that will provide optional WSDL validation, both schema validation
+            and semantic validation.</li>
+        <li>An Ant task for command line usage based on Ant XMLValidate.</li>
+        <li>Support usability and flexibility across different usage scenarios through the handling of
+            behaviour such as I/O, error reporting, progress monitoring, memory efficiency and thread
+            safety.</li>
+      </ul>
+      <p>Longer term, Woden's scope will include:</p>
+      <ul>
+        <li>Full support for remaining parts of the W3C WSDL 2.0 specification, such as other protocol
+            and type extensions.</li>
+        <li>A Woden framework based on an extendable architecture that will allow for known or future
+            versions of WSDL to be plugged in, rather than hard coded in the core of the WSDL processor
+            (e.g. plugging in WSDL 1.1 support).</li>
+        <li>A pluggable choice of XML parsing and object representation to support particular usage
+            scenarios (e.g. a StAX-based, DOM-free XML model for a runtime application versus a 
+            DOM-based model for build time tooling).</li>
+      </ul>
+    </section>
+    <section name="Initial Source">
+      <p>IBM will donate the WSDL4J source code. Although WSDL4J is the reference implementation of 
+         JSR110 (Java APIs for WSDL), Woden will not be an implementation of JSR110. WSDL4J is specific
+         to WSDL 1.1 but some of the code and the intellectual property may be reused to develop a 
+         WSDL 2.0 processor.
+      </p>
+    </section>
+    <section name="Resources to be created">
+      <p>Mailing Lists: woden-dev, woden-user</p>
+
+      <p>SVN Repository: ws-woden</p>
+
+      <p>Issue Tracking: JIRA</p>
+    </section>
+    <section name="Apache Sponsor">
+      <p>The Champion of the Woden incubator project is Davanum Srinivas (dims at apache.org).</p>
+
+      <p>The Sponsor of Woden is the Apache Web Services PMC.</p>
+    </section>
+    <section name="Initial Committers">
+      <p>Chathura Herath (chathura at opensource.lk, WS-Apache Axis)<br/>
+         Jeremy Hughes (hughesj at apache.org, WSDL4J)<br/>
+         John Kaputin (jakaputin at gmail.com, WSDL4J)<br/>
+         Lawrence Mandel (lmandel at ca.ibm.com, Eclipse Web Tools (WTP) / Eclipse Web Service Validation Tools (WSVT) )<br/>
+         Arthur Ryman (arthur.ryman at gmail.com, Eclipse Web Tools (WTP) / W3C WSDL 2.0 Working Group)
+      </p>
+    </section>
+    <section name="Incubator Mentors">
+      <p>Paul Fremantle (pzf at hursley.ibm.com)<br/>
+         Sanjiva Weerawarana (sanjiva at opensource.lk)
+      </p>
+    </section>
+    <section name="Relevant links">
+      <ul>
+        <li>Eclipse Web Service Validation Tools (WSVT)
+            - <a href="http://www.eclipse.org/wsvt">http://www.eclipse.org/wsvt</a></li>
+        <li>Eclipse Web Tools (WTP) - <a href="http://www.eclipse.org/webtools">http://www.eclipse.org/webtools</a></li>
+        <li>W3C WSDL 2.0 Working Group - <a href="http://www.w3.org/2002/ws/desc/">http://www.w3.org/2002/ws/desc/</a></li>
+        <li>WSDL4J - <a href="http://sourceforge.net/projects/wsdl4j/">http://sourceforge.net/projects/wsdl4j/</a></li>
+      </ul>
+    </section>
+
+  </body>
+</document>
+
+

@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!--
+ ! Licensed to the Apache Software Foundation (ASF) under one or more
+ ! contributor license agreements.  See the NOTICE file distributed with
+ ! this work for additional information regarding copyright ownership.
+ ! The ASF licenses this file to You under the Apache License, Version 2.0
+ ! (the "License"); you may not use this file except in compliance with
+ ! the License.  You may obtain a copy of the License at
+ !
+ !      http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Project Team</title>
+  </properties>
+  
+  <body>
+  
+    <section name="Committers">
+      <table>
+      	<tr>
+      		<td>
+      			Matthew Duftler
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			duftler AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Chathura Herath
+      		</td>
+      		<td>
+      			Indiana University
+      		</td>
+      		<td>
+      			chathura AT opensource.lk
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Jeremy Hughes
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			hughesj AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			John Kaputin
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			jkaputin AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Lawrence Mandel
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			lmandel AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Arthur Ryman
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			ryman AT apache.org
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Oshani Seneviratne
+      		</td>
+      		<td>
+      			WSO2
+      		</td>
+      		<td>
+      			oshanis AT gmail.com
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			Graham Turrell
+      		</td>
+      		<td>
+      			IBM
+      		</td>
+      		<td>
+      			gturrell AT apache.org
+      		</td>
+      	</tr>
+		<tr>
+      		<td>
+      			Sagara Gunathunga
+      		</td>
+      		<td>
+      			-
+      		</td>
+      		<td>
+      			sagara AT apache.org
+      		</td>
+      	</tr>
+     </table>      
+    </section>
+    
+  </body>
+  
+</document>

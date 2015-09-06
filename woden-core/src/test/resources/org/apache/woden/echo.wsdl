@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ! ! Licensed to the Apache Software Foundation (ASF) under one or more 
+	! contributor license agreements. See the NOTICE file distributed with ! 
+	this work for additional information regarding copyright ownership. ! The 
+	ASF licenses this file to You under the Apache License, Version 2.0 ! (the 
+	"License"); you may not use this file except in compliance with ! the License. 
+	You may obtain a copy of the License at ! ! http://www.apache.org/licenses/LICENSE-2.0 
+	! ! Unless required by applicable law or agreed to in writing, software ! 
+	distributed under the License is distributed on an "AS IS" BASIS, ! WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. ! See the 
+	License for the specific language governing permissions and ! limitations 
+	under the License. ! -->
+<wsdl2:description xmlns:wsdl2="http://www.w3.org/ns/wsdl"
+	xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://echo.services.core.carbon.wso2.org"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wrpc="http://www.w3.org/ns/wsdl/rpc"
+	xmlns:wsoap="http://www.w3.org/ns/wsdl/soap" xmlns:tns="http://echo.services.core.carbon.wso2.org"
+	xmlns:wsdlx="http://www.w3.org/ns/wsdl-extensions" xmlns:ax21="http://echo.services.core.carbon.wso2.org/xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:whttp="http://www.w3.org/ns/wsdl/http"
+	targetNamespace="http://echo.services.core.carbon.wso2.org">
+	<wsdl2:documentation>echo</wsdl2:documentation>
+	<wsdl2:types>
+		<xs:schema attributeFormDefault="qualified"
+			elementFormDefault="unqualified" targetNamespace="http://echo.services.core.carbon.wso2.org/xsd">
+			<xs:complexType name="SimpleBean">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="a_r"
+						nillable="true" type="xs:string"></xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="b_r"
+						nillable="true" type="xs:string"></xs:element>
+					<xs:element minOccurs="0" name="c" type="xs:int"></xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:ax22="http://echo.services.core.carbon.wso2.org/xsd"
+			attributeFormDefault="qualified" elementFormDefault="unqualified"
+			targetNamespace="http://echo.services.core.carbon.wso2.org">
+			<xs:import namespace="http://echo.services.core.carbon.wso2.org/xsd"></xs:import>
+			<xs:element name="throwAxisFault">
+				<xs:complexType>
+					<xs:sequence></xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="throwAxisFaultResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:string"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoStringArrays">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="a"
+							nillable="true" type="xs:string"></xs:element>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="b"
+							nillable="true" type="xs:string"></xs:element>
+						<xs:element minOccurs="0" name="c" type="xs:int"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoStringArraysResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax21:SimpleBean"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoString">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="in" nillable="true"
+							type="xs:string"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoStringResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:string"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoOMElement">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="omEle" nillable="true"
+							type="xs:anyType"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoOMElementResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:anyType"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoInt">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="in" type="xs:int"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="echoIntResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" type="xs:int"></xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl2:types>
+	<wsdl2:interface name="ServiceInterface">
+		<wsdl2:operation name="echoStringArrays"
+			style="http://www.w3.org/ns/wsdl/style/rpc" wrpc:signature="a #in b #in c #in return #return "
+			pattern="http://www.w3.org/ns/wsdl/in-out">
+			<wsdl2:input element="ns:echoStringArrays" wsaw:Action="urn:echoStringArrays"></wsdl2:input>
+			<wsdl2:output element="ns:echoStringArraysResponse"
+				wsaw:Action="urn:echoStringArraysResponse"></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation name="echoOMElement"
+			style="http://www.w3.org/ns/wsdl/style/rpc" wrpc:signature="omEle #in return #return "
+			pattern="http://www.w3.org/ns/wsdl/in-out">
+			<wsdl2:input element="ns:echoOMElement" wsaw:Action="urn:echoOMElement"></wsdl2:input>
+			<wsdl2:output element="ns:echoOMElementResponse"
+				wsaw:Action="urn:echoOMElementResponse"></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation name="echoInt"
+			style="http://www.w3.org/ns/wsdl/style/rpc" wrpc:signature="in #in return #return "
+			pattern="http://www.w3.org/ns/wsdl/in-out">
+			<wsdl2:input element="ns:echoInt" wsaw:Action="urn:echoInt"></wsdl2:input>
+			<wsdl2:output element="ns:echoIntResponse" wsaw:Action="urn:echoIntResponse"></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation name="throwAxisFault"
+			style="http://www.w3.org/ns/wsdl/style/rpc http://www.w3.org/ns/wsdl/style/iri http://www.w3.org/ns/wsdl/style/multipart"
+			wrpc:signature="return #return " pattern="http://www.w3.org/ns/wsdl/in-out">
+			<wsdl2:input element="ns:throwAxisFault" wsaw:Action="urn:throwAxisFault"></wsdl2:input>
+			<wsdl2:output element="ns:throwAxisFaultResponse"
+				wsaw:Action="urn:throwAxisFaultResponse"></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation name="echoString"
+			style="http://www.w3.org/ns/wsdl/style/rpc" wrpc:signature="in #in return #return "
+			pattern="http://www.w3.org/ns/wsdl/in-out">
+			<wsdl2:input element="ns:echoString" wsaw:Action="urn:echoString"></wsdl2:input>
+			<wsdl2:output element="ns:echoStringResponse"
+				wsaw:Action="urn:echoStringResponse"></wsdl2:output>
+		</wsdl2:operation>
+	</wsdl2:interface>
+	<wsdl2:binding name="echoSoap11Binding" interface="tns:ServiceInterface"
+		type="http://www.w3.org/ns/wsdl/soap" wsoap:version="1.1">
+		<wsdl2:operation ref="tns:echoStringArrays"
+			wsoap:action="urn:echoStringArrays">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoOMElement" wsoap:action="urn:echoOMElement">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoInt" wsoap:action="urn:echoInt">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:throwAxisFault"
+			wsoap:action="urn:throwAxisFault">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoString" wsoap:action="urn:echoString">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+	</wsdl2:binding>
+	<wsdl2:binding name="echoHttpBinding" interface="tns:ServiceInterface"
+		whttp:methodDefault="POST" type="http://www.w3.org/ns/wsdl/http">
+		<wsdl2:operation ref="tns:echoStringArrays"
+			whttp:location="echoStringArrays">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoOMElement"
+			whttp:location="echoOMElement">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoInt" whttp:location="echoInt">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:throwAxisFault"
+			whttp:location="throwAxisFault">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoString" whttp:location="echoString">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+	</wsdl2:binding>
+	<wsdl2:binding name="echoSoap12Binding" interface="tns:ServiceInterface"
+		type="http://www.w3.org/ns/wsdl/soap" wsoap:version="1.2">
+		<wsdl2:operation ref="tns:echoStringArrays"
+			wsoap:action="urn:echoStringArrays">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoOMElement" wsoap:action="urn:echoOMElement">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoInt" wsoap:action="urn:echoInt">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:throwAxisFault"
+			wsoap:action="urn:throwAxisFault">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+		<wsdl2:operation ref="tns:echoString" wsoap:action="urn:echoString">
+			<wsdl2:input></wsdl2:input>
+			<wsdl2:output></wsdl2:output>
+		</wsdl2:operation>
+	</wsdl2:binding>
+	<wsdl2:service name="echo" interface="tns:ServiceInterface">
+		<wsdl2:endpoint name="echoHttpEndpoint" binding="tns:echoHttpBinding"
+			address="http://192.168.1.2:9763/services/echo.echoHttpEndpoint/"></wsdl2:endpoint>
+		<wsdl2:endpoint name="echoHttpSoap12Endpoint" binding="tns:echoSoap12Binding"
+			address="http://192.168.1.2:9763/services/echo.echoHttpSoap12Endpoint/"></wsdl2:endpoint>
+		<wsdl2:endpoint name="echoHttpsSoap12Endpoint" binding="tns:echoSoap12Binding"
+			address="https://192.168.1.2:9443/services/echo.echoHttpsSoap12Endpoint/"></wsdl2:endpoint>
+		<wsdl2:endpoint name="echoHttpsEndpoint" binding="tns:echoHttpBinding"
+			address="https://192.168.1.2:9443/services/echo.echoHttpsEndpoint/"></wsdl2:endpoint>
+		<wsdl2:endpoint name="echoHttpsSoap11Endpoint" binding="tns:echoSoap11Binding"
+			address="https://192.168.1.2:9443/services/echo.echoHttpsSoap11Endpoint/"></wsdl2:endpoint>
+		<wsdl2:endpoint name="echoHttpSoap11Endpoint" binding="tns:echoSoap11Binding"
+			address="http://192.168.1.2:9763/services/echo.echoHttpSoap11Endpoint/"></wsdl2:endpoint>
+	</wsdl2:service>
+</wsdl2:description>

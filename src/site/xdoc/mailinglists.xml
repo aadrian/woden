@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+ ! Licensed to the Apache Software Foundation (ASF) under one or more
+ ! contributor license agreements.  See the NOTICE file distributed with
+ ! this work for additional information regarding copyright ownership.
+ ! The ASF licenses this file to You under the Apache License, Version 2.0
+ ! (the "License"); you may not use this file except in compliance with
+ ! the License.  You may obtain a copy of the License at
+ !
+ !      http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden Mailing Lists</title>
+  </properties>
+  
+  <body>
+  
+    <section name="Mailing Lists">
+      <p>
+        The Woden development list is
+        <a href="mailto:dev@ws.apache.org">dev@ws.apache.org</a>.
+      </p>      
+      <ul>
+        <li><a href="mailto:dev-subscribe@ws.apache.org">Subscribe to List</a></li>
+        <li><a href="mailto:dev-unsubscribe@ws.apache.org">Unsubscribe from List</a></li>
+      </ul>
+      <p><b>NOTE - In order to post to the list, it is necessary to first subscribe to it.</b></p>
+      <br/>
+      <ul>
+            <li>View List Archives
+                <ul>
+                    <li><a href="http://mail-archives.apache.org/mod_mbox/ws-dev/">WS dev list archive</a> </li>
+                    <li><a href="http://mail-archives.apache.org/mod_mbox/ws-woden-dev/">Old Woden dev list archive</a> </li>
+                </ul>
+            </li>
+            <li><a href="http://markmail.org/search/list:org.apache.ws.woden.dev">View Markmail Archive</a></li>
+      </ul>
+      <!--
+      <p>
+        The Woden SVN list is woden-commits@incubator.apache.org.        
+      </p>      
+      <ul>
+        <li><a href="mailto:woden-commits-subscribe@incubator.apache.org">Subscribe to List</a></li>
+        <li><a href="mailto:woden-commits-unsubscribe@incubator.apache.org">Unsubscribe from List</a></li>
+      </ul>
+      <p>Posts are automatically made to this list upon commits to SVN. There is no list archive.</p>  -->
+    </section>
+    
+  </body>
+  
+</document>

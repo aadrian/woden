@@ -1,0 +1,774 @@
+<?xml version="1.0"?>
+<!--
+ ! Licensed to the Apache Software Foundation (ASF) under one or more
+ ! contributor license agreements.  See the NOTICE file distributed with
+ ! this work for additional information regarding copyright ownership.
+ ! The ASF licenses this file to You under the Apache License, Version 2.0
+ ! (the "License"); you may not use this file except in compliance with
+ ! the License.  You may obtain a copy of the License at
+ !
+ !      http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <properties>
+    <title>Woden User Guide</title>
+  </properties>
+  
+  <body>
+  
+    <!-- ================================================================ -->
+    <section name="Introduction" id="intro">
+       <p>
+       The purpose of the Woden User Guide is to explain how to use the external interfaces 
+       of Woden. These external interfaces currently consist of the Woden API, but as development
+       progresses they may also include other configuration techniques, command
+       line tools and script-based utilities such as ANT tasks.
+       Woden users are typically developers of other tools and technologies that use Woden 
+       for parsing or manipulating WSDL documents. 
+       </p>
+       <p>
+       The Woden User Guide will not discuss the 'internals' of the Woden implementation and
+       it will only touch on the Woden design where it is relevant to this discussion of how 
+       to use Woden. A Woden Developer Guide (not yet written) will discuss the design and
+       implementation.
+       </p>
+       <p>
+       The User Guide reflects the current state of Woden's development and will be updated as 
+       new function is added to Woden. See the "Woden Overview" section below for up-to-date
+       details of what function currently exists and what doesn't.
+       </p>
+       <p>
+       This Guide should be read in conjunction with the Woden API Javadocs included with the
+       milestone distribution (see the "Download and Setup" section below).
+       Please post any questions or comments to the Woden development mailing list, 
+       <a href="mailto:woden-dev@ws.apache.org">woden-dev@ws.apache.org</a>.
+       </p>
+
+    </section>
+    
+    <!-- ================================================================ -->
+    <section name="Woden Overview" id="overview">
+       <p>
+       The initial goal of the Woden project is to develop a WSDL 2.0 processor that implements
+       the W3C WSDL 2.0 specification in response to the Working Group's call for implementations.
+       This includes defining an API for Woden separate to its implementation, so that other projects 
+       can modify or replace the Woden implementation while maintaining consistent external interfaces.
+       Further goals include support for high performance XML parsing and support for WSDL 1.1.
+       </p>
+       <p>
+       The objectives to achieve these goals are:
+       </p>
+       <ul>
+       <li>
+       Develop a WSDL 2.0 processor (DOM-based initially) for serializing and deserializing WSDL 2.0 documents.
+       </li>
+       <li>
+       Define a WSDL object model that conforms to the W3C WSDL 2.0 spec, including support for 
+       WSDL and type system extensibility.
+       </li>
+       <li>
+       Enable WSDL to be created or modified programmatically via this object model.
+       </li>
+       <li>
+       Develop Woden as a configurable and extendable framework to support implementation-specific 
+       customization, such as customization of object factories, validation and error handling.
+       </li>
+       <li>
+       Develop a framework extension mechanism that allows alternative XML parsers to be used to support different 
+       usage scenarios and performance requirements, then develop a WSDL parser implementation based on an 
+       XML streaming 'pull' parser such as StAX (JSR173).
+       </li>
+       <li>
+       Support deserializing WSDL 1.1 documents and optionally converting them into the WSDL 2.0 object model. 
+       </li>
+       <li>
+       Support deserializing WSDL 1.1 documents and optionally representing them with the JWSDL object model
+       (i.e. the WSDL 1.1 object model defined by JSR110 "Java APIs for WSDL" and currently implemented by WSDL4J).
+       </li>
+       <li>
+       Develop a comprehensive Junit-based test suite that integrates the WSDL test cases 
+       from the W3C WSDL 2.0 test suite and includes Woden-specific tests that cover its API and
+       the features of the Woden framework.
+       </li>
+       </ul>
+       
+       <p><br/>
+       The functionality that currently exists in Woden and is described in this User Guide includes:
+       </p>
+       <ul>
+       <li>
+       A factory mechanism used to obtain a WSDL reader (or parser) object.
+       </li>
+       <li>
+       A DOM implementation of the reader, based on Apache Xerces.
+       </li>
+       <li>
+       Configuring WSDL reader features and properties - for example, switching the validation feature on or off.
+       </li>
+       <li>
+       Using the reader to parse (deserialize) a WSDL document at a specified URL into the Woden WSDL 2.0 object model.
+       </li>
+       <li>
+       Two forms of the WSDL 2.0 object model; one representing the WSDL 2.0 abstract Component model and one 
+       that maps to the XML elements and attributes in the WSDL namespace.
+       </li>
+       <li>
+       Parsing of most of the elements and attributes in the WSDL 2.0 namespace 
+       (the 'extends' attribute of Interface is the only outstanding item).
+       </li>
+       <li>
+       Partial WSDL validation using the assertions defined in the WSDL 2.0 spec. 
+       Validation currently exists for Types, Interface and Binding.
+       </li>
+       <li>
+       Manipulating the WSDL via methods of the WSDL 2.0 object model. 
+       </li>
+       <li>
+       Support for extensibility elements and attributes (i.e. for XML elements and 
+       attributes that extend elements in the WSDL 2.0 namespace).
+       </li>
+       <li>
+       Use of this extensibility mechanism for the SOAP binding extensions defined in the WSDL 2.0 spec.
+       </li>
+       <li>
+       A customizable error handling mechanism for reporting warnings, errors or fatal errors
+       that result from WSDL validation or Woden configuration problems.
+       </li>
+       </ul>
+       
+       <p><br/>
+       Planned functionality that does not yet exist in Woden and is NOT described in this User Guide includes:
+       </p>
+       <ul>
+       <li>
+       Parsing  of HTTP binding extensions, as defined in the WSDL 2.0 spec.
+       </li>
+       <li>
+       WSDL validation of import and include, SOAP and HTTP binding extensions, and Service.
+       </li>
+       <li>
+       Resolving URLs with an entity or catalog resolver
+       </li>
+       <li>
+       A mechanism for extending Woden to support other XML parsers.
+       </li>
+       <li>
+       A StAX implementation of this parser extension mechanism.
+       </li>
+       <li>
+       A mechanism for extending Woden to support types systems other than W3C XML Schema
+       (e.g. RelaxNG, DTD). 
+       </li>
+       <li>
+       Writing (serializing) the WSDL object model out to a WSDL document.
+       </li>
+       <li>
+       Parsing WSDL 1.1 documents and converting them into the WSDL 2.0 object model. 
+       </li>
+       <li>
+       Parsing WSDL 1.1 documents and representing them using the JWSDL object model 
+       (i.e. a WSDL 1.1 object model)
+       </li>
+       </ul>
+
+    </section>
+    
+    <!-- ================================================================ -->
+    <section name="Download and Setup">
+       <p>Obtain the Apache Woden WSDL processor in one of 2 ways:</p>
+       <ul>
+       <li>extract the source code from the Woden Subversion (SVN) <a href="version_control.html">repository</a> and compile it, or</li>
+       <li>obtain the Woden binary distribution from the latest <a href="download.html">release</a>.</li>
+       </ul>
+       <p>
+       Woden's DOM-based XML parsing depends on Apache Xerces 2.7.1.
+       Its XML Schema support it depends on the schema parser and object model implemented by 
+       the Apache Web Services Commons (ws-commons) XmlSchema project.
+       </p>
+       <p>
+       The milestone build includes all of the required libraries and these must be on the classpath:
+       </p>
+       <ul>
+       <li>woden.jar contains the Woden binary code</li>
+       <li>xercesImpl.jar and xml-apis.jar contain Apache Xerces 2.7.1</li>
+       <li>XmlSchema-SNAPSHOT.jar contains the Apache ws-commons XmlSchema</li>
+       </ul>
+       <p>
+       If using the Woden source code, rather than the milestone distribution, then the Apache Xerces 2.7.1 
+       distribution can be downloaded from the Apache Xerces project <a href="http://xerces.apache.org/xerces2-j/download.cgi">here</a>.
+       The source code for Apache Web Services ws-commons XmlSchema can be extracted from its
+       Subversion (SVN) <a href="http://svn.apache.org/repos/asf/webservices/commons/modules/XmlSchema/">repository</a>
+       using the logon id "anoncvs".
+       </p>
+       <p>
+       Woden requires Java 1.4 or higher.
+       </p>
+       
+    </section>
+    
+    <!-- ================================================================ -->
+    <section name="Getting Started">
+       <p>
+       This section contains a few code examples to demonstrate the Woden programming model. See "The Woden API"
+       section below and the Javadocs included with the milestone distribution for more details.
+       </p>
+       <p>
+       The following code example shows how to obtain a <code>WSDLFactory</code> object which is then used to obtain
+       a <code>WSDLReader</code> object (the WSDL parser). 
+       WSDL validation is then enabled on the reader, before the <em>readWSDL</em> method reads a WSDL document
+       from the specified URL and returns the WSDL as a <code>Description</code> object. 
+       The <code>Description</code> represents the Description component from the WSDL 2.0
+       Component model. The API declared by <code>Description</code> and its contained objects will be
+       referred to as the <strong>Component</strong> API. 
+       The <em>toElement</em> method on <code>Description</code> returns the WSDL as a 
+       <code>DescriptionElement</code> object, which represents the WSDL &lt;description&gt; element and along with
+       its contained objects, it declares an API that maps to the XML elements and attributes in the 
+       WSDL 2.0 namespace. This will be referred to as the <strong>Element</strong> API.
+       </p><source>
+       WSDLFactory factory = WSDLFactory.newInstance();
+       WSDLReader reader = factory.newWSDLReader();
+       reader.setFeature(WSDLReader.FEATURE_VALIDATION, true);
+       Description descComp = reader.readWSDL(wsdlurl);        &lt;-- the Description component
+       DescriptionElement descElem = descElem.toComponent();   &lt;-- the &lt;description&gt; element</source>
+       
+       <p>
+       The parameter <code>wsdlurl</code> is the String representation of a URL, e.g.:
+       </p><source>
+       wsdlurl="http://ws.org.apache/woden/services/Booking.wsdl" 
+       wsdlurl="C:/woden/services/Booking.wsdl"</source>
+       
+       <p>
+       To obtain the top-level WSDL elements from the <code>DescriptionElement</code>:
+       </p><source>
+       InterfaceElement[] interfaces = descElem.getInterfaceElements();
+       BindingElement[] bindings = descElem.getBindingElements();
+       ServiceElement[] services = descElem.getServiceElements();</source>
+       
+       <p>
+       This example shows how to get the global schema element declaration (represented by the
+       <code>XmlSchemaElement</code> class from Apache ws-commons XmlSchema) which is referred to by 
+       QName in the 'element' attribute of the interface &lt;fault&gt; element:
+       </p><source>
+       InterfaceElement interfaceElem = interfaces[0];
+       InterfaceFaultElement[] faults = interfaceElem.getInterfaceFaultElements();
+       XmlSchemaElement xsElem = faults[0].getXmlSchemaElement();</source>
+       
+       <p>
+       Where the WSDL is composed of multiple WSDL documents via WSDL &lt;import&gt; and 
+       &lt;include&gt;, you can navigate the WSDL modules using the methods
+       <em>getImportElements</em> and <em>getIncludeElements</em> of <code>DescriptionElement</code>:
+       </p><source>
+       ImportElement[] imports = descElem.getImportElements();
+       DescriptionElement importedDescElem = imports[0].getDescriptionElement();</source>
+       
+       <p>
+       The <code>Description</code> component also has methods to retrieve the top-level WSDL components, 
+       but unlike those in <code>DescriptionElement</code>, the behaviour here is to 'flatten' the WSDL.
+       That is, to return the top-level components of the initial description and of all imported or 
+       included descriptions as well:
+       </p><source>
+       Interface[] allInterfaces = descComp.getInterfaces();
+       Binding[] allBindings = descComp.getBindings();
+       Service[] allServices = descComp.getServices();</source>
+
+       <p>
+       The next example shows how to get all of the <code>ElementDeclaration</code> and <code>TypeDefinition</code>
+       components from the <code>Description</code> component. These represent the global schema element 
+       declarations and type definitions from the XML Schemas defined in-line or imported within the WSDL 
+       &lt;types&gt; element. Once again, this is a 'flattened' view that includes schema components from
+       imported or included WSDL documents (assuming the WSDL 2.0 rules about schema visibility have been followed):
+       </p><source>
+       ElementDeclaration[] elemDecls = descComp.getElementDeclarations();
+       TypeDefinition[] typeDefs = descComp.getTypeDefinitions();</source>
+       
+    </section>
+    
+    <!-- ================================================================ -->
+    <section name="The Woden API">
+       
+       <p>
+       This section provides an overview of the Woden API.
+       </p>
+       <p>
+       The Woden WSDL processor is implemented as a framework with extension points for adding
+       user-defined behaviour. The details of this implementation are 'hidden' by the Woden API.
+       Even the extension points are exposed on the Woden API, either as Java interfaces that can 
+       be re-implemented or as Java classes that can be extended. With the Woden extension and 
+       programming model based on the API, there should be no need to refer to Woden implementation 
+       classes in user code. If you think you have such a need, please post your requirements to
+       the Woden development mailing list. 
+       </p>
+       <p>
+       The Woden API contains two 'sub-APIs', introduced previously in the 
+       "Getting Started" section, which represent alternative WSDL 2.0 object models:
+       </p>
+      <ul>
+       <li>
+       The <strong>Element</strong> API which represents a model of the XML elements and attributes in the 
+       WSDL 2.0 namespace, as described by the XML mappings in the WSDL 2.0 specification.
+       </li>
+       <li>
+       The <strong>Component</strong> API which represents the abstract WSDL Component model described by the WSDL 2.0 specification.
+       </li>
+       </ul>
+       
+       <p>
+       Whereas the Element and Component APIs are concerned solely with WSDL representation and manipulation, the
+       remainder of the Woden API is concerned with how to use, configure and extend the Woden WSDL processor.
+       The term <strong>Woden</strong> API encompasses these more general features of the Woden processor and
+       the WSDL-specific features. However if we need to discuss these WSDL-specific features of the API,
+       we may use the terms Element or Component API to be more specific.
+       </p>
+       
+       <p><strong>API Packages</strong></p>
+       <p>
+       The Woden API is declared by Java interfaces and a small number of Java classes within
+       package names beginning with <code>org.apache.woden</code>. 
+       Woden implementation package names begin with <code>org.apache.woden.internal</code>
+       to distinguish them from the API packages. All other <code>org.apache.woden</code>
+       packages are part of the Woden API.
+       </p>
+       <p>
+       The most important API packages are:
+       </p>
+       <p>
+       <code>org.apache.woden</code><br/>
+       This contains the core components of the Woden WSDL processor - WSDLFactory, WSDLReader,
+       WSDLException, ErrorReporter, ErrorHandler to name a few.
+       </p> 
+       
+       <p>
+       <code>org.apache.woden.schema</code><br/>
+       This contains interfaces representing both in-lined and imported XML schemas. These 
+       represent schemas in terms of the &lt;xs:schema&gt; and &lt;xs:import&gt; elements 
+       that can appear directly under the WSDL &lt;types&gt; element.
+       </p> 
+       
+       <p>
+       <code>org.apache.woden.wsdl20.extensions</code><br/>
+       This represents the extension architecture to support extension elements and attributes
+       (i.e. those that are not in the WSDL 2.0 namespace). This includes a mechanism for
+       registering user-defined serializers, deserializers and Java mappings for these
+       extensions.
+       </p> 
+       
+       <p>
+       <code>org.apache.woden.wsdl20.extensions.soap</code><br/>
+       This contains Java classes that map to the SOAP binding extensions defined in the WSDL 2.0 spec.
+       </p> 
+       
+       <p>
+       <code>org.apache.woden.wsdl20</code><br/>
+       Contains the Java interfaces that make up the <strong>Component</strong> API (i.e. the abstract WSDL
+       Component model). 
+       </p>
+       
+       <p> 
+       <code>org.apache.woden.wsdl20.xml</code><br/>
+       Contains the Java interfaces that make up the <strong>Element</strong> API (i.e. the XML mappings 
+       for WSDL elements and attributes).
+       </p>
+       
+       <p><strong>Core API Features</strong></p>
+       <p>
+       The core features of the Woden API include: 
+       </p>
+       <ul>
+       <li>
+       The factory mechanism for creating Woden objects such as 
+       </li>
+       <li>
+       Configuring Woden behaviour by setting features or properties of the <code>WSDLReader</code>.
+       </li>
+       <li>
+       Customizing the error handling behaviour.
+       </li>
+       <li>
+       Registering user-defined extensions to support elements and attributes outside of the WSDL 2.0 namespace. 
+       </li>
+       <li>
+       Manipulating the XML-based model of WSDL elements and attributes (i.e. via the Element API).
+       </li>
+       <li>
+       Manipulating the abstract model of WSDL components (i.e. via the Component API).
+       </li>
+       </ul> 
+       
+       <p>
+       The <code>WSDLFactory</code> class has static methods <em>newInstance()</em> and 
+       <em>newInstance(String className)</em> that return a factory object. 
+       The noarg version adopts a strategy to search for a user-configured factory classname, 
+       defaulting to a Woden-provided factory class if none is found.
+       The factory class name search strategy is to check first for a Java system property, 
+       then check for a property file in the JAVA-HOME/lib directory (we intend also to search for 
+       a property in META-INF/services but this is not implemented yet). 
+       The Javadoc for this class provides details of the system property and property file names. 
+       The <em>newInstance(String className)</em> version allows you to specify the factory class to be instantiated.
+       This factory object is used to create some of the key objects of the Woden programming model such as 
+       <code>WSDLReader</code>, <code>DescriptionElement</code> and <code>ExtensionRegistry</code>.
+       </p>
+       <p>
+       The Woden parsing behaviour can be configured by setting features or properties of the 
+       <code>WSDLReader</code> object. Note, these are Woden-specific configuration details, not
+       to be confused with the WSDL Feature and Property components.
+       Reader features are configured via the <em>setFeature</em> method with a feature name and 
+       a boolean value, indicating whether the feature is enabled. The <em>getFeature</em> method
+       is used to query whether a specified feature is enabled. Reader properties are configured
+       via the <em>setProperty</em> method with a property name and an object representing the property.
+       Likewise, a <em>getProperty</em> method returns the property object for a specified property name.
+       The names of the Woden-defined features and properties are specified on the API as 
+       <code>public static final</code> constants on the <code>WSDLReader</code> interface.
+       See the API Javadoc for details.
+       These methods may also be used to configure user-defined, implementation-specific 
+       features and properties. The "Getting Started" section above showed an example of feature
+       configuration - the Woden validation feature was enabled on the reader object by the code:<br/>
+       <code>reader.setFeature(WSDLReader.FEATURE_VALIDATION, true);</code>
+       </p>
+       <p>
+       The API provides error handling through four interfaces and the <code>WSDLException</code> class.
+       System configuration errors are typically handled by throwing a <code>WSDLException</code> 
+       containing appropriate error information.
+       WSDL parsing errors are reported by the <code>ErrorReporter</code> which delegates the 
+       reporting style to the <code>ErrorHandler</code>.
+       <code>ErrorHandler</code> recognizes 3 types of error; warnings, errors and fatal errors.
+       A default error handler implementation is provided with Woden which prints all 3 types of  
+       message to <code>System.out</code> and then for fatal errors only, terminates processing with a
+       <code>WSDLException</code>.
+       Users may provide their own implementation of <code>ErrorHandler</code> to change this 
+       behaviour.
+       The <em>setErrorHandler</em> method on <code>ErrorReporter</code> is used to set a
+       user-defined custom error handler.
+       User-defined extensions to Woden may use <code>ErrorReporter</code> to report their errors 
+       via the <code>ErrorHandler</code> or to obtain a formatted error message, 
+       for example to place inside an exception object.
+       Messages are expected to have an error id and some message text, but 
+       users have the option of defining fully formatted messages or using parameterized
+       strings in a Java ResourceBundle.
+       <code>ErrorInfo</code> declares a data object containing the error information
+       passed to the <code>ErrorHandler</code>.
+       This includes the <code>ErrorLocator</code> which specifies the URI of the WSDL source document 
+       and the line and column number where the error occurred (although this feature is not yet implemented). 
+       </p>
+       <p>
+       Extension elements and attributes (those outside of the WSDL 2.0 namespace) are handled 
+       by the Woden extension architecture. For each extension element, a user-defined implementation 
+       of the <code>ExtensionDeserializer</code> and <code>ExtensionSerializer</code> interfaces will 
+       map the element to/from some user-defined implementation of <code>ExtensionElement</code>
+       which represents the element.
+       The deserializer, serializer and Java mapping classes are registered in the 
+       <code>ExtensionRegistry</code> so that the <code>WSDLReader</code> (or WSDLWriter when it gets
+       implemented) will know what to do when it encounters this element. 
+       The Woden API includes <code>ExtensionElement</code> implementations to represent the 
+       SOAP binding extensions defined in the WSDL 2.0 spec (and HTTP extensions will follow soon).
+       To handle extension elements that have not been registered, default behaviour is provided by the 
+       <code>UnknownDeserializer</code>, <code>UnknownSerializer</code> and <code>UnknownExtensionElement</code> classes.
+       These Woden-defined extensions (SOAP and Unknown) are pre-registered in the <code>ExtensionRegistry</code>
+       by the Woden implementation.
+       </p>
+       <p>
+       The package <code>org.apache.woden.xml</code> contains classes that represent the more common 
+       types of extension attribute values (e.g. string, QName, boolean, etc). These are all subclasses of 
+       <code>XMLAttr</code> which defines the <em>init</em> method for parsing an extension attribute value and the
+       <em>toExternalForm</em> method for representing the value as a string. Users may extend <code>XMLAttr</code>
+       to support other types of values. The <code>XMLAttr</code> subclass must be registered with its parent
+       class name (i.e. its containing element) and the QName of the extension attribute in the 
+       <code>ExtensionRegistry</code>, so that the <code>WSDLReader</code> will have the information necessary
+       to parse it correctly. The extension attributes defined in the WSDL 2.0 spec (i.e. those for the SOAP and
+       HTTP binding extensions) will be pre-registered in the <code>ExtensionRegistry</code> using the 
+       <code>XMLAttr</code> subclasses defined in package <code>org.apache.woden.xml</code>.  
+       </p>
+       <p>
+       The Element and Component APIs are discussed below.
+       </p>
+
+       <p><strong>Element API</strong></p>
+       <p>
+       The Element API allows you to navigate the nested hierarchy of WSDL elements 
+       that would appear in a WSDL document (as defined by the 
+       <a href="http://www.w3.org/2006/01/wsdl/wsdl20.xsd">WSDL 2.0 Schema</a>). 
+       For example, <code>DescriptionElement</code> 
+       declares methods <em>getInterfaceElements</em>, <em>getBindingElements</em> and 
+       <em>getServiceElements</em> which provide access to the top-level WSDL elements. 
+       <code>InterfaceElement</code> declares the methods <em>getInterfaceFaultElements</em> and
+       <em>getInterfaceOperationElements</em> and so on.  
+       The Element API is described in detail
+       in the Javadocs included in the milestone distribution. 
+       </p>
+       <p>
+       Within the <code>org.apache.woden.wsdl20.xml</code> package, each WSDL element is represented
+       by a Java interface.
+       The WSDL attributes present in each WSDL element are represented by appropriate methods on
+       those interfaces. So for example, <code>DescriptionElement</code> has the 
+       method <em>getTargetNamespace</em>. 
+       </p>
+       <p>
+       Note that the methods of the Element API do not 'flatten' composite WSDL structures.
+       For example, the <em>getServiceElements</em> method returns the &lt;service&gt; elements
+       defined directly within the containing &lt;description&gt; element, but not 
+       those defined within any imported or included descriptions. To retrieve all of the
+       <code>ServiceElement</code>s from a composite WSDL, you need to navigate the WSDL structure
+       using the <em>getImportElements</em> or <em>getIncludeElements</em> methods on
+       <code>DescriptionElement</code>.
+       </p>
+       
+       <p><strong>Component API</strong></p>
+       <p>
+       The Component API represents the abstract WSDL Component model described in the WSDL 2.0 spec.
+       This differs from the Element API in that certain aspects of WSDL XML are not represented in the Component model.
+       The &lt;documentation&gt; element is not captured in the Component model. 
+       The &lt;types&gt; element and particular type systems like XML Schema
+       are not represented, however the Component API does contain <code>ElementDeclaration</code>
+       and <code>TypeDefinition</code> which provide a general representation for global 
+       element declarations and type definitions, such as those used in XML Schema.
+       </p>
+       <p>
+       The composition of WSDL documents via the &lt;import&gt; and &lt;include&gt; elements is
+       not represented in the Component model. Instead, the Description component 
+       represents the entire, composite WSDL structure and its properties which represent top-level 
+       WSDL components, like Interface, Binding and Service, contain a 'flattened' representation of the WSDL. 
+       For example, the <em>getInterfaces</em> method of <code>Description</code> will return not just the 
+       interfaces defined within the initial description, but those defined within any imported or included 
+       descriptions as well.
+       </p>
+       <p>
+       The Component API provides a read-only view of the WSDL Component model 
+       (i.e. it defines accessors but no mutators).
+       The only way to create a <code>Description</code> object is by calling the <em>toComponent</em> method
+       on a <code>DescriptionElement</code> object. Once you have a <code>Description</code> object you can
+       access the rest of the WSDL component model, but you cannot modify it.
+       WSDL can only be created or modified programmatically via the Element API.
+       </p>
+
+       <p><strong>Mapping of WSDL elements to the API</strong></p>
+       <source>
+           WSDL element              Element API                           Component API
+                           
+       &lt;description&gt;           DescriptionElement                    Description
+         &lt;documentation&gt;       DocumentationElement
+         &lt;import&gt;              ImportElement
+         &lt;include&gt;             IncludeElement
+         &lt;types&gt;               TypesElement
+         &lt;interface&gt;           InterfaceElement                      Interface
+           &lt;fault&gt;             InterfaceFaultElement                 InterfaceFault
+           &lt;operation&gt;         InterfaceOperationElement             InterfaceOperation
+             &lt;input&gt;           InterfaceMessageReferenceElement      InterfaceMessageReference
+             &lt;output&gt;          InterfaceMessageReferenceElement      InterfaceMessageReference
+             &lt;infault&gt;         FaultReferenceElement                 InterfaceFaultReference
+             &lt;outfault&gt;        FaultReferenceElement                 InterfaceFaultReference
+         &lt;binding&gt;             BindingElement                        Binding
+           &lt;fault&gt;             BindingFaultElement                   BindingFault
+           &lt;operation&gt;         BindingOperationElement               BindingOperation
+             &lt;input&gt;           BindingMessageReferenceElement        BindingMessageReference
+             &lt;output&gt;          BindingMessageReferenceElement        BindingMessageReference
+             &lt;infault&gt;         FaultReferenceElement                 BindingFaultReference
+             &lt;outfault&gt;        FaultReferenceElement                 BindingFaultReference
+         &lt;service&gt;             ServiceElement                        Service
+           &lt;endpoint&gt;          EndpointElement                       Endpoint
+         &lt;feature&gt;             FeatureElement                        Feature
+         &lt;property&gt;            PropertyElement                       Property
+         
+          XML Schema element
+            
+       &lt;xs:import&gt;             ImportedSchema
+       &lt;xs:schema&gt;             InlinedSchema
+         &lt;xs:element name=".."&gt;                                     ElementDeclaration
+         &lt;xs:complexType name=".."&gt;                                 TypeDefinition
+       </source>
+
+    </section>
+    
+    <!-- ================================================================ -->
+    <section name="Woden URI Resolver">
+       	<p>
+       	This allows URIs referred to in WSDL 2.0 and XML Schema documents to be redirected to alternative URIs. 
+      	Woden is equipped with such a resolver as default, and an API to define alternative implementations.
+      	</p>
+        <p><strong>The Resolver API</strong></p>
+        <p>Users are free to create their own custom URI Resolvers, by implementing the interface 
+        <code>org.apache.woden.resolver.URIResolver</code>.
+        </p>
+        <p>	
+        The resolver should be registered with the WSDLReader object before invoking <em>readWSDL()</em> methods.
+        </p>
+        <p>Example:</p>
+        <source>
+        URIResolver myResolver = new CustomURIResolver();
+        WSDLFactory factory = WSDLFactory.newInstance();
+        WSDLReader reader = factory.newWSDLReader();
+        reader.setURIResolver(myResolver);
+        ...
+        reader.readWSDL(…..);
+        </source>
+
+       <p><strong>SimpleURIResolver</strong></p>
+       <p>
+       This is the URI resolver implementation provided with the Woden distribution, and it is also the default. 
+       When a WSDLReader object is requested, a <code>SimpleURIResolver</code> is automatically instantiated and 
+       registered with it. In other words the following happens implicitly:</p>
+       <source>
+       reader.setURIResolver(new SimpleURIResolver());
+       </source>
+       <p>
+       If required, a custom resolver can be registered programmatically in place of the default, as shown above.
+       </p>
+
+       <p><strong>1 - Catalog file format</strong></p>
+       <p>
+       The catalog file follows the Java Properties file syntax:  rows of entries of the form 
+       <code>&lt;property name&gt;=&lt;property value&gt;</code>, interspersed with comment lines starting with the “#” character. 
+       However, with catalog notation the meaning of the left and right hand expressions is slightly different:</p>
+       <source>
+       &lt;resolve-from URI&gt;=&lt;resolve-to URI&gt;
+       </source>
+       <p>
+       where <em>resolve-from URI</em> is the subject of the resolution, and <em>resolve-to URI</em> is the place where the resolver looks 
+       for the resource. To be meaningful, the <em>resolve-to URI</em> should be a valid URL (that is, a reference 
+       a physical document).
+       </p>
+       <p>By convention, URI catalog file names have the suffix <code>.catalog</code>, though this is not mandatory.</p>
+       <p>Note that the first “:” in the line of each entry must be escaped. See examples below.</p>
+       <p>
+       The schema catalog is read sequentially when a <code>SimpleURIResolver</code> is instantiated. 
+       Where multiple entries exist in the catalog for a given resolve-from URI, the last such entry is used.
+       </p>
+
+       <p><strong>Absolute URIs</strong></p>
+       <p>Examples:</p>
+       <source>
+       Resource held locally on an NTFS file system:
+       http\://test.com/interface.wsdl=file:///c:/resources/interface.wsdl
+
+       Similarly on a Un*x-based file system:
+       http\://test.com/interface.wsdl=file:///resources/interface.wsdl
+
+       Resource held remotely and accessed over http:
+       http\://test.com/interface.wsdl=http://aplace.org/resources/interface.wsdl
+       </source>
+
+       <p><strong>Relative URIs</strong></p>
+       <p>
+       If relative URIs appear in any resolve-to entries in the catalog, then a search path is used 
+       (on initialisation of the resolver) to convert them to absolute URIs. Any <em>resolve-to</em> entry 
+       that does include a Protocol (e.g. starting with <em>file:</em> or <em>http:</em>) is regarded as relative. 
+       Otherwise it is treated as absolute.
+       </p>
+       <p>
+       By default, the Java classpath is searched left to right for a base URI to complete the 
+       relative URI in the catalog. However, it is more useful to prepend the classpath with a 
+       user-defined list of base locations. 
+       The System Property <code>org.apache.woden.resolver.simpleresolver.baseURIs</code> may be used to specify such a list.
+       </p>
+       <p>
+       For example, say we wish to resolve to two files stored on the local file system as <code>/wsdl/resources/interface.wsdl</code>,
+       <code>/xsd/resources/schema.xsd</code> and one file <code>/wibble/random.wsdl</code> contained in a JAR called <code>/mydocs.jar</code>. 
+       </p>
+       <p>
+       We set the <code>org.apache.woden.resolver.simpleresolver.baseURIs</code> property to the value 
+       <code>file:///wsdl/;file:///xsd/;file:///mydocs.jar</code>. 
+       Note the trailing “/” on the first two semi-colon separated entries which indicates a base URI. 
+       If this is omitted the entry is assumed to be a URL of a JAR file. 
+       Now we can use the following in the catalog to reference the files:</p>
+       <source>
+       http\://test.com/importinterface.wsdl=resources/interface.wsdl
+       http\://test.com/myschema.xsd=resources/schema.xsd
+       http\://test.com/random.wsdl=wibble/random.wsdl
+       </source>
+       <p>
+       Note that when the resolver creates its resolution table, for each relative entry the baseURIs list is 
+       searched left-to-right and the first match that references a physical resource is used.
+       </p>
+       <p>Typically, baseURIs will be set to a single path from which all relative URIs in the catalog descend.</p>
+
+       <p><strong>URLs from JAR files</strong></p>
+       <p>
+       These are references to resources contained within a jar file, and may be used as absolute resolve-to 
+       URLs in the catalog.
+       </p>
+       <p>Example:</p>
+       <source>
+       http\://test.com/doit.wsdl=jar:file:///wibble/pling.jar!/doit.wsdl
+       </source>
+
+       <p><strong>2 – Configuration Properties</strong></p>
+       <p>
+       When a SimpleURIResolver is instantiated, it examines two system properties:</p>
+       <ul>
+       <li>org.apache.woden.resolver.simpleresolver.catalog</li>
+       <li>org.apache.woden.resolver.simpleresolver.baseURIs</li>
+       </ul>	
+       <p>
+       The first should contain a URL for the location of the user’s catalog file. If this is unset, 
+       no URI resolving will occur, except for that defined in the woden schema catalog (see below).
+       </p>	
+       <p>
+       The second is introduced in the discussion on relative URIs above.
+       </p>		
+       <p>
+       An application using the Woden WSDLReader to parse a document might configure the URI resolver 
+       as in the flowing snippet:</p>
+       <source>
+       System.setProperty(“org.apache.woden.resolver.simpleresolver.catalog”,
+                          ”file:///myplace/myresolves.catalog”);
+       System.setProperty(“org.apache.woden.resolver.simpleresolver.baseURIs”,
+                          “file:///wsdl/;file:///xsd/;file:///mydocs.jar”);
+
+       WSDLReader reader = factory.newWSDLReader(); // instantiates the default resolver
+       reader.readWSDL(“file:///mydoc.wsdl”); // this is also a candidate for the resolver
+       </source>
+
+       <p><strong>3 – Automatic schema resolution - schema.catalog</strong></p>
+       <p>
+       The Woden <em>schema catalog</em> is a predefined catalog which is loaded automatically when a 
+       <code>SimpleURIResolver</code> is instantiated. 
+       It is loaded immediately before the user-defined catalog (if any).
+       </p>	
+       <p>
+       The Woden schema catalog contains resolutions of the standard XML Schema schema, and the WSDL 2.0 schema, necessary 
+       to allow the parser to operate when in network isolation. Because the user catalog is loaded second, it is possible
+       to override schema entries by redefining them there.
+       </p>	
+       <p>The schema catalog is located in <code>meta-inf/schema.catalog</code> in the Woden distribution jar.</p>
+ 
+    </section> 
+ 
+       
+    <!-- ================================================================ -->
+    <section name="More topics to be added...">
+       <p>
+       <em>
+       This User Guide is a work-in-progress. The content will be expanded and restructured as the
+       development of the Woden project progresses. The following list indicates some topics to be added:
+       </em>
+       </p>
+       <ul>
+       <li>More on WSDLReader and readWSDL options (including URL resolution)</li>
+       <li>Types support (XML Schema)</li>
+       <li>Extension architecture (extension elements and attributes, extension registry)</li>
+       <li>Validation strategy (validation feature, continue-on-error feature)</li>
+       <li>Error reporting, error messages, customizing the ErrorHandler</li>
+       <li>creating or modifying WSDL programmatically</li>
+       <li>serializing WSDL with WSDLWriter</li>
+       <li>How to extend the Woden framework (details of extension points)</li>
+       </ul>
+
+<!--
+       <p>
+       A custom error handler can also be specified as follows:
+       </p>
+       <source>
+       DescriptionElement desc = reader.readWSDL(wsdlLoc, handler);
+       </source>
+-->
+
+
+    </section>
+    
+  </body>
+</document>

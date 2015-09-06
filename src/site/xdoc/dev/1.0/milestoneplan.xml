@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2002-2004 The Apache Software Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!--
+  Use the following images for milestone status:
+	Item is under development:
+	<img src="../../images/progress.gif" height="5" width="14" alt="development"/>
+	Item is under investigation:
+	<img src="../../images/glass.gif" height="10" width="10" alt="investigation"/>
+	Item is finished:
+	<img src="../../images/ok.gif" height="10" width="10" alt="finished"/>
+	Item is deferred:
+	<img src="../../images/defer.gif" height="10" width="10" alt="deferred"/>
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"> 
+  <properties> 
+    <title>Woden 1.0 Milestone plan</title> 
+  </properties> 
+  <body> 
+    <section name="Woden 1.0 Milestone plan">
+      <p>Development of Woden will proceed according to the following milestone plan.</p>
+      <p>All dates should be taken as approximate and subject to change.</p>
+    </section>
+
+    <section name="M1 - Sept 30, 2005">
+      	<ul>
+      		<li>WSDL 2.0 types parsing (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for types parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>WSDL 2.0 Interface parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for Interface parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Create validation framework including extension mechanism <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for validation framework <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Create Ant script for build process <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Update website to follow new Apache Web services website layout <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li> 
+			<li>Update technical documentation about Woden design and implementation on Wiki <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Create initial user documentation <img src="../../images/glass.gif" height="10" width="10" alt="investigation"/></li>
+		</ul>
+    </section> 
+    <section name="M2 - Dec 2, 2005">
+      	<ul>
+      		<li>WSDL 2.0 Interface parsing (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      		<li>Unit tests for Interface parsing (DOM) <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+      		<li>Create validation framework <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      		<li>Create validation framework extension mechanism <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+      		<li>WSDL 2.0 Binding parsing (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li> 
+			<li>WSDL 2.0 Binding extensibility mechanism (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li> 
+			<li>Unit tests for Binding parsing (DOM) <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>WSDL 2.0 SOAP Binding extension (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li> 
+			<li>Unit tests for SOAP Binding extension (DOM) <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Implement validation logic for types and Interface <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li> 
+			<li>Unit tests for validation logic for types and Interface <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Integrate W3C WSDL 2.0 types and Interface tests into Woden test suite <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li> 
+			<li>Update technical documentation about Woden design and implementation on Wiki <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Create initial user documentation <img src="../../images/glass.gif" height="10" width="10" alt="investigation"/></li>
+		</ul>
+    </section> 
+	<section name="M3 - Jan 20, 2006">
+      	<ul>
+			<li>Parsing of WSDL 2.0 import and include (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for import and include parsing (DOM) <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+      		<li>WSDL 2.0 HTTP Binding extension (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for HTTP Binding extension (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+      		<li>WSDL 2.0 Service parsing (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for Service parsing (DOM) <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Implement validation logic for Binding <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for validation logic for Binding <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Integrate W3C WSDL 2.0 Binding tests into Woden test suite <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Investigate WSDL 2.0 parsing with StAX <img src="../../images/glass.gif" height="10" width="10" alt="investigation"/></li>
+			<li>Update technical documentation about Woden design and implementation on Wiki <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Create initial user documentation <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+		</ul>
+    </section> 
+    <section name="M4 - Mar 3, 2006">
+      	<ul>
+      		<li>Unit tests for Description parsing (DOM) - including Documentation, Feature, Property <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for Types parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit test for Interface parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for Binding parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Parsing of WSDL 2.0 interface extension (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for interface extension parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for SOAP binding extensions parsing (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      		<li>WSDL 2.0 HTTP Binding extension (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for HTTP Binding extension (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+      		<li>Implement validation logic for Service <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for validation logic for Service <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Integrate W3C WSDL 2.0 Service tests into Woden test suite <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>API review <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li> 
+			<li>Review Woden non-functional requirements <img src="../../images/glass.gif" height="10" width="10" alt="investigation"/></li>
+			<li>Bug fixes <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Update technical documentation about Woden design and implementation on Wiki <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Create initial user documentation <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+		</ul>
+    </section> 
+    <section name="M5 - May 19, 2006">
+      	<ul>
+      		<li>Unit tests for Description parsing (DOM) - including Documentation, Feature, Property <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for Types parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit test for Interface parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for Binding parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Parsing of WSDL 2.0 interface extension (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for interface extension parsing (DOM) <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+      		<li>WSDL 2.0 HTTP Binding extension (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+			<li>Unit tests for HTTP Binding extension (DOM) <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      		<li>Implement validation logic for SOAP binding extension <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Unit tests for validation logic for SOAP binding extension <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>Update W3C WSDL 2.0 tests in Woden test suite <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+			<li>API review <img src="../../images/glass.gif" height="10" width="10" alt="investigation"/></li> 
+			<li>Review Woden non-functional requirements <img src="../../images/glass.gif" height="10" width="10" alt="investigation"/></li>
+			<li>Bug fixes <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Update technical documentation about Woden design and implementation on Wiki <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+		</ul>
+    </section> 
+    <section name="M6 - October 6, 2006">
+      	<ul>
+			<li>Implement Woden API using StAX and AXIOM <img src="../../images/progress.gif" height="5" width="14" alt="development"/></li>
+			<li>Change API to enforce correct scoping of nested elements <img src="../../images/ok.gif" height="5" width="14" alt="development"/></li>
+		</ul>
+    </section> 
+    <section name="M7 - February 19, 2007">
+        <p>
+        Updated Feb 6th: Finishing off some API Javadoc. Expect to start the release vote today or tomorrow.
+        </p>
+        <p>
+        Updated Jan 26th: The M7 release date has been delayed from Jan 29th by 1 week and two of the release defining 
+        JIRAs have been deferred until the release following M7 (WODEN-47 and WODEN-56).
+        </p>
+        <p>
+        The release-defining criteria for M7 are:
+        </p>
+        <ul>
+            <li>to pass all of the 'good' document test cases in the W3C WSDL 2.0 suite,
+                as this will help the W3C WSDL 2.0 spec progress from CR to PR.</li>
+            <li>to implement any required API changes sooner rather than later to
+                stablize the API</li>
+            <li>to implement unit tests outstanding from previous milestone plans</li>
+            <li>to fix major bugs</li>
+        </ul>
+        <p>
+        While complete WSDL validation (i.e. support for all assertions in the WSDL 2.0 spec and the Validation test cases in the 
+        WSDL 2.0 Test Suite) is a major objective of the Woden project, it is not a mandatory criteria for the M7 release. 
+        However, it is high priority post-M7. 
+        </p>
+        <p>
+          See the <a href="http://issues.apache.org/jira/browse/Woden">Woden JIRAs</a> marked with Version M7 for a list of 
+          outstanding function planned for M7.
+          Of those, the release-defining JIRAs for M7 (those that are "must-do") are:
+        </p>
+      	<ul>
+      	    <li>'good' test case failures:
+      	        <ul>
+      	            <li>WODEN-10 SchemaId-1G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-86 MessageTest-1G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-98 LocationTemplate-1G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-99 MessageTest-2G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-100 Schema-1G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-101 SparqlQuery-1G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-102 SparqlQuerySimplified-1G <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	        </ul>
+      	    </li>    
+      	    <li>API changes:
+      	        <ul>
+      	            <li>WODEN-47 generic collections of extensions as well as/instead of static typing <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+      	            <li>WODEN-56 remove need to use *internal* classes when coding extensions <img src="../../images/defer.gif" height="10" width="10" alt="deferred"/></li>
+      	            <li>WODEN-87 methods in Interface API to 'flatten' interface inheritance <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-119 readWSDL args should be URI instead of String (CANCELLED)</li>
+      	            <li>WODEN-120 readWSDL methods should return Description not DescriptionElement <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-126 provide the underlying schema element <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-129 add query parameter separator to SOAP/HTTP extensions <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	        </ul>
+      	    </li>
+      	    <li>Outstanding unit tests:
+      	        <ul>
+      	            <li>WODEN-49 tests for ImportElement and IncludeElement <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-50 tests for Service and Endpoint <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-51 tests for Description and DescriptionElement <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-53 tests for TypesElement, ElementDeclaration, TypeDefinition <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-54 tests for Interface and InterfaceElement and their children <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-55 tests for Binding and BindingElement and their children <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	        </ul>
+      	    </li>
+      	    <li>Others:
+      	        <ul>
+      	            <li>WODEN-45 changes to "ASF Source Header and Copyright Notice Policy" <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-85 Common, standard schema and DTD files <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-118 NPE when import location does not resolve to a document <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	            <li>WODEN-123 Include ALL schema elements and types in Component model <img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+      	        </ul>
+      	    </li>
+      	</ul>
+    </section> 
+    <section name="M7a - April 23, 2007">
+        <p>
+        The M7a release is an incremental release of M7 which delivers an essential fix. 
+        Namely, the change of the WSDL 2.0 namespaces from the CR format "http://www.w3.org/2006/01/wsdl*" 
+        to the shortened format "http://www.w3.org/ns/wsdl*". 
+        The W3C WSDL 2.0 test suite has been updated to use this new namespace format and as with the M7 release, 
+        M7a is still 100% compliant with the Component Model test suite (ie. the 'good' WSDL documents).
+        </p>
+        <p>
+        The new features included in this release are described in these <a href="http://issues.apache.org/jira/browse/Woden">Woden JIRAs</a>:
+        </p>
+        <ul>
+            <li> WODEN-153, Use new WSDL 2.0 Namespaces<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+            <li> WODEN-154, URI Resolver error "URI is not hierarchical"<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+        </ul>
+    </section>
+    <section name="M7b - August 3, 2007">
+        <p>
+        The M7b release is a further incremental release of M7 which includes some minor corrections to 
+        accomodate late changes to the WSDL 2.0 spec and a number of fixes, including Woden's use of WS-Commons XmlSchema.
+        </p>
+        <p>
+        The new features included in this release are described in these <a href="http://issues.apache.org/jira/browse/Woden">Woden JIRAs</a>:
+        </p>
+        <ul>
+            <li> WODEN-33,  DocumentationElement should extend NestedElement<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+            <li> WODEN-149, Update Woden with New WSDL 2.0 Assertions Numbers for Proposed Recommendation<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+            <li> WODEN-161, Style default from interface not applied to operations<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+            <li> WODEN-165, SAX attribution in NOTICE file is not required<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>
+            <li> WODEN-168, OMXMLElementTest class incorrectly returning the DOMXMLElementTest class as its test suit<img src="../../images/ok.gif" height="10" width="10" alt="finished"/></li>  
+        </ul>
+        <p>
+        Also included is a fix to DOMWSDLReader to set base URI before calling XmlSchema. 
+        </p>
+    </section>  
+    <section name="M8 - April 23, 2008">
+        <p>
+        The M8 release will complete Woden's compliance with the W3C WSDL 2.0 Recommendation. 
+        The M7 release completed spec-compliance for valid WSDL documents. M8 will complete
+        spec-compliance for invalid WSDL by supporting all of the validation assertions defined by the 
+        Recommendation.
+        </p>
+        <p>
+        The release-defining criteria for M8 are:
+        </p>
+        <ul>
+            <li>to continue to pass all of the 'good' WSDL test cases in the W3C WSDL 2.0 test suite</li>
+            <li>to validate all of the expected assertion failures from the 'bad' WSDL test cases in 
+                the W3C WSDL 2.0 test suite</li>
+            <li>to implement the changes to the extension architecture deferred from M7</li>
+            <li>to support user-defined WSDL extensions AND user-defined validation of those extensions</li>
+        </ul>
+        <p>
+          See the <a href="http://issues.apache.org/jira/browse/WODEN/fixforversion/12312291">
+          Woden JIRAs to be fixed for Version M8</a> for the remaining function planned for M8.
+        </p>
+        <p>
+        The JIRAs considered part of the release-defining criteria are:
+        </p>
+        <ul>
+          <li>WODEN-39 W3C WSDL2 tests should include assertions<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-47 Extensions as generic collections<img src="../../images/ok.gif" height="10" width="10" alt="finished"/> </li>
+          <li>WODEN-56 Extensions API should not use *internal* classes<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-62 Adding an assertion check should be simple<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-74 Missing QName resolution error for {interface fault} property of Interface<img src="../../images/ok.gif" height="10" width="10" alt="finished"/> </li>
+          <li>WODEN-103 Several binding assertion failures<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-104 Several import/include assertion failures<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-105 Several interface assertion failures<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-106 Several types/schema assertions failures<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-107 Several qname assertion failures<img src="../../images/progress.gif" height="5" width="14" alt="development"/> </li>
+          <li>WODEN-122 Implement EBNF grammar for {http location} </li>
+          <li>WODEN-156 User extensions for Interface </li>
+          <li>WODEN-157 SOAP binding reuse of HTTP properties </li>
+          <li>WODEN-158 SOAPBindingOperationExtensions does not have isHttpLocationIgnoreUncited </li>
+          <li>WODEN-181 Add method BindingMessageReferenceElement.getInterfaceMessageReferenceElement()<img src="../../images/ok.gif" height="10" width="10" alt="finished"/> </li>
+       </ul> 
+   
+    </section>
+    <section name="Woden 1.0 - expected 2008">
+      	<p>
+      		The 1.0 release of Woden will support DOM parsing and validation of WSDL 2.0
+      		documents. The main objective of this release will be to deliver a stable Woden API.
+      		That is, a committed API for future releases. User feedback from the milestone releases 
+      		so far has resulted in ongoing improvements to the Woden API. Further work will be required
+      		for the 1.0 release to agree the final API. 
+      		Some <a href="http://wiki.apache.org/ws/FrontPage/Woden/APIReview">API review issues</a>
+      		have already been caputured on the Woden wiki.
+      	</p>
+    </section> 
+    <section name="Legend">
+    	<table>
+    		<tr>
+    			<td>
+    				<img src="../../images/progress.gif" height="5" width="14" alt="development"/>
+				</td>
+				<td>
+					item is under development.
+				</td>
+
+				<td>
+					<img src="../../images/glass.gif" height="10" width="10" alt="investigation"/>
+				</td>
+				<td>
+					item is under investigation.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="../../images/ok.gif" height="10" width="10" alt="finished"/>
+				</td>
+				<td>
+					item is finished.
+				</td>
+				<td>
+					<img src="../../images/defer.gif" height="10" width="10" alt="deferred"/>
+				</td>
+				<td>
+					item is deferred.
+				</td>
+			</tr>
+		</table>
+	</section>
+
+  </body>
+</document>
+
+
