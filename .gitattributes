@@ -14,6 +14,8 @@ java/etc/wsdl-viewer/src/wsdl-viewer-xsd-tree.xsl -text
 java/etc/wsdl-viewer/src/wsdl-viewer.css -text
 java/etc/wsdl-viewer/src/wsdl-viewer.js -text
 java/etc/wsdl-viewer/wsdl-viewer.xsl -text
+java/legal/LICENSE.commons-logging svn_keywords=Date+Author+Id+Revision+HeadURL
+java/legal/LICENSE.xmlschema-core -text
 java/src/site/markdown/download.md.vm -text
 java/src/site/markdown/index.md.vm -text
 java/src/site/markdown/release-notes/1.0M10.md -text
