@@ -25,7 +25,7 @@
     </parent>
     <groupId>org.apache.woden</groupId>
     <artifactId>woden</artifactId>
-    <version>1.0M11-SNAPSHOT</version>
+    <version>1.0M10-SNAPSHOT</version>
     <packaging>pom</packaging>
     <inceptionYear>2005</inceptionYear>
     <name>Woden</name>
@@ -52,7 +52,7 @@
                 <version>2.8</version>
                 <reportSets>
                     <reportSet>
-                        <reports />
+                        <reports/>
                     </reportSet>
                 </reportSets>
             </plugin>
