@@ -159,14 +159,6 @@
                     <groupId>org.apache.rat</groupId>
                     <artifactId>apache-rat-plugin</artifactId>
                     <version>0.11</version>
-                    <configuration>
-                        <excludes>
-                            <exclude>legal/**</exclude>
-                            <exclude>src/site/markdown/release-notes/**</exclude>
-                            <exclude>**/META-INF/MANIFEST.MF</exclude>
-                            <exclude>**/about-this-package</exclude>
-                        </excludes>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
@@ -179,19 +171,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <version>0.11</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -261,6 +240,26 @@
                                 <!-- The source release is built by the woden-dist module -->
                                 <id>source-release-assembly</id>
                                 <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <excludes>
+                                        <exclude>legal/**</exclude>
+                                        <exclude>src/site/markdown/release-notes/**</exclude>
+                                        <exclude>**/META-INF/MANIFEST.MF</exclude>
+                                        <exclude>**/about-this-package</exclude>
+                                    </excludes>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
