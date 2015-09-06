@@ -19,6 +19,7 @@ java/legal/LICENSE.xmlschema-core -text
 java/src/site/markdown/download.md.vm -text
 java/src/site/markdown/index.md.vm -text
 java/src/site/markdown/release-notes/1.0M10.md -text
+java/src/site/markdown/release-notes/1.0M11.md -text
 java/src/site/markdown/release-notes/index.md -text
 java/src/site/resources/images/defer.gif -text
 java/src/site/resources/images/glass.gif -text

@@ -39,6 +39,7 @@
             <item name="Release Notes" collapse="true" href="release-notes/index.html">
                 <item name="1.0M9" href="release-notes/1.0M9.html"/>
                 <item name="1.0M10" href="release-notes/1.0M10.html"/>
+                <item name="1.0M11" href="release-notes/1.0M11.html"/>
             </item>
             <item name="User Guide" href="userguide.html"/>
         </menu>
