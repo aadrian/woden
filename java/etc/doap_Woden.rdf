@@ -51,6 +51,13 @@ There are two main deliverables: an API and an implementation. The Woden API wil
         <revision>1.0M9</revision>
      </Version>
     </release>
+    <release>
+      <Version>
+        <name>Apache Woden</name>
+        <created>2015-09-06</created>
+        <revision>1.0M10</revision>
+      </Version>
+    </release>
     <repository>
       <SVNRepository>
         <location rdf:resource="https://svn.apache.org/repos/asf/webservices/woden/"/>
