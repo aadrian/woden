@@ -36,6 +36,13 @@ java/src/site/xdoc/projectteam.xml -text
 java/src/site/xdoc/proposal.xml -text
 java/src/site/xdoc/userguide.xml -text
 java/woden-ant/pom.xml -text
+java/woden-converter-maven-plugin/src/it/basic/invoker.properties svneol=native#text/plain svn_keywords=Author+Date+Id+Revision
+java/woden-converter-maven-plugin/src/it/basic/pom.xml svneol=native#text/plain svn_keywords=Author+Date+Id+Revision
+java/woden-converter-maven-plugin/src/it/basic/src/main/wsdl/HelloService.wsdl -text svneol=unset#text/plain%0A
+java/woden-converter-maven-plugin/src/it/cli/HelloService.wsdl -text svneol=unset#text/plain%0A
+java/woden-converter-maven-plugin/src/it/cli/invoker.properties svneol=native#text/plain svn_keywords=Author+Date+Id+Revision
+java/woden-converter-maven-plugin/src/it/cli/pom.xml svneol=native#text/plain svn_keywords=Author+Date+Id+Revision
+java/woden-converter-maven-plugin/src/it/settings.xml svneol=native#text/plain svn_keywords=Author+Date+Id+Revision
 java/woden-core/src/test/resources/org/apache/woden/echo.wsdl -text
 java/woden-dist/pom.xml -text
 java/woden-dist/src/main/assembly/bin.xml -text

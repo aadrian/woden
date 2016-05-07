@@ -24,69 +24,63 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.woden.tool.converter.Convert;
 
 /**
  * <p>
- * This is used to invoke Woden WSDL converter as Maven2 plug-in.
- * Following meta data required  for this Mojo.
+ * Woden Converter Maven: it is used to invoke Woden WSDL converter as Maven plugin.
+ * Following meta data required for this Mojo.
  * </p>
  * <p>
  * It is possible run this command using
  * "mvn woden:convert" command.
  * </p>
  * 
- * @goal convert
- * @execute phase="generate-sources"
- * @requiresDependencyResolution runtime  *
- * @description Woden Converter Maven plig-in
  * @author Sagara Gunathunga
  */
+@Mojo(name = "convert", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.RUNTIME)
 public class ConverterMojo extends AbstractMojo {
 
     /** 
-     * File or URL of wsdl1.1 document.Also multiple
+     * File or URL of wsdl1.1 document. Also multiple
      * WSDL files can be specified as a comma separated list.
-     * 
-     * @parameter expression="${woden.converter.wsdl}"
-     * @required
      */
+    @Parameter(property = "woden.converter.wsdl", required = true)
     private String wsdl;
 
     /** 
      * New target namespace for WSDL2.0 document.
-     * 
-     * @parameter expression="${woden.converter.wsdl}" 
      */
+    @Parameter
     private String targetNS;
 
     /** 
-     * Target directory for out put, default 
+     * Target directory for output, default 
      * location is project build directory. 
-     * 
-     * @parameter expression="${woden.converter.wsdl}" default-value="${project.build.directory}"
      */
+    @Parameter(defaultValue = "${project.build.directory}")
     private String targetDir;
 
     /** 
-     * sourceDir directory for out put. 
-     * 
-     * @parameter expression="${woden.converter.wsdl}" 
+     * sourceDir directory for output. 
      */
+    @Parameter
     private String sourceDir;
 
     /** 
      * verbose option. 
-     * 
-     * @parameter expression="${woden.converter.wsdl}"
      */
+    @Parameter(property = "woden.converter.verbose")
     private boolean verbose;
 
     /** 
-     * Overwrite existing files. 
-     * 
-     * @parameter expression="${woden.converter.wsdl}"
+     * Overwrite existing files.
      */
+    @Parameter(property = "woden.converter.overwrite")
     private boolean overwrite;
     
 
@@ -109,7 +103,7 @@ public class ConverterMojo extends AbstractMojo {
     }
 
     /**
-     * Convert each WSDL1.1 file in to WSDL2.0 file.     * 
+     * Convert each WSDL1.1 file in to WSDL2.0 file.
      */
     private void convertEachFile(String wsdlFile) throws MojoFailureException,
             MojoExecutionException {
