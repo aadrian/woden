@@ -348,7 +348,7 @@ public class ExtensionRegistry
    * @param parentClass a class object indicating where in the WSDL
    * document this extensibility attribute was encountered. For
    * example, org.apache.woden.Binding.class would be used to indicate
-   * this attribute was defined on a &lt;wsdl:binding> element.
+   * this attribute was defined on a &lt;wsdl:binding&gt; element.
    * @param elemQN the qname of the extensibility attribute
    *
    * @return one of the constants defined on the AttributeExtensible class
@@ -507,7 +507,7 @@ public class ExtensionRegistry
    * @param ownerClass a class object indicating where in the WSDL
    * document this extensibility attribute was encountered. For
    * example, org.apache.woden.Binding.class would be used to indicate
-   * this attribute was defined on a &lt;wsdl:binding> element.
+   * this attribute was defined on a &lt;wsdl:binding&gt; element.
    * @param attrQName the qname of the extensibility attribute
    * @param attrClass one of the constants defined on the AttributeExtensible
    * class
@@ -538,7 +538,7 @@ public class ExtensionRegistry
    * @param parentClass a class object indicating where in the WSDL
    * document this extensibility attribute was encountered. For
    * example, org.apache.woden.Binding.class would be used to indicate
-   * this attribute was defined on a &lt;wsdl:binding> element.
+   * this attribute was defined on a &lt;wsdl:binding&gt; element.
    * @param attrQN the qname of the extensibility attribute
    *
    * @return one of the constants defined on the AttributeExtensible class

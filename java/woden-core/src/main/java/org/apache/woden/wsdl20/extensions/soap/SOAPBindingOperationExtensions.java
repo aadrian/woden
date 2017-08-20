@@ -29,6 +29,7 @@ import org.apache.woden.wsdl20.extensions.http.HTTPLocation;
  * using the property names and Java types shown in the following table.
  * <p>
  * <table border="1">
+ * <caption>Property names and Java types</caption>
  * <tr>
  * <th>Property name</th>
  * <th>Java type</th>
@@ -41,6 +42,7 @@ import org.apache.woden.wsdl20.extensions.http.HTTPLocation;
  * <td>soap action</td>
  * <td>java.net.URI</td>
  * </tr>
+ * <tr>
  * <td>soap modules</td>
  * <td>org.apache.woden.wsdl20.extensions.soap.SOAPModule[]</td>
  * </tr>

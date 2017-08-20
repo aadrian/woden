@@ -41,7 +41,7 @@ import org.apache.ws.commons.schema.XmlSchema;
  * 
  * NOTE: non-XML type systems like DTD are not handled by this interface. They must be
  * handled by WSDL 2.0 extension mechanisms.
- * <br />
+ * <br>
  * TODO Need to determine if this interface is suitable for use with other xml-based 
  * schema types like Relax NG or if some type of schema extension mechanism is required. 
  * 

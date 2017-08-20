@@ -26,6 +26,7 @@ import org.apache.woden.wsdl20.extensions.ComponentExtensionContext;
  * using the property names and Java types shown in the following table.
  * <p>
  * <table border="1">
+ * <caption>Property names and Java types</caption>
  * <tr>
  * <th>Property name</th>
  * <th>Java type</th>

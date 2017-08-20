@@ -25,7 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author Matthew J. Duftler <duftler@us.ibm.com>
+ * @author Matthew J. Duftler (duftler@us.ibm.com)
  */
 public class Utils
  {

@@ -49,9 +49,9 @@ public interface Binding extends WSDLComponent
      * Returns a URI representing the {type} property of the Binding component. 
      * <p>
      * For example:
-     * <br/>
+     * <br>
      * For a SOAP binding this will be the uri "http://www.w3.org/ns/wsdl/soap".
-     * <br/>
+     * <br>
      * For an HTTP binding this will be the uri "http://www.w3.org/ns/wsdl/http".
      * 
      * @return URI representing the binding type

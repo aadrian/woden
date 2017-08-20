@@ -19,7 +19,7 @@ package org.apache.woden.xpointer;
 /**
  * This class represents Exceptions that can happen during parsing an XPointer Expression.
  * 
- * @author Dan Harvey <danharvey42@gmail.com>
+ * @author Dan Harvey (danharvey42@gmail.com)
  *
  */
 public class InvalidXPointerException extends Exception {

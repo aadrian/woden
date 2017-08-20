@@ -1567,9 +1567,8 @@ public class Convert
   /**
    * The main entry-point for the conversion utility. The output is sent to
    * standard out.
-   *<code>
-   *<pre>Usage:</pre>
-   *<p>
+   * <p>
+   * Usage:
    *<pre>  java org.apache.woden.tool.converter.Convert -wsdl wsdl1.1FileName</pre>
    */
   public static void main(String[] argv) throws Exception

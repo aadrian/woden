@@ -25,9 +25,8 @@ package org.apache.woden.wsdl20.extensions.http;
  * The property is one of:
  * <ul>
  * <li>basic</li>
- * <li>digest</li
+ * <li>digest</li>
  * </ul>
- * </p>
  * 
  * <p>
  * This class uses the typesafe enum pattern. Applications should use the public

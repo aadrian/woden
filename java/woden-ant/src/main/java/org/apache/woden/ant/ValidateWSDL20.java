@@ -54,7 +54,7 @@ import org.apache.commons.logging.LogFactory;
  * output.
  * 
  * The <code>cm</code> attribute is a boolean flag that enables Component
- * Model interchange format output</code>. The default is false.
+ * Model interchange format output. The default is false.
  * 
  * The <code>cmdir</code> attribute is a file directory for the Component
  * Model interchange format output files. This is ignored if <code>cm</code>

@@ -29,9 +29,9 @@ package org.apache.woden.wsdl20.extensions.http;
  * in the formatted HTTP Location string.
  * <p>
  * The WSDL 2.0 HTTP binding extension requires certain encoding be performed on the content of
- * the HTTP Location string. Templates of the form "{localname}" are called <it>encoded</it> 
+ * the HTTP Location string. Templates of the form "{localname}" are called <i>encoded</i> 
  * templates because these encoding rules also apply to any element values substituted
- * for these templates. A <it>raw</it> template is used to indicate that encoding is not to
+ * for these templates. A <i>raw</i> template is used to indicate that encoding is not to
  * be performed on the substituted value. Raw templates are identified by the exclamated curly 
  * brace syntax "{!localname}".
  * <p>

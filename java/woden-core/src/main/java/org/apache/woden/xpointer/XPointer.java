@@ -77,7 +77,7 @@ public class XPointer {
      * Appends a pointer part to the end of this XPointer.
      * 
      * @param pointerPart the Pointer Part to append.
-     * @throws UnsupportedOperationException() if a Shorthand Pointer is already set.
+     * @throws UnsupportedOperationException if a Shorthand Pointer is already set.
      */
     public void addPointerPart(PointerPart pointerPart) {
         if(!shorthandPointer.equals(emptyNCName)) {
@@ -92,7 +92,7 @@ public class XPointer {
      * 
      * @param pointerPart the Pointer Part to inserted.
      * @param index an integer specifying the point to insert the pointer part.
-     * @throws UnsupportedOperationException() if a Shorthand Pointer is already set.
+     * @throws UnsupportedOperationException if a Shorthand Pointer is already set.
      */
     public void addPointerPart(int index, PointerPart pointerPart) {
         if(hasShorthandPointer()) {
@@ -127,7 +127,7 @@ public class XPointer {
      * Sets the Shorthand Pointer of this XPointer to the NCName given as an argument.
      * 
      * @param shorthandPointer an NCName of the Shorthand Pointer to set.
-     * @throws UnsupportedOperationException() is a PointerPart Pointer is already set.
+     * @throws UnsupportedOperationException is a PointerPart Pointer is already set.
      */
     public void setShorthandPointer(NCName shorthandPointer) {
         if (hasPointerParts()) {
