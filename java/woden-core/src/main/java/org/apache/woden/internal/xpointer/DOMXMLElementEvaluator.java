@@ -30,7 +30,7 @@ import org.w3c.dom.Element;
 /**
  * This class extends the XMLElementEvaluator to support the DOM implementation in XMLElement.
  * 
- * @author Dan Harvey <danharvey42@gmail.com>
+ * @author Dan Harvey (danharvey42@gmail.com)
  *
  */
 public class DOMXMLElementEvaluator extends XMLElementEvaluator {

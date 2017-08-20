@@ -431,7 +431,6 @@ public class WSDLDocumentValidator
    * are part of the XML schema namespace.
    * 
    * @param descElement The description element of the document.
-   * @param namespace Check this namespace to see if it has been defined.
    * @param errorReporter The error Reporter.
    * @return True if the assertion passes, false otherwise.
    * @throws WSDLException

@@ -37,7 +37,7 @@ import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
  * or create an API interface called WSDLContext with getters instead of public variables and create
  * an implementation class called WSDLContextImpl.<br>
  * TODO check for use cases that break the WSDLFactory context concept (ie WSDLReader.setFactoryImplName).<br>
- * TODO decide if anything else should be kept here (e.g. woden feats & props, Description factory)
+ * TODO decide if anything else should be kept here (e.g. woden feats &amp; props, Description factory)
  *  
  * @author John Kaputin (jkaputin@apache.org)
  */

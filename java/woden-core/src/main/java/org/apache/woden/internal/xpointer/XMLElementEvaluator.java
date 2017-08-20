@@ -34,7 +34,7 @@ import org.apache.woden.xpointer.XPointer;
  * This class Evaluates an XPointer on a XMLElement, using the XPointer model in Woden.
  * It currently supports shorthand pointer and element() scheme based pointer part.
  * 
- * @author Dan Harvey <danharvey42@gmail.com>
+ * @author Dan Harvey (danharvey42@gmail.com)
  *
  */
 public abstract class XMLElementEvaluator {

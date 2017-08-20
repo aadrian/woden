@@ -45,7 +45,7 @@ import org.apache.woden.wsdl20.extensions.ExtensionRegistry;
  * <p>
  * The error is handled according to the severity level 
  * (warning, error or fatal error) reported with the error.
- * <p/>
+ * <p>
  * The error reporter supports the 'en' (English) locale by default 
  * and has a default error handler (i.e. a default implementation of 
  * ErrorHandler). However, a different locale may be configured 

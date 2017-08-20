@@ -133,7 +133,7 @@ public class DOMWSDLWriter extends BaseWSDLWriter
      * child elements to  the specified Writer.
      *
      * @param desEle the WSDL Description to be written.
-     * @param sink the Writer to write the xml to.
+     * @param pw the Writer to write the xml to.
      */
     protected void printDescription(DescriptionElement desEle, PrintWriter pw)
         throws WSDLException {
@@ -251,7 +251,7 @@ public class DOMWSDLWriter extends BaseWSDLWriter
     /**
      * Serialize  the IncludeElements of the  WSDL element model.
      *
-     * @param imports an array of IncludeElements.
+     * @param includes an array of IncludeElements.
      * @param des corresponding  DescriptionElement.
      * @param pw the Writer to write the xml to.
      */
@@ -941,7 +941,7 @@ public class DOMWSDLWriter extends BaseWSDLWriter
      *
      * @param parentType  parent class of the ExtensibilityElements.
      * @param extensibilityElements an array of ExtensibilityElements.
-     * @param des corresponding  DescriptionElement.
+     * @param def corresponding  DescriptionElement.
      * @param pw the Writer to write the xml to.
      */
     protected void printExtensibilityElements(Class parentType,
@@ -977,7 +977,6 @@ public class DOMWSDLWriter extends BaseWSDLWriter
      * Serialize  the printExtensibilityAttributess of the  WSDL element model.
      *
      * @param attrExts an array of XMLAttrs.
-     * @param des corresponding  DescriptionElement.
      * @param pw the Writer to write the xml to.
      */
     protected void printExtensibilityAttributes(
@@ -1015,7 +1014,7 @@ public class DOMWSDLWriter extends BaseWSDLWriter
      * Serialize  the DocumentationElements of the  WSDL element model.
      *
      * @param docEles an array of DocumentationElements.
-     * @param des corresponding  DescriptionElement.
+     * @param def corresponding  DescriptionElement.
      * @param pw the Writer to write the xml to.
      */
     protected void printDocumentation(DocumentationElement[] docEles,
