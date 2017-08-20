@@ -764,7 +764,7 @@ public class DOMWSDLWriter extends BaseWSDLWriter
                             pw);
                 }
                 QName interfaceName = service.getInterfaceName();
-                if (name != null){
+                if (interfaceName != null){
 
                     DOMUtils.printQualifiedAttribute(Constants.ATTR_INTERFACE,
                             interfaceName,des, pw);
