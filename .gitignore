@@ -28,3 +28,9 @@ java/woden-tool/.classpath
 java/woden-tool/.project
 java/woden-tool/.settings
 java/woden-tool/target
+
+# ignore IDE specific files
+java/.idea/*
+*.iml
+*.ipr
+*.iws
